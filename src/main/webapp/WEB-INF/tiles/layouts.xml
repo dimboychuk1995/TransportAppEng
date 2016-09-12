@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+	<definition name="DefaultTemplate" template="/WEB-INF/views/tilesTemplate/site-template.jsp">
+		<put-attribute name="title" value="Home" />
+		<put-attribute name="body" value="" />
+	</definition>
+	
+	<definition name="item" extends="DefaultTemplate">
+    	<put-attribute name="title" value="Items" />
+    	<put-attribute name="body" value="/WEB-INF/views/item.jsp" />
+  	</definition>
+	
+</tiles-definitions>
