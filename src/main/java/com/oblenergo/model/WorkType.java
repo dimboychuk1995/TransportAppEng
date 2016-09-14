@@ -5,61 +5,63 @@
  */
 package com.oblenergo.model;
 
-import java.util.Objects;
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
- *
- * @author us9522
- */
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Entity
 @Table(name = "work_type")
-public class OrderList {
-    
+public class WorkType implements Serializable{
+
+    private static final long serialVersionUID = -4180639762560575780L;
+
     @Id
-    @Column(name="id")
+    @Column(name = "id")
     @GeneratedValue
     private Integer id;
-    
-    @Column(name="name")
+
+    @Column(name = "name")
     private String name;
-    
-    @Column(name="count_hours")
+
+    @Column(name = "count_hours")
     private double count_hours;
-    
-    @Column(name="salary")
+
+    @Column(name = "salary")
     private double salary;
-    
-    @Column(name="social_insurance")
+
+    @Column(name = "social_insurance")
     private double social_insurance;
-    
-    @Column(name="production_costs")
+
+    @Column(name = "production_costs")
     private double production_costs;
-    
-    @Column(name="all_costs")
+
+    @Column(name = "all_costs")
     private double all_costs;
-    
-    @Column(name="profit")
+
+    @Column(name = "profit")
     private double profit;
-    
-    @Column(name="sum")
+
+    @Column(name = "sum")
     private double sum;
-    
-    @Column(name="cost_of_materials")
+
+    @Column(name = "cost_of_materials")
     private double cost_of_materials;
-    
-    @Column(name="selling_price")
+
+    @Column(name = "selling_price")
     private double selling_price;
-    
-    @Column(name="vat")
+
+    @Column(name = "vat")
     private double vat;
-    
-    @Column(name="price_including_vat")
+
+    @Column(name = "price_including_vat")
     private double price_including_vat;
 
     public Integer getId() {
@@ -168,34 +170,20 @@ public class OrderList {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.id);
-        hash = 97 * hash + Objects.hashCode(this.name);
-        return hash;
+        return HashCodeBuilder.reflectionHashCode(this, true);
+
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final OrderList other = (OrderList) obj;
-        if (!Objects.equals(this.name, other.name)) {
-            return false;
-        }
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return true;
+
+        return EqualsBuilder.reflectionEquals(this, obj, true);
     }
-    
-    
-    
-    
+
+    @Override
+    public String toString() {
+
+        return ToStringBuilder.reflectionToString(this);
+    }
+
 }

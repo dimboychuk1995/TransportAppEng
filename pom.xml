@@ -17,7 +17,7 @@
 		<hibernate-validator-version>5.2.3.Final</hibernate-validator-version>
 		<hibernate-version>5.1.1.Final</hibernate-version>
 		<commons-dbcp-version>1.4</commons-dbcp-version>
-		<mysql-connector-java-version>5.1.38</mysql-connector-java-version>
+		<mssql-version>3.0</mssql-version>
 		<jstl-version>1.2</jstl-version>
 		<junit-version>4.12</junit-version>
 		<jackson-version>2.5.0</jackson-version>
@@ -28,6 +28,7 @@
 	</properties>
 
 	<dependencies>
+		
 		<!-- Spring -->
 
 		<dependency>
@@ -173,16 +174,15 @@
 		</dependency>
 
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>${mysql-connector-java-version}</version>
+  			<groupId>com.microsoft.sqlserver</groupId>
+  			<artifactId>sqljdbc4</artifactId>
+  			<version>${mssql-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>5.1.1.Final</version>
-		 <type>jar</type>
+			<version>${hibernate-version}</version>
 		</dependency>
 
 		<!-- other -->

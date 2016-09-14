@@ -5,53 +5,68 @@
  */
 package com.oblenergo.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
- *
- * @author us9522
- */
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 @Table(name = "servises")
-public class Order {
-    
+public class Order implements Serializable {
+
+    private static final long serialVersionUID = 7191453677142422700L;
+
     @Id
-    @Column(name="id")
+    @Column(name = "id")
     @GeneratedValue
     private Integer id;
-    
-    @Column(name="name_servise_id")
+
+    @NotEmpty
+    @Column(name = "name_servise_id")
     private Integer name_servise_id;
-    
-    @Column(name="customer")
+
+    @NotEmpty
+    @Column(name = "customer")
     private String customer;
-    
-    @Column(name="car_name_id")
+
+    @NotEmpty
+    @Column(name = "car_name_id")
     private Integer car_name_id;
-    
-    @Column(name="car_model")
+
+    @NotEmpty
+    @Column(name = "car_model")
     private String car_model;
-    
-    @Column(name="sum_vithput_pdv")
+
+    @NotEmpty
+    @Column(name = "sum_vithput_pdv")
     private double sum_vithput_pdv;
-    
-    @Column(name="pdv")
+
+    @NotEmpty
+    @Column(name = "pdv")
     private double pdv;
-    
-    @Column(name="all_sum")
+
+    @NotEmpty
+    @Column(name = "all_sum")
     private double all_sum;
-    
-    @Column(name="performer_id")
+
+    @NotEmpty
+    @Column(name = "performer_id")
     private Integer performer_id;
-    
-    @Column(name="date")
+
+    @NotEmpty
+    @Column(name = "date")
     private String date;
-    
-    @Column(name="time")
+
+    @NotEmpty
+    @Column(name = "time")
     private String time;
 
     public Integer getId() {
@@ -141,8 +156,23 @@ public class Order {
     public void setTime(String time) {
         this.time = time;
     }
-    
-    
-    
-    
+
+    @Override
+    public int hashCode() {
+
+        return HashCodeBuilder.reflectionHashCode(this, true);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        return EqualsBuilder.reflectionEquals(this, obj, true);
+    }
+
+    @Override
+    public String toString() {
+
+        return ToStringBuilder.reflectionToString(this);
+    }
+
 }
