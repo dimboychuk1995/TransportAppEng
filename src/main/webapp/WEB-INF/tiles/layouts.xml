@@ -12,5 +12,10 @@
     	<put-attribute name="title" value="Items" />
     	<put-attribute name="body" value="/WEB-INF/views/item.jsp" />
   	</definition>
+  	
+  	<definition name="WorkTypePage" extends="DefaultTemplate">
+    	<put-attribute name="title" value="WorkTypes" />
+    	<put-attribute name="body" value="/WEB-INF/views/pages/WorkTypePage.jsp" />
+  	</definition>
 	
 </tiles-definitions>

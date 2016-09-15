@@ -20,36 +20,36 @@ import org.springframework.web.servlet.view.tiles3.TilesView;
 @EnableWebMvc
 public class AppConfiguration extends WebMvcConfigurerAdapter {
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 
-        registry.addResourceHandler("/resources/**").addResourceLocations("/resources");
-    }
+		registry.addResourceHandler("/resources/**").addResourceLocations("/resources");
+	}
 
-    @Bean
-    public MessageSource messageSource() {
+	@Bean
+	public MessageSource messageSource() {
 
-        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasename("validationMessage");
-        return messageSource;
-    }
+		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+		messageSource.setBasename("validationMessage");
+		return messageSource;
+	}
 
-    @Override
-    public void configureViewResolvers(ViewResolverRegistry registry) {
+	@Override
+	public void configureViewResolvers(ViewResolverRegistry registry) {
 
-        UrlBasedViewResolver urlBasedViewResolver = new UrlBasedViewResolver();
-        urlBasedViewResolver.setViewClass(TilesView.class);
-        registry.viewResolver(urlBasedViewResolver);
+		UrlBasedViewResolver urlBasedViewResolver = new UrlBasedViewResolver();
+		urlBasedViewResolver.setViewClass(TilesView.class);
+		registry.viewResolver(urlBasedViewResolver);
 
-    }
+	}
 
-    @Bean
-    public TilesConfigurer tilesConfigurer() {
+	@Bean
+	public TilesConfigurer tilesConfigurer() {
 
-        TilesConfigurer tilesConfigurer = new TilesConfigurer();
-        String[] str = { "/WEB-INF/tiles/layouts.xml" };
-        tilesConfigurer.setDefinitions(str);
-        return tilesConfigurer;
-    }
+		TilesConfigurer tilesConfigurer = new TilesConfigurer();
+		String[] str = { "/WEB-INF/tiles/layouts.xml" };
+		tilesConfigurer.setDefinitions(str);
+		return tilesConfigurer;
+	}
 
 }

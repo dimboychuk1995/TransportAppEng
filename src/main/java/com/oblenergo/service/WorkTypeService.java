@@ -1,8 +1,11 @@
 package com.oblenergo.service;
 
-import org.springframework.stereotype.Service;
+import java.util.List;
 
-@Service
-public class WorkTypeService {
+import com.oblenergo.model.WorkType;
+
+public interface WorkTypeService {
+
+	public List<WorkType> findAll();
 
 }
