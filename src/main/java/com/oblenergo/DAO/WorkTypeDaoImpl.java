@@ -19,4 +19,9 @@ public class WorkTypeDaoImpl extends AbstractDao<Integer, WorkType> implements W
 		return (List<WorkType>) crit.list();
 	}
 
+	@Override
+	public void save(WorkType wt) {
+		persist(wt);
+	}
+
 }

@@ -8,4 +8,6 @@ public interface WorkTypeDao {
 
 	List<WorkType> findAllItems();
 
+	void save(WorkType wt);
+
 }

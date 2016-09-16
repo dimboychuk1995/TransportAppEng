@@ -22,4 +22,11 @@ public class WorkTypeServiseImpl implements WorkTypeService {
 		return dao.findAllItems();
 	}
 
+	@Transactional
+	@Override
+	public void save(WorkType workType) {
+
+		dao.save(workType);
+	}
+
 }

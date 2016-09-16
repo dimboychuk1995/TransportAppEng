@@ -8,4 +8,6 @@ public interface WorkTypeService {
 
 	public List<WorkType> findAll();
 
+	void save(WorkType workType);
+
 }
