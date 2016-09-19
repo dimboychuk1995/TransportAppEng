@@ -2,10 +2,10 @@
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
-
-	<definition name="DefaultTemplate" template="/WEB-INF/views/tilesTemplate/site-template.jsp">
-		<put-attribute name="title" value="Home" />
-		<put-attribute name="body" value="" />
-	</definition>
-		
+	
+  	<definition name="workTypePage" extends="DefaultTemplate">
+    	<put-attribute name="title" value="WorkTypes" />
+    	<put-attribute name="body" value="/WEB-INF/views/pages/workTypePage.jsp" />
+  	</definition>
+	
 </tiles-definitions>

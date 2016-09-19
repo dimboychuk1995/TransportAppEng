@@ -3,9 +3,9 @@
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 
-	<definition name="DefaultTemplate" template="/WEB-INF/views/tilesTemplate/site-template.jsp">
-		<put-attribute name="title" value="Home" />
-		<put-attribute name="body" value="" />
-	</definition>
-		
+  <definition name="login" extends="DefaultTemplate">
+    <put-attribute name="title" value="Login" />
+    <put-attribute name="body" value="/WEB-INF/views/login.jsp" />
+  </definition>
+  
 </tiles-definitions>
