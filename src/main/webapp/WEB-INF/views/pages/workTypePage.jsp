@@ -23,8 +23,9 @@
       </tr>
     </thead>
     <tbody>
+      <c:forEach items="${typeWorks}" var="WorkTypePage">
       <tr>
-        <c:forEach items="${typeWorks}" var="WorkTypePage">
+       
           <td>
             <c:out value="${WorkTypePage.id}"></c:out>
           </td>
@@ -64,8 +65,9 @@
           <td>
             <c:out value="${WorkTypePage.price_including_vat}"></c:out>
           </td>
-        </c:forEach>
+        
       </tr>
+      </c:forEach>
     </tbody>
   </table>
 </div>
