@@ -7,7 +7,7 @@
   <table>
     <thead>
       <tr>
-        <th>id</th>
+
         <th>Назва робіт</th>
         <th>Кількість люд/год.</th>
         <th>Заробітна плата</th>
@@ -23,49 +23,48 @@
       </tr>
     </thead>
     <tbody>
-      <c:forEach items="${typeWorks}" var="WorkTypePage">
+      <c:forEach items="${typeWorks}" var="workType">
+      
       <tr>
-       
           <td>
-            <c:out value="${WorkTypePage.id}"></c:out>
+            <c:out value="${workType.name}"></c:out>
           </td>
           <td>
-            <c:out value="${WorkTypePage.name}"></c:out>
+            <c:out value="${workType.count_hours}"></c:out>
           </td>
           <td>
-            <c:out value="${WorkTypePage.count_hours}"></c:out>
+            <c:out value="${workType.salary}"></c:out>
           </td>
           <td>
-            <c:out value="${WorkTypePage.salary}"></c:out>
+            <c:out value="${workType.social_insurance}"></c:out>
           </td>
           <td>
-            <c:out value="${WorkTypePage.social_insurance}"></c:out>
+            <c:out value="${workType.production_costs}"></c:out>
           </td>
           <td>
-            <c:out value="${WorkTypePage.production_costs}"></c:out>
+            <c:out value="${workType.all_costs}"></c:out>
           </td>
           <td>
-            <c:out value="${WorkTypePage.all_costs}"></c:out>
+            <c:out value="${workType.profit}"></c:out>
           </td>
           <td>
-            <c:out value="${WorkTypePage.profit}"></c:out>
+            <c:out value="${workType.sum}"></c:out>
           </td>
           <td>
-            <c:out value="${WorkTypePage.sum}"></c:out>
+            <c:out value="${workType.cost_of_materials}"></c:out>
           </td>
           <td>
-            <c:out value="${WorkTypePage.cost_of_materials}"></c:out>
+            <c:out value="${workType.selling_price}"></c:out>
           </td>
           <td>
-            <c:out value="${WorkTypePage.selling_price}"></c:out>
+            <c:out value="${workType.vat}"></c:out>
           </td>
           <td>
-            <c:out value="${WorkTypePage.vat}"></c:out>
+            <c:out value="${workType.price_including_vat}"></c:out>
           </td>
           <td>
-            <c:out value="${WorkTypePage.price_including_vat}"></c:out>
-          </td>
-        
+			<a href=<c:url value="/workType/${workType.id}" />>Update</a>
+          </td>    
       </tr>
       </c:forEach>
     </tbody>
@@ -74,42 +73,41 @@
 <div>
   <form:form action="" method="POST" modelAttribute="workType" class="">
     <fieldset>
-      <p><b>Назва робіт</b><br>
+      <p><b>Назва робіт</b>
         <form:input type="text" path="name" class="" cssErrorClass="" />
       </p>
-      <p><b>Кількість люд/год.</b><br>
+      <p><b>Кількість люд/год.</b>
         <form:input type="text" path="count_hours" class="" cssErrorClass="" />
       </p>
-      <p><b>Заробітна плата</b><br>
+      <p><b>Заробітна плата</b>
         <form:input type="text" path="salary" class="" cssErrorClass="" />
       </p>
-      <p><b>Нарахування</b><br>
+      <p><b>Нарахування</b>
         <form:input type="text" path="social_insurance" class="" cssErrorClass="" />
       </p>
-      <p><b>Загальні витрати</b><br>
+      <p><b>Загальні витрати</b>
         <form:input type="text" path="production_costs" class="" cssErrorClass="" />
       </p>
-      <p><b>Всього витрати</b><br>
+      <p><b>Всього витрати</b>
         <form:input type="text" path="all_costs" class="" cssErrorClass="" />
       </p>
-      <p><b>Прибуток</b><br>
+      <p><b>Прибуток</b>
         <form:input type="text" path="profit" class="" cssErrorClass="" />
       </p>
-      <p><b>Разом</b><br>
+      <p><b>Разом</b>
         <form:input type="text" path="sum" class="" cssErrorClass="" />
       </p>
 
-      <p><b>Вартість матеріалів</b><br>
+      <p><b>Вартість матеріалів</b>
         <form:input type="text" path="cost_of_materials" class="" cssErrorClass="" />
       </p>
-      <p><b>Відпускна вартість</b><br>
+      <p><b>Відпускна вартість</b>
         <form:input type="text" path="selling_price" class="" cssErrorClass="" />
       </p>
-      <p><b>ПДВ</b><br>
-        <input type="text" size="40">
+      <p><b>ПДВ</b>
         <form:input type="text" path="vat" class="" cssErrorClass="" />
       </p>
-      <p><b>Вартість ПДВ</b><br>
+      <p><b>Вартість ПДВ</b>
         <form:input type="text" path="price_including_vat" class="" cssErrorClass="" />
       </p>
       <button id="" type="submit" class="">Save</button>

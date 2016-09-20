@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -20,11 +21,14 @@ public class WorkTypeController {
 	public static final String ITEMS = "typeWorks";
 
 	private static final String WORK_TYPE = "workType";
+	private static final String TYPE_BY_ID = "typeById";
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String getAllType(Model model) {
 		model.addAttribute(ITEMS, workTypeServiceImpl.findAll());
 		model.addAttribute(WORK_TYPE, new WorkType());
+		// model.addAttribute(TYPE_BY_ID, new WorkType());
+
 		return "workTypePage";
 	}
 
@@ -33,6 +37,20 @@ public class WorkTypeController {
 
 		workTypeServiceImpl.save(workType);
 		return "redirect:/";
+	}
+
+	@RequestMapping(value = "/workType/{id}", method = RequestMethod.POST)
+	public String updateType(@ModelAttribute WorkType workType) {
+
+		// workTypeServiceImpl.save(workType);
+		workTypeServiceImpl.update(workType);
+		return "redirect:/";
+	}
+
+	@RequestMapping(value = "/workType/{id}", method = RequestMethod.GET)
+	public String showTypeById(@PathVariable int id, Model model) {
+		model.addAttribute(TYPE_BY_ID, workTypeServiceImpl.findWorkTypeById(id));
+		return "updateWorkType";
 	}
 
 }

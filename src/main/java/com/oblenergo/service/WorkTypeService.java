@@ -10,4 +10,8 @@ public interface WorkTypeService {
 
 	void save(WorkType workType);
 
+	void update(WorkType workType);
+
+	WorkType findWorkTypeById(int id);
+
 }

@@ -7,5 +7,10 @@
     	<put-attribute name="title" value="WorkTypes" />
     	<put-attribute name="body" value="/WEB-INF/views/pages/workTypePage.jsp" />
   	</definition>
+
+  	<definition name="updateWorkType" extends="DefaultTemplate">
+    	<put-attribute name="title" value="WorkTypeById" />
+    	<put-attribute name="body" value="/WEB-INF/views/pages/updateWorkType.jsp" />
+  	</definition>
 	
 </tiles-definitions>

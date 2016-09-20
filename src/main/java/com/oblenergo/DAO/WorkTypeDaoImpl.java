@@ -24,4 +24,9 @@ public class WorkTypeDaoImpl extends AbstractDao<Integer, WorkType> implements W
 		persist(wt);
 	}
 
+	@Override
+	public WorkType findById(int id) {
+		return getById(id);
+	}
+
 }
