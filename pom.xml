@@ -205,13 +205,6 @@
 			<version>${commons-fileupload-version}</version>
 		</dependency>
 	</dependencies>
-	
-	<repositories>
-		<repository>
-			<id>Project repository</id>
-			<url>file://${basedir}/lib</url>
-		</repository>
-	</repositories>
 
 	<build>
 		<finalName>transportApp</finalName>
