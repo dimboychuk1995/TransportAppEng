@@ -3,14 +3,13 @@
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 	
-  	<definition name="workTypePage" extends="DefaultTemplate">
+  	<definition name="workType" extends="DefaultTemplate">
     	<put-attribute name="title" value="WorkTypes" />
-    	<put-attribute name="body" value="/WEB-INF/views/pages/workTypePage.jsp" />
+    	<put-attribute name="body" value="/WEB-INF/views/admin/workType/workType.jsp" />
   	</definition>
 
-  	<definition name="updateWorkType" extends="DefaultTemplate">
+  	<definition name="updateCreateWorkType" extends="DefaultTemplate">
     	<put-attribute name="title" value="WorkTypeById" />
-    	<put-attribute name="body" value="/WEB-INF/views/pages/updateWorkType.jsp" />
+    	<put-attribute name="body" value="/WEB-INF/views/admin/workType/updateCreateWorkType.jsp" />
   	</definition>
-	
 </tiles-definitions>

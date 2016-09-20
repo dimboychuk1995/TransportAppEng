@@ -14,4 +14,6 @@ public interface WorkTypeService {
 
 	WorkType findWorkTypeById(int id);
 
+	void delete(int id);
+
 }

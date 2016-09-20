@@ -12,4 +12,6 @@ public interface WorkTypeDao {
 
 	void save(WorkType wt);
 
+	void delete(int id);
+
 }

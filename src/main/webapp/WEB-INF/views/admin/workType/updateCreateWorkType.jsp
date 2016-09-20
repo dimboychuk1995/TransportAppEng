@@ -4,7 +4,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <div>
-  <form:form action="" method="POST" modelAttribute="typeById" class="">
+  <form:form action="" method="POST" modelAttribute="workType" class="">
     <fieldset>
     
      <p><b>Назва робіт</b>
