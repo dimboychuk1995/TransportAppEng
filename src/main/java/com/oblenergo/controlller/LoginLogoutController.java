@@ -26,6 +26,7 @@ public class LoginLogoutController {
         if (auth instanceof AnonymousAuthenticationToken) {
             return "login";
         }
+        System.out.println(auth.getAuthorities());
         model.addAttribute(SUCCES, auth.isAuthenticated());
         return "login";
     }

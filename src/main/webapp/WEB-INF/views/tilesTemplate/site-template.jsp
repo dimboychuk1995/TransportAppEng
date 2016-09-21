@@ -18,7 +18,7 @@
 
 <body>
   
-<%--   <tiles:insertAttribute name="menu" /> --%>
+  <tiles:insertAttribute name="menu" />
 
   <div id="">
     <tiles:insertAttribute name="body" />

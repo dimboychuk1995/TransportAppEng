@@ -16,19 +16,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     DataSource dataSource;
-    
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-            .authorizeRequests()
-            .antMatchers("/","/login").permitAll()
-            .antMatchers("/admin/**").access("hasAuthority('ADMIN')")
-            .antMatchers("/**").access("isAuthenticated()")
-            .and().formLogin().loginPage("/login").loginProcessingUrl("/loginCheck")
-            .usernameParameter("username").passwordParameter("password")
-            .defaultSuccessUrl("/", true).failureUrl("/login?error=true")
-            .and().exceptionHandling().accessDeniedPage("/403")
-            .and().csrf().disable();
+        http.authorizeRequests().antMatchers("/", "/login").permitAll().antMatchers("/admin/**")
+                .access("hasAuthority('ADMIN')").antMatchers("/**").access("isAuthenticated()").and().formLogin()
+                .loginPage("/login").loginProcessingUrl("/loginCheck").usernameParameter("username")
+                .passwordParameter("password").defaultSuccessUrl("/", true).failureUrl("/login?error=true").and()
+                .exceptionHandling().accessDeniedPage("/403").and().csrf().disable();
     }
 
     @Override
@@ -38,9 +33,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("user").password("user").authorities("USER");
-        auth.inMemoryAuthentication().withUser("admin").password("admin").authorities("ADMIN");
-//        auth.jdbcAuthentication().dataSource(dataSource).usersByUsernameQuery("SELECT id, password, true FROM user WHERE lower(login) = lower(?)").authoritiesByUsernameQuery("SELECT id, user_role FROM user WHERE id = ?");
+        // auth.inMemoryAuthentication().withUser("user").password("user").authorities("USER");
+        // auth.inMemoryAuthentication().withUser("admin").password("admin").authorities("ADMIN");
+        auth.jdbcAuthentication().dataSource(dataSource)
+                .usersByUsernameQuery("SELECT username, password, 1 FROM users WHERE username = ?")
+                .authoritiesByUsernameQuery("SELECT username, role FROM users WHERE username = ?");
     }
 
 }
