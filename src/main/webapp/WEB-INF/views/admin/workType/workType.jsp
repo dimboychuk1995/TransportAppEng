@@ -70,50 +70,6 @@
       </c:forEach>
     </tbody>
   </table>
-  <a href=<c:url value="/workTypeCreate/1" />>Create</a>
+  <a href=<c:url value="/admin/workType/newWorkType" />>Create</a>
   
-</div>
-<div>
-  <form:form action="" method="POST" modelAttribute="workType" class="">
-    <fieldset>
-      <p><b>Назва робіт</b>
-        <form:input type="text" path="name" class="" cssErrorClass="" />
-      </p>
-      <p><b>Кількість люд/год.</b>
-        <form:input type="text" path="count_hours" class="" cssErrorClass="" />
-      </p>
-      <p><b>Заробітна плата</b>
-        <form:input type="text" path="salary" class="" cssErrorClass="" />
-      </p>
-      <p><b>Нарахування</b>
-        <form:input type="text" path="social_insurance" class="" cssErrorClass="" />
-      </p>
-      <p><b>Загальні витрати</b>
-        <form:input type="text" path="production_costs" class="" cssErrorClass="" />
-      </p>
-      <p><b>Всього витрати</b>
-        <form:input type="text" path="all_costs" class="" cssErrorClass="" />
-      </p>
-      <p><b>Прибуток</b>
-        <form:input type="text" path="profit" class="" cssErrorClass="" />
-      </p>
-      <p><b>Разом</b>
-        <form:input type="text" path="sum" class="" cssErrorClass="" />
-      </p>
-
-      <p><b>Вартість матеріалів</b>
-        <form:input type="text" path="cost_of_materials" class="" cssErrorClass="" />
-      </p>
-      <p><b>Відпускна вартість</b>
-        <form:input type="text" path="selling_price" class="" cssErrorClass="" />
-      </p>
-      <p><b>ПДВ</b>
-        <form:input type="text" path="vat" class="" cssErrorClass="" />
-      </p>
-      <p><b>Вартість ПДВ</b>
-        <form:input type="text" path="price_including_vat" class="" cssErrorClass="" />
-      </p>
-      <button id="" type="submit" class="">Save</button>
-    </fieldset>
-  </form:form>
 </div>

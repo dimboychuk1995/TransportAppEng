@@ -31,13 +31,6 @@ public class WorkTypeController {
 		return "workType";
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
-	public String addType(@ModelAttribute WorkType workType) {
-
-		workTypeServiceImpl.save(workType);
-		return "redirect:/";
-	}
-
 	@RequestMapping(value = "/workType/{id}", method = RequestMethod.POST)
 	public String updateType(@ModelAttribute WorkType workType) {
 		workTypeServiceImpl.update(workType);
@@ -51,11 +44,19 @@ public class WorkTypeController {
 	}
 
 	// test methods///////can`t do redirect i need help/////////////////////
-	@RequestMapping(value = "/workTypeCreate/{id}", method = RequestMethod.GET)
-	public String redirectToCreate(@PathVariable int id, Model model) {
-		// model.addAttribute(WORK_TYPE, new WorkType());
-		model.addAttribute(WORK_TYPE, workTypeServiceImpl.findWorkTypeById(1));
+	@RequestMapping(value = "/admin/workType/newWorkType", method = RequestMethod.GET)
+	public String redirectToCreate(Model model) {
+		model.addAttribute(WORK_TYPE, new WorkType());
+		// model.addAttribute(WORK_TYPE,
+		// workTypeServiceImpl.findWorkTypeById(1));
 		return "updateCreateWorkType";
+	}
+
+	@RequestMapping(value = "/admin/workType/newWorkType", method = RequestMethod.POST)
+	public String addType(@ModelAttribute WorkType workType) {
+
+		workTypeServiceImpl.save(workType);
+		return "redirect:/";
 	}
 	//////////////////////////////////////////////
 
