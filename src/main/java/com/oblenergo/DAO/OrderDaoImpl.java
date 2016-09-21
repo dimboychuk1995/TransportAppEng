@@ -1,10 +1,5 @@
 package com.oblenergo.DAO;
 
-/**
- *
- * @author us9522
- */
-
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -14,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.oblenergo.model.Orders;
 
-
+@Repository
 public class OrderDaoImpl extends AbstractDao<Integer, Orders> implements OrderDao{
     
     @SuppressWarnings("unchecked")

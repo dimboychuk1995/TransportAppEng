@@ -22,7 +22,7 @@ public interface OrderServise {
 
     void update(Orders order);
 
-    Orders findWorkTypeById(int id);
+    Orders findOrderById(int id);
 
     void delete(int id);
     
