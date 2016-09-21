@@ -3,6 +3,35 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript">
+
+var delereWorkType = function(id) {
+        var msg   = $('#delete' + id).serialize();
+    $.ajax({
+        type: 'GET',
+        url: 'workType/deleteType/' + id,
+        data: msg,
+    success: function(data) {
+        $('#results').html(data); 
+        var row = document.getElementById(id);
+        var table = row.parentNode;
+        while ( table && table.tagName != 'TABLE' )
+            table = table.parentNode;
+            if ( !table )
+            return;
+        table.deleteRow(row.rowIndex);
+    },
+    error:  function(xhr, str){
+        alert('Помилка видалення даних: ' + xhr.responseCode);
+    }
+  });
+}
+
+
+
+</script>
+
 <div>
   <table>
     <thead>
@@ -25,7 +54,7 @@
     <tbody>
       <c:forEach items="${typeWorks}" var="workType">
       
-      <tr>
+      <tr id = "${workType.id}">
           <td>
             <c:out value="${workType.name}"></c:out>
           </td>
@@ -66,7 +95,9 @@
 			<a href=<c:url value="/workType/${workType.id}" />>Update</a>
           </td>
           <td>
-			<a href=<c:url value="/workType/deleteType/${workType.id}" />>Delete</a>
+			<form:form id = "delete${workType.id}"  action="javascript:void(null);" method="GET" onsubmit= "delereWorkType(${workType.id})" modelAttribute="" class="">
+			<button id="" type="submit" class="">Delete</button>
+			</form:form>
           </td>           
       </tr>
       </c:forEach>
