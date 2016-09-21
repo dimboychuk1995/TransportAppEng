@@ -5,7 +5,11 @@
 
 	<definition name="DefaultTemplate" template="/WEB-INF/views/tilesTemplate/site-template.jsp">
 		<put-attribute name="title" value="Home" />
+		<put-attribute name="menu" value="/WEB-INF/views/tilesTemplate/menu.jsp" />
 		<put-attribute name="body" value="" />
 	</definition>
+	
+	<definition name="error" template="/WEB-INF/views/error.jsp">
+    </definition>
 		
 </tiles-definitions>

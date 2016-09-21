@@ -36,8 +36,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         // auth.inMemoryAuthentication().withUser("user").password("user").authorities("USER");
         // auth.inMemoryAuthentication().withUser("admin").password("admin").authorities("ADMIN");
         auth.jdbcAuthentication().dataSource(dataSource)
-                .usersByUsernameQuery("SELECT login, password FROM [user] WHERE login = ?")
-                .authoritiesByUsernameQuery("SELECT login, role FROM [user] WHERE login = ?");
+                .usersByUsernameQuery("SELECT username, password, 1 FROM users WHERE username = ?")
+                .authoritiesByUsernameQuery("SELECT username, role FROM users WHERE username = ?");
     }
 
 }
