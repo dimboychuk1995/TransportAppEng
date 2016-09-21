@@ -5,11 +5,11 @@
 	
   	<definition name="workType" extends="DefaultTemplate">
     	<put-attribute name="title" value="WorkTypes" />
-    	<put-attribute name="body" value="/WEB-INF/views/admin/workType/workType.jsp" />
+    	<put-attribute name="body" value="/WEB-INF/views/workTypes/workType.jsp" />
   	</definition>
 
   	<definition name="updateCreateWorkType" extends="DefaultTemplate">
     	<put-attribute name="title" value="WorkTypeById" />
-    	<put-attribute name="body" value="/WEB-INF/views/admin/workType/updateCreateWorkType.jsp" />
+    	<put-attribute name="body" value="/WEB-INF/views/workTypes/updateCreateWorkType.jsp" />
   	</definition>
 </tiles-definitions>

@@ -44,7 +44,7 @@ public class WorkTypeController {
 	}
 
 	// test methods///////can`t do redirect i need help/////////////////////
-	@RequestMapping(value = "/admin/workType/newWorkType", method = RequestMethod.GET)
+	@RequestMapping(value = "/workTypes/newWorkType", method = RequestMethod.GET)
 	public String redirectToCreate(Model model) {
 		model.addAttribute(WORK_TYPE, new WorkType());
 		// model.addAttribute(WORK_TYPE,
@@ -52,7 +52,7 @@ public class WorkTypeController {
 		return "updateCreateWorkType";
 	}
 
-	@RequestMapping(value = "/admin/workType/newWorkType", method = RequestMethod.POST)
+	@RequestMapping(value = "/workTypes/newWorkType", method = RequestMethod.POST)
 	public String addType(@ModelAttribute WorkType workType) {
 
 		workTypeServiceImpl.save(workType);

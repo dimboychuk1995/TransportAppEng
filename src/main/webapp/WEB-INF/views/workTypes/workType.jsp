@@ -70,6 +70,6 @@
       </c:forEach>
     </tbody>
   </table>
-  <a href=<c:url value="/admin/workType/newWorkType" />>Create</a>
+  <a href=<c:url value="/workTypes/newWorkType" />>Create</a>
   
 </div>
