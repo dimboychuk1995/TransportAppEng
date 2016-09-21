@@ -64,8 +64,10 @@
           </td>
           <td>
 			<a href=<c:url value="/workType/${workType.id}" />>Update</a>
-
-          </td>          
+          </td>
+          <td>
+			<a href=<c:url value="/workType/deleteType/${workType.id}" />>Delete</a>
+          </td>           
       </tr>
       </c:forEach>
     </tbody>

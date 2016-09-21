@@ -19,10 +19,8 @@ public class WorkTypeController {
 	WorkTypeService workTypeServiceImpl;
 
 	public static final String ITEMS = "typeWorks";
-	// public static final String DELETE_ITEMS = "typeWorks";
 
 	private static final String WORK_TYPE = "workType";
-	// private static final String TYPE_BY_ID = "typeById";
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String getAllType(Model model) {
@@ -43,12 +41,10 @@ public class WorkTypeController {
 		return "updateCreateWorkType";
 	}
 
-	// test methods///////can`t do redirect i need help/////////////////////
 	@RequestMapping(value = "/workTypes/newWorkType", method = RequestMethod.GET)
 	public String redirectToCreate(Model model) {
 		model.addAttribute(WORK_TYPE, new WorkType());
-		// model.addAttribute(WORK_TYPE,
-		// workTypeServiceImpl.findWorkTypeById(1));
+
 		return "updateCreateWorkType";
 	}
 
@@ -58,16 +54,11 @@ public class WorkTypeController {
 		workTypeServiceImpl.save(workType);
 		return "redirect:/";
 	}
-	//////////////////////////////////////////////
 
-	// @RequestMapping(value = "/workTypeDelete/{id}", method =
-	// RequestMethod.GET)
-	// public String deleteType(@PathVariable int id, Model model) {
-	// // System.out.println("ID" + id);
-	// model.addAttribute(DELETE_ITEMS,
-	// workTypeServiceImpl.findWorkTypeById(id));
-	// workTypeServiceImpl.delete(id);
-	// return "redirect:/";
-	// }
+	@RequestMapping(value = "/workType/deleteType/{id}", method = RequestMethod.GET)
+	public String deleteType(@PathVariable int id) {
+		workTypeServiceImpl.delete(id);
+		return "redirect:/";
+	}
 
 }

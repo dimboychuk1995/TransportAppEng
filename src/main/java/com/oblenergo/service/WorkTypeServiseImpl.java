@@ -53,10 +53,10 @@ public class WorkTypeServiseImpl implements WorkTypeService {
 		entity.setPrice_including_vat(workType.getPrice_including_vat());
 	}
 
+	@Transactional
 	@Override
 	public void delete(int id) {
-		// TODO Auto-generated method stub
-
+		dao.delete(id);
 	}
 
 }
