@@ -50,7 +50,6 @@ public class WorkTypeController {
 
 	@RequestMapping(value = "/workTypes/newWorkType", method = RequestMethod.POST)
 	public String addType(@ModelAttribute WorkType workType) {
-
 		workTypeServiceImpl.save(workType);
 		return "redirect:/";
 	}

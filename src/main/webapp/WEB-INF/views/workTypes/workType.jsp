@@ -92,7 +92,7 @@ var delereWorkType = function(id) {
             <c:out value="${workType.price_including_vat}"></c:out>
           </td>
           <td>
-			<a href=<c:url value="/workType/${workType.id}" />>Update</a>
+            <a href=<c:url value="/workType/${workType.id}" />>Update</a>
           </td>
           <td>
 			<form:form id = "delete${workType.id}"  action="javascript:void(null);" method="GET" onsubmit= "delereWorkType(${workType.id})" modelAttribute="" class="">
@@ -104,5 +104,5 @@ var delereWorkType = function(id) {
     </tbody>
   </table>
   <a href=<c:url value="/workTypes/newWorkType" />>Create</a>
-  
+  <a href=<c:url value="/order"/>>Order</a>
 </div>

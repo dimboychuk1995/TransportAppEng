@@ -29,4 +29,16 @@ public class OrderController {
             return "order";
         }
         
+        @RequestMapping(value = "/orders/{id}", method = RequestMethod.POST)
+        public String updateOrder(@ModelAttribute Orders order){
+            orderServiseImpl.update(order);
+            return "redirect:/";
+        }
+        
+        @RequestMapping(value = "/order/{id}", method = RequestMethod.GET)
+	public String showTypeById(@PathVariable int id, Model model) {
+		model.addAttribute(ORDER, orderServiseImpl.findOrderById(id));
+		return "updateCreateOrder";
+	}
+        
 }

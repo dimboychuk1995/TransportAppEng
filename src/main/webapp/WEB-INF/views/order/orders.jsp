@@ -53,6 +53,9 @@
                     <td>
                         <c:out value="${orders.time}"></c:out>
                     </td>
+                    <td>
+                        <a href=<c:url value="/orders/${orders.id}" />>Update</a>
+                    </td>
                 </tr>
             </c:forEach>
         </tbody>
