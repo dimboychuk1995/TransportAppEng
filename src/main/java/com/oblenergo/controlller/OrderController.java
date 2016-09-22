@@ -12,7 +12,7 @@ import com.oblenergo.model.Orders;
 import com.oblenergo.service.OrderServise;
 
 @Controller
-@RequestMapping(value = "/")
+@RequestMapping(value = "/order")
 public class OrderController {
         
         @Autowired
@@ -20,13 +20,13 @@ public class OrderController {
         
         public static final String ITEMS = "order";
 
-	private static final String ORDER = "order";
+	private static final String ORDER = "orders";
         
         @RequestMapping(method = RequestMethod.GET)
         public String getAllOrders(Model model){
             model.addAttribute(ITEMS, orderServiseImpl.findAll());
             model.addAttribute(ORDER, new Orders());
-            return "orders";
+            return "order";
         }
         
 }
