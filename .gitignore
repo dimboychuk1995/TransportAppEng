@@ -33,3 +33,5 @@ dependency-reduced-pom.xml
 # Logs
 log.txt
 *.log
+
+nb-configuration.xml
