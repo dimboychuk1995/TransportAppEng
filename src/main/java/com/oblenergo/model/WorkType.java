@@ -17,174 +17,175 @@ import javax.persistence.Table;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "work_type")
-public class WorkType implements Serializable{
+public class WorkType implements Serializable {
 
-    private static final long serialVersionUID = -4180639762560575780L;
+	private static final long serialVersionUID = -4180639762560575780L;
 
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Integer id;
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	@NotEmpty(message = "Wsafdasf")
+	@Column(name = "name")
+	private String name;
+	// @Size(min = 5, max = 10, message = "Капец тест валідація")
+	@Column(name = "count_hours")
+	private double count_hours;
 
-    @Column(name = "name")
-    private String name;
+	@Column(name = "salary")
+	private double salary;
 
-    @Column(name = "count_hours")
-    private double count_hours;
+	@Column(name = "social_insurance")
+	private double social_insurance;
 
-    @Column(name = "salary")
-    private double salary;
+	@Column(name = "production_costs")
+	private double production_costs;
 
-    @Column(name = "social_insurance")
-    private double social_insurance;
+	@Column(name = "all_costs")
+	private double all_costs;
 
-    @Column(name = "production_costs")
-    private double production_costs;
+	@Column(name = "profit")
+	private double profit;
 
-    @Column(name = "all_costs")
-    private double all_costs;
+	@Column(name = "sum")
+	private double sum;
 
-    @Column(name = "profit")
-    private double profit;
+	@Column(name = "cost_of_materials")
+	private double cost_of_materials;
 
-    @Column(name = "sum")
-    private double sum;
+	@Column(name = "selling_price")
+	private double selling_price;
 
-    @Column(name = "cost_of_materials")
-    private double cost_of_materials;
+	@Column(name = "vat")
+	private double vat;
 
-    @Column(name = "selling_price")
-    private double selling_price;
+	@Column(name = "price_including_vat")
+	private double price_including_vat;
 
-    @Column(name = "vat")
-    private double vat;
+	public Integer getId() {
+		return id;
+	}
 
-    @Column(name = "price_including_vat")
-    private double price_including_vat;
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public double getCount_hours() {
+		return count_hours;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setCount_hours(double count_hours) {
+		this.count_hours = count_hours;
+	}
 
-    public double getCount_hours() {
-        return count_hours;
-    }
+	public double getSalary() {
+		return salary;
+	}
 
-    public void setCount_hours(double count_hours) {
-        this.count_hours = count_hours;
-    }
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
 
-    public double getSalary() {
-        return salary;
-    }
+	public double getSocial_insurance() {
+		return social_insurance;
+	}
 
-    public void setSalary(double salary) {
-        this.salary = salary;
-    }
+	public void setSocial_insurance(double social_insurance) {
+		this.social_insurance = social_insurance;
+	}
 
-    public double getSocial_insurance() {
-        return social_insurance;
-    }
+	public double getProduction_costs() {
+		return production_costs;
+	}
 
-    public void setSocial_insurance(double social_insurance) {
-        this.social_insurance = social_insurance;
-    }
+	public void setProduction_costs(double production_costs) {
+		this.production_costs = production_costs;
+	}
 
-    public double getProduction_costs() {
-        return production_costs;
-    }
+	public double getAll_costs() {
+		return all_costs;
+	}
 
-    public void setProduction_costs(double production_costs) {
-        this.production_costs = production_costs;
-    }
+	public void setAll_costs(double all_costs) {
+		this.all_costs = all_costs;
+	}
 
-    public double getAll_costs() {
-        return all_costs;
-    }
+	public double getProfit() {
+		return profit;
+	}
 
-    public void setAll_costs(double all_costs) {
-        this.all_costs = all_costs;
-    }
+	public void setProfit(double profit) {
+		this.profit = profit;
+	}
 
-    public double getProfit() {
-        return profit;
-    }
+	public double getSum() {
+		return sum;
+	}
 
-    public void setProfit(double profit) {
-        this.profit = profit;
-    }
+	public void setSum(double sum) {
+		this.sum = sum;
+	}
 
-    public double getSum() {
-        return sum;
-    }
+	public double getCost_of_materials() {
+		return cost_of_materials;
+	}
 
-    public void setSum(double sum) {
-        this.sum = sum;
-    }
+	public void setCost_of_materials(double cost_of_materials) {
+		this.cost_of_materials = cost_of_materials;
+	}
 
-    public double getCost_of_materials() {
-        return cost_of_materials;
-    }
+	public double getSelling_price() {
+		return selling_price;
+	}
 
-    public void setCost_of_materials(double cost_of_materials) {
-        this.cost_of_materials = cost_of_materials;
-    }
+	public void setSelling_price(double selling_price) {
+		this.selling_price = selling_price;
+	}
 
-    public double getSelling_price() {
-        return selling_price;
-    }
+	public double getVat() {
+		return vat;
+	}
 
-    public void setSelling_price(double selling_price) {
-        this.selling_price = selling_price;
-    }
+	public void setVat(double vat) {
+		this.vat = vat;
+	}
 
-    public double getVat() {
-        return vat;
-    }
+	public double getPrice_including_vat() {
+		return price_including_vat;
+	}
 
-    public void setVat(double vat) {
-        this.vat = vat;
-    }
+	public void setPrice_including_vat(double price_including_vat) {
+		this.price_including_vat = price_including_vat;
+	}
 
-    public double getPrice_including_vat() {
-        return price_including_vat;
-    }
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this, true);
 
-    public void setPrice_including_vat(double price_including_vat) {
-        this.price_including_vat = price_including_vat;
-    }
+	}
 
-    @Override
-    public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this, true);
+	@Override
+	public boolean equals(Object obj) {
 
-    }
+		return EqualsBuilder.reflectionEquals(this, obj, true);
+	}
 
-    @Override
-    public boolean equals(Object obj) {
+	@Override
+	public String toString() {
 
-        return EqualsBuilder.reflectionEquals(this, obj, true);
-    }
-
-    @Override
-    public String toString() {
-
-        return ToStringBuilder.reflectionToString(this);
-    }
+		return ToStringBuilder.reflectionToString(this);
+	}
 
 }

@@ -9,9 +9,11 @@
     
      <p><b>Назва робіт</b>
         <form:input type="text" path="name" class="" cssErrorClass=""/>
+        <form:errors path="name" class="" cssErrorClass="" />
       </p>
       <p><b>Кількість люд/год.</b>
         <form:input type="text" path="count_hours" class="" cssErrorClass="" />
+       
       </p>
       <p><b>Заробітна плата</b>
         <form:input type="text" path="salary" class="" cssErrorClass="" />
