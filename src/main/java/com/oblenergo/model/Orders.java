@@ -30,43 +30,43 @@ public class Orders implements Serializable {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
 
-    @NotEmpty
+    
     @Column(name = "name_servise_id")
     private Integer name_servise_id;
 
-    @NotEmpty
+    
     @Column(name = "customer")
     private String customer;
 
-    @NotEmpty
+    
     @Column(name = "car_name_id")
     private Integer car_name_id;
 
-    @NotEmpty
+    
     @Column(name = "car_model")
     private String car_model;
 
-    @NotEmpty
+    
     @Column(name = "sum_vithput_pdv")
-    private double sum_vithput_pdv;
+    private Double sum_vithput_pdv;
 
-    @NotEmpty
+    
     @Column(name = "pdv")
-    private double pdv;
+    private Double pdv;
 
-    @NotEmpty
+    
     @Column(name = "all_sum")
-    private double all_sum;
+    private Double all_sum;
 
-    @NotEmpty
+    
     @Column(name = "performer_id")
     private Integer performer_id;
 
-    @NotEmpty
+   
     @Column(name = "date")
     private String date;
 
-    @NotEmpty
+    
     @Column(name = "time")
     private String time;
 
@@ -110,27 +110,27 @@ public class Orders implements Serializable {
         this.car_model = car_model;
     }
 
-    public double getSum_vithput_pdv() {
+    public Double getSum_vithput_pdv() {
         return sum_vithput_pdv;
     }
 
-    public void setSum_vithput_pdv(double sum_vithput_pdv) {
+    public void setSum_vithput_pdv(Double sum_vithput_pdv) {
         this.sum_vithput_pdv = sum_vithput_pdv;
     }
 
-    public double getPdv() {
+    public Double getPdv() {
         return pdv;
     }
 
-    public void setPdv(double pdv) {
+    public void setPdv(Double pdv) {
         this.pdv = pdv;
     }
 
-    public double getAll_sum() {
+    public Double getAll_sum() {
         return all_sum;
     }
 
-    public void setAll_sum(double all_sum) {
+    public void setAll_sum(Double all_sum) {
         this.all_sum = all_sum;
     }
 

@@ -6,14 +6,38 @@
 
 <div>
     <form:form action="" method="POST" modelAttribute="orders" class="">
-        <p><b>Виконавець</b>
-            <form:input type="text" path="performer_id" class="" cssErrorClass=""/>                
-        </p>
-        <p><b>Дата</b>
-            <form:input type="text" path="date" class="" cssErrorClass=""/>                
-        </p>
-        <p><b>Час</b>
-            <form:input type="text" path="time" class="" cssErrorClass=""/>                
-        </p>
+        <fieldset>
+            <p><b>Вид робіт</b>
+                <form:input type="text" path="name_servise_id" class="" cssErrorClass=""/>                
+            </p>
+            <p><b>Замовник</b>
+                <form:input type="text" path="customer" class="" cssErrorClass=""/>                
+            </p>
+            <p><b>Марка авто</b>
+                <form:input type="text" path="car_name_id" class="" cssErrorClass=""/>                
+            </p>
+            <p><b>Модель</b>
+                <form:input type="text" path="car_model" class="" cssErrorClass=""/>                
+            </p>
+            <p><b>Сума без ПДВ</b>
+                <form:input type="text" path="sum_vithput_pdv" class="" cssErrorClass=""/>                
+            </p>
+            <p><b>ПДВ</b>
+                <form:input type="text" path="pdv" class="" cssErrorClass=""/>                
+            </p>
+            <p><b>Вся сума</b>
+                <form:input type="text" path="all_sum" class="" cssErrorClass=""/>                
+            </p>
+            <p><b>Виконавець</b>
+                <form:input type="text" path="performer_id" class="" cssErrorClass=""/>                
+            </p>
+            <p><b>Дата</b>
+                <form:input type="text" path="date" class="" cssErrorClass=""/>                
+            </p>
+            <p><b>Час</b>
+                <form:input type="text" path="time" class="" cssErrorClass=""/>                
+            </p>
+            <button id="" type="submit" class="">save</button>
+        </fieldset>
     </form:form>
 </div>

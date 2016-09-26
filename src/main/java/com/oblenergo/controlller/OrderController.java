@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.oblenergo.model.Orders;
 import com.oblenergo.service.OrderServise;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 
 @Controller
 @RequestMapping(value = "/order")
@@ -29,16 +31,33 @@ public class OrderController {
             return "order";
         }
         
-        @RequestMapping(value = "/orders/{id}", method = RequestMethod.POST)
-        public String updateOrder(@ModelAttribute Orders order){
-            orderServiseImpl.update(order);
-            return "redirect:/";
+        @RequestMapping(value = "/{id}", method = RequestMethod.POST)
+        public String updateOrder(@ModelAttribute Orders orders){
+            orderServiseImpl.update(orders);
+            return "redirect:/order";
         }
         
-        @RequestMapping(value = "/order/{id}", method = RequestMethod.GET)
+        @RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String showTypeById(@PathVariable int id, Model model) {
 		model.addAttribute(ORDER, orderServiseImpl.findOrderById(id));
-		return "updateCreateOrder";
+		return "updateCreateOrders";
+	}
+        
+        @RequestMapping(value="/orders/newOrder", method = RequestMethod.GET)
+        public String redirectToCreate(Model model){
+            model.addAttribute(ORDER, new Orders());
+            return "updateCreateOrders";
+        }
+        
+        @RequestMapping(value = "/orders/newOrder", method = RequestMethod.POST)
+	public String addType(@Validated @ModelAttribute("orders") Orders orders, BindingResult bindingResult) {
+            
+		if (bindingResult.hasErrors()) {
+			return "updateCreateWorkType";
+		}
+                
+		orderServiseImpl.save(orders);
+		return "redirect:/";
 	}
         
 }

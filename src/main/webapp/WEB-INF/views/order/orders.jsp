@@ -8,8 +8,8 @@
     <table>
         <thead>
             <tr>
-                <th>id</th>
                 <th>Вид робіт</th>
+                <th>Замовник</th>
                 <th>Марка авто</th>
                 <th>Модель</th>
                 <th>Сума без ПДВ</th>
@@ -22,7 +22,7 @@
         </thead>
         <tbody>
             <c:forEach items="${order}" var="orders">
-                <tr>
+                <tr id="${orders.id}">
                     <td>
                         <c:out value="${orders.name_servise_id}"></c:out>
                     </td>
@@ -54,7 +54,7 @@
                         <c:out value="${orders.time}"></c:out>
                     </td>
                     <td>
-                        <a href=<c:url value="/orders/${orders.id}" />>Update</a>
+                        <a href=<c:url value="/order/${orders.id}" />>Update</a>
                     </td>
                 </tr>
             </c:forEach>

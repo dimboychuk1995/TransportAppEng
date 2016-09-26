@@ -10,7 +10,7 @@
 
         <definition name="updateCreateOrders" extends="DefaultTemplate">
     	<put-attribute name="title" value="OrdersById" />
-    	<put-attribute name="body" value="/WEB-INF/views/workTypes/updateCreateOrders.jsp" />
+    	<put-attribute name="body" value="/WEB-INF/views/order/updateCreateOrders.jsp" />
   	</definition>
   	
 </tiles-definitions>
