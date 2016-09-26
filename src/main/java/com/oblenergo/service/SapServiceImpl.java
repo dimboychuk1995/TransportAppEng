@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -20,6 +22,10 @@ public class SapServiceImpl implements SapService {
 
     private static final Logger LOGGER = Logger.getLogger(SapServiceImpl.class);
 
+    private static final String REGEX_PATTERN = "<h3>(.)+?</h3>";
+    private static final int START_INDEX = 4;
+    private static final int END_INDEX = 5;
+    // http client constants
     private static final String URL = "http://obl-java:8080/SOAPEmpoyee/PersonSearch";
     private static final String ACCEPT_HEADER = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
     private static final String ACCEPT_ENCODING_HEADER = "gzip, deflate";
@@ -32,7 +38,7 @@ public class SapServiceImpl implements SapService {
     private static final String TASK_REQUIRED_VALUE = "COMMUNIC";
 
     @Override
-    public void httpConnectorForSap(int tabNamber) {
+    public String httpConnectorForSap(int tabNamber) {
 
         HttpPost post = new HttpPost(URL);
 
@@ -64,9 +70,26 @@ public class SapServiceImpl implements SapService {
         try {
             HttpResponse response = HttpClientBuilder.create().build().execute(post);
             String responseString = EntityUtils.toString(response.getEntity(), "UTF-8");
-            System.out.println(responseString);
+            return regexFinder(responseString);
         } catch (IOException e) {
             LOGGER.error("Can`t get response from" + URL, e);
+        }
+
+        return "";
+    }
+
+    private String regexFinder(String input) {
+
+        Pattern p = Pattern.compile(REGEX_PATTERN);
+        Matcher m = p.matcher(input);
+        String userName = null;
+        if (m.find()) {
+            userName = m.group();
+        }
+        if (userName != null) {
+            return userName.substring(START_INDEX, userName.length() - END_INDEX);
+        } else {
+            return "Табельний номер введений Вами не існує";
         }
     }
 
