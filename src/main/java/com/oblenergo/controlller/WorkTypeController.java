@@ -61,7 +61,6 @@ public class WorkTypeController {
 		if (bindingResult.hasErrors()) {
 			return "updateCreateWorkType";
 		}
-
 		workTypeServiceImpl.save(workType);
 		return "redirect:/";
 	}

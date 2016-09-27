@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
+<script src="/transportApp/resources/dist/js/jquery.min.js"></script>
+<script type="text/javascript" src="/transportApp/resources/dist/js/jsonDeleteOrder.js"></script>
 
 <div>
     <table>
@@ -56,9 +58,16 @@
                     <td>
                         <a href=<c:url value="/order/${orders.id}" />>Update</a>
                     </td>
+                    <td>
+                        <form:form id="delete${orders.id}" action="javascript:void(null)" method="GET" onsubmit="deleteOrder(${orders.id})" modelAttribute="" class="">
+                            <button id="" type="submit" class="">Delete</button>
+                        </form:form>
+                    </td>
                 </tr>
             </c:forEach>
         </tbody>
     </table>
+    <a href=<c:url value="/order/newOrder" />>Create</a>
+    <a href=<c:url value="/"/>>workType</a>
 </div>
 

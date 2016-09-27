@@ -43,21 +43,28 @@ public class OrderController {
 		return "updateCreateOrders";
 	}
         
-        @RequestMapping(value="/orders/newOrder", method = RequestMethod.GET)
+        @RequestMapping(value="/newOrder", method = RequestMethod.GET)
         public String redirectToCreate(Model model){
-            model.addAttribute(ORDER, new Orders());
-            return "updateCreateOrders";
+                model.addAttribute(ORDER, new Orders());
+
+                return "updateCreateOrders";
         }
         
-        @RequestMapping(value = "/orders/newOrder", method = RequestMethod.POST)
+        @RequestMapping(value = "/newOrder", method = RequestMethod.POST)
 	public String addType(@Validated @ModelAttribute("orders") Orders orders, BindingResult bindingResult) {
             
-		if (bindingResult.hasErrors()) {
-			return "updateCreateWorkType";
-		}
+                if (bindingResult.hasErrors()) {
+                        return "updateCreateOrders";
+                }
+                orderServiseImpl.save(orders);
                 
-		orderServiseImpl.save(orders);
-		return "redirect:/";
+                return "redirect:/order";
+	}
+        
+        @RequestMapping(value = "/deleteOrder/{id}", method = RequestMethod.GET)
+	public String deleteType(@PathVariable int id) {
+		orderServiseImpl.delete(id);
+		return "redirect:/order";
 	}
         
 }
