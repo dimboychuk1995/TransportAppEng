@@ -22,7 +22,7 @@ import com.oblenergo.service.WorkTypeService;
 import com.oblenergo.validator.WorkTypeValidator;
 
 @Controller
-@RequestMapping(value = "/")
+@RequestMapping(value = "/admin")
 public class WorkTypeController {
 
 	public static final String ITEMS = "typeWorks";
@@ -48,7 +48,6 @@ public class WorkTypeController {
 
 		model.addAttribute(ITEMS, workTypeServiceImpl.findAll());
 		model.addAttribute(WORK_TYPE, new WorkType());
-		// sapServiceImpl.httpConnectorForSap("9047");
 		return "workType";
 	}
 
@@ -60,7 +59,7 @@ public class WorkTypeController {
 		}
 
 		workTypeServiceImpl.update(workType);
-		return "redirect:/";
+		return "redirect:/admin";
 	}
 
 	@RequestMapping(value = "/workType/{id}", method = RequestMethod.GET)
@@ -70,26 +69,26 @@ public class WorkTypeController {
 		return "updateCreateWorkType";
 	}
 
-	@RequestMapping(value = "/workTypes/newWorkType", method = RequestMethod.GET)
+	@RequestMapping(value = "/workType/newWorkType", method = RequestMethod.GET)
 	public String redirectToCreate(Model model) {
 
 		model.addAttribute(WORK_TYPE, new WorkType());
 		return "updateCreateWorkType";
 	}
 
-	@RequestMapping(value = "/workTypes/newWorkType", method = RequestMethod.POST)
+	@RequestMapping(value = "/workType/newWorkType", method = RequestMethod.POST)
 	public String addType(@Validated @ModelAttribute("workType") WorkType workType, BindingResult bindingResult) {
 
 		if (bindingResult.hasErrors()) {
 			return "updateCreateWorkType";
 		}
 		workTypeServiceImpl.save(workType);
-		return "redirect:/";
+		return "redirect:/admin";
 	}
 
 	@RequestMapping(value = "/delete", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteBanner(@RequestBody int id) {
+	public void deleteWorkType(@RequestBody int id) {
 
 		workTypeServiceImpl.delete(id);
 	}

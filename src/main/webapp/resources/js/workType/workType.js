@@ -11,7 +11,7 @@ $(function() {
   function deleteWorkType(butObj) {
     $.ajax({
       type: 'DELETE',
-      url: contextPath + '/delete',
+      url: contextPath + '/admin/delete',
       contentType: 'application/json',
       data: JSON.stringify(butObj.prop('id')),
       success: function() {

@@ -62,7 +62,7 @@
             <c:out value="${workType.price_including_vat}"></c:out>
           </td>
           <td>
-            <a href=<c:url value="/workType/${workType.id}" />>Update</a>
+            <a href=<c:url value="/admin/workType/${workType.id}" />>Update</a>
           </td>
           <td>
 			<button id="${workType.id}" class="delete">Delete</button>
@@ -71,7 +71,7 @@
       </c:forEach>
     </tbody>
   </table>
-  <a href=<c:url value="/workTypes/newWorkType" />>Create</a>
+  <a href=<c:url value="/admin/workType/newWorkType"/>>Create</a>
   <a href=<c:url value="/order"/>>Order</a>
 </div>
 
