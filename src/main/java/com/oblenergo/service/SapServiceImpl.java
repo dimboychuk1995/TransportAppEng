@@ -38,7 +38,7 @@ public class SapServiceImpl implements SapService {
     private static final String TASK_REQUIRED_VALUE = "COMMUNIC";
 
     @Override
-    public String httpConnectorForSap(int tabNamber) {
+    public String httpConnectorForSap(String tabNumber) {
 
         HttpPost post = new HttpPost(URL);
 
@@ -51,7 +51,7 @@ public class SapServiceImpl implements SapService {
 
         List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
         urlParameters.add(new BasicNameValuePair("task", TASK_REQUIRED_VALUE));
-        urlParameters.add(new BasicNameValuePair("employee_id", Integer.toString(tabNamber)));
+        urlParameters.add(new BasicNameValuePair("employee_id", tabNumber));
         urlParameters.add(new BasicNameValuePair("last_name", EMPTY_FIELD));
         urlParameters.add(new BasicNameValuePair("first_name", EMPTY_FIELD));
         urlParameters.add(new BasicNameValuePair("org_name", EMPTY_FIELD));
@@ -73,24 +73,27 @@ public class SapServiceImpl implements SapService {
             return regexFinder(responseString);
         } catch (IOException e) {
             LOGGER.error("Can`t get response from" + URL, e);
+            e.printStackTrace();
         }
 
-        return "";
+        return null;
     }
 
     private String regexFinder(String input) {
 
         Pattern p = Pattern.compile(REGEX_PATTERN);
         Matcher m = p.matcher(input);
-        String userName = null;
+        String fullName = null;
         if (m.find()) {
-            userName = m.group();
+            fullName = m.group();
+            try {
+                return fullName.substring(START_INDEX, fullName.length() - END_INDEX);
+            } catch (Exception e) {
+                LOGGER.error("Something wrong in sapService response", e);
+                e.printStackTrace();
+            }
         }
-        if (userName != null) {
-            return userName.substring(START_INDEX, userName.length() - END_INDEX);
-        } else {
-            return "Табельний номер введений Вами не існує";
-        }
+        return fullName;
     }
 
 }

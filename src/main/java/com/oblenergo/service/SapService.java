@@ -2,6 +2,6 @@ package com.oblenergo.service;
 
 public interface SapService {
 
-    String httpConnectorForSap(int tabNamber);
+    String httpConnectorForSap(String tabNamber);
     
 }
