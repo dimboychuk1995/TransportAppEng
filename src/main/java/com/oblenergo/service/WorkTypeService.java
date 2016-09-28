@@ -14,6 +14,10 @@ public interface WorkTypeService {
 
 	WorkType findWorkTypeById(int id);
 
+	WorkType findWorkTypeByName(String name);
+
 	void delete(int id);
+
+	boolean isWorkTypeUnique(String name, Integer id);
 
 }

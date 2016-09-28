@@ -29,7 +29,7 @@ public class WorkType implements Serializable {
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	@NotEmpty(message = "Wsafdasf")
+	@NotEmpty(message = " Empty place")
 	@Column(name = "name")
 	private String name;
 	// @Size(min = 5, max = 10, message = "Капец тест валідація")

@@ -3,6 +3,7 @@ package com.oblenergo.DAO;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -28,6 +29,17 @@ public class WorkTypeDaoImpl extends AbstractDao<Integer, WorkType> implements W
 	@Override
 	public WorkType findById(int id) {
 		return getById(id);
+	}
+
+	@Override
+	public WorkType findByName(String name) {
+		Criteria criteria = createEntityCriteria();
+		criteria.add(Restrictions.eq("name", name));
+		WorkType wt = (WorkType) criteria.uniqueResult();
+		if (wt != null) {
+			Hibernate.initialize(wt.getName());
+		}
+		return wt;
 	}
 
 	@Override

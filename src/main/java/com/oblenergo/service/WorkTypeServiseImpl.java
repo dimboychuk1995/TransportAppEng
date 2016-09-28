@@ -37,6 +37,12 @@ public class WorkTypeServiseImpl implements WorkTypeService {
 
 	@Transactional
 	@Override
+	public WorkType findWorkTypeByName(String name) {
+		return dao.findByName(name);
+	}
+
+	@Transactional
+	@Override
 	public void update(WorkType workType) {
 		WorkType entity = dao.findById(workType.getId());
 		entity.setName(workType.getName());
@@ -57,6 +63,13 @@ public class WorkTypeServiseImpl implements WorkTypeService {
 	@Override
 	public void delete(int id) {
 		dao.delete(id);
+	}
+
+	@Transactional
+	@Override
+	public boolean isWorkTypeUnique(String name, Integer id) {
+		WorkType wt = findWorkTypeByName(name);
+		return (wt == null || wt.getId() == id);
 	}
 
 }
