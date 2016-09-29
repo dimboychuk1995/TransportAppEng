@@ -32,7 +32,7 @@
                 <form:input type="text" path="performer_id" class="" cssErrorClass=""/>                
             </p>
             <p><b>Дата</b>
-                <form:input type="text" path="date" class="" cssErrorClass=""/>                
+                <form:input type="text" id = "datepicker" path="date" class="" cssErrorClass=""/>                
             </p>
             <p><b>Час</b>
                 <form:input type="text" path="time" class="" cssErrorClass=""/>                
@@ -41,3 +41,7 @@
         </fieldset>
     </form:form>
 </div>
+
+<script src=<c:url value="/resources/js/datePicker/datePicker.js" />></script>
+<script src=<c:url value="/resources/js/datePicker/jquery-ui.min.js" />></script>
+<script src=<c:url value="/resources/js/datePicker/jquery-ui.js" />></script>
