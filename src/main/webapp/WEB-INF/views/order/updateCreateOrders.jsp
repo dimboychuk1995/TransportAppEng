@@ -35,13 +35,21 @@
                 <form:input type="text" id = "datepicker" path="date" class="" cssErrorClass=""/>                
             </p>
             <p><b>Час</b>
-                <form:input type="text" path="time" class="" cssErrorClass=""/>                
+                <form:input type="text" id = "timepicker" path="time" class="" cssErrorClass=""/>                
             </p>
             <button id="" type="submit" class="">save</button>
         </fieldset>
     </form:form>
 </div>
-
+<!-- DatePicker -->
 <script src=<c:url value="/resources/js/datePicker/datePicker.js" />></script>
 <script src=<c:url value="/resources/js/datePicker/jquery-ui.min.js" />></script>
 <script src=<c:url value="/resources/js/datePicker/jquery-ui.js" />></script>
+
+<!-- TimePicker -->
+
+<script src=<c:url value="/resources/js/timePicker/timePicker.js" />></script>
+<script src=<c:url value="/resources/js/timePicker/bootstrap.min.js" />></script>
+<script src=<c:url value="/resources/js/timePicker/bootstrap-datetimepicker.min.js" />></script>
+<script src=<c:url value="/resources/js/timePicker/moment-with-locales.min.js" />></script>
+
