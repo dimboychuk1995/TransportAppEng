@@ -17,16 +17,11 @@
   <!-- Bootstrap JS -->
   <script src="<c:url value = "/resources/dist/js/bootstrap.min.js" />"></script>
   <script src="<c:url value = "/resources/dist/js/bootstrap.js" />"></script>
-
-   <!-- DatePicker CSS -->
-   <link href="<c:url value = "/resources/dist/css/datePicker/jquery-ui.css" />" rel="stylesheet">
-   <link href="<c:url value = "/resources/dist/css/datePicker/jquery-ui.min.css" />" rel="stylesheet">
-   <link href="<c:url value = "/resources/dist/css/datePicker/jquery-ui.structure.css" />" rel="stylesheet">
-   <link href="<c:url value = "/resources/dist/css/datePicker/jquery-ui.theme.css" />" rel="stylesheet">
-   <link href="<c:url value = "/resources/dist/css/datePicker/jquery-ui.theme.min.css" />" rel="stylesheet">
-   
+ 
    <!-- TimePicker CSS -->
-   <link href="<c:url value = "/resources/dist/css/timePicker/jquery.timepicker.css" />" rel="stylesheet">
+   <link href="<c:url value = "/resources/dist/css/dateTimePicker/bootstrap-datepicker.css" />" rel="stylesheet">
+   <link href="<c:url value = "/resources/dist/css/dateTimePicker/jquery.timepicker.css" />" rel="stylesheet">
+  
   
   <title>
     <tiles:insertAttribute name="title" ignore="true" />

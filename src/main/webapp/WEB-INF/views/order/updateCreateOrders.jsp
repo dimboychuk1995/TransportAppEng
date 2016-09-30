@@ -29,27 +29,22 @@
                 <form:input type="text" path="all_sum" class="" cssErrorClass=""/>                
             </p>
             <p><b>Виконавець</b>
-                <form:input type="text" path="performer_id" class="" cssErrorClass=""/>                
-            </p>
-            <p><b>Дата</b>
-                <form:input type="text" id = "datepicker" path="date" class="" cssErrorClass=""/>                
-            </p>
-            <p><b>Час</b>
-                <form:input type="text" id = "timepicker" path="time" class="" cssErrorClass=""/>                
+                <form:input type="text" path="performer_id" class="" cssErrorClass=""/> 
+
+            <p id ="timePickerPair" ><b>Дата та час</b>
+            	<form:input id = "datetpicker" type="text" path="date" class="date start" cssErrorClass=""/>
+                <form:input type="text" path="time" class="time start" cssErrorClass=""/>
+                <input type="text" class="time end" disabled="disabled" />               
             </p>
             <button id="" type="submit" class="">save</button>
         </fieldset>
     </form:form>
 </div>
-<!-- DatePicker -->
-<script src=<c:url value="/resources/js/datePicker/datePicker.js" />></script>
-<script src=<c:url value="/resources/js/datePicker/jquery-ui.min.js" />></script>
-<script src=<c:url value="/resources/js/datePicker/jquery-ui.js" />></script>
 
-<!-- TimePicker -->
+<!-- DateTimePicker -->
+<script src=<c:url value="/resources/js/dateTimePicker/dateTimePicker.js" />></script>
+<script src=<c:url value="/resources/js/dateTimePicker/bootstrap-datepicker.js" />></script>
+<script src=<c:url value="/resources/js/dateTimePicker/datepair.js" />></script>
+<script src=<c:url value="/resources/js/dateTimePicker/jquery.timepicker.js" />></script>
 
-<script src=<c:url value="/resources/js/timePicker/timePicker.js" />></script>
-<script src=<c:url value="/resources/js/timePicker/bootstrap.min.js" />></script>
-<script src=<c:url value="/resources/js/timePicker/bootstrap-datetimepicker.min.js" />></script>
-<script src=<c:url value="/resources/js/timePicker/moment-with-locales.min.js" />></script>
 
