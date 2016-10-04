@@ -31,22 +31,21 @@ public class OrderController {
             return "order";
         }
         
-        @RequestMapping(value = "/{id}", method = RequestMethod.POST)
-        public String updateOrder(@ModelAttribute Orders orders){
-            orderServiseImpl.update(orders);
-            return "redirect:/order";
-        }
-        
         @RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String showTypeById(@PathVariable int id, Model model) {
 		model.addAttribute(ORDER, orderServiseImpl.findOrderById(id));
 		return "updateCreateOrders";
 	}
         
+        @RequestMapping(value = "/{id}", method = RequestMethod.POST)
+        public String updateOrder(@ModelAttribute Orders orders){
+            orderServiseImpl.update(orders);
+            return "redirect:/order";
+        }
+        
         @RequestMapping(value="/newOrder", method = RequestMethod.GET)
         public String redirectToCreate(Model model){
                 model.addAttribute(ORDER, new Orders());
-
                 return "updateCreateOrders";
         }
         
@@ -57,9 +56,9 @@ public class OrderController {
                         return "updateCreateOrders";
                 }
                 orderServiseImpl.save(orders);
-                
                 return "redirect:/order";
 	}
+
         
         @RequestMapping(value = "/deleteOrder/{id}", method = RequestMethod.GET)
 	public String deleteType(@PathVariable int id) {

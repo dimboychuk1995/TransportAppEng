@@ -53,6 +53,9 @@ public class OrderServiseImpl implements OrderServise{
         entity.setPerformer_id(order.getPerformer_id());
         entity.setDate(order.getDate());
         entity.setTime(order.getTime());
+        entity.setUser_tab(order.getUser_tab());
+        entity.setCar_number(order.getCar_number());
+        entity.setStatus_order(order.getStatus_order());
     }
 
     @Transactional

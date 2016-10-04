@@ -1,5 +1,6 @@
 package com.oblenergo.controlller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,6 +22,10 @@ import com.oblenergo.service.SapService;
 import com.oblenergo.service.WorkTypeService;
 import com.oblenergo.validator.WorkTypeValidator;
 
+
+import com.oblenergo.model.Orders;
+import com.oblenergo.service.OrderServise;
+
 @Controller
 @RequestMapping(value = "/admin")
 public class AdminController {
@@ -31,6 +36,7 @@ public class AdminController {
 
 	@Autowired
 	WorkTypeService workTypeServiceImpl;
+        OrderServise orderServiseImpl;
 
 	@Autowired
 	SapService sapServiceImpl;
@@ -92,5 +98,8 @@ public class AdminController {
 
 		workTypeServiceImpl.delete(id);
 	}
+        
+        
+        
 
 }

@@ -12,5 +12,11 @@
     	<put-attribute name="title" value="OrdersById" />
     	<put-attribute name="body" value="/WEB-INF/views/order/updateCreateOrders.jsp" />
   	</definition>
+        
+        <definition name="createOrder" extends="DefaultTemplate">
+    	<put-attribute name="title" value="OrdersById" />
+    	<put-attribute name="body" value="/WEB-INF/views/createOrder/createOrder.jsp" />
+  	</definition>
+        
   	
 </tiles-definitions>

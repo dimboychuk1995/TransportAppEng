@@ -36,6 +36,15 @@
                 <form:input type="text" path="time" class="time start" cssErrorClass=""/>
                 <input type="text" class="time end" disabled="disabled" />               
             </p>
+            <p><b>Табельний номер</b>
+                <form:input type="text" id = "" path="user_tab" class="" cssErrorClass=""/>                
+            </p>
+            <p><b>Номер авто</b>
+                <form:input type="text" id = "" path="car_number" class="" cssErrorClass=""/>                
+            </p>
+            <p><b>Статус замовлення</b>
+                <form:input type="text" id = "" path="status_order" class="" cssErrorClass=""/>                
+            </p>
             <button id="" type="submit" class="">save</button>
         </fieldset>
     </form:form>

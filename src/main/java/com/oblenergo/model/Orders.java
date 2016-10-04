@@ -70,6 +70,41 @@ public class Orders implements Serializable {
     @Column(name = "time")
     private String time;
 
+    @Column(name = "user_tab")
+    private Integer user_tab;
+
+    @Column(name = "car_number")
+    private String car_number;
+
+    @Column(name = "status_order")
+    private Integer status_order;
+
+    public Integer getUser_tab() {
+        return user_tab;
+    }
+
+    public void setUser_tab(Integer user_tab) {
+        this.user_tab = user_tab;
+    }
+
+    public String getCar_number() {
+        return car_number;
+    }
+
+    public void setCar_number(String car_number) {
+        this.car_number = car_number;
+    }
+
+    public Integer getStatus_order() {
+        return status_order;
+    }
+
+    public void setStatus_order(Integer status_order) {
+        this.status_order = status_order;
+    }
+
+     
+   
     public Integer getId() {
         return id;
     }
