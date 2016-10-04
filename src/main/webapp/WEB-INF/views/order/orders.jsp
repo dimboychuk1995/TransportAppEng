@@ -20,6 +20,9 @@
                 <th>Виконавець</th>
                 <th>Дата</th>
                 <th>Час</th>
+                <th>Табельний номер</th>
+                <th>Номер авто</th>
+                <th>Статус замовлення</th>
             </tr>
         </thead>
         <tbody>
@@ -53,7 +56,13 @@
                         <c:out value="${orders.date}"></c:out>
                     </td>
                     <td>
-                        <c:out value="${orders.time}"></c:out>
+                        <c:out value="${orders.user_tab}"></c:out>
+                    </td>
+                    <td>
+                        <c:out value="${orders.car_number}"></c:out>
+                    </td>
+                    <td>
+                        <c:out value="${orders.status_order}"></c:out>
                     </td>
                     <td>
                         <a href=<c:url value="/order/${orders.id}" />>Update</a>
@@ -68,6 +77,6 @@
         </tbody>
     </table>
     <a href=<c:url value="/order/newOrder" />>Create</a>
-    <a href=<c:url value="/"/>>workType</a>
+    <a href=<c:url value="/admin"/>>workType</a>
 </div>
 
