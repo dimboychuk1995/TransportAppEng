@@ -8,13 +8,13 @@
     <form:form action="" method="POST" modelAttribute="orders" class="">
         <fieldset>
             <p><b>Вид робіт</b>
-                <form:input type="text" path="name_servise_id" class="" cssErrorClass=""/>                
+                <form:input type="text" path="workType.name" class="" cssErrorClass=""/>                
             </p>
             <p><b>Замовник</b>
                 <form:input type="text" path="customer" class="" cssErrorClass=""/>                
             </p>
             <p><b>Марка авто</b>
-                <form:input type="text" path="car_name_id" class="" cssErrorClass=""/>                
+                <form:input type="text" path="car.name" class="" cssErrorClass=""/>                
             </p>
             <p><b>Модель</b>
                 <form:input type="text" path="car_model" class="" cssErrorClass=""/>                

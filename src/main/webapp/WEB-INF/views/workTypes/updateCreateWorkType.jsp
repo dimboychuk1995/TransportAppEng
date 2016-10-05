@@ -43,7 +43,7 @@
       <p><b>ПДВ</b>
         <form:input type="text" path="vat" class="" cssErrorClass="" />
       </p>
-      <p><b>Вартість ПДВ</b>
+      <p><b>відпускна вартість з ПДВ</b>
         <form:input type="text" path="price_including_vat" class="" cssErrorClass="" />
       </p>
       <button id="" type="submit" class="">Save</button>

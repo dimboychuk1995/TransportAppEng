@@ -44,9 +44,7 @@ public class UserOrderController {
         
         @RequestMapping(value = "/", method = RequestMethod.POST)
 	public String addType(@Validated @ModelAttribute("orders") Orders orders) {
-                System.out.println("I was here");
                 orderServiseImpl.save(orders);
-                System.out.println("and I was here");
                 return "redirect:/";
 	} 
 }

@@ -29,13 +29,13 @@
             <c:forEach items="${order}" var="orders">
                 <tr id="${orders.id}">
                     <td>
-                        <c:out value="${orders.name_servise_id}"></c:out>
+                        <c:out value="${orders.workType.name}"></c:out>
                     </td>
                     <td>
                         <c:out value="${orders.customer}"></c:out>
                     </td>
                     <td>
-                        <c:out value="${orders.car_name_id}"></c:out>
+                        <c:out value="${orders.car.name}"></c:out>
                     </td>
                     <td>
                         <c:out value="${orders.car_model}"></c:out>

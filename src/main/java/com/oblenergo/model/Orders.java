@@ -1,17 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.oblenergo.model;
 
 import java.io.Serializable;
 
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -30,18 +31,16 @@ public class Orders implements Serializable {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
 
-    
-    @Column(name = "name_servise_id")
-    private Integer name_servise_id;
-
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "name_servise_id")
+    private WorkType workType;
     
     @Column(name = "customer")
     private String customer;
 
-    
-    @Column(name = "car_name_id")
-    private Integer car_name_id;
-
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "car_name_id")
+    private Car car;
     
     @Column(name = "car_model")
     private String car_model;
@@ -78,7 +77,7 @@ public class Orders implements Serializable {
 
     @Column(name = "status_order")
     private Integer status_order;
-
+    
     public Integer getUser_tab() {
         return user_tab;
     }
@@ -102,9 +101,7 @@ public class Orders implements Serializable {
     public void setStatus_order(Integer status_order) {
         this.status_order = status_order;
     }
-
-     
-   
+    
     public Integer getId() {
         return id;
     }
@@ -112,15 +109,7 @@ public class Orders implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-
-    public Integer getName_servise_id() {
-        return name_servise_id;
-    }
-
-    public void setName_servise_id(Integer name_servise_id) {
-        this.name_servise_id = name_servise_id;
-    }
-
+    
     public String getCustomer() {
         return customer;
     }
@@ -128,13 +117,13 @@ public class Orders implements Serializable {
     public void setCustomer(String customer) {
         this.customer = customer;
     }
-
-    public Integer getCar_name_id() {
-        return car_name_id;
+    
+    public Car getCar() {
+        return car;
     }
 
-    public void setCar_name_id(Integer car_name_id) {
-        this.car_name_id = car_name_id;
+    public void setCar(Car car) {
+        this.car = car;
     }
 
     public String getCar_model() {
@@ -192,6 +181,16 @@ public class Orders implements Serializable {
     public void setTime(String time) {
         this.time = time;
     }
+    
+    public WorkType getWorkType(){
+        return workType;
+    }
+    
+    public void setWorkType(WorkType workType){
+        this.workType = workType;
+    }
+    
+    
 
     @Override
     public int hashCode() {
