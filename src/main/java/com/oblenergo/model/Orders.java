@@ -3,8 +3,6 @@ package com.oblenergo.model;
 
 import java.io.Serializable;
 
-import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,13 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "orders")
@@ -26,58 +22,22 @@ public class Orders implements Serializable {
 
     private static final long serialVersionUID = 7191453677142422700L;
 
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
-
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "name_servise_id")
     private WorkType workType;
-    
-    @Column(name = "customer")
     private String customer;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "car_name_id")
-    private Car car;
-    
-    @Column(name = "car_model")
+    // private Car car = new Car();
     private String car_model;
-
-    
-    @Column(name = "sum_vithput_pdv")
     private Double sum_vithput_pdv;
-
-    
-    @Column(name = "pdv")
     private Double pdv;
-
-    
-    @Column(name = "all_sum")
     private Double all_sum;
-
-    
-    @Column(name = "performer_id")
     private Integer performer_id;
-
-   
-    @Column(name = "date")
     private String date;
-
-    
-    @Column(name = "time")
     private String time;
+    private Integer user_tab;
+    private String car_number;
+    private Integer status_order;
 
     @Column(name = "user_tab")
-    private Integer user_tab;
-
-    @Column(name = "car_number")
-    private String car_number;
-
-    @Column(name = "status_order")
-    private Integer status_order;
-    
     public Integer getUser_tab() {
         return user_tab;
     }
@@ -86,6 +46,7 @@ public class Orders implements Serializable {
         this.user_tab = user_tab;
     }
 
+    @Column(name = "car_number")
     public String getCar_number() {
         return car_number;
     }
@@ -94,6 +55,7 @@ public class Orders implements Serializable {
         this.car_number = car_number;
     }
 
+    @Column(name = "status_order")
     public Integer getStatus_order() {
         return status_order;
     }
@@ -101,7 +63,10 @@ public class Orders implements Serializable {
     public void setStatus_order(Integer status_order) {
         this.status_order = status_order;
     }
-    
+
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getId() {
         return id;
     }
@@ -109,7 +74,8 @@ public class Orders implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-    
+
+    @Column(name = "customer")
     public String getCustomer() {
         return customer;
     }
@@ -117,15 +83,18 @@ public class Orders implements Serializable {
     public void setCustomer(String customer) {
         this.customer = customer;
     }
-    
-    public Car getCar() {
-        return car;
-    }
 
-    public void setCar(Car car) {
-        this.car = car;
-    }
+    // @ManyToOne
+    // @JoinColumn(name = "car_name_id")
+    // public Car getCar() {
+    // return car;
+    // }
 
+    // public void setCar(Car car) {
+    // this.car = car;
+    // }
+
+    @Column(name = "car_model")
     public String getCar_model() {
         return car_model;
     }
@@ -134,6 +103,7 @@ public class Orders implements Serializable {
         this.car_model = car_model;
     }
 
+    @Column(name = "sum_vithput_pdv")
     public Double getSum_vithput_pdv() {
         return sum_vithput_pdv;
     }
@@ -142,6 +112,7 @@ public class Orders implements Serializable {
         this.sum_vithput_pdv = sum_vithput_pdv;
     }
 
+    @Column(name = "pdv")
     public Double getPdv() {
         return pdv;
     }
@@ -150,6 +121,7 @@ public class Orders implements Serializable {
         this.pdv = pdv;
     }
 
+    @Column(name = "all_sum")
     public Double getAll_sum() {
         return all_sum;
     }
@@ -158,6 +130,7 @@ public class Orders implements Serializable {
         this.all_sum = all_sum;
     }
 
+    @Column(name = "performer_id")
     public Integer getPerformer_id() {
         return performer_id;
     }
@@ -166,6 +139,7 @@ public class Orders implements Serializable {
         this.performer_id = performer_id;
     }
 
+    @Column(name = "date")
     public String getDate() {
         return date;
     }
@@ -174,6 +148,7 @@ public class Orders implements Serializable {
         this.date = date;
     }
 
+    @Column(name = "time")
     public String getTime() {
         return time;
     }
@@ -181,16 +156,16 @@ public class Orders implements Serializable {
     public void setTime(String time) {
         this.time = time;
     }
-    
-    public WorkType getWorkType(){
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "name_servise_id", referencedColumnName="id")
+    public WorkType getWorkType() {
         return workType;
     }
-    
-    public void setWorkType(WorkType workType){
+
+    public void setWorkType(WorkType workType) {
         this.workType = workType;
     }
-    
-    
 
     @Override
     public int hashCode() {

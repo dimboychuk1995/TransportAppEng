@@ -45,7 +45,7 @@ public class OrderServiseImpl implements OrderServise{
         Orders entity = dao.findById(order.getId());
         entity.setWorkType(order.getWorkType());
         entity.setCustomer(order.getCustomer());
-        entity.setCar(order.getCar());
+//        entity.setCar(order.getCar());
         entity.setCar_model(order.getCar_model());
         entity.setSum_vithput_pdv(order.getSum_vithput_pdv());
         entity.setPdv(order.getPdv());

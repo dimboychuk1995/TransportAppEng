@@ -13,9 +13,9 @@
         <p><b>Табельний номер</b>
             <form:input type="text" id = "" path="user_tab" class="" cssErrorClass=""/>                
         </p>
-        <p><b>Марка авто</b>
-            <form:input type="text" path="car.name" class="" cssErrorClass=""/>                
-        </p>
+<!--         <p><b>Марка авто</b> -->
+<%--             <form:input type="text" path="car.name" class="" cssErrorClass=""/>                 --%>
+<!--         </p> -->
         <p><b>Модель</b>
             <form:input type="text" path="car_model" class="" cssErrorClass=""/>                
         </p>

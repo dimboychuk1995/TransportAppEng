@@ -19,8 +19,8 @@ import javax.persistence.Table;
 @Table(name = "car_directory")
 public class Car implements Serializable{
     
-    
-    
+    private static final long serialVersionUID = -4253388238358112696L;
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
