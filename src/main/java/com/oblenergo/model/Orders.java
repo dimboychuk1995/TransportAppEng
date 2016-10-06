@@ -25,7 +25,7 @@ public class Orders implements Serializable {
     private Integer id;
     private WorkType workType;
     private String customer;
-    // private Car car = new Car();
+    private Car car;
     private String car_model;
     private Double sum_vithput_pdv;
     private Double pdv;
@@ -83,16 +83,6 @@ public class Orders implements Serializable {
     public void setCustomer(String customer) {
         this.customer = customer;
     }
-
-    // @ManyToOne
-    // @JoinColumn(name = "car_name_id")
-    // public Car getCar() {
-    // return car;
-    // }
-
-    // public void setCar(Car car) {
-    // this.car = car;
-    // }
 
     @Column(name = "car_model")
     public String getCar_model() {
@@ -165,6 +155,16 @@ public class Orders implements Serializable {
 
     public void setWorkType(WorkType workType) {
         this.workType = workType;
+    }
+    
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "car_name_id", referencedColumnName="id")
+        public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
     }
 
     @Override

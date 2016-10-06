@@ -8,14 +8,18 @@
 <form:form action="" method="POST" modelAttribute="orders" class="">
     <fieldset>    
         <p><b>Вид робіт</b>
-            <form:input type="text" path="workType.name" class="" cssErrorClass=""/>                
+            <form:select path="workType.id" items="${typeWorks}" class=""
+                    data-placeholder="work"
+                    itemLabel="name" itemValue="id" />               
         </p>
         <p><b>Табельний номер</b>
             <form:input type="text" id = "" path="user_tab" class="" cssErrorClass=""/>                
         </p>
-<!--         <p><b>Марка авто</b> -->
-<%--             <form:input type="text" path="car.name" class="" cssErrorClass=""/>                 --%>
-<!--         </p> -->
+        <p><b>Марка авто</b>
+            <form:select path="car.id" items="${cars}" class=""
+                    data-placeholder="cars"
+                    itemLabel="name" itemValue="id" />               
+        </p>
         <p><b>Модель</b>
             <form:input type="text" path="car_model" class="" cssErrorClass=""/>                
         </p>

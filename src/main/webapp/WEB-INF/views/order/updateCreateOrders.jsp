@@ -13,9 +13,11 @@
             <p><b>Замовник</b>
                 <form:input type="text" path="customer" class="" cssErrorClass=""/>                
             </p>
-<!--             <p><b>Марка авто</b> -->
-<%--                 <form:input type="text" path="car.name" class="" cssErrorClass=""/>                 --%>
-<!--             </p> -->
+            <p id="car_name"><b>Марка авто</b>
+                <form:select path="car.id" items="${cars}" class=""
+                        data-placeholder="cars"
+                        itemLabel="name" itemValue="id" />               
+            </p>
             <p><b>Модель</b>
                 <form:input type="text" path="car_model" class="" cssErrorClass=""/>                
             </p>

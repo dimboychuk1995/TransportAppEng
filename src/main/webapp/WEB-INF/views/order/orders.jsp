@@ -34,9 +34,9 @@
                     <td>
                         <c:out value="${orders.customer}"></c:out>
                     </td>
-<!--                     <td> -->
-<%--                         <c:out value="${orders.car.name}"></c:out> --%>
-<!--                     </td> -->
+                    <td>
+                        <c:out value="${car.name}"></c:out>>               
+                    </td>
                     <td>
                         <c:out value="${orders.car_model}"></c:out>
                     </td>
