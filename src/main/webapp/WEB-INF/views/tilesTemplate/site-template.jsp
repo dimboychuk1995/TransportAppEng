@@ -17,11 +17,17 @@
   <!-- Bootstrap JS -->
   <script src="<c:url value = "/resources/dist/js/bootstrap.min.js" />"></script>
   <script src="<c:url value = "/resources/dist/js/bootstrap.js" />"></script>
+  
+  <!-- WebSocket JS -->
+  <script src="<c:url value = "/resources/dist/js/sockjs.min.js" />"></script>
+  <script src="<c:url value = "/resources/dist/js/stomp.min.js" />"></script>
  
    <!-- TimePicker CSS -->
    <link href="<c:url value = "/resources/dist/css/dateTimePicker/bootstrap-datepicker.css" />" rel="stylesheet">
    <link href="<c:url value = "/resources/dist/css/dateTimePicker/jquery.timepicker.css" />" rel="stylesheet">
   
+   <!-- Main page CSS -->
+   <link href="<c:url value = "/resources/dist/css/main.css" />" rel="stylesheet">
   
   <title>
     <tiles:insertAttribute name="title" ignore="true" />

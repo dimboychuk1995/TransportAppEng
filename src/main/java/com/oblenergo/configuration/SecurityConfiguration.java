@@ -20,7 +20,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/", "/login").permitAll().antMatchers("/admin/**")
-                .access("hasAuthority('ADMIN')").antMatchers("/**").access("isAuthenticated()").and().formLogin()
+                .access("hasAuthority('ADMIN')").antMatchers("/cashier/**").access("hasAuthority('CASHIER')").antMatchers("/**").access("isAuthenticated()").and().formLogin()
                 .loginPage("/login").loginProcessingUrl("/loginCheck").usernameParameter("username")
                 .passwordParameter("password").defaultSuccessUrl("/", true).failureUrl("/login?error=true").and()
                 .exceptionHandling().accessDeniedPage("/403").and().csrf().disable();

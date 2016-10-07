@@ -76,7 +76,21 @@
             </c:forEach>
         </tbody>
     </table>
+    
     <a href=<c:url value="/order/newOrder" />>Create</a>
     <a href=<c:url value="/admin"/>>workType</a>
 </div>
+
+<div>
+<button id="sendMessage">Send</button>
+<button id="estConnection">Connect</button>
+<button id="disConnection">Disconnect</button>
+</div>
+
+<input id="contextPath" type="hidden" value="${pageContext.request.contextPath}" />
+
+<p id="messageField"></p>
+
+<!-- Main page script -->
+<script src=<c:url value="/resources/js/admin/admin.js" />></script>
 

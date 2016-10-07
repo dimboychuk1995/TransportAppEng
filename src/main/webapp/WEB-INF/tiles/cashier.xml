@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+	<definition name="cashier" extends="DefaultTemplate">
+		<put-attribute name="title" value="Cashier" />
+		<put-attribute name="body" value="/WEB-INF/views/cashier/cashier.jsp" />
+	</definition>
+
+</tiles-definitions>
