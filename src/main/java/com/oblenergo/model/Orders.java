@@ -1,6 +1,7 @@
 
 package com.oblenergo.model;
 
+import com.oblenergo.enums.StatusOrderEnum;
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -35,7 +36,7 @@ public class Orders implements Serializable {
     private String time;
     private Integer user_tab;
     private String car_number;
-    private Integer status_order;
+    private String status_order = StatusOrderEnum.NEW.getStatusOrder();
 
     @Column(name = "user_tab")
     public Integer getUser_tab() {
@@ -56,11 +57,11 @@ public class Orders implements Serializable {
     }
 
     @Column(name = "status_order")
-    public Integer getStatus_order() {
+    public String getStatus_order() {
         return status_order;
     }
 
-    public void setStatus_order(Integer status_order) {
+    public void setStatus_order(String status_order) {
         this.status_order = status_order;
     }
 

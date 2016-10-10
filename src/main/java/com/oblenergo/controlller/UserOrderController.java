@@ -26,15 +26,10 @@ import org.springframework.web.bind.annotation.InitBinder;
 public class UserOrderController {
         
         public static final String ITEMSORDER = "order";
-        
         public static final String ITEMSWORKTYPE = "typeWorks";
-
         public static final String ITEMSCAR = "cars";
-        
 	private static final String ORDER = "orders";
-        
         private static final String WORK_TYPE = "workType";
-        
         private static final String CAR = "car";
         
         @Autowired
@@ -48,7 +43,7 @@ public class UserOrderController {
         
         @RequestMapping(method = RequestMethod.GET)
 	public String getAllType(Model model) {
-
+                model.addAttribute(ITEMSORDER, orderServiseImpl.findAll());
 		model.addAttribute(ITEMSWORKTYPE, workTypeServiceImpl.findAll());
 		model.addAttribute(ITEMSCAR, carServiceImpl.findAll());
                 model.addAttribute(ORDER, new Orders());

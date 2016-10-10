@@ -17,7 +17,6 @@
                 <th>Сума без ПДВ</th>
                 <th>ПДВ</th>
                 <th>Всього</th>
-                <th>Виконавець</th>
                 <th>Дата</th>
                 <th>Час</th>
                 <th>Табельний номер</th>
@@ -35,7 +34,7 @@
                         <c:out value="${orders.customer}"></c:out>
                     </td>
                     <td>
-                        <c:out value="${car.name}"></c:out>>               
+                        <c:out value="${orders.car.name}"></c:out>               
                     </td>
                     <td>
                         <c:out value="${orders.car_model}"></c:out>
@@ -50,10 +49,10 @@
                         <c:out value="${orders.all_sum}"></c:out>
                     </td>
                     <td>
-                        <c:out value="${orders.performer_id}"></c:out>
+                        <c:out value="${orders.date}"></c:out>
                     </td>
                     <td>
-                        <c:out value="${orders.date}"></c:out>
+                        <c:out value="${orders.time}"></c:out>
                     </td>
                     <td>
                         <c:out value="${orders.user_tab}"></c:out>

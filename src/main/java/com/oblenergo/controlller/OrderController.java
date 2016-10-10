@@ -14,6 +14,7 @@ import com.oblenergo.model.Orders;
 import com.oblenergo.model.WorkType;
 import com.oblenergo.service.CarService;
 import com.oblenergo.service.OrderServise;
+import com.oblenergo.service.WorkTypeService;
 import java.util.List;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -30,16 +31,19 @@ public class OrderController {
         @Autowired
         CarService carServiceImpl;
         
-        public static final String ITEMSCAR = "cars";
+        @Autowired
+        WorkTypeService workTypeServiceImpl;
         
+        public static final String ITEMSCAR = "cars";
         public static final String ITEMS = "order";
-
+        public static final String ITEMSWORKTYPE = "typeWorks";
 	private static final String ORDER = "orders";
+        private static final String CAR = "car";
+        private static final String WORK_TYPE = "workType";
         
         @RequestMapping(method = RequestMethod.GET)
         public String getAllOrders(Model model){
             model.addAttribute(ITEMS, orderServiseImpl.findAll());
-            model.addAttribute(ITEMSCAR, carServiceImpl.findAll());
             model.addAttribute(ORDER, new Orders());
             return "order";
         }
@@ -47,11 +51,14 @@ public class OrderController {
         @RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String showTypeById(@PathVariable int id, Model model) {
 		model.addAttribute(ORDER, orderServiseImpl.findOrderById(id));
+                model.addAttribute(ITEMSWORKTYPE, workTypeServiceImpl.findAll());
+                model.addAttribute(ITEMSCAR, carServiceImpl.findAll());
 		return "updateCreateOrders";
 	}
         
         @RequestMapping(value = "/{id}", method = RequestMethod.POST)
-        public String updateOrder(@ModelAttribute Orders orders){
+        public String updateOrder(@ModelAttribute Orders orders, Model model){
+            model.addAttribute(ITEMS, orderServiseImpl.findAll());
             orderServiseImpl.update(orders);
             return "redirect:/order";
         }
@@ -64,10 +71,6 @@ public class OrderController {
         
         @RequestMapping(value = "/newOrder", method = RequestMethod.POST)
 	public String addType(@Validated @ModelAttribute("orders") Orders orders, BindingResult bindingResult) {
-            
-                if (bindingResult.hasErrors()) {
-                        return "updateCreateOrders";
-                }
                 orderServiseImpl.save(orders);
                 return "redirect:/order";
 	}

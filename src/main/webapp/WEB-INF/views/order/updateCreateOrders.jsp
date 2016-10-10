@@ -8,7 +8,9 @@
     <form:form action="" method="POST" modelAttribute="orders" class="">
         <fieldset>
             <p><b>Вид робіт</b>
-                <form:input type="text" path="workType.name" class="" cssErrorClass=""/>                
+                <form:select path="workType.id" items="${typeWorks}" class=""
+                    data-placeholder="work"
+                    itemLabel="name" itemValue="id" />             
             </p>
             <p><b>Замовник</b>
                 <form:input type="text" path="customer" class="" cssErrorClass=""/>                
