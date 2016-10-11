@@ -3,59 +3,63 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
-<div>
-    <table>
-        <thead>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-responsive">
+        <table class="table table-hover table-striped table-bordered" id="orders">
+          <thead>
             <tr>
-            	<th>Замовник</th>
-                <th>Табельний номер</th>
-                <th>Вид робіт</th>
-                <th>Дата</th>
-                <th>Час</th>
-                <th>Сума без ПДВ</th>
-                <th>ПДВ</th>
-                <th>Всього</th>
-                <th>Підтвердити оплату</th>
+              <th class="col-md-2">Замовник</th>
+              <th class="col-md-1">Табельний номер</th>
+              <th class="col-md-4">Вид робіт</th>
+              <th class="col-md-1">Дата</th>
+              <th class="col-md-1">Час</th>
+              <th class="col-md-1">ПДВ</th>
+              <th class="col-md-1">Всього до оплати</th>
+              <th class="col-md-1">Підтвердити оплату</th>
             </tr>
-        </thead>
-        <tbody>
+          </thead>
+          <tbody>
             <c:forEach items="${orders}" var="order">
-                 <tr id="${order.id}">
-                  	<td>
-                        <c:out value="${order.customer}"></c:out>
-                    </td>
-                    <td>
-                        <c:out value="${order.user_tab}"></c:out>
-                    </td>
-                    <td>
-                        <c:out value="${order.workType.name}"></c:out>
-                    </td>
-                    <td>
-                        <c:out value="${order.date}"></c:out>
-                    </td>
-                     <td>
-                        <c:out value="${order.time}"></c:out>
-                    </td>                   
-                    <td>
-                        <c:out value="${order.sum_vithput_pdv}"></c:out>
-                    </td>
-                    <td>
-                        <c:out value="${order.pdv}"></c:out>
-                    </td>
-                    <td>
-                        <c:out value="${order.all_sum}"></c:out>
-                    </td>
-                    <td>
-                        <button id="${order.user_tab}" class="sendMessage">Підтвердити оплату</button>
-                    </td>    
-                </tr>
+              <tr id="${order.id}" class="dataRow">
+                <td>
+                  <c:out value="${order.customer}"></c:out>
+                </td>
+                <td>
+                  <c:out value="${order.user_tab}"></c:out>
+                </td>
+                <td>
+                  <c:out value="${order.workType.name}"></c:out>
+                </td>
+                <td>
+                  <c:out value="${order.date}"></c:out>
+                </td>
+                <td>
+                  <c:out value="${order.time}"></c:out>
+                </td>
+                <td>
+                  <c:out value="${order.pdv}"></c:out>
+                </td>
+                <td>
+                  <c:out value="${order.all_sum}"></c:out>
+                </td>
+                <td class="no-padding">
+                  <button id="${order.user_tab}" class="btn btn-success paymentApprove">
+                    <span class="glyphicon glyphicon-ok"></span> Підтвердити
+                  </button>
+                </td>
+              </tr>
             </c:forEach>
-        </tbody>
-    </table>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
 
-<input id="contextPath" type="hidden" value="${pageContext.request.contextPath}" />
 
+<input id="contextPath" type="hidden" value="${pageContext.request.contextPath}" />
 
 <!-- Main page script -->
 <script src=<c:url value="/resources/js/cashier/cashier.js" />></script>

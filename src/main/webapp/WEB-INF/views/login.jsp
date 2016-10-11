@@ -3,46 +3,40 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
-<c:if test="${succes==true}">
-  <div class="">
-    <div class="">
-      <strong>Success!</strong> You have successfully logged in!
-      <a href=<c:url value="/logout" /> class="">Logout</a>
-    </div>
-  </div>
-</c:if>
 
-<c:if test="${succes!=true}">
-  <div class="">
-    <div class="">
-      <div class="">
-        <div class="">
-          <div class="">
-            <h3 class="">Please Sign In</h3>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <c:if test="${succes==true}">
+        <div class="form-signin">
+          <div class="login-title">
+            Ви успішно увійшли до системи!
+            <a href=<c:url value="/logout" /> class="btn btn-default col-md-4 col-md-offset-4">Вийти</a>
           </div>
-          <div class="">
+        </div>
+      </c:if>
 
+      <c:if test="${succes!=true}">
+        <div class="form-signin">
+          <div class="login-title">
+            <h3 class="">Будь ласка увійдіть до системи</h3>
             <c:if test="${not empty param.error}">
               <div class="alert alert-danger">
-                <strong>Error!</strong> Invalid login and password!
+                Неправильний логін або пароль!
               </div>
             </c:if>
 
             <form role="" action="${pageContext.request.contextPath}/loginCheck" method="POST">
               <fieldset>
-                <div class="">
-                  <input class="" type="text" name="username" placeholder="enter login" autofocus>
-                </div>
-                <div class="">
-                  <input class="" type="password" name="password" placeholder="enter password" value="">
-                </div>
-                <input type="submit" class="" value="Login" />
+                <input class="form-control" type="text" name="username" placeholder="Введіть логін" autofocus>
+                <input class="form-control pull-down" type="password" name="password" placeholder="Введіть пароль" value="">
+                <input type="submit" class="btn btn-primary col-md-3" value="Увійти" />
               </fieldset>
             </form>
-
           </div>
         </div>
-      </div>
+      </c:if>
+
     </div>
   </div>
-</c:if>
+</div>

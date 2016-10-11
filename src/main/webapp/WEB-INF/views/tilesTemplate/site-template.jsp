@@ -9,25 +9,36 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap -->
+  <link href="<c:url value = "/resources/dist/css/bootstrap/bootstrap.css" />" rel="stylesheet">
+  <link href="<c:url value = "/resources/dist/css/bootstrap/bootstrap.min.css" />" rel="stylesheet">
+ 
+  <!-- Bootstrap Data table css-->
+  <link href="<c:url value = "/resources/dist/bootstrap-dataTables/css/dataTables.bootstrap.min.css" />" rel="stylesheet">
+
+  <!-- TimePicker CSS -->
+  <link href="<c:url value = "/resources/dist/css/dateTimePicker/bootstrap-datepicker.css" />" rel="stylesheet">
+  <link href="<c:url value = "/resources/dist/css/dateTimePicker/jquery.timepicker.css" />" rel="stylesheet">
+  
+  <!-- Main CSS -->
+  <link href="<c:url value = "/resources/dist/css/main.css" />" rel="stylesheet">
   
   <!-- jQuery -->
-  <script src="<c:url value = "/resources/dist/js/jquery.min.js" />"></script>
-  <script src="<c:url value = "/resources/dist/js/jquery.js" />"></script>
-
+  <script src="<c:url value = "/resources/dist/js/jquery/jquery.min.js" />"></script>
+  <script src="<c:url value = "/resources/dist/js/jquery/jquery.js" />"></script>
+  
   <!-- Bootstrap JS -->
-  <script src="<c:url value = "/resources/dist/js/bootstrap.min.js" />"></script>
-  <script src="<c:url value = "/resources/dist/js/bootstrap.js" />"></script>
+  <script src="<c:url value = "/resources/dist/js/bootstrap/bootstrap.min.js" />"></script>
+  <script src="<c:url value = "/resources/dist/js/bootstrap/bootstrap.js" />"></script>
+  
+  <!-- Bootstrap Data table js-->
+  <script src="<c:url value = "/resources/dist/bootstrap-dataTables/js/jquery.dataTables.min.js" />"></script>
+  <script src="<c:url value = "/resources/dist/bootstrap-dataTables/js/dataTables.bootstrap.min.js" />"></script>
   
   <!-- WebSocket JS -->
-  <script src="<c:url value = "/resources/dist/js/sockjs.min.js" />"></script>
-  <script src="<c:url value = "/resources/dist/js/stomp.min.js" />"></script>
- 
-   <!-- TimePicker CSS -->
-   <link href="<c:url value = "/resources/dist/css/dateTimePicker/bootstrap-datepicker.css" />" rel="stylesheet">
-   <link href="<c:url value = "/resources/dist/css/dateTimePicker/jquery.timepicker.css" />" rel="stylesheet">
-  
-   <!-- Main page CSS -->
-   <link href="<c:url value = "/resources/dist/css/main.css" />" rel="stylesheet">
+  <script src="<c:url value = "/resources/dist/js/web_socket/sockjs.min.js" />"></script>
+  <script src="<c:url value = "/resources/dist/js/web_socket/stomp.min.js" />"></script>
   
   <title>
     <tiles:insertAttribute name="title" ignore="true" />
