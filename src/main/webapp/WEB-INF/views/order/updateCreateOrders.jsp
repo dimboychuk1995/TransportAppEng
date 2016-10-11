@@ -47,7 +47,8 @@
                 <form:input type="text" id = "" path="car_number" class="" cssErrorClass=""/>                
             </p>
             <p><b>Статус замовлення</b>
-                <form:input type="text" id = "" path="status_order" class="" cssErrorClass=""/>                
+                <form:select path="status_order" items="${order}"
+                             itemValue="status" itemLabel="status"/>
             </p>
             <button id="" type="submit" class="">save</button>
         </fieldset>

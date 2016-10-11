@@ -1,6 +1,7 @@
 package com.oblenergo.controlller;
 
 import com.oblenergo.editor.ServiceEditor;
+import com.oblenergo.enums.StatusOrderEnum;
 import com.oblenergo.model.Car;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,6 +42,8 @@ public class OrderController {
         private static final String CAR = "car";
         private static final String WORK_TYPE = "workType";
         
+        private static final String STATUS_ORDER_ENUM = "StatusOrderEnum";
+        
         @RequestMapping(method = RequestMethod.GET)
         public String getAllOrders(Model model){
             model.addAttribute(ITEMS, orderServiseImpl.findAll());
@@ -53,6 +56,7 @@ public class OrderController {
 		model.addAttribute(ORDER, orderServiseImpl.findOrderById(id));
                 model.addAttribute(ITEMSWORKTYPE, workTypeServiceImpl.findAll());
                 model.addAttribute(ITEMSCAR, carServiceImpl.findAll());
+                model.addAttribute(STATUS_ORDER_ENUM, StatusOrderEnum.values());
 		return "updateCreateOrders";
 	}
         
