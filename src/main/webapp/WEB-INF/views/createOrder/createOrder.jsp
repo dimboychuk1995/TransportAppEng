@@ -26,14 +26,18 @@
         <p><b>Номер авто</b>
             <form:input type="text" id = "" path="car_number" class="" cssErrorClass=""/>                
         </p>
-        <p><b>Дата</b>
-            <form:input type="text" id = "datepicker" path="date" class="" cssErrorClass=""/>                
-        </p>
-        <p><b>Час</b>
-            <form:input type="text" id = "timepicker" path="time" class="" cssErrorClass=""/>                
-        </p>
-        
-        <button id="" type="submit" class="">Замовити</button>
+        <p id ="datePicker" ><b>Дата</b>
+           	<form:input id = "dpicker" type="text" path="date" class="date start" cssErrorClass=""/>
+           	<form:errors path="date" class="" cssErrorClass="" />
+           	
+           	<form:input id = "time" type="hidden" path="time" cssErrorClass=""/>
+           	<input  type="hidden" class="" id = "butShow">
+           	
+           	<select id ="selectTime" style="" hidden="true">
+           	<option disabled>виберіть час</option>
+           	</select>
+ 		</p>
+        <button id="sendForm" type="submit" class="">Замовити</button>
     </fieldset>
 </form:form>
 <br>
@@ -61,4 +65,14 @@
         </c:forEach>
     </tbody>
   </table>
-</div>       
+</div> 
+
+<input id="contextPath" type="hidden" value="${pageContext.request.contextPath}" />
+
+<!-- DateTimePicker -->
+<script src=<c:url value="/resources/js/dateTimePicker/time.js" />></script>
+<script src=<c:url value="/resources/js/dateTimePicker/dateTimePicker.js" />></script>
+
+<script src=<c:url value="/resources/js/dateTimePicker/bootstrap-datepicker.js" />></script>
+<script src=<c:url value="/resources/js/dateTimePicker/datepair.js" />></script>
+<script src=<c:url value="/resources/js/dateTimePicker/jquery.timepicker.js" />></script>        

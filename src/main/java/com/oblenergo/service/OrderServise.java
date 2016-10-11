@@ -13,17 +13,21 @@ package com.oblenergo.service;
 import java.util.List;
 
 import com.oblenergo.model.Orders;
-        
+
 public interface OrderServise {
-    
-    public List<Orders> findAll();
 
-    void save(Orders order);
+	public List<Orders> findAll();
 
-    void update(Orders order);
+	void save(Orders order);
 
-    Orders findOrderById(int id);
+	void update(Orders order);
 
-    void delete(int id);
-    
+	Orders findOrderById(int id);
+
+	void delete(int id);
+
+	public List<Orders> findDateOfOrders(String date);
+
+	public List<String> findFreeTime(String[] arrTimeOrders, String date);
+
 }

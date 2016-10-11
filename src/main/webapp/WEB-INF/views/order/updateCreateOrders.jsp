@@ -35,11 +35,17 @@
             <p><b>Виконавець</b>
                 <form:input type="text" path="performer_id" class="" cssErrorClass=""/> 
 
-            <p id ="timePickerPair" ><b>Дата та час</b>
-            	<form:input id = "datetpicker" type="text" path="date" class="date start" cssErrorClass=""/>
-                <form:input type="text" path="time" class="time start" cssErrorClass=""/>
-                <input type="text" class="time end" disabled="disabled" />               
-            </p>
+            <p id ="datePicker" ><b>Дата</b>
+	           	<form:input id = "dpicker" type="text" path="date" class="date start" cssErrorClass=""/>
+	           	<form:errors path="date" class="" cssErrorClass="" />
+	           	
+	           	<form:input id = "time" type="hidden" path="time" cssErrorClass=""/>
+	           	<input  type="hidden" class="" id = "butShow">
+	           	
+	           	<select id ="selectTime" style="" hidden="true">
+	           	<option disabled>виберіть час</option>
+	           	</select>
+ 			</p>
             <p><b>Табельний номер</b>
                 <form:input type="text" id = "" path="user_tab" class="" cssErrorClass=""/>                
             </p>
@@ -50,15 +56,19 @@
                 <form:select path="status_order" items="${order}"
                              itemValue="status" itemLabel="status"/>
             </p>
-            <button id="" type="submit" class="">save</button>
+            <button id="sendForm" type="submit" class="">Зберегти</button>
         </fieldset>
     </form:form>
 </div>
 
+<input id="contextPath" type="hidden" value="${pageContext.request.contextPath}" />
+
 <!-- DateTimePicker -->
+<script src=<c:url value="/resources/js/dateTimePicker/time.js" />></script>
 <script src=<c:url value="/resources/js/dateTimePicker/dateTimePicker.js" />></script>
+
 <script src=<c:url value="/resources/js/dateTimePicker/bootstrap-datepicker.js" />></script>
 <script src=<c:url value="/resources/js/dateTimePicker/datepair.js" />></script>
-<script src=<c:url value="/resources/js/dateTimePicker/jquery.timepicker.js" />></script>
+<script src=<c:url value="/resources/js/dateTimePicker/jquery.timepicker.js" />></script>  
 
 

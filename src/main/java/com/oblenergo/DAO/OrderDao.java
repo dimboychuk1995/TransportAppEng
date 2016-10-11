@@ -5,13 +5,15 @@ import java.util.List;
 import com.oblenergo.model.Orders;
 
 public interface OrderDao {
-    
-    Orders findById(int id);
 
-    List<Orders> findAllItems();
+	Orders findById(int id);
 
-    void save(Orders order);
+	List<Orders> findAllItems();
 
-    void delete(int id);
-    
+	void save(Orders order);
+
+	void delete(int id);
+
+	List<Orders> dateOfOrders(String date);
+
 }

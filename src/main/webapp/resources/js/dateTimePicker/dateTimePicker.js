@@ -1,17 +1,8 @@
-
  $(function() {
+	 
+	
 	 // initialize input widgets first
-	    $('#timePickerPair .time').timepicker({
-	    	'minTime': '8:00',
-	    	'maxTime': '16:00',	
-	        'timeFormat': 'H:i',
-	        'disableTimeRanges': [
-	            ['14:00', '15:00'],
-	            ['16:00', '17:00']
-	         ]
-	    });
 
-	   
 	    $.fn.datepicker.dates['uk'] = {
 	    		days: ["Неділя", "Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця", "Субота"],
 	    		daysShort: ["Нед", "Пнд", "Втр", "Срд", "Чтв", "Птн", "Суб"],
@@ -25,9 +16,9 @@
 	    	};
 	    
 	    
-	    $('#timePickerPair .date').datepicker({
+	    $('#datePicker .date').datepicker({
 
-	      'format': 'yyyy-m-d',
+	      'format': 'yyyy-m-dd',
 	       isRTL: false,
 	       startDate: '0d',
 	       endDate: '+7d',
@@ -37,7 +28,7 @@
 	       
 	   });
 
-	    // initialize datepicer
-	    var basicExampleEl = document.getElementById('timePickerPair');
-	    var datepair = new Datepair(timePickerPair);
+	    //initialize datepicer
+	   // var basicExampleEl = document.getElementById('timePickerPair');
+	    //var datepair = new Datepair(timePickerPair);
  });
