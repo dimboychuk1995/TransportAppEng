@@ -60,7 +60,7 @@
                         <c:out value="${orders.car_number}"></c:out>
                     </td>
                     <td>
-                        <c:out value="${orders.status_order}"></c:out>
+                        <c:out value="${orders.status_order.statusOrder}"></c:out>
                     </td>
                     <td>
                         <a href=<c:url value="/order/${orders.id}" />>Update</a>

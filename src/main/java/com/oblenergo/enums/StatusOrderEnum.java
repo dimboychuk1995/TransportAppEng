@@ -10,10 +10,10 @@ package com.oblenergo.enums;
  * @author us9522
  */
 public enum StatusOrderEnum {
-        нове("нове"),
-        оплачене("оплачене"),
-        виконане("виконане"),
-        скасоване("скасоване");
+        NEW("нове"),
+        PAID("оплачене"),
+        DONE("виконане"),
+        CANCELED("скасоване");
         
         String statusOrder;
         

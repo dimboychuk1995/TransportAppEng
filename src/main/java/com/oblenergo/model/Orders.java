@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,7 +23,6 @@ import com.oblenergo.enums.StatusOrderEnum;
 @Table(name = "orders")
 public class Orders implements Serializable {
 
-
     private static final long serialVersionUID = 7191453677142422700L;
 
     private Integer id;
@@ -37,7 +38,7 @@ public class Orders implements Serializable {
     private String time;
     private Integer user_tab;
     private String car_number;
-    private String status_order = StatusOrderEnum.нове.getStatusOrder();
+    private StatusOrderEnum status_order = StatusOrderEnum.valueOf("NEW");
 
     @Column(name = "user_tab")
     public Integer getUser_tab() {
@@ -57,12 +58,13 @@ public class Orders implements Serializable {
         this.car_number = car_number;
     }
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "status_order")
-    public String getStatus_order() {
+    public StatusOrderEnum getStatus_order() {
         return status_order;
     }
 
-    public void setStatus_order(String status_order) {
+    public void setStatus_order(StatusOrderEnum status_order) {
         this.status_order = status_order;
     }
 
@@ -150,7 +152,7 @@ public class Orders implements Serializable {
     }
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "name_servise_id", referencedColumnName="id")
+    @JoinColumn(name = "name_servise_id", referencedColumnName = "id")
     public WorkType getWorkType() {
         return workType;
     }
@@ -158,10 +160,10 @@ public class Orders implements Serializable {
     public void setWorkType(WorkType workType) {
         this.workType = workType;
     }
-    
+
     @ManyToOne(optional = false)
-    @JoinColumn(name = "car_name_id", referencedColumnName="id")
-        public Car getCar() {
+    @JoinColumn(name = "car_name_id", referencedColumnName = "id")
+    public Car getCar() {
         return car;
     }
 

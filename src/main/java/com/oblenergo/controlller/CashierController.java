@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.oblenergo.enums.StatusOrderEnum;
 import com.oblenergo.model.OrderMessage;
 import com.oblenergo.model.Orders;
 import com.oblenergo.service.OrderServise;
@@ -35,7 +36,8 @@ public class CashierController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void approvePayment(@RequestBody int id){
         Orders order = orderServiceImpl.findOrderById(id);
-//        order.setStatus_order(0);
+        order.setStatus_order(StatusOrderEnum.valueOf("PAID"));
+        orderServiceImpl.update(order);
     }
     
     @MessageMapping("/paymentAproveNotification")
