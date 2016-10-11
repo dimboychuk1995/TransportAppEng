@@ -42,7 +42,7 @@ public class OrderController {
         private static final String CAR = "car";
         private static final String WORK_TYPE = "workType";
         
-        private static final String STATUS_ORDER_ENUM = "StatusOrderEnum";
+        private static final String STATUS_ORDER_ENUM = "items";
         
         @RequestMapping(method = RequestMethod.GET)
         public String getAllOrders(Model model){
@@ -70,6 +70,9 @@ public class OrderController {
         @RequestMapping(value="/newOrder", method = RequestMethod.GET)
         public String redirectToCreate(Model model){
                 model.addAttribute(ORDER, new Orders());
+                model.addAttribute(ITEMSWORKTYPE, workTypeServiceImpl.findAll());
+                model.addAttribute(ITEMSCAR, carServiceImpl.findAll());
+                model.addAttribute(STATUS_ORDER_ENUM, StatusOrderEnum.values());
                 return "updateCreateOrders";
         }
         

@@ -36,7 +36,7 @@ public class Orders implements Serializable {
     private String time;
     private Integer user_tab;
     private String car_number;
-    private String status_order = StatusOrderEnum.NEW.getStatusOrder();
+    private String status_order = StatusOrderEnum.нове.getStatusOrder();
 
     @Column(name = "user_tab")
     public Integer getUser_tab() {
