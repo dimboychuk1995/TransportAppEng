@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.oblenergo.enums.StatusOrderEnum;
+import com.oblenergo.model.Notification;
 import com.oblenergo.model.OrderMessage;
 import com.oblenergo.model.Orders;
 import com.oblenergo.service.OrderServise;
@@ -42,7 +43,8 @@ public class CashierController {
     
     @MessageMapping("/paymentAproveNotification")
     @SendTo("/adminNotification")
-    public OrderMessage greeting(OrderMessage orderMessage) {
-        return orderMessage;
+    public Notification greeting(OrderMessage orderMessage) {
+
+        return new Notification(orderMessage.getMessage());
     }
 }

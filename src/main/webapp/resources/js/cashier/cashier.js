@@ -48,7 +48,7 @@ $(function() {
   //Sent message to the server about new order confirmation
   function sendName(customer) {
     stompClient.send("/app/paymentAproveNotification", {}, JSON.stringify({
-      'message': 'New order from ' + customer
+      'message': 'New order from '+customer
     }));
   }
 
