@@ -8,8 +8,8 @@ $(function() {
 
       //searching: false,
       language: {
-        search: "Search by name:",
-        searchPlaceholder: "search..."
+        search: "Введіть табельний номер:",
+        searchPlaceholder: "пошук..."
       },
       order: [
         [1, 'asc']
