@@ -4,9 +4,10 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <script type="text/javascript" src="/transportApp/resources/dist/js/jsonDeleteOrder.js"></script>
+<link rel="stylesheet" href=<c:url value="/resources/dist/css/order.css"/>>
 
 <div>
-    <table>
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th>Вид робіт</th>
@@ -47,7 +48,7 @@
                     <td>
                         <c:out value="${orders.all_sum}"></c:out>
                     </td>
-                    <td>
+                    <td class="date_td">
                         <c:out value="${orders.date}"></c:out>
                     </td>
                     <td>
@@ -63,26 +64,22 @@
                         <c:out value="${orders.status_order.statusOrder}"></c:out>
                     </td>
                     <td>
-                        <a href=<c:url value="/order/${orders.id}" />>Update</a>
+                        <a class="btn btn-primary" href=<c:url value="/order/${orders.id}"/>>Оновити</a>
                     </td>
                     <td>
                         <form:form id="delete${orders.id}" action="javascript:void(null)" method="GET" onsubmit="deleteOrder(${orders.id})" modelAttribute="" class="">
-                            <button id="" type="submit" class="">Delete</button>
+                            <button id="" type="submit" class="btn btn-danger">Видалити замовлення</button>
                         </form:form>
                     </td>
                 </tr>
             </c:forEach>
         </tbody>
     </table>
-    
-    <a href=<c:url value="/order/newOrder" />>Create</a>
-    <a href=<c:url value="/admin"/>>workType</a>
-</div>
-
-<div>
-<button id="sendMessage">Send</button>
-<button id="estConnection">Connect</button>
-<button id="disConnection">Disconnect</button>
+    <div class="btns_bottom">
+	    <a class="btn btn-primary" href=<c:url value="/order/newOrder" />>Створити нове замовлення</a>
+	    
+	    <a class="btn btn-primary" href=<c:url value="/admin"/>>Довідник послуг</a>
+    </div>
 </div>
 
 <input id="contextPath" type="hidden" value="${pageContext.request.contextPath}" />
