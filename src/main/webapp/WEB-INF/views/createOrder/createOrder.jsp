@@ -13,7 +13,8 @@
                     itemLabel="name" itemValue="id" />               
         </p>
         <p><b>Табельний номер</b>
-            <form:input type="text" id = "" path="user_tab" class="" cssErrorClass=""/>                
+            <form:input type="text" id = "" path="user_tab" class="" cssErrorClass=""/>
+            <form:errors path="user_tab" class="" cssErrorClass="" />                
         </p>
         <p><b>Марка авто</b>
             <form:select path="car.id" items="${cars}" class=""
@@ -21,23 +22,28 @@
                     itemLabel="name" itemValue="id" />               
         </p>
         <p><b>Модель</b>
-            <form:input type="text" path="car_model" class="" cssErrorClass=""/>                
+            <form:input type="text" path="car_model" class="" cssErrorClass=""/> 
+            <form:errors path="car_model" class="" cssErrorClass="" />                
         </p>
         <p><b>Номер авто</b>
-            <form:input type="text" id = "" path="car_number" class="" cssErrorClass=""/>                
+            <form:input type="text" id = "" path="car_number" class="" cssErrorClass=""/>   
+            <form:errors path="car_number" class="" cssErrorClass="" />               
         </p>
         <p id ="datePicker" ><b>Дата</b>
            	<form:input id = "dpicker" type="text" path="date" class="date start" cssErrorClass=""/>
            	<form:errors path="date" class="" cssErrorClass="" />
            	
-           	<form:input id = "time" type="hidden" path="time" cssErrorClass=""/>
            	<input  type="hidden" class="" id = "butShow">
            	
-           	<select id ="selectTime" style="" hidden="true">
-           	<option disabled>виберіть час</option>
-           	</select>
+           
+            <form:select id="selectForm" path="time" class="" />
+    
+           
+<!--            	<select id ="selectTime" style="" hidden="true"> -->
+<!--            		<option disabled>виберіть час</option> -->
+<!--            	</select> -->
  		</p>
-        <button id="sendForm" type="submit" class="">Замовити</button>
+        <button id="" type="submit" class="">Замовити</button>
     </fieldset>
 </form:form>
 <br>

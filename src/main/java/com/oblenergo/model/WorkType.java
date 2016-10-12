@@ -12,8 +12,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -31,12 +29,10 @@ public class WorkType implements Serializable {
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-        
-        
+
 	@NotEmpty(message = " Empty place")
 	@Column(name = "name")
 	private String name;
-	// @Size(min = 5, max = 10, message = "Капец тест валідація")
 	@Column(name = "count_hours")
 	private double count_hours;
 
@@ -70,7 +66,6 @@ public class WorkType implements Serializable {
 	@Column(name = "price_including_vat")
 	private double price_including_vat;
 
-        
 	public Integer getId() {
 		return id;
 	}
@@ -82,7 +77,7 @@ public class WorkType implements Serializable {
 	public String getName() {
 		return name;
 	}
-        
+
 	public void setName(String name) {
 		this.name = name;
 	}

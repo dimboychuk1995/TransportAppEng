@@ -1,29 +1,8 @@
- $(function(){
-	  
-		  $(document).on('click', '#sendForm', function() {
-			  var q = $("#selectTime option:selected").text();
-			  $("#time").val(q);
-		  });
- });
-
- 
- $(function(){
-	  
-	  $(document).on('click', '#dpicker', function() {
-		  $('#butShow').attr('type','button');
-		  $('#butShow').attr('value','showTime');
-		  $('#selectTime').attr('hidden','true');
-
-	  });
-});
-
 
  $(function(){
 		  var contextPath = $('#contextPath').val();
 		  
-		  $(document).on('click', '#butShow', function() {
-			  $('#butShow').attr('type','hidden');
-			  $('#selectTime').removeAttr('hidden');
+		  $(document).on('click', '#selectForm', function() {
 			  
 			  selectTime($("#dpicker").val());
 		  });
@@ -37,9 +16,13 @@
 		      success:
 		    	  function(response){
 		    	   // we have the response
-		    	  $('#selectTime').children('option:not(:first)').remove();
+//		    	  var resp=response;
+//		    	  console.log(response);
+//		    	  $('#selectForm').prop('items').val('resp');
+		    	  
+		    	  $('#selectForm').children('option:not(:first)').remove();
 		    	  for(var i = 0; i < response.length; i++){
-		    	  $('#selectTime').append($('<option></option>').val(i).html(response[i]))
+		    	  $('#selectForm').append($('<option></option>').val(response[i]).html(response[i]))
 		    	  }
 		      },
 		      error: function(jqXHR) {

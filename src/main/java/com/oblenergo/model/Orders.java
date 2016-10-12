@@ -12,10 +12,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import com.oblenergo.enums.StatusOrderEnum;
 
@@ -23,169 +26,177 @@ import com.oblenergo.enums.StatusOrderEnum;
 @Table(name = "orders")
 public class Orders implements Serializable {
 
-    private static final long serialVersionUID = 7191453677142422700L;
+	private static final long serialVersionUID = 7191453677142422700L;
 
-    private Integer id;
-    private WorkType workType;
-    private String customer;
-    private Car car;
-    private String car_model;
-    private Double sum_vithput_pdv;
-    private Double pdv;
-    private Double all_sum;
-    private Integer performer_id;
-    private String date;
-    private String time;
-    private Integer user_tab;
-    private String car_number;
-    private StatusOrderEnum status_order = StatusOrderEnum.valueOf("NEW");
+	private Integer id;
+	private WorkType workType;
+	private String customer;
+	private Car car;
 
-    @Column(name = "user_tab")
-    public Integer getUser_tab() {
-        return user_tab;
-    }
+	@NotBlank
+	private String car_model;
+	private Double sum_vithput_pdv;
+	private Double pdv;
+	private Double all_sum;
+	private Integer performer_id;
 
-    public void setUser_tab(Integer user_tab) {
-        this.user_tab = user_tab;
-    }
+	@NotEmpty
+	private String date;
+	@NotBlank
+	private String time;
+	@NotBlank
+	@Size(max = 5)
+	private String user_tab;
+	@NotBlank
+	private String car_number;
+	private StatusOrderEnum status_order = StatusOrderEnum.valueOf("NEW");
 
-    @Column(name = "car_number")
-    public String getCar_number() {
-        return car_number;
-    }
+	@Column(name = "user_tab")
+	public String getUser_tab() {
+		return user_tab;
+	}
 
-    public void setCar_number(String car_number) {
-        this.car_number = car_number;
-    }
+	public void setUser_tab(String user_tab) {
+		this.user_tab = user_tab;
+	}
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status_order")
-    public StatusOrderEnum getStatus_order() {
-        return status_order;
-    }
+	@Column(name = "car_number")
+	public String getCar_number() {
+		return car_number;
+	}
 
-    public void setStatus_order(StatusOrderEnum status_order) {
-        this.status_order = status_order;
-    }
+	public void setCar_number(String car_number) {
+		this.car_number = car_number;
+	}
 
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer getId() {
-        return id;
-    }
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status_order")
+	public StatusOrderEnum getStatus_order() {
+		return status_order;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setStatus_order(StatusOrderEnum status_order) {
+		this.status_order = status_order;
+	}
 
-    @Column(name = "customer")
-    public String getCustomer() {
-        return customer;
-    }
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	public Integer getId() {
+		return id;
+	}
 
-    public void setCustomer(String customer) {
-        this.customer = customer;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    @Column(name = "car_model")
-    public String getCar_model() {
-        return car_model;
-    }
+	@Column(name = "customer")
+	public String getCustomer() {
+		return customer;
+	}
 
-    public void setCar_model(String car_model) {
-        this.car_model = car_model;
-    }
+	public void setCustomer(String customer) {
+		this.customer = customer;
+	}
 
-    @Column(name = "sum_vithput_pdv")
-    public Double getSum_vithput_pdv() {
-        return sum_vithput_pdv;
-    }
+	@Column(name = "car_model")
+	public String getCar_model() {
+		return car_model;
+	}
 
-    public void setSum_vithput_pdv(Double sum_vithput_pdv) {
-        this.sum_vithput_pdv = sum_vithput_pdv;
-    }
+	public void setCar_model(String car_model) {
+		this.car_model = car_model;
+	}
 
-    @Column(name = "pdv")
-    public Double getPdv() {
-        return pdv;
-    }
+	@Column(name = "sum_vithput_pdv")
+	public Double getSum_vithput_pdv() {
+		return sum_vithput_pdv;
+	}
 
-    public void setPdv(Double pdv) {
-        this.pdv = pdv;
-    }
+	public void setSum_vithput_pdv(Double sum_vithput_pdv) {
+		this.sum_vithput_pdv = sum_vithput_pdv;
+	}
 
-    @Column(name = "all_sum")
-    public Double getAll_sum() {
-        return all_sum;
-    }
+	@Column(name = "pdv")
+	public Double getPdv() {
+		return pdv;
+	}
 
-    public void setAll_sum(Double all_sum) {
-        this.all_sum = all_sum;
-    }
+	public void setPdv(Double pdv) {
+		this.pdv = pdv;
+	}
 
-    @Column(name = "performer_id")
-    public Integer getPerformer_id() {
-        return performer_id;
-    }
+	@Column(name = "all_sum")
+	public Double getAll_sum() {
+		return all_sum;
+	}
 
-    public void setPerformer_id(Integer performer_id) {
-        this.performer_id = performer_id;
-    }
+	public void setAll_sum(Double all_sum) {
+		this.all_sum = all_sum;
+	}
 
-    @Column(name = "date")
-    public String getDate() {
-        return date;
-    }
+	@Column(name = "performer_id")
+	public Integer getPerformer_id() {
+		return performer_id;
+	}
 
-    public void setDate(String date) {
-        this.date = date;
-    }
+	public void setPerformer_id(Integer performer_id) {
+		this.performer_id = performer_id;
+	}
 
-    @Column(name = "time")
-    public String getTime() {
-        return time;
-    }
+	@Column(name = "date")
+	public String getDate() {
+		return date;
+	}
 
-    public void setTime(String time) {
-        this.time = time;
-    }
+	public void setDate(String date) {
+		this.date = date;
+	}
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "name_servise_id", referencedColumnName = "id")
-    public WorkType getWorkType() {
-        return workType;
-    }
+	@Column(name = "time")
+	public String getTime() {
+		return time;
+	}
 
-    public void setWorkType(WorkType workType) {
-        this.workType = workType;
-    }
+	public void setTime(String time) {
+		this.time = time;
+	}
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "car_name_id", referencedColumnName = "id")
-    public Car getCar() {
-        return car;
-    }
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "name_servise_id", referencedColumnName = "id")
+	public WorkType getWorkType() {
+		return workType;
+	}
 
-    public void setCar(Car car) {
-        this.car = car;
-    }
+	public void setWorkType(WorkType workType) {
+		this.workType = workType;
+	}
 
-    @Override
-    public int hashCode() {
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "car_name_id", referencedColumnName = "id")
+	public Car getCar() {
+		return car;
+	}
 
-        return HashCodeBuilder.reflectionHashCode(this, true);
-    }
+	public void setCar(Car car) {
+		this.car = car;
+	}
 
-    @Override
-    public boolean equals(Object obj) {
+	@Override
+	public int hashCode() {
 
-        return EqualsBuilder.reflectionEquals(this, obj, true);
-    }
+		return HashCodeBuilder.reflectionHashCode(this, true);
+	}
 
-    @Override
-    public String toString() {
+	@Override
+	public boolean equals(Object obj) {
 
-        return ToStringBuilder.reflectionToString(this);
-    }
+		return EqualsBuilder.reflectionEquals(this, obj, true);
+	}
+
+	@Override
+	public String toString() {
+
+		return ToStringBuilder.reflectionToString(this);
+	}
 }

@@ -39,12 +39,11 @@
 	           	<form:input id = "dpicker" type="text" path="date" class="date start" cssErrorClass=""/>
 	           	<form:errors path="date" class="" cssErrorClass="" />
 	           	
-	           	<form:input id = "time" type="hidden" path="time" cssErrorClass=""/>
 	           	<input  type="hidden" class="" id = "butShow">
 	           	
-	           	<select id ="selectTime" style="" hidden="true">
-	           	<option disabled>виберіть час</option>
-	           	</select>
+				<form:select id="selectForm"  path="time" class="" >
+				<form:option value="${orders.time}">${orders.time}</form:option>
+				</form:select>
  			</p>
             <p><b>Табельний номер</b>
                 <form:input type="text" id = "" path="user_tab" class="" cssErrorClass=""/>                
