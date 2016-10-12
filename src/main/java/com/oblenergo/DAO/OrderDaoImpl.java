@@ -7,6 +7,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import com.oblenergo.enums.StatusOrderEnum;
 import com.oblenergo.model.Orders;
 
 @Repository
@@ -46,5 +47,14 @@ public class OrderDaoImpl extends AbstractDao<Integer, Orders> implements OrderD
 		crit.add(Restrictions.eq("date", date));
 		return (List<Orders>) crit.list();
 	}
+
+	@SuppressWarnings("unchecked")
+    @Override
+    public List<Orders> findAllNewOrders() {
+        Criteria crit = createEntityCriteria();
+        crit.add(Restrictions.eq("status_order", StatusOrderEnum.NEW));
+        crit.addOrder(Order.desc("id"));
+        return (List<Orders>) crit.list();
+    }
 
 }

@@ -29,7 +29,7 @@ public class CashierController {
     
     @RequestMapping(method=RequestMethod.GET)
     public String getCashierPage(Model model) { 
-        model.addAttribute(ORDER_LIST, orderServiceImpl.findAll());
+        model.addAttribute(ORDER_LIST, orderServiceImpl.findAllNew());
         return "cashier";      
     }
     

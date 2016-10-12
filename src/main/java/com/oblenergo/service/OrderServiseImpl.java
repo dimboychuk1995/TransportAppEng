@@ -162,4 +162,11 @@ public class OrderServiseImpl implements OrderServise {
 		return freeTime;
 	}
 
+	@Transactional
+    @Override
+    public List<Orders> findAllNew() {
+       
+        return dao.findAllNewOrders();
+    }
+
 }

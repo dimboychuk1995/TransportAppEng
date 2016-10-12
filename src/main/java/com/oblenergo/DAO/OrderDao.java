@@ -15,5 +15,7 @@ public interface OrderDao {
 	void delete(int id);
 
 	List<Orders> dateOfOrders(String date);
+	
+	List<Orders> findAllNewOrders();
 
 }
