@@ -35,8 +35,8 @@
            	<form:input id = "dpicker" type="text" path="date" class="date start dateChange" cssErrorClass=""/>
            	<form:errors path="date" class="" cssErrorClass="" />
            	
-			 <form:select id="selectForm" path="time" class="tpicker"  >
-   				<form:option value="${orders.time}">${orders.time}</form:option>
+			 <form:select id="selectForm" path="time" class=""  >
+   				<option disabled="disabled">Виберіть дату спочатку</option>
           	</form:select>
  			</p>
         <button id="" type="submit" class="btn btn-lg btn-primary btn_create_order">Замовити</button>

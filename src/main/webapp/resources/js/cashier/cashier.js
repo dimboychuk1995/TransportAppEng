@@ -8,7 +8,7 @@ $(function() {
 
       //searching: false,
       language: {
-        search: "Введіть табельний номер:",
+        search: "Введіть ПІП замовника:",
         searchPlaceholder: "пошук..."
       },
       order: [
@@ -48,13 +48,13 @@ $(function() {
   //Sent message to the server about new order confirmation
   function sendName(customer) {
     stompClient.send("/app/paymentAproveNotification", {}, JSON.stringify({
-      'message': 'New order from '+customer
+      'message': 'Нове замовлення від '+customer
     }));
   }
 
   // Invoke AJAX function to send data to server
   $(document).on('click', '.paymentApprove', function() {
-    if (confirm('Please confirm!')) {
+    if (confirm('Підтвердіть будь ласка')) {
       approvePayment($(this));
     }
     return false;
@@ -72,10 +72,9 @@ $(function() {
       success: function() {
         connect(butObj.prop('id'));
         butObj.closest('tr').remove();
-        alert('Employees ' + butObj.prop('id') + ' payment has been confirmed');
       },
       error: function(jqXHR) {
-        alert('Smth wrong... code: ' + jqXHR.status);
+        alert('Щось пішло не так... : ' + jqXHR.status);
       },
     });
   };

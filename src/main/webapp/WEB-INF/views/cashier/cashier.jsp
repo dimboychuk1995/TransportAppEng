@@ -45,7 +45,7 @@
                   <c:out value="${order.all_sum}"></c:out>
                 </td>
                 <td class="no-padding">
-                  <button id="${order.user_tab}" class="btn btn-success paymentApprove">
+                  <button id="${order.customer}" class="btn btn-success paymentApprove">
                     <span class="glyphicon glyphicon-ok"></span> Підтвердити
                   </button>
                 </td>
