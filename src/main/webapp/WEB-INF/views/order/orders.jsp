@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
-<script type="text/javascript" src="/transportApp/resources/dist/js/jsonDeleteOrder.js"></script>
 <link rel="stylesheet" href=<c:url value="/resources/dist/css/order.css"/>>
 
 <div>
@@ -64,20 +63,16 @@
                         <c:out value="${orders.status_order.statusOrder}"></c:out>
                     </td>
                     <td>
-                        <a class="btn btn-primary" href=<c:url value="/order/${orders.id}"/>>Оновити</a>
+                        <a class="btn btn-primary" href=<c:url value="/admin/order/${orders.id}"/>>Оновити</a>
                     </td>
                     <td>
-                        <form:form id="delete${orders.id}" action="javascript:void(null)" method="GET" onsubmit="deleteOrder(${orders.id})" modelAttribute="" class="">
-                            <button id="" type="submit" class="btn btn-danger">Видалити замовлення</button>
-                        </form:form>
+                        <button id="${orders.id}" type="submit" class="btn btn-danger delete">Видалити замовлення</button>
                     </td>
                 </tr>
             </c:forEach>
         </tbody>
     </table>
-    <div class="btns_bottom">
-	    <a class="btn btn-primary" href=<c:url value="/order/newOrder" />>Створити нове замовлення</a>
-	    
+    <div class="btns_bottom">	    
 	    <a class="btn btn-primary" href=<c:url value="/admin"/>>Довідник послуг</a>
     </div>
 </div>
@@ -87,5 +82,4 @@
 <p id="messageField"></p>
 
 <!-- Main page script -->
-<script src=<c:url value="/resources/js/admin/admin.js" />></script>
-
+<script src=<c:url value="/resources/js/order/order.js" />></script>

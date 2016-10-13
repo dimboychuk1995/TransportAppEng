@@ -72,7 +72,7 @@
     </tbody>
   </table>
   <a href=<c:url value="/admin/workType/newWorkType"/>>Create</a>
-  <a href=<c:url value="/order"/>>Order</a>
+  <a href=<c:url value="/admin/order"/>>Order</a>
 </div>
 
 <input id="contextPath" type="hidden" value="${pageContext.request.contextPath}" />

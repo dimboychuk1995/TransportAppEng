@@ -54,7 +54,7 @@
 <div class="container">
     <h3>Список наших послуг</h3>
     
-	<div>
+	<div class="table-responsive">
 	  <table class="table_on_main_view table table-hover">
 	    <thead>
 	      <tr>
