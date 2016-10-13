@@ -29,7 +29,7 @@ public class Orders implements Serializable {
 	private static final long serialVersionUID = 7191453677142422700L;
 
 	private Integer id;
-	private WorkType workType;
+	static private WorkType workType;
 	private String customer;
 	private Car car;
 
@@ -165,11 +165,14 @@ public class Orders implements Serializable {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "name_servise_id", referencedColumnName = "id")
 	public WorkType getWorkType() {
+		// System.out.println(workType);
 		return workType;
 	}
 
 	public void setWorkType(WorkType workType) {
-		this.workType = workType;
+
+		Orders.workType = new WorkType();
+		Orders.workType = workType;
 	}
 
 	@ManyToOne(optional = false)

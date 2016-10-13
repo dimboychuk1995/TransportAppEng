@@ -38,9 +38,7 @@
             <p id ="datePicker" ><b>Дата</b>
 	           	<form:input id = "dpicker" type="text" path="date" class="date start" cssErrorClass=""/>
 	           	<form:errors path="date" class="" cssErrorClass="" />
-	           	
-	           	<input  type="hidden" class="" id = "butShow">
-	           	
+
 				<form:select id="selectForm"  path="time" class="" >
 				<form:option value="${orders.time}">${orders.time}</form:option>
 				</form:select>

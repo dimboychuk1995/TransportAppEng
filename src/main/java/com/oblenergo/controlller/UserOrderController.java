@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oblenergo.editor.ServiceEditor;
+import com.oblenergo.model.Car;
 import com.oblenergo.model.Orders;
+import com.oblenergo.model.WorkType;
 import com.oblenergo.service.CarService;
 import com.oblenergo.service.ItextService;
 import com.oblenergo.service.OrderServise;
@@ -53,9 +55,15 @@ public class UserOrderController {
 	@Autowired
 	ClientValidator clientValidator;
 
-	@InitBinder(ORDER)
+	@Autowired
+	ServiceEditor editor;
+
+	@InitBinder("orders")
 	public void initBinder(WebDataBinder binder) {
+		binder.registerCustomEditor(WorkType.class, editor);
+		binder.registerCustomEditor(Car.class, editor);
 		binder.addValidators(clientValidator);
+
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -84,21 +92,6 @@ public class UserOrderController {
 		return "redirect:/";
 
 	}
-
-	@Autowired
-	ServiceEditor editor;
-
-	// @InitBinder("orders")
-	// public void initBinder(WebDataBinder binder) {
-	// binder.registerCustomEditor(WorkType.class, editor);
-	//
-	// }
-	//
-	// @InitBinder("orders")
-	// public void initBinderCar(WebDataBinder binder) {
-	// binder.addValidators(clientValidator);
-	// binder.registerCustomEditor(Car.class, editor);
-	// }
 
 	@RequestMapping(value = "/selectTime", headers = "Accept=*/*", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = "application/json")
 
