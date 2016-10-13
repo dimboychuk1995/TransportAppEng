@@ -31,20 +31,14 @@
             <form:input type="text" id = "" path="car_number" class="" cssErrorClass=""/>   
             <form:errors path="car_number" class="" cssErrorClass="" />               
         </p>
-        <p id ="datePicker" class="option_in_new_order" ><b>Дата</b>
-           	<form:input id = "dpicker" type="text" path="date" class="date start" cssErrorClass=""/>
+        <p id ="datePicker" ><b>Дата</b>
+           	<form:input id = "dpicker" type="text" path="date" class="date start dateChange" cssErrorClass=""/>
            	<form:errors path="date" class="" cssErrorClass="" />
            	
-           	<input  type="hidden" class="" id = "butShow">
-           	
-           
-            <form:select id="selectForm" path="time" class="" />
-    
-           
-<!--            	<select id ="selectTime" style="" hidden="true"> -->
-<!--            		<option disabled>виберіть час</option> -->
-<!--            	</select> -->
- 		</p>
+			 <form:select id="selectForm" path="time" class="tpicker"  >
+   				<form:option value="${orders.time}">${orders.time}</form:option>
+          	</form:select>
+ 			</p>
         <button id="" type="submit" class="btn btn-lg btn-primary btn_create_order">Замовити</button>
     </fieldset>
 </form:form>

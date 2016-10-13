@@ -36,12 +36,12 @@
                 <form:input type="text" path="performer_id" class="" cssErrorClass=""/> 
 
             <p id ="datePicker" ><b>Дата</b>
-	           	<form:input id = "dpicker" type="text" path="date" class="date start" cssErrorClass=""/>
+	           	<form:input id = "dpicker" type="text" path="date" class="date start dateChange" cssErrorClass=""/>
 	           	<form:errors path="date" class="" cssErrorClass="" />
 
-				<form:select id="selectForm"  path="time" class="" >
-				<form:option value="${orders.time}">${orders.time}</form:option>
-				</form:select>
+				 <form:select id="selectForm" path="time" class="tpicker"  >
+    				<form:option value="${orders.time}">${orders.time}</form:option>
+           		</form:select>
  			</p>
             <p><b>Табельний номер</b>
                 <form:input type="text" id = "" path="user_tab" class="" cssErrorClass=""/>                
