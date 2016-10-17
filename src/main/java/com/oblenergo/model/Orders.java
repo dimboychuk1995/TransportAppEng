@@ -135,7 +135,6 @@ public class Orders implements Serializable {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "name_servise_id", referencedColumnName = "id")
 	public WorkType getWorkType() {
-		// System.out.println(workType);
 		return workType;
 	}
 

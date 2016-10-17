@@ -21,30 +21,30 @@ import com.oblenergo.service.OrderServise;
 @Controller
 @RequestMapping("/cashier")
 public class CashierController {
-    
-    private static final String ORDER_LIST = "orders";
-    
-    @Autowired
-    private OrderServise orderServiceImpl;
-    
-    @RequestMapping(method=RequestMethod.GET)
-    public String getCashierPage(Model model) { 
-        model.addAttribute(ORDER_LIST, orderServiceImpl.findAllNew());
-        return "cashier";      
-    }
-    
-    @RequestMapping(value="/approvePayment", method=RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void approvePayment(@RequestBody int id){
-        Orders order = orderServiceImpl.findOrderById(id);
-        order.setStatus_order(StatusOrderEnum.valueOf("PAID"));
-        orderServiceImpl.update(order);
-    }
-    
-    @MessageMapping("/paymentAproveNotification")
-    @SendTo("/adminNotification")
-    public Notification greeting(OrderMessage orderMessage) {
 
-        return new Notification(orderMessage.getMessage());
-    }
+	private static final String ORDER_LIST = "orders";
+
+	@Autowired
+	private OrderServise orderServiceImpl;
+
+	@RequestMapping(method = RequestMethod.GET)
+	public String getCashierPage(Model model) {
+		model.addAttribute(ORDER_LIST, orderServiceImpl.findAllNew());
+		return "cashier";
+	}
+
+	@RequestMapping(value = "/approvePayment", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void approvePayment(@RequestBody int id) {
+		Orders order = orderServiceImpl.findOrderById(id);
+		order.setStatus_order(StatusOrderEnum.valueOf("PAID"));
+		orderServiceImpl.update(order);
+	}
+
+	@MessageMapping("/paymentAproveNotification")
+	@SendTo("/adminNotification")
+	public Notification greeting(OrderMessage orderMessage) {
+
+		return new Notification(orderMessage.getMessage());
+	}
 }

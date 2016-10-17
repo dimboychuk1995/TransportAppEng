@@ -21,7 +21,7 @@
             </tr>
           </thead>
           <tbody>
-            <c:forEach items="${orders}" var="order">
+           <c:forEach items="${orders}" var="order">
               <tr id="${order.id}" class="dataRow">
                 <td>
                   <c:out value="${order.customer}"></c:out>
@@ -39,10 +39,10 @@
                   <c:out value="${order.time}"></c:out>
                 </td>
                 <td>
-                  <c:out value="${order.pdv}"></c:out>
+                  <c:out value="${order.workType.vat}"></c:out>
                 </td>
                 <td>
-                  <c:out value="${order.all_sum}"></c:out>
+                  <c:out value="${order.workType.price_including_vat}"></c:out>
                 </td>
                 <td class="no-padding">
                   <button id="${order.customer}" class="btn btn-success paymentApprove">

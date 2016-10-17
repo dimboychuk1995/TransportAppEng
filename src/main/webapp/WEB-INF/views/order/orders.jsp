@@ -4,79 +4,83 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <link rel="stylesheet" href=<c:url value="/resources/dist/css/order.css"/>>
-
-<div>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>Вид робіт</th>
-                <th>Замовник</th>
-                <th>Марка авто</th>
-                <th>Модель</th>
-                <th>Сума без ПДВ</th>
-                <th>ПДВ</th>
-                <th>Всього</th>
-                <th>Дата</th>
-                <th>Час</th>
-                <th>Табельний номер</th>
-                <th>Номер авто</th>
-                <th>Статус замовлення</th>
-            </tr>
-        </thead>
-        <tbody>
-            <c:forEach items="${order}" var="orders">
-                <tr id="${orders.id}">
-                    <td>
-                        <c:out value="${orders.workType.name}"></c:out>
-                    </td>
-                    <td>
-                        <c:out value="${orders.customer}"></c:out>
-                    </td>
-                    <td>
-                        <c:out value="${orders.car.name}"></c:out>               
-                    </td>
-                    <td>
-                        <c:out value="${orders.car_model}"></c:out>
-                    </td>
-                    <td>
-                        <c:out value="${orders.workType.selling_price}"></c:out>
-                    </td>
-                    <td>
-                        <c:out value="${orders.workType.vat}"></c:out>
-                    </td>
-                    <td>
-                        <c:out value="${orders.workType.price_including_vat}"></c:out>
-                    </td>
-                    <td class="date_td">
-                        <c:out value="${orders.date}"></c:out>
-                    </td>
-                    <td>
-                        <c:out value="${orders.time}"></c:out>
-                    </td>
-                    <td>
-                        <c:out value="${orders.user_tab}"></c:out>
-                    </td>
-                    <td>
-                        <c:out value="${orders.car_number}"></c:out>
-                    </td>
-                    <td>
-                        <c:out value="${orders.status_order.statusOrder}"></c:out>
-                    </td>
-                    <td>
-                        <a class="btn btn-primary" href=<c:url value="/admin/order/${orders.id}"/>>Оновити</a>
-                    </td>
-                    <td>
-                        <button id="${orders.id}" type="submit" class="btn btn-danger delete">Видалити замовлення</button>
-                    </td>
-                </tr>
-            </c:forEach>
-        </tbody>
-    </table>
-    <div class="btns_bottom">	    
-	    <a class="btn btn-primary" href=<c:url value="/admin"/>>Довідник послуг</a>
-    </div>
+<div class="container-fluid">
+  	<div class="row">
+    	<div class="col-md-12">
+			<div class="table-responsive">
+			    <table class="table table-hover table-striped table-bordered">
+			        <thead>
+			            <tr>
+			                <th>Вид робіт</th>
+			                <th>Замовник</th>
+			                <th>Марка авто</th>
+			                <th>Модель</th>
+			                <th>Сума без ПДВ</th>
+			                <th>ПДВ</th>
+			                <th>Всього</th>
+			                <th>Дата</th>
+			                <th>Час</th>
+			                <th>Табельний номер</th>
+			                <th>Номер авто</th>
+			                <th>Статус замовлення</th>
+			            </tr>
+			        </thead>
+			        <tbody>
+			            <c:forEach items="${order}" var="orders">
+			                <tr id="${orders.id}">
+			                    <td>
+			                        <c:out value="${orders.workType.name}"></c:out>
+			                    </td>
+			                    <td>
+			                        <c:out value="${orders.customer}"></c:out>
+			                    </td>
+			                    <td>
+			                        <c:out value="${orders.car.name}"></c:out>               
+			                    </td>
+			                    <td>
+			                        <c:out value="${orders.car_model}"></c:out>
+			                    </td>
+			                    <td>
+			                        <c:out value="${orders.workType.selling_price}"></c:out>
+			                    </td>
+			                    <td>
+			                        <c:out value="${orders.workType.vat}"></c:out>
+			                    </td>
+			                    <td>
+			                        <c:out value="${orders.workType.price_including_vat}"></c:out>
+			                    </td>
+			                    <td class="date_td">
+			                        <c:out value="${orders.date}"></c:out>
+			                    </td>
+			                    <td>
+			                        <c:out value="${orders.time}"></c:out>
+			                    </td>
+			                    <td>
+			                        <c:out value="${orders.user_tab}"></c:out>
+			                    </td>
+			                    <td>
+			                        <c:out value="${orders.car_number}"></c:out>
+			                    </td>
+			                    <td>
+			                        <c:out value="${orders.status_order.statusOrder}"></c:out>
+			                    </td>
+			                    <td>
+			                        <a class="btn btn-primary" href=<c:url value="/admin/order/${orders.id}"/>>Оновити</a>
+			                    </td>
+			                    <td>
+			                        <button id="${orders.id}" type="submit" class="btn btn-danger delete">Видалити замовлення</button>
+			                    </td>
+			                </tr>
+			            </c:forEach>
+			        </tbody>
+			    </table>
+			    <div class="btns_bottom">	    
+				    <a class="btn btn-primary" href=<c:url value="/admin"/>>Довідник послуг</a>
+			    </div>
+			</div>
+		</div>
+	</div>
 </div>
-
 <input id="contextPath" type="hidden" value="${pageContext.request.contextPath}" />
 
 <p id="messageField"></p>

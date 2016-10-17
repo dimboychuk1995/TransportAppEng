@@ -61,8 +61,6 @@ public class AdminController {
 	@InitBinder(WORK_TYPE)
 	public void initBinder(WebDataBinder binder) {
 		binder.addValidators(workTypeValidator);
-		//
-
 	}
 
 	@InitBinder
