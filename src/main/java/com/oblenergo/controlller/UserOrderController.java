@@ -1,11 +1,18 @@
 package com.oblenergo.controlller;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
@@ -31,12 +38,10 @@ import com.oblenergo.validator.ClientValidator;
 @RequestMapping(value = "/")
 public class UserOrderController {
 
-	public static final String ITEMSORDER = "order";
-	public static final String ITEMSWORKTYPE = "typeWorks";
-	public static final String ITEMSCAR = "cars";
+	private static final String ITEMSWORKTYPE = "typeWorks";
+	private static final String ITEMSCAR = "cars";
 	private static final String ORDER = "orders";
-	private static final String WORK_TYPE = "workType";
-	private static final String CAR = "car";
+	private static final String DATAFORMAT = "YYYY-MM-DD HH:mm:ss";
 
 	@Autowired
 	WorkTypeService workTypeServiceImpl;
@@ -76,8 +81,8 @@ public class UserOrderController {
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public String addType(@Validated @ModelAttribute("orders") Orders orders, BindingResult bindingResult,
-			Model model) {
+	public String addType(HttpServletResponse response, @Validated @ModelAttribute("orders") Orders orders,
+			BindingResult bindingResult, Model model) {
 
 		if (bindingResult.hasErrors()) {
 			model.addAttribute(ITEMSWORKTYPE, workTypeServiceImpl.findAll());
@@ -85,10 +90,22 @@ public class UserOrderController {
 			return "createOrder";
 		}
 		orders.setCustomer(sapServiceImpl.httpConnectorForSap(orders.getUser_tab()));
-		System.out.println(orders.getTime());
-		System.out.println(orders.getDate());
+
 		orderServiseImpl.save(orders);
-		iTextServiceImpl.writeCheck(orders);
+		byte[] data = iTextServiceImpl.writeCheck(orders);
+		System.out.println(data);
+		String fileName = new SimpleDateFormat(DATAFORMAT).format(new Date()) + ".pdf";
+		response.setHeader("Content-Disposition", String.format("inline; filename=\"" + fileName + "\""));
+		response.setContentType("application/x-download");
+
+		try (ServletOutputStream outputStream = response.getOutputStream()) {
+			response.setContentLength(data.length);
+			FileCopyUtils.copy(data, outputStream);
+		} catch (NullPointerException | IOException e) {
+
+			throw new RuntimeException();
+		}
+
 		return "redirect:/";
 
 	}

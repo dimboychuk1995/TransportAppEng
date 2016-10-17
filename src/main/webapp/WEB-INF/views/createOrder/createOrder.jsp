@@ -7,7 +7,7 @@
 
 <!DOCTYPE html>
 
-<form:form action="" method="POST" modelAttribute="orders" class="">
+<form:form action="" method="POST" modelAttribute="orders" class="" id="orderForm">
     <fieldset>    
         <p class="option_in_new_order"><b>Вид робіт</b>
             <form:select path="workType.id" items="${typeWorks}" class=""
@@ -79,7 +79,7 @@
 <!-- DateTimePicker -->
 <script src=<c:url value="/resources/js/dateTimePicker/time.js" />></script>
 <script src=<c:url value="/resources/js/dateTimePicker/dateTimePicker.js" />></script>
-
+<script src=<c:url value="/resources/js/dateTimePicker/dateTimePicker.js" />></script>
 <script src=<c:url value="/resources/js/dateTimePicker/bootstrap-datepicker.js" />></script>
 <script src=<c:url value="/resources/js/dateTimePicker/datepair.js" />></script>
 <script src=<c:url value="/resources/js/dateTimePicker/jquery.timepicker.js" />></script>        

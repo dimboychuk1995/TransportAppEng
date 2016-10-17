@@ -1,6 +1,6 @@
 package com.oblenergo.service;
 
-import java.io.FileOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
@@ -48,24 +48,32 @@ public class ItextServiceImpl implements ItextService {
 	}
 
 	@Override
-	public void writeCheck(Orders order) {
+	public byte[] writeCheck(Orders order) {
 
+		byte[] pdf = null;
 		Document document = new Document();
 		document.setMargins(20, 50, 25, 2);
 
-		try {
-			PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("c://check.pdf"));
+		try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
 
+			PdfWriter writer = PdfWriter.getInstance(document, baos);
 			document.open();
-
 			document.add(createTable(order));
+
+			Paragraph paragraph = new Paragraph();
+			paragraph.setSpacingBefore(25);
+
+			document.add(paragraph);
 			document.add(createTableOrder(order));
 			document.close();
+			pdf = baos.toByteArray();
 			writer.close();
 
-		} catch (Exception e) {
-
+		} catch (DocumentException | IOException e) {
+			e.printStackTrace();
 		}
+
+		return pdf;
 	}
 
 	public PdfPTable createTable(Orders order) {
@@ -79,19 +87,18 @@ public class ItextServiceImpl implements ItextService {
 		} catch (DocumentException e) {
 			e.printStackTrace();
 		}
-		// the cell object
+
 		PdfPCell cell;
-		// we add a cell with colspan 3
 
 		cell = new PdfPCell(new Phrase("РАХУНОК-ФАКТУРА №  від " + getLocalDay(), getFont()));
 		cell.setColspan(2);
 		cell.setBorderColor(BaseColor.WHITE);
 		table.addCell(cell);
-		// now we add a cell with rowspan 2
+
 		cell = new PdfPCell(new Phrase("Постачальник : ", getFont()));
-		// cell.setRowspan(2);
+
 		table.addCell(cell);
-		// we add the four remaining cells with addCell()
+
 		table.addCell("00131564");
 
 		cell = new PdfPCell(new Phrase("Адреса : ", getFont()));
@@ -104,7 +111,7 @@ public class ItextServiceImpl implements ItextService {
 
 		cell = new PdfPCell(new Phrase("Р/рахунок : ", getFont()));
 		table.addCell(cell);
-		table.addCell(new Phrase("Філія - Івано.-Франк.ОУ АТ Ощадбанк 336503 26003301757", getFont()));
+		table.addCell(new Phrase("Філія - Івано.-Франк.ОУ АТ Ощадбанк 336503   26003301757", getFont()));
 
 		cell = new PdfPCell(new Phrase("Платник : ", getFont()));
 		table.addCell(cell);
@@ -115,27 +122,11 @@ public class ItextServiceImpl implements ItextService {
 
 		table.addCell(new Phrase("на підставі заказу №" + order.getId() + " від " + getLocalDay(), getFont()));
 
-		cell = new PdfPCell(new Phrase("", getFont()));
-		cell.setColspan(2);
-		cell.setBorderColor(BaseColor.WHITE);
-		cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		table.addCell(cell);
-
-		cell = new PdfPCell(new Phrase("", getFont()));
-		cell.setColspan(2);
-		cell.setBorderColor(BaseColor.WHITE);
-		cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		table.addCell(cell);
-
-		cell = new PdfPCell(new Phrase("", getFont()));
-		cell.setColspan(2);
-		cell.setBorderColor(BaseColor.WHITE);
-		cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		table.addCell(cell);
 		return table;
 	}
 
 	public PdfPTable createTableOrder(Orders order) {
+
 		// a table with three columns
 		PdfPTable table = new PdfPTable(6);
 		table.setWidthPercentage(100); // Width 100%
