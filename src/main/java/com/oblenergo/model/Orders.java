@@ -29,15 +29,12 @@ public class Orders implements Serializable {
 	private static final long serialVersionUID = 7191453677142422700L;
 
 	private Integer id;
-	static private WorkType workType;
+	private WorkType workType;
 	private String customer;
 	private Car car;
 
 	@NotBlank
 	private String car_model;
-	private Double sum_vithput_pdv;
-	private Double pdv;
-	private Double all_sum;
 	private Integer performer_id;
 
 	@NotEmpty
@@ -108,33 +105,6 @@ public class Orders implements Serializable {
 		this.car_model = car_model;
 	}
 
-	@Column(name = "sum_vithput_pdv")
-	public Double getSum_vithput_pdv() {
-		return sum_vithput_pdv;
-	}
-
-	public void setSum_vithput_pdv(Double sum_vithput_pdv) {
-		this.sum_vithput_pdv = sum_vithput_pdv;
-	}
-
-	@Column(name = "pdv")
-	public Double getPdv() {
-		return pdv;
-	}
-
-	public void setPdv(Double pdv) {
-		this.pdv = pdv;
-	}
-
-	@Column(name = "all_sum")
-	public Double getAll_sum() {
-		return all_sum;
-	}
-
-	public void setAll_sum(Double all_sum) {
-		this.all_sum = all_sum;
-	}
-
 	@Column(name = "performer_id")
 	public Integer getPerformer_id() {
 		return performer_id;
@@ -170,9 +140,7 @@ public class Orders implements Serializable {
 	}
 
 	public void setWorkType(WorkType workType) {
-
-		Orders.workType = new WorkType();
-		Orders.workType = workType;
+		this.workType = workType;
 	}
 
 	@ManyToOne(optional = false)

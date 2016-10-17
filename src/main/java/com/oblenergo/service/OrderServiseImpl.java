@@ -65,9 +65,6 @@ public class OrderServiseImpl implements OrderServise {
 		entity.setCustomer(order.getCustomer());
 		entity.setCar(order.getCar());
 		entity.setCar_model(order.getCar_model());
-		entity.setSum_vithput_pdv(order.getSum_vithput_pdv());
-		entity.setPdv(order.getPdv());
-		entity.setAll_sum(order.getAll_sum());
 		entity.setPerformer_id(order.getPerformer_id());
 		entity.setDate(order.getDate());
 		entity.setTime(order.getTime());
@@ -163,10 +160,10 @@ public class OrderServiseImpl implements OrderServise {
 	}
 
 	@Transactional
-    @Override
-    public List<Orders> findAllNew() {
-       
-        return dao.findAllNewOrders();
-    }
+	@Override
+	public List<Orders> findAllNew() {
+
+		return dao.findAllNewOrders();
+	}
 
 }

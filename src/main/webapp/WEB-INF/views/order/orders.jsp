@@ -39,13 +39,13 @@
                         <c:out value="${orders.car_model}"></c:out>
                     </td>
                     <td>
-                        <c:out value="${orders.sum_vithput_pdv}"></c:out>
+                        <c:out value="${orders.workType.selling_price}"></c:out>
                     </td>
                     <td>
-                        <c:out value="${orders.pdv}"></c:out>
+                        <c:out value="${orders.workType.vat}"></c:out>
                     </td>
                     <td>
-                        <c:out value="${orders.all_sum}"></c:out>
+                        <c:out value="${orders.workType.price_including_vat}"></c:out>
                     </td>
                     <td class="date_td">
                         <c:out value="${orders.date}"></c:out>

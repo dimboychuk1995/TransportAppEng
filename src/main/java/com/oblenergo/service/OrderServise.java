@@ -29,7 +29,7 @@ public interface OrderServise {
 	public List<Orders> findDateOfOrders(String date);
 
 	public List<String> findFreeTime(String[] arrTimeOrders, String date);
-	
+
 	public List<Orders> findAllNew();
 
 }

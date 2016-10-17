@@ -23,15 +23,7 @@
             <p><b>Модель</b>
                 <form:input type="text" path="car_model" class="" cssErrorClass=""/>                
             </p>
-            <p><b>Сума без ПДВ</b>
-                <form:input type="text" path="sum_vithput_pdv" class="" cssErrorClass=""/>                
-            </p>
-            <p><b>ПДВ</b>
-                <form:input type="text" path="pdv" class="" cssErrorClass=""/>                
-            </p>
-            <p><b>Вся сума</b>
-                <form:input type="text" path="all_sum" class="" cssErrorClass=""/>                
-            </p>
+          
             <p><b>Виконавець</b>
                 <form:input type="text" path="performer_id" class="" cssErrorClass=""/> 
 
