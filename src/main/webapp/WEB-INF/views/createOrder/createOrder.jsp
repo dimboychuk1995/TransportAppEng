@@ -5,74 +5,88 @@
 
 <link rel="stylesheet" href=<c:url value="/resources/dist/css/userOrder.css"/>>
 
-<!DOCTYPE html>
+<c:if test="${param.id == null}">
 
-<form:form action="" method="POST" modelAttribute="orders" class="" id="orderForm">
-    <fieldset>    
-        <p class="option_in_new_order"><b>Вид робіт</b>
-            <form:select path="workType.id" items="${typeWorks}" class=""
-                    data-placeholder="work"
-                    itemLabel="name" itemValue="id" />               
-        </p>
-        <p class="option_in_new_order"><b>Табельний номер</b>
-            <form:input type="text" id = "" path="user_tab" class="" cssErrorClass=""/>
-            <form:errors path="user_tab" class="" cssErrorClass="" />                
-        </p>
-        <p class="option_in_new_order"><b>Марка авто</b>
-            <form:select path="car.id" items="${cars}" class=""
-                    data-placeholder="cars"
-                    itemLabel="name" itemValue="id" />               
-        </p>
-        <p class="option_in_new_order"><b>Модель</b>
-            <form:input type="text" path="car_model" class="" cssErrorClass=""/> 
-            <form:errors path="car_model" class="" cssErrorClass="" />                
-        </p>
-        <p class="option_in_new_order"><b>Номер авто</b>
-            <form:input type="text" id = "" path="car_number" class="" cssErrorClass=""/>   
-            <form:errors path="car_number" class="" cssErrorClass="" />               
-        </p>
-        <p id ="datePicker" ><b>Дата</b>
-           	<form:input id = "dpicker" type="text" path="date" class="date start dateChange" cssErrorClass=""/>
-           	<form:errors path="date" class="" cssErrorClass="" />
-           	
-			 <form:select id="selectForm" path="time" class=""  >
-   				<option disabled="disabled">Виберіть дату спочатку</option>
-          	</form:select>
- 			</p>
-        <button id="" type="submit" class="btn btn-lg btn-primary btn_create_order">Замовити</button>
+  <form:form action="" method="POST" modelAttribute="orders" class="" id="orderForm">
+    <fieldset>
+      <p class="option_in_new_order"><b>Вид робіт</b>
+        <form:select path="workType.id" items="${typeWorks}" class="" data-placeholder="work" itemLabel="name" itemValue="id" />
+      </p>
+      <p class="option_in_new_order"><b>Табельний номер</b>
+        <form:input type="text" id="" path="user_tab" class="" cssErrorClass="" />
+        <form:errors path="user_tab" class="" cssErrorClass="" />
+      </p>
+      <p class="option_in_new_order"><b>Марка авто</b>
+        <form:select path="car.id" items="${cars}" class="" data-placeholder="cars" itemLabel="name" itemValue="id" />
+      </p>
+      <p class="option_in_new_order"><b>Модель</b>
+        <form:input type="text" path="car_model" class="" cssErrorClass="" />
+        <form:errors path="car_model" class="" cssErrorClass="" />
+      </p>
+      <p class="option_in_new_order"><b>Номер авто</b>
+        <form:input type="text" id="" path="car_number" class="" cssErrorClass="" />
+        <form:errors path="car_number" class="" cssErrorClass="" />
+      </p>
+      <p id="datePicker"><b>Дата</b>
+        <form:input id="dpicker" type="text" path="date" class="date start dateChange" cssErrorClass="" />
+        <form:errors path="date" class="" cssErrorClass="" />
+
+        <form:select id="selectForm" path="time" class="">
+          <option disabled="disabled">Виберіть дату спочатку</option>
+        </form:select>
+      </p>
+      <button id="" type="submit" class="btn btn-lg btn-primary btn_create_order">Замовити</button>
     </fieldset>
-</form:form>
-<br>
+  </form:form>
+  <br>
 
 
-<div class="container">
+  <div class="container">
     <h3>Список наших послуг</h3>
-    
-	<div class="table-responsive">
-	  <table class="table_on_main_view table table-hover">
-	    <thead>
-	      <tr>
-	        <th>Назва робіт</th>
-	        <th>Вартість послуги</th>
-	      </tr>
-	    </thead>
-	    <tbody>
-	        <c:forEach items="${typeWorks}" var="workType">
-	
-	        <tr id = "${workType.id}">
-	            <td>
-	              <c:out value="${workType.name}"></c:out>
-	            </td>
-	            <td>
-	              <c:out value="${workType.price_including_vat}"></c:out>
-	            </td>       
-	        </tr>
-	        </c:forEach>
-	    </tbody>
-	  </table>
-	</div>
-	 
-</div>
+
+    <div class="table-responsive">
+      <table class="table_on_main_view table table-hover">
+        <thead>
+          <tr>
+            <th>Назва робіт</th>
+            <th>Вартість послуги</th>
+          </tr>
+        </thead>
+        <tbody>
+          <c:forEach items="${typeWorks}" var="workType">
+            <tr id="${workType.id}">
+              <td>
+                <c:out value="${workType.name}"></c:out>
+              </td>
+              <td>
+                <c:out value="${workType.price_including_vat}"></c:out>
+              </td>
+            </tr>
+          </c:forEach>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</c:if>
+
+<c:if test="${param.id != null}">
+
+  <div class="row">
+    <div class="alert alert-success col-md-4 col-md-offset-4">
+      Ваше замовлення оформлено, для здійснення оплати та в'їзду на територію підприємтсва роздрукуйте будь ласка чек!
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <form:form action="${pageContext.request.contextPath}/pdf/${param.id}" method="GET">
+        <button type="submit" class="btn btn-success">Роздрукувати чек</button>
+        <a href=<c:url value="/" /> class="btn btn-default">Повернутися</a>
+      </form:form>
+    </div>
+  </div>
+
+</c:if>
 
 <input id="contextPath" type="hidden" value="${pageContext.request.contextPath}" />
 

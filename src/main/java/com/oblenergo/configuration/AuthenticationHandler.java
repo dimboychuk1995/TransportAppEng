@@ -62,7 +62,7 @@ public class AuthenticationHandler implements AuthenticationSuccessHandler {
         if (isCashier) {
             return "/cashier";
         } else if (isAdmin) {
-            return "/admin";
+            return "/admin/order";
         } else {
             throw new IllegalStateException();
         }
