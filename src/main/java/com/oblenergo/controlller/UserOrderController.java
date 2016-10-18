@@ -22,8 +22,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.oblenergo.DTO.TimeDTO;
 import com.oblenergo.editor.ServiceEditor;
 import com.oblenergo.model.Car;
 import com.oblenergo.model.Orders;
@@ -128,18 +130,23 @@ public class UserOrderController {
 
 	@RequestMapping(value = "/selectTimeAdmin", headers = "Accept=*/*", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = "application/json")
 
-	public @ResponseBody String[] selectTimeForDateAdmin(@RequestBody String date, String id) {
+	public @ResponseBody String[] selectTimeForDateAdmin(@RequestBody TimeDTO timeDTO) {
+	    
+//	    System.out.println("****"+text);
+	    System.out.println("****data  "+timeDTO.getDate());
+	    System.out.println("****id   "+timeDTO.getId());
 
-		Orders order = orderServiseImpl.findOrderById(Integer.parseInt("98"));
+	    String date="";
+		Orders order = orderServiseImpl.findOrderById(Integer.parseInt(timeDTO.getId()));
 
-		List<Orders> orders = orderServiseImpl.findDateOfOrders(date);
+		List<Orders> orders = orderServiseImpl.findDateOfOrders(timeDTO.getDate());
 
 		String[] arrTimeOrders = new String[orders.size()];
 		for (int i = 0; i < arrTimeOrders.length; i++) {
 			arrTimeOrders[i] = orders.get(i).getTime();
 		}
 
-		List<String> freeTime = orderServiseImpl.findFreeTimeForAdmin(arrTimeOrders, date, order);
+		List<String> freeTime = orderServiseImpl.findFreeTimeForAdmin(arrTimeOrders, timeDTO.getDate(), order);
 
 		String[] arr = freeTime.toArray(new String[freeTime.size()]);
 		return arr;

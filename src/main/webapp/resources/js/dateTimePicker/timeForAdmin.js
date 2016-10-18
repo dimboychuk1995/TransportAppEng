@@ -20,7 +20,10 @@ $(function() {
       type: 'POST',
       url: contextPath + '/selectTimeAdmin',
       contentType: 'application/json',
-      data:  timeInput,
+      data:  JSON.stringify({"date": timeInput, 
+    	  	  "id": $("#idOrder").val()
+      
+      }),
       success: function(response) {
         $('#selectForm').children('option').remove();
         for (var i = 0; i < response.length; i++) {
