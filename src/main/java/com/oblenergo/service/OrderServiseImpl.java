@@ -99,6 +99,19 @@ public class OrderServiseImpl implements OrderServise {
 		return getFreeTime(time, getBusyTime(time, arrTimeOrders));
 	}
 
+	@Override
+	public List<String> findFreeTimeForAdmin(String[] arrTimeOrders, String date, Orders order) {
+		String[] timeAdmin;
+
+		if (shortDay == getDayOfWeek(date)) {
+			timeAdmin = shortTimeRange;
+		} else {
+			timeAdmin = fullTimeRange;
+		}
+
+		return getFreeTime(timeAdmin, getBusyTimeForAdmin(timeAdmin, arrTimeOrders, date, order));
+	}
+
 	public int getDayOfWeek(String date) {
 		Calendar c = Calendar.getInstance();
 
@@ -141,6 +154,94 @@ public class OrderServiseImpl implements OrderServise {
 						busyTime.add(iter, time[i]);
 						iter++;
 						busyTime.add(iter, time[i - stepOfTime]);
+						iter++;
+					}
+
+				}
+			}
+		}
+
+		return busyTime;
+	}
+
+	public ArrayList<String> getBusyTimeForAdmin(String[] time, String[] arrTimeOrders, String date, Orders order) {
+
+		ArrayList<String> busyTime = new ArrayList<String>();
+		int iter = 0;
+		for (int i = 0; i < time.length; i++) {
+			for (int j = 0; j < arrTimeOrders.length; j++) {
+
+				if (time[i].equals(arrTimeOrders[j])) {
+
+					if (i > 0 && i < (time.length - 2)) {
+
+						if (date.equals(order.getDate()) && arrTimeOrders[j].equals(order.getTime())) {
+
+							if ((time.length - 3) < i && (arrTimeOrders.length - 2) < j) {
+
+								if (time[i + 2].equals(arrTimeOrders[j + 1])) {
+									busyTime.add(iter, time[i + stepOfTime]);
+									iter++;
+								}
+								if (time[i - 2].equals(arrTimeOrders[j - 1])) {
+									busyTime.add(iter, time[i - stepOfTime]);
+									iter++;
+								}
+							}
+							busyTime.add(iter, time[i]);
+							iter++;
+						} else {
+
+							busyTime.add(iter, time[i - stepOfTime]);
+							iter++;
+							busyTime.add(iter, time[i]);
+							iter++;
+							busyTime.add(iter, time[i + stepOfTime]);
+							iter++;
+
+						}
+					}
+
+					if (i == 0) {
+
+						if (date.equals(order.getDate()) && arrTimeOrders[j].equals(order.getTime())) {
+
+							if ((time.length - 3) < i && (arrTimeOrders.length - 2) < j) {
+
+								if (time[i + 2].equals(arrTimeOrders[i + 1])) {
+									busyTime.add(iter, time[i + stepOfTime]);
+									iter++;
+								}
+							}
+
+						} else {
+
+							busyTime.add(iter, time[i + stepOfTime]);
+							iter++;
+
+						}
+
+						busyTime.add(iter, time[i]);
+						iter++;
+					}
+
+					if (i == (time.length - 1)) {
+
+						if (date.equals(order.getDate()) && arrTimeOrders[j].equals(order.getTime())) {
+
+							if ((arrTimeOrders.length - 1) >= 2) {
+								if (time[i - 2].equals(arrTimeOrders[j - 1])) {
+									busyTime.add(iter, time[i - stepOfTime]);
+								}
+							}
+
+						} else {
+
+							busyTime.add(iter, time[i - stepOfTime]);
+							iter++;
+						}
+
+						busyTime.add(iter, time[i]);
 						iter++;
 					}
 

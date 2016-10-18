@@ -49,12 +49,12 @@ public class OrderDaoImpl extends AbstractDao<Integer, Orders> implements OrderD
 	}
 
 	@SuppressWarnings("unchecked")
-    @Override
-    public List<Orders> findAllNewOrders() {
-        Criteria crit = createEntityCriteria();
-        crit.add(Restrictions.eq("status_order", StatusOrderEnum.NEW));
-        crit.addOrder(Order.desc("id"));
-        return (List<Orders>) crit.list();
-    }
+	@Override
+	public List<Orders> findAllNewOrders() {
+		Criteria crit = createEntityCriteria();
+		crit.add(Restrictions.eq("status_order", StatusOrderEnum.NEW));
+		crit.addOrder(Order.desc("id"));
+		return (List<Orders>) crit.list();
+	}
 
 }

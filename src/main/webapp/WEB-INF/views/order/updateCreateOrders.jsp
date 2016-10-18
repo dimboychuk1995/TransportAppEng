@@ -49,10 +49,11 @@
     </form:form>
 </div>
 
+<input id="idOrder" type="hidden" value="${orders.id}" />
 <input id="contextPath" type="hidden" value="${pageContext.request.contextPath}" />
 
 <!-- DateTimePicker -->
-<script src=<c:url value="/resources/js/dateTimePicker/time.js" />></script>
+<script src=<c:url value="/resources/js/dateTimePicker/timeForAdmin.js" />></script>
 <script src=<c:url value="/resources/js/dateTimePicker/dateTimePicker.js" />></script>
 
 <script src=<c:url value="/resources/js/dateTimePicker/bootstrap-datepicker.js" />></script>

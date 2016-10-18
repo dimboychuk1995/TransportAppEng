@@ -30,6 +30,8 @@ public interface OrderServise {
 
 	public List<String> findFreeTime(String[] arrTimeOrders, String date);
 
+	public List<String> findFreeTimeForAdmin(String[] arrTimeOrders, String date, Orders order);
+
 	public List<Orders> findAllNew();
 
 }

@@ -18,9 +18,9 @@ $(function() {
   function selectTime(timeInput) {
     $.ajax({
       type: 'POST',
-      url: contextPath + '/selectTime',
+      url: contextPath + '/selectTimeAdmin',
       contentType: 'application/json',
-      data:  timeInput,  
+      data:  timeInput,
       success: function(response) {
         $('#selectForm').children('option').remove();
         for (var i = 0; i < response.length; i++) {
@@ -29,6 +29,8 @@ $(function() {
       },
       error: function(jqXHR) {
         if (jqXHR.status == 400) {
+        	console.log(timeInput);
+        	console.log()
           alert('Невірно введена дата, повторіть спробу!!!');
         } else {
           alert('Smth wrong... code: ' + jqXHR.status);
