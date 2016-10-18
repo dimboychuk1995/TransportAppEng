@@ -8,7 +8,11 @@ $(function() {
 
       language: {
         search: "Введіть табельний номер замовника:",
-        searchPlaceholder: "пошук..."
+        searchPlaceholder: "пошук...",
+        paginate: {
+        	next: "Наступна",
+        	previous: "Попередня"
+        }
       },
       order: [
         [1, 'asc']
@@ -22,6 +26,7 @@ $(function() {
       }],
       bLengthChange: false,
       info: false,
+      
     });
   });
 
