@@ -6,9 +6,8 @@ $(function() {
   $(document).ready(function() {
     $('#orders').DataTable({
 
-      //searching: false,
       language: {
-        search: "Введіть ПІП замовника:",
+        search: "Введіть табельний номер замовника:",
         searchPlaceholder: "пошук..."
       },
       order: [
