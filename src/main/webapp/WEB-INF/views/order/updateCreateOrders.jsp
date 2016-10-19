@@ -5,49 +5,59 @@
 
 
 <div class="container-fluid">
+  <div class="row">
+    <h1 class="pull-down col-md-6">Редагування замовлення</h1>
+  </div>
 <div class="row">
 <div class="col-md-4">
 
-    <form:form action="" method="POST" modelAttribute="orders" class="">
+    <form:form action="" method="POST" modelAttribute="orders" class="form-group pull-down">
         <fieldset>
             <p><b>Вид робіт</b>
-                <form:select path="workType.id" items="${typeWorks}" class=""
+                <form:select path="workType.id" items="${typeWorks}" class="form-control"
                     data-placeholder="work"
                     itemLabel="name" itemValue="id" />             
             </p>
             <p><b>Замовник</b>
-                <form:input type="text" path="customer" class="" cssErrorClass=""/>                
+                <form:input type="text" path="customer" class="form-control" cssErrorClass=""/>                
             </p>
             <p id="car_name"><b>Марка авто</b>
-                <form:select path="car.id" items="${cars}" class=""
+                <form:select path="car.id" items="${cars}" class="form-control"
                         data-placeholder="cars"
                         itemLabel="name" itemValue="id" />               
             </p>
             <p><b>Модель</b>
-                <form:input type="text" path="car_model" class="" cssErrorClass=""/>                
+                <form:input type="text" path="car_model" class="form-control" cssErrorClass=""/>                
             </p>
           
             <p><b>Виконавець</b>
-                <form:input type="text" path="performer_id" class="" cssErrorClass=""/> 
+                <form:input type="text" path="performer_id" class="form-control" cssErrorClass=""/> 
 
-            <p id ="datePicker" ><b>Дата</b>
-	           	<form:input id = "dpicker" type="text" path="date" class="date start dateChange" cssErrorClass=""/>
-	           	<form:errors path="date" class="" cssErrorClass="" />
-
-				 <form:select id="selectForm" path="time" class="tpicker"  >
+            
+            <label class="col-md-6 no-padding-left">Дата</label>
+            <label class="col-md-6">Час</label> 
+            <div id ="datePicker" >
+            	<div class="col-md-6 no-padding">
+		           	<form:input id = "dpicker" type="text" path="date" class="date start form-control" cssErrorClass=""/>
+		           	<form:errors path="date" class="" cssErrorClass="" />
+				</div>
+				<div class="col-md-6 no-padding-right">
+				 <form:select id="selectForm" path="time" class="tpicker form-control"  >
     				<form:option value="${orders.time}">${orders.time}</form:option>
            		</form:select>
- 			</p>
+           		</div>
+ 			</div>
             <p><b>Табельний номер</b>
-                <form:input type="text" id = "" path="user_tab" class="" cssErrorClass=""/>                
+                <form:input type="text" id = "" path="user_tab" class="form-control" cssErrorClass=""/>                
             </p>
             <p><b>Номер авто</b>
-                <form:input type="text" id = "" path="car_number" class="" cssErrorClass=""/>                
+                <form:input type="text" id = "" path="car_number" class="form-control" cssErrorClass=""/>                
             </p>
             <p><b>Статус замовлення</b>
-                <form:select path="status_order" items="${items}" itemLabel="statusOrder"/>
+                <form:select path="status_order" items="${items}" itemLabel="statusOrder" class = "form-control"/>
             </p>
-            <button id="sendForm" type="submit" class="">Зберегти</button>
+            <button id="sendForm" type="submit" class="btn btn-success">Зберегти</button>
+            <a href=<c:url value="/admin/order" /> class="btn btn-default">Повернутись на сторінку замовлень</a>
         </fieldset>
     </form:form>
 </div>
