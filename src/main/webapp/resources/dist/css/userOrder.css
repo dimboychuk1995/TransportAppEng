@@ -36,15 +36,8 @@
 	background-color: rgba(30, 144, 255, 0.12);
 	border: 1px solid #dad2d2;
 }
-form {
-/*   width: 500px ; */
-/*   margin-left: 10px; */
-/*   margin-right: 10px; */
-/*   border: 3px solid #ccc; */
-/*   border-radius : 10px; */
-/*   padding: 10px; */
-/*   background: #DCDCDC; */
-/*   float : left; */
+.textForm{
+	margin-left: 15px;
 }
 .textHeadForm{
 	margin-top : 92px;

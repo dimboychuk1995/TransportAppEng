@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oblenergo.DTO.TimeDTO;
@@ -131,12 +130,10 @@ public class UserOrderController {
 	@RequestMapping(value = "/selectTimeAdmin", headers = "Accept=*/*", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = "application/json")
 
 	public @ResponseBody String[] selectTimeForDateAdmin(@RequestBody TimeDTO timeDTO) {
-	    
-//	    System.out.println("****"+text);
-	    System.out.println("****data  "+timeDTO.getDate());
-	    System.out.println("****id   "+timeDTO.getId());
 
-	    String date="";
+		System.out.println("****id   " + timeDTO.getId());
+
+		String date = "";
 		Orders order = orderServiseImpl.findOrderById(Integer.parseInt(timeDTO.getId()));
 
 		List<Orders> orders = orderServiseImpl.findDateOfOrders(timeDTO.getDate());

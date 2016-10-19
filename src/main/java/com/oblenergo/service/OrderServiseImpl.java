@@ -188,8 +188,8 @@ public class OrderServiseImpl implements OrderServise {
 									iter++;
 								}
 							}
-							busyTime.add(iter, time[i]);
-							iter++;
+							// busyTime.add(iter, time[i]);
+							// iter++;
 						} else {
 
 							busyTime.add(iter, time[i - stepOfTime]);
@@ -218,11 +218,10 @@ public class OrderServiseImpl implements OrderServise {
 
 							busyTime.add(iter, time[i + stepOfTime]);
 							iter++;
-
+							busyTime.add(iter, time[i]);
+							iter++;
 						}
 
-						busyTime.add(iter, time[i]);
-						iter++;
 					}
 
 					if (i == (time.length - 1)) {
@@ -239,10 +238,10 @@ public class OrderServiseImpl implements OrderServise {
 
 							busyTime.add(iter, time[i - stepOfTime]);
 							iter++;
+							busyTime.add(iter, time[i]);
+							iter++;
 						}
 
-						busyTime.add(iter, time[i]);
-						iter++;
 					}
 
 				}

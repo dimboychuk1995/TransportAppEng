@@ -6,15 +6,6 @@ $(function() {
       selectTime($("#dpicker").val());
     }
   });
-  $(document).on('change', '.dateChange', function() {
-    if ($(this).val() != "") {
-      selectTime($("#dpicker").val());
-    }
-  });
-  $(document).one('click', '.tpicker', function() {
-    selectTime($("#dpicker").val());
-  });
-
   function selectTime(timeInput) {
     $.ajax({
       type: 'POST',
