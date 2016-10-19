@@ -4,7 +4,10 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 
-<div>
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-4">
+
     <form:form action="" method="POST" modelAttribute="orders" class="">
         <fieldset>
             <p><b>Вид робіт</b>
@@ -47,6 +50,8 @@
             <button id="sendForm" type="submit" class="">Зберегти</button>
         </fieldset>
     </form:form>
+</div>
+</div>
 </div>
 
 <input id="idOrder" type="hidden" value="${orders.id}" />
