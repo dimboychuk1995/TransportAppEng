@@ -18,7 +18,6 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import com.oblenergo.enums.StatusOrderEnum;
 
@@ -33,18 +32,18 @@ public class Orders implements Serializable {
 	private String customer;
 	private Car car;
 
-	@NotBlank
+	@NotBlank(message = "Ви не заповнили дане поле")
 	private String car_model;
 	private Integer performer_id;
 
-	@NotEmpty
+	@NotBlank(message = "Ви не заповнили дане поле")
 	private String date;
-	@NotBlank
+
 	private String time;
-	@NotBlank
-	@Size(max = 5)
+	@NotBlank(message = "Ви не заповнили дане поле")
+	@Size(max = 5, message = "введіть не більше 5 цифр")
 	private String user_tab;
-	@NotBlank
+	@NotBlank(message = "Ви не заповнили дане поле")
 	private String car_number;
 	private StatusOrderEnum status_order = StatusOrderEnum.valueOf("NEW");
 
