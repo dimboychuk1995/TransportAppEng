@@ -3,26 +3,29 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
+<link href="<c:url value = "/resources/dist/css/login/login.css" />" rel="stylesheet">
 
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-md-4 col-md-offset-4">
-      <c:if test="${succes==true}">
-        <div class="form-signin">
-          <div class="login-title">
-            Ви успішно увійшли до системи!
-            <a href=<c:url value="/logout" /> class="btn btn-default col-md-4 col-md-offset-4">Вийти</a>
+    <div class="col-md-6 col-md-offset-4">
+      <div class="col-md-8">
+        <c:if test="${succes==true}">
+          <div class="form-signin">
+            <div class="login-title">
+              <p><strong>Ви успішно увійшли до системи!</strong></p>
+              <p><a href=<c:url value="/logout" /> class="btn transparent">Вийти</a></p>
+            </div>
           </div>
-        </div>
-      </c:if>
+        </c:if>
 
-      <c:if test="${succes!=true}">
-        <div class="form-signin">
-          <div class="login-title">
-            <h3 class="">Будь ласка увійдіть до системи</h3>
+        <c:if test="${succes!=true}">
+          <div class="form-signin">
+            <div class="login-title">
+              <h3>Будь ласка увійдіть до системи</h3>
+            </div>
             <c:if test="${not empty param.error}">
               <div class="alert alert-danger">
-                Неправильний логін або пароль!
+                <strong>Неправильний логін або пароль!</strong>
               </div>
             </c:if>
 
@@ -30,13 +33,13 @@
               <fieldset>
                 <input class="form-control" type="text" name="username" placeholder="Введіть логін" autofocus>
                 <input class="form-control pull-down" type="password" name="password" placeholder="Введіть пароль" value="">
-                <input type="submit" class="btn btn-primary col-md-3" value="Увійти" />
+                <input type="submit" class="btn col-md-12 transparent" value="Увійти" />
               </fieldset>
             </form>
-          </div>
-        </div>
-      </c:if>
 
+          </div>
+        </c:if>
+      </div>
     </div>
   </div>
 </div>

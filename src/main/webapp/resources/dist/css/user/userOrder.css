@@ -1,0 +1,51 @@
+html {
+	background-image: url("../../../background.jpg");
+	background-size: 100%;
+	background-attachment: fixed;
+}
+
+nav.navbar{
+	background: transparent !important;
+}
+
+body { 	
+	background: transparent; 	
+}
+
+.btn_create_order{
+	margin-left: 15px;
+}
+
+.container{
+	text-align: center;
+}
+
+.form-control {
+	background-color: rgba(255, 255, 255, 0.6);
+   	color: #000000;
+	border: none;
+}
+
+table {
+	background-color: ;
+
+   	color: #000000;
+}
+th, td {
+	border-color: #FFFFFF !important;
+}
+
+select option {
+	background-color: rgba(200, 200, 200, 0.6);
+   	color: #000000 !important;
+	border: none !important;
+}
+
+.row {
+	text-align: center;
+}
+
+.alert {
+	background-color: rgba(255, 255, 255, 0.6);
+	    border: none;	
+}

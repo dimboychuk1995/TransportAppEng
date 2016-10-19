@@ -26,6 +26,14 @@ th,td {
 	padding: 0px !important;
 }
 
+.no-padding-left {
+	padding-left: 0px !important;
+}
+
+.no-padding-right {
+	padding-right: 0px !important;
+}
+
 .no-vertical-padding {
 	padding-bottom: 0px !important;
 	padding-top: 0px !important;
@@ -34,7 +42,7 @@ th,td {
 .form-signin
 { 
     padding: 15px;
-    padding-top: 100px;
+    padding-top: 150px;
     margin: 0 auto;
 }
 
@@ -79,10 +87,15 @@ th,td {
     font-size: 20px;
     font-weight: 400;
     display: block;
+    text-align: center;
 }
 
 .pull-down {
 	margin-top: 10px;
+}
+
+.pull-left {
+	padding-left: 15px;
 }
 
 .no-bottom-boarder {
@@ -90,24 +103,21 @@ th,td {
 }
 
 input.error, textarea.error{
-    background-color: #fff;
-    background-image: none;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border: 2px solid #ccc;
     border-color: #a94442;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
     color: #555;
     display: block;
-    font-size: 14px;
-    height: 34px;
-    line-height: 1.42857;
-    padding: 6px 12px;
     transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
-    width: 100%;
-    height: 100%;
 }
 
 .help-block {
- color: #a94442
+ color: #a94442;
+ font-weight: bold;
+}
+	
+select{
+    -webkit-appearance: none;
+    -moz-appearance: none;
 }
 
