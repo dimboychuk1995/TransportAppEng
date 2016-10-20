@@ -27,9 +27,12 @@
             <form:select path="car.id" items="${cars}" class="form-control" data-placeholder="cars" itemLabel="name" itemValue="id" />
           </div>
           <label>Модель</label>
-          <form:input type="text" path="car_model" class="form-control" cssErrorClass="" />
+          <form:input type="text" path="car_model" class="form-control" cssErrorClass="error form-control" />
+          <form:errors path="car_model" class="help-block with-errors" cssErrorClass="" />
+          
           <label>Номер авто</label>
-          <form:input type="text" id="" path="car_number" class="form-control" cssErrorClass="" />
+          <form:input type="text" id="" path="car_number" class="form-control" cssErrorClass="error form-control" />
+          <form:errors path="car_number" class="help-block with-errors" cssErrorClass="" />
 
           <label class="col-md-6 no-padding-left">Дата</label>
           <label class="col-md-6">Час</label>

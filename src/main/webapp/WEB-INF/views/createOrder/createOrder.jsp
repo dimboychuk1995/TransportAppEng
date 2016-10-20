@@ -27,7 +27,7 @@
           <form:select id="carBrand" path="car.id" items="${cars}" class="form-control orderInput" data-placeholder="cars" itemLabel="name" itemValue="id" />
 
           <label>Модель</label>
-          <form:input id="modelCar" type="text" path="car_model" placeholder="Введіть Вашу марку авто" class="form-control orderInput" cssErrorClass="error form-control" />
+          <form:input id="modelCar" type="text" path="car_model" placeholder="Введіть модель авто" class="form-control orderInput" cssErrorClass="error form-control" />
           <form:errors path="car_model" class="help-block with-errors" cssErrorClass="" />
 
           <label>Номер авто</label>
