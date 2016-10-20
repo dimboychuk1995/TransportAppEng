@@ -8,7 +8,7 @@
   	<div class="row">
     	<div class="col-md-12">
 			<div class="table-responsive">
-			    <table class="table table-hover table-striped table-bordered">
+			    <table class="table table-hover table-striped">
 			        <thead>
 			            <tr>
 			                <th>Вид робіт</th>
@@ -20,9 +20,11 @@
 			                <th>Всього</th>
 			                <th>Дата</th>
 			                <th>Час</th>
-			                <th>Табельний номер</th>
+			                <th class="tab_num">Табельний номер</th>
 			                <th>Номер авто</th>
-			                <th>Статус замовлення</th>
+			                <th class="status_order">Статус замовлення</th>
+			                <th class=""></th>
+			                <th class=""></th>
 			            </tr>
 			        </thead>
 			        <tbody>
@@ -49,7 +51,7 @@
 			                    <td>
 			                        <c:out value="${orders.workType.price_including_vat}"></c:out>
 			                    </td>
-			                    <td class="date_td">
+			                    <td>
 			                        <c:out value="${orders.date}"></c:out>
 			                    </td>
 			                    <td>

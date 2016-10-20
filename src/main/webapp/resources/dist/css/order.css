@@ -1,4 +1,9 @@
 
-.date_td{
-	min-width: 90px;
+.tab_num{
+	max-width: 80px;
 }
+
+.status_order{
+	max-width: 90px;
+}
+
