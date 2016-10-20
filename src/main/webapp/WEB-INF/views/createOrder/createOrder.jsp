@@ -38,7 +38,7 @@
           <label class="col-md-6">Час</label>
           <div id="datePicker">
             <div class="col-md-6 no-padding">
-              <form:input id="dpicker" type="text" path="date" class="date start dateChange form-control orderDate col-md-6" placeholder="Виберіть дату" cssErrorClass="date start dateChange orderDate error form-control" />
+              <form:input id="dpicker" type="text" path="date" class="date start dateChange form-control col-md-6" placeholder="Виберіть дату" cssErrorClass="date start dateChange error form-control" />
               <form:errors path="date" class="help-block with-errors" cssErrorClass="" />
             </div>
 

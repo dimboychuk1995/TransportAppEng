@@ -18,6 +18,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.oblenergo.enums.StatusOrderEnum;
 
@@ -37,6 +38,7 @@ public class Orders implements Serializable {
 	private Integer performer_id;
 
 	@NotBlank(message = "Ви не заповнили дане поле")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private String date;
 
 	private String time;
