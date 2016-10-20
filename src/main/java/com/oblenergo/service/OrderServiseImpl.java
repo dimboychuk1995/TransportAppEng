@@ -61,14 +61,11 @@ public class OrderServiseImpl implements OrderServise {
 	@Override
 	public void update(Orders order) {
 		Orders entity = dao.findById(order.getId());
-		entity.setWorkType(order.getWorkType());
-		entity.setCustomer(order.getCustomer());
 		entity.setCar(order.getCar());
 		entity.setCar_model(order.getCar_model());
 		entity.setPerformer_id(order.getPerformer_id());
 		entity.setDate(order.getDate());
 		entity.setTime(order.getTime());
-		entity.setUser_tab(order.getUser_tab());
 		entity.setCar_number(order.getCar_number());
 		entity.setStatus_order(order.getStatus_order());
 	}

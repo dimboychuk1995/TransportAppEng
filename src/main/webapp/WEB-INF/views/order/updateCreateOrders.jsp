@@ -3,65 +3,57 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
-
 <div class="container-fluid">
   <div class="row">
     <h1 class="pull-down col-md-6">Редагування замовлення</h1>
   </div>
-<div class="row">
-<div class="col-md-4">
+  <div class="row">
+    <div class="col-md-4">
 
-    <form:form action="" method="POST" modelAttribute="orders" class="form-group pull-down">
+      <form:form action="" method="POST" modelAttribute="orders" class="form-group pull-down">
         <fieldset>
-            <p><b>Вид робіт</b>
-                <form:select path="workType.id" items="${typeWorks}" class="form-control"
-                    data-placeholder="work"
-                    itemLabel="name" itemValue="id" />             
-            </p>
-            <p><b>Замовник</b>
-                <form:input type="text" path="customer" class="form-control" cssErrorClass=""/>                
-            </p>
-            <p id="car_name"><b>Марка авто</b>
-                <form:select path="car.id" items="${cars}" class="form-control"
-                        data-placeholder="cars"
-                        itemLabel="name" itemValue="id" />               
-            </p>
-            <p><b>Модель</b>
-                <form:input type="text" path="car_model" class="form-control" cssErrorClass=""/>                
-            </p>
-          
-            <p><b>Виконавець</b>
-                <form:input type="text" path="performer_id" class="form-control" cssErrorClass=""/> 
+          <label class="col-md-12 no-padding-left">Табельний номер</label>
+          <form:input type="text" id="" path="user_tab" readonly="true" class="form-control" cssErrorClass="" />
 
-            
-            <label class="col-md-6 no-padding-left">Дата</label>
-            <label class="col-md-6">Час</label> 
-            <div id ="datePicker" >
-            	<div class="col-md-6 no-padding">
-		           	<form:input id = "dpicker" type="text" path="date" class="date start form-control" cssErrorClass=""/>
-		           	<form:errors path="date" class="" cssErrorClass="" />
-				</div>
-				<div class="col-md-6 no-padding-right">
-				 <form:select id="selectForm" path="time" class="tpicker form-control"  >
-    				<form:option value="${orders.time}">${orders.time}</form:option>
-           		</form:select>
-           		</div>
- 			</div>
-            <p><b>Табельний номер</b>
-                <form:input type="text" id = "" path="user_tab" class="form-control" cssErrorClass=""/>                
-            </p>
-            <p><b>Номер авто</b>
-                <form:input type="text" id = "" path="car_number" class="form-control" cssErrorClass=""/>                
-            </p>
-            <p><b>Статус замовлення</b>
-                <form:select path="status_order" items="${items}" itemLabel="statusOrder" class = "form-control"/>
-            </p>
-            <button id="sendForm" type="submit" class="btn btn-success">Зберегти</button>
-            <a href=<c:url value="/admin/order" /> class="btn btn-default">Повернутись на сторінку замовлень</a>
+          <label>Замовник</label>
+          <form:input type="text" path="customer" readonly="true" class="form-control" cssErrorClass="" />
+
+
+          <label>Вид робіт</label>
+          <form:select path="workType.id" items="${typeWorks}" class="form-control" data-placeholder="work" itemLabel="name" itemValue="id" disabled="true" />
+
+          <div id="car_name">
+            <label>Марка авто</label>
+            <form:select path="car.id" items="${cars}" class="form-control" data-placeholder="cars" itemLabel="name" itemValue="id" />
+          </div>
+          <label>Модель</label>
+          <form:input type="text" path="car_model" class="form-control" cssErrorClass="" />
+          <label>Номер авто</label>
+          <form:input type="text" id="" path="car_number" class="form-control" cssErrorClass="" />
+
+          <label class="col-md-6 no-padding-left">Дата</label>
+          <label class="col-md-6">Час</label>
+          <div id="datePicker">
+            <div class="col-md-6 no-padding">
+              <form:input id="dpicker" type="text" path="date" class="date start form-control" cssErrorClass="date start error form-control" />
+              <form:errors path="date" class="help-block with-errors" cssErrorClass="" />
+            </div>
+            <div class="col-md-6 no-padding-right">
+              <form:select id="selectForm" path="time" class="tpicker form-control">
+                <form:option value="${orders.time}">${orders.time}</form:option>
+              </form:select>
+            </div>
+          </div>
+          <label class="col-md-12 no-padding-left">Статус замовлення</label>
+          <form:select path="status_order" items="${items}" itemLabel="statusOrder" class="form-control" />
+          <button id="sendForm" type="submit" class="btn btn-success pull-down">Зберегти
+            	<span class="glyphicon glyphicon-ok"></span>
+            </button>
+          <a href=<c:url value="/admin/order" /> class="btn btn-default pull-down">Назад</a>
         </fieldset>
-    </form:form>
-</div>
-</div>
+      </form:form>
+    </div>
+  </div>
 </div>
 
 <input id="idOrder" type="hidden" value="${orders.id}" />
