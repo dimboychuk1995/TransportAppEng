@@ -31,7 +31,7 @@
 
             <form role="" action="${pageContext.request.contextPath}/loginCheck" method="POST">
               <fieldset>
-                <input class="form-control" type="text" name="username" placeholder="Введіть логін" autofocus>
+                <input class="form-control" required="required" name="username" placeholder="Введіть логін" autofocus>
                 <input class="form-control pull-down" type="password" name="password" placeholder="Введіть пароль" value="">
                 <input type="submit" class="btn col-md-12 transparent" value="Увійти" />
               </fieldset>

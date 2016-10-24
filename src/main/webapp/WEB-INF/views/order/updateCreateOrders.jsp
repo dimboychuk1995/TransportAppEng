@@ -27,18 +27,18 @@
             <form:select path="car.id" items="${cars}" class="form-control" data-placeholder="cars" itemLabel="name" itemValue="id" />
           </div>
           <label>Модель</label>
-          <form:input type="text" path="car_model" class="form-control" cssErrorClass="error form-control" />
+          <form:input required="required" path="car_model" class="form-control" cssErrorClass="error form-control" />
           <form:errors path="car_model" class="help-block with-errors" cssErrorClass="" />
           
           <label>Номер авто</label>
-          <form:input type="text" id="" path="car_number" class="form-control" cssErrorClass="error form-control" />
+          <form:input required="required" id="" path="car_number" class="form-control" cssErrorClass="error form-control" />
           <form:errors path="car_number" class="help-block with-errors" cssErrorClass="" />
 
           <label class="col-md-6 no-padding-left">Дата</label>
           <label class="col-md-6">Час</label>
           <div id="datePicker">
             <div class="col-md-6 no-padding">
-              <form:input id="dpicker" type="text" path="date" class="date start form-control" cssErrorClass="date start error form-control" />
+              <form:input id="dpicker" required="required" path="date" class="date start form-control" cssErrorClass="date start error form-control" />
               <form:errors path="date" class="help-block with-errors" cssErrorClass="" />
             </div>
             <div class="col-md-6 no-padding-right">

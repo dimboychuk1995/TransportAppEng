@@ -20,25 +20,25 @@
           <form:select id="typeOfWork" path="workType.id" items="${typeWorks}" class="form-control orderInput" data-placeholder="work" itemLabel="name" itemValue="id" />
 
           <label>Табельний номер</label>
-          <form:input type="text" id="tableNumber" class="form-control orderInput" path="user_tab" placeholder="Введіть Ваш табельний номер" cssErrorClass="error form-control" />
+          <form:input required="required" id="tableNumber" class="form-control orderInput" path="user_tab" placeholder="Введіть Ваш табельний номер"  cssErrorClass="error form-control" />
           <form:errors path="user_tab" class="help-block with-errors" cssErrorClass="" />
 
           <label>Марка автор</label>
           <form:select id="carBrand" path="car.id" items="${cars}" class="form-control orderInput" data-placeholder="cars" itemLabel="name" itemValue="id" />
 
           <label>Модель</label>
-          <form:input id="modelCar" type="text" path="car_model" placeholder="Введіть модель авто" class="form-control orderInput" cssErrorClass="error form-control" />
+          <form:input id="modelCar" required="required" path="car_model" placeholder="Введіть модель авто" class="form-control orderInput" cssErrorClass="error form-control" />
           <form:errors path="car_model" class="help-block with-errors" cssErrorClass="" />
 
           <label>Номер авто</label>
-          <form:input id="numberCar" type="text" path="car_number" class="form-control orderInput" placeholder="Введіть номер Вашого авто" cssErrorClass="error form-control" />
+          <form:input id="numberCar" required="required" path="car_number" class="form-control orderInput" placeholder="Введіть номер Вашого авто" cssErrorClass="error form-control" />
           <form:errors path="car_number" class="help-block with-errors" cssErrorClass="" />
 
           <label class="col-md-6 no-padding-left">Дата</label>
           <label class="col-md-6">Час</label>
           <div id="datePicker">
             <div class="col-md-6 no-padding">
-              <form:input id="dpicker" type="text" path="date" class="date start dateChange form-control col-md-6" placeholder="Виберіть дату" cssErrorClass="date start dateChange error form-control" />
+              <form:input id="dpicker" required="required" path="date" class="date start dateChange form-control col-md-6" placeholder="Виберіть дату" cssErrorClass="date start dateChange error form-control" />
               <form:errors path="date" class="help-block with-errors" cssErrorClass="" />
             </div>
 
