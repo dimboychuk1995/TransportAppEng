@@ -36,9 +36,6 @@ public class WorkTypeDaoImpl extends AbstractDao<Integer, WorkType> implements W
 		Criteria criteria = createEntityCriteria();
 		criteria.add(Restrictions.eq("name", name));
 		WorkType wt = (WorkType) criteria.uniqueResult();
-		if (wt != null) {
-			Hibernate.initialize(wt.getName());
-		}
 		return wt;
 	}
 

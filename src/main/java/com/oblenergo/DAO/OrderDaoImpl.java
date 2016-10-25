@@ -42,7 +42,6 @@ public class OrderDaoImpl extends AbstractDao<Integer, Orders> implements OrderD
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Orders> dateOfOrders(String date) {
-
 		Criteria crit = createEntityCriteria();
 		crit.add(Restrictions.eq("date", date));
 		return (List<Orders>) crit.list();

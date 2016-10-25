@@ -115,7 +115,6 @@ public class UserOrderController {
 	@RequestMapping(value = "/selectTime", headers = "Accept=*/*", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = "application/json")
 
 	public @ResponseBody String[] selectTimeForDate(@RequestBody String date) {
-		System.out.println("Date date = " + date);
 
 		List<Orders> orders = orderServiseImpl.findDateOfOrders(date);
 		String[] arrTimeOrders = new String[orders.size()];
@@ -131,9 +130,6 @@ public class UserOrderController {
 
 	public @ResponseBody String[] selectTimeForDateAdmin(@RequestBody TimeDTO timeDTO) {
 
-		System.out.println("****id   " + timeDTO.getId());
-
-		String date = "";
 		Orders order = orderServiseImpl.findOrderById(Integer.parseInt(timeDTO.getId()));
 
 		List<Orders> orders = orderServiseImpl.findDateOfOrders(timeDTO.getDate());
