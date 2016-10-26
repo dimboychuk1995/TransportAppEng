@@ -12,7 +12,7 @@ import com.oblenergo.service.WorkTypeService;
 public class WorkTypeValidator implements Validator {
 
 	@Autowired
-	WorkTypeService workTypeServiceImpl;
+	private WorkTypeService workTypeServiceImpl;
 
 	@Override
 	public boolean supports(Class<?> clazz) {
@@ -22,13 +22,8 @@ public class WorkTypeValidator implements Validator {
 	@Override
 	public void validate(Object target, Errors errors) {
 		WorkType wt = (WorkType) target;
-		String name = wt.getName();
-		Integer id = wt.getId();
-
-		if (!workTypeServiceImpl.isWorkTypeUnique(name, id)) {
+		if (workTypeServiceImpl.isWorkTypeUnique(wt.getName(), wt.getId())) {
 			errors.rejectValue("name", "Must.Be.N.Unique");
 		}
-
 	}
-
 }

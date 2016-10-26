@@ -18,6 +18,6 @@ public interface WorkTypeService {
 
 	void delete(int id);
 
-	boolean isWorkTypeUnique(String name, Integer id);
+	boolean isWorkTypeUnique(String name, int id);
 
 }

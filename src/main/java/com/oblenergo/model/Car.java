@@ -17,65 +17,62 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "car_directory")
-public class Car implements Serializable{
-    
-    private static final long serialVersionUID = -4253388238358112696L;
-    
-    private Integer id;
-    private String name;
+public class Car implements Serializable {
 
-    
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    public Integer getId() {
-        return id;
-    }
+  private static final long serialVersionUID = -4253388238358112696L;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-    
-    @Column(name="name")
-    public String getName() {
-        return name;
-    }
+  private Integer id;
+  private String name;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  @Id
+  @Column(name = "id")
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  public Integer getId() {
+    return id;
+  }
 
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 89 * hash + Objects.hashCode(this.id);
-        hash = 89 * hash + Objects.hashCode(this.name);
-        return hash;
-    }
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Car other = (Car) obj;
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return true;
-    }
+  @Column(name = "name")
+  public String getName() {
+    return name;
+  }
 
-    @Override
-    public String toString() {
-        return "Car{" + "id=" + id + ", name=" + name + '}';
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  @Override
+  public int hashCode() {
+    int hash = 5;
+    hash = 89 * hash + Objects.hashCode(this.id);
+    hash = 89 * hash + Objects.hashCode(this.name);
+    return hash;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
     }
-    
-    
-    
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    final Car other = (Car) obj;
+    if (!Objects.equals(this.id, other.id)) {
+      return false;
+    }
+    return true;
+  }
+
+  @Override
+  public String toString() {
+    return "Car{" + "id=" + id + ", name=" + name + '}';
+  }
+
 }

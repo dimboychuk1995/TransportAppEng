@@ -11,6 +11,8 @@
   <div class="row">
     <div class="col-md-4">
       <form:form action="" method="POST" modelAttribute="workType" class="form-group pull-down">
+      
+      	   <form:hidden path="id"/>
         <p><b>Назва робіт</b>
           <form:input required="required" path="name" class="form-control" cssErrorClass="error form-control" />
           <form:errors path="name" class="help-block with-errors" cssErrorClass="" />

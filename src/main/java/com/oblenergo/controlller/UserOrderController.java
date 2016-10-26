@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oblenergo.DTO.TimeDTO;
+import com.oblenergo.editor.CarEditor;
 import com.oblenergo.editor.ServiceEditor;
 import com.oblenergo.model.Car;
 import com.oblenergo.model.Orders;
@@ -40,109 +41,106 @@ import com.oblenergo.validator.ClientValidator;
 @RequestMapping(value = "/")
 public class UserOrderController {
 
-	private static final String ITEMSWORKTYPE = "typeWorks";
-	private static final String ITEMSCAR = "cars";
-	private static final String ORDER = "orders";
-	private static final String DATAFORMAT = "YYYY-MM-DD HH:mm:ss";
+  private static final String ITEMSWORKTYPE = "typeWorks";
+  private static final String ITEMSCAR = "cars";
+  private static final String ORDER = "orders";
+  private static final String DATAFORMAT = "YYYY-MM-DD HH:mm:ss";
 
-	@Autowired
-	WorkTypeService workTypeServiceImpl;
+  @Autowired
+  private WorkTypeService workTypeServiceImpl;
 
-	@Autowired
-	OrderServise orderServiseImpl;
+  @Autowired
+  private OrderServise orderServiseImpl;
 
-	@Autowired
-	ItextService iTextServiceImpl;
+  @Autowired
+  private ItextService iTextServiceImpl;
 
-	@Autowired
-	CarService carServiceImpl;
+  @Autowired
+  private CarService carServiceImpl;
 
-	@Autowired
-	SapService sapServiceImpl;
-	@Autowired
-	ClientValidator clientValidator;
+  @Autowired
+  private SapService sapServiceImpl;
 
-	@Autowired
-	ServiceEditor editor;
+  @Autowired
+  private ClientValidator clientValidator;
 
-	@InitBinder("orders")
-	public void initBinder(WebDataBinder binder) {
+  @Autowired
+  private ServiceEditor serviceEditor;
 
-		binder.registerCustomEditor(WorkType.class, editor);
-		binder.registerCustomEditor(Car.class, editor);
-		binder.addValidators(clientValidator);
-	}
+  @Autowired
+  private CarEditor carEditor;
 
-	@RequestMapping(method = RequestMethod.GET)
-	public String getAllType(Model model) {
+  @InitBinder("orders")
+  public void initBinder(WebDataBinder binder) {
 
-		model.addAttribute(ITEMSWORKTYPE, workTypeServiceImpl.findAll());
-		model.addAttribute(ITEMSCAR, carServiceImpl.findAll());
-		model.addAttribute(ORDER, new Orders());
-		return "createOrder";
-	}
+    binder.registerCustomEditor(WorkType.class, serviceEditor);
+    binder.registerCustomEditor(Car.class, carEditor);
+    binder.addValidators(clientValidator);
+  }
 
-	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public String addType(@Validated @ModelAttribute("orders") Orders orders, BindingResult bindingResult,
-			Model model) {
+  @RequestMapping(method = RequestMethod.GET)
+  public String getAllType(Model model) {
 
-		if (bindingResult.hasErrors()) {
-			model.addAttribute(ITEMSWORKTYPE, workTypeServiceImpl.findAll());
-			model.addAttribute(ITEMSCAR, carServiceImpl.findAll());
-			return "createOrder";
-		}
-		orders.setCustomer(sapServiceImpl.httpConnectorForSap(orders.getUser_tab()));
-		orderServiseImpl.save(orders);
-		return "redirect:/?id=" + orders.getId();
-	}
+    model.addAttribute(ITEMSWORKTYPE, workTypeServiceImpl.findAll());
+    model.addAttribute(ITEMSCAR, carServiceImpl.findAll());
+    model.addAttribute(ORDER, new Orders());
+    return "createOrder";
+  }
 
-	@RequestMapping(value = "/pdf/{id}", method = RequestMethod.GET)
-	public void getPDF(HttpServletResponse response, @PathVariable int id) {
+  @RequestMapping(value = "/", method = RequestMethod.POST)
+  public String addType(@Validated @ModelAttribute("orders") Orders orders, BindingResult bindingResult, Model model) {
 
-		Orders order = orderServiseImpl.findOrderById(id);
-		byte[] data = iTextServiceImpl.writeCheck(order);
-		String fileName = new SimpleDateFormat(DATAFORMAT).format(new Date()) + ".pdf";
-		response.setHeader("Content-Disposition", String.format("inline; filename=\"" + fileName + "\""));
-		response.setContentType("application/x-download");
-		try (ServletOutputStream outputStream = response.getOutputStream()) {
-			response.setContentLength(data.length);
-			FileCopyUtils.copy(data, outputStream);
-		} catch (NullPointerException | IOException e) {
-			throw new RuntimeException();
-		}
-	}
+    if (bindingResult.hasErrors()) {
+      model.addAttribute(ITEMSWORKTYPE, workTypeServiceImpl.findAll());
+      model.addAttribute(ITEMSCAR, carServiceImpl.findAll());
+      return "createOrder";
+    }
+    orders.setCustomer(sapServiceImpl.httpConnectorForSap(orders.getUser_tab()));
+    orderServiseImpl.save(orders);
+    return "redirect:/?id=" + orders.getId();
+  }
 
-	@RequestMapping(value = "/selectTime", headers = "Accept=*/*", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = "application/json")
+  @RequestMapping(value = "/pdf/{id}", method = RequestMethod.GET)
+  public void getPDF(HttpServletResponse response, @PathVariable int id) {
 
-	public @ResponseBody String[] selectTimeForDate(@RequestBody String date) {
+    Orders order = orderServiseImpl.findOrderById(id);
+    byte[] data = iTextServiceImpl.writeCheck(order);
+    String fileName = new SimpleDateFormat(DATAFORMAT).format(new Date()) + ".pdf";
+    response.setHeader("Content-Disposition", String.format("inline; filename=\"" + fileName + "\""));
+    response.setContentType("application/x-download");
+    try (ServletOutputStream outputStream = response.getOutputStream()) {
+      response.setContentLength(data.length);
+      FileCopyUtils.copy(data, outputStream);
+    } catch (NullPointerException | IOException e) {
+      throw new RuntimeException();
+    }
+  }
 
-		List<Orders> orders = orderServiseImpl.findDateOfOrders(date);
-		String[] arrTimeOrders = new String[orders.size()];
-		for (int i = 0; i < arrTimeOrders.length; i++) {
-			arrTimeOrders[i] = orders.get(i).getTime();
-		}
-		List<String> freeTime = orderServiseImpl.findFreeTime(arrTimeOrders, date);
-		String[] arr = freeTime.toArray(new String[freeTime.size()]);
-		return arr;
-	}
+  @RequestMapping(value = "/selectTime", headers = "Accept=*/*", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = "application/json")
+  public @ResponseBody String[] selectTimeForDate(@RequestBody String date) {
 
-	@RequestMapping(value = "/selectTimeAdmin", headers = "Accept=*/*", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = "application/json")
+    List<Orders> orders = orderServiseImpl.findDateOfOrders(date);
+    String[] arrTimeOrders = new String[orders.size()];
+    for (int i = 0; i < arrTimeOrders.length; i++) {
+      arrTimeOrders[i] = orders.get(i).getTime();
+    }
+    List<String> freeTime = orderServiseImpl.findFreeTime(arrTimeOrders, date);
+    String[] arr = freeTime.toArray(new String[freeTime.size()]);
+    return arr;
+  }
 
-	public @ResponseBody String[] selectTimeForDateAdmin(@RequestBody TimeDTO timeDTO) {
+  @RequestMapping(value = "/selectTimeAdmin", headers = "Accept=*/*", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = "application/json")
+  public @ResponseBody String[] selectTimeForDateAdmin(@RequestBody TimeDTO timeDTO) {
 
-		Orders order = orderServiseImpl.findOrderById(Integer.parseInt(timeDTO.getId()));
-
-		List<Orders> orders = orderServiseImpl.findDateOfOrders(timeDTO.getDate());
-
-		String[] arrTimeOrders = new String[orders.size()];
-		for (int i = 0; i < arrTimeOrders.length; i++) {
-			arrTimeOrders[i] = orders.get(i).getTime();
-		}
-
-		List<String> freeTime = orderServiseImpl.findFreeTimeForAdmin(arrTimeOrders, timeDTO.getDate(), order);
-
-		String[] arr = freeTime.toArray(new String[freeTime.size()]);
-		return arr;
-	}
+    Orders order = orderServiseImpl.findOrderById(Integer.parseInt(timeDTO.getId()));
+    List<Orders> orders = orderServiseImpl.findDateOfOrders(timeDTO.getDate());
+    String[] arrTimeOrders = new String[orders.size()];
+    for (int i = 0; i < arrTimeOrders.length; i++) {
+      arrTimeOrders[i] = orders.get(i).getTime();
+    }
+    List<String> freeTime = orderServiseImpl.findFreeTimeForAdmin(arrTimeOrders, timeDTO.getDate(), order);
+    String[] arr = freeTime.toArray(new String[freeTime.size()]);
+    return arr;
+  }
 
 }

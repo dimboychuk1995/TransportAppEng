@@ -28,27 +28,31 @@ public class Orders implements Serializable {
 
   private static final long serialVersionUID = 7191453677142422700L;
 
-  private Integer id;
+  private int id;
   private WorkType workType;
   private String customer;
   private Car car;
-
-  @NotBlank
   private String car_model;
   private Integer performer_id;
-
-  @NotBlank
-  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private String date;
-
   private String time;
-  @NotBlank
-  @Size(max = 5)
   private String user_tab;
-  @NotBlank
   private String car_number;
   private StatusOrderEnum status_order = StatusOrderEnum.valueOf("NEW");
 
+  @Id
+  @Column(name = "id")
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  public int getId() {
+    return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
+  }
+
+  @NotBlank
+  @Size(max = 5)
   @Column(name = "user_tab")
   public String getUser_tab() {
     return user_tab;
@@ -58,6 +62,7 @@ public class Orders implements Serializable {
     this.user_tab = user_tab;
   }
 
+  @NotBlank
   @Column(name = "car_number")
   public String getCar_number() {
     return car_number;
@@ -77,17 +82,6 @@ public class Orders implements Serializable {
     this.status_order = status_order;
   }
 
-  @Id
-  @Column(name = "id")
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  public Integer getId() {
-    return id;
-  }
-
-  public void setId(Integer id) {
-    this.id = id;
-  }
-
   @Column(name = "customer")
   public String getCustomer() {
     return customer;
@@ -97,6 +91,7 @@ public class Orders implements Serializable {
     this.customer = customer;
   }
 
+  @NotBlank
   @Column(name = "car_model")
   public String getCar_model() {
     return car_model;
@@ -115,6 +110,8 @@ public class Orders implements Serializable {
     this.performer_id = performer_id;
   }
 
+  @NotBlank
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
   @Column(name = "date")
   public String getDate() {
     return date;
@@ -155,19 +152,16 @@ public class Orders implements Serializable {
 
   @Override
   public int hashCode() {
-
     return HashCodeBuilder.reflectionHashCode(this, true);
   }
 
   @Override
   public boolean equals(Object obj) {
-
     return EqualsBuilder.reflectionEquals(this, obj, true);
   }
 
   @Override
   public String toString() {
-
     return ToStringBuilder.reflectionToString(this);
   }
 }

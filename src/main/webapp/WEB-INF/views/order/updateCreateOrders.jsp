@@ -20,11 +20,11 @@
 
 
           <label>Вид робіт</label>
-          <form:select path="workType.id" items="${typeWorks}" class="form-control" data-placeholder="work" itemLabel="name" itemValue="id" disabled="true" />
+          <form:select path="workType" items="${typeWorks}" class="form-control" data-placeholder="work" itemLabel="name" itemValue="id" disabled="true" />
 
           <div id="car_name">
             <label>Марка авто</label>
-            <form:select path="car.id" items="${cars}" class="form-control" data-placeholder="cars" itemLabel="name" itemValue="id" />
+            <form:select path="car" items="${cars}" class="form-control" data-placeholder="cars" itemLabel="name" itemValue="id" />
           </div>
           <label>Модель</label>
           <form:input required="required" path="car_model" class="form-control" cssErrorClass="error form-control" />

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.oblenergo.editor.CarEditor;
 import com.oblenergo.editor.ServiceEditor;
 import com.oblenergo.enums.StatusOrderEnum;
 import com.oblenergo.model.Car;
@@ -23,7 +24,6 @@ import com.oblenergo.model.Orders;
 import com.oblenergo.model.WorkType;
 import com.oblenergo.service.CarService;
 import com.oblenergo.service.OrderServise;
-import com.oblenergo.service.SapService;
 import com.oblenergo.service.WorkTypeService;
 import com.oblenergo.validator.WorkTypeValidator;
 
@@ -31,42 +31,40 @@ import com.oblenergo.validator.WorkTypeValidator;
 @RequestMapping(value = "/admin")
 public class AdminController {
 
-	public static final String ITEMSWORKTYPE = "typeWorks";
-	public static final String ITEMSORDER = "order";
-	public static final String ITEMSCAR = "cars";
-
+  private static final String ITEMSWORKTYPE = "typeWorks";
+	private static final String ITEMSORDER = "order";
+	private static final String ITEMSCAR = "cars";
 	private static final String WORK_TYPE = "workType";
 	private static final String ORDER = "orders";
-
 	private static final String STATUS_ORDER_ENUM = "items";
 
 	@Autowired
-	OrderServise orderServiseImpl;
+	private OrderServise orderServiseImpl;
 
 	@Autowired
-	CarService carServiceImpl;
+	private CarService carServiceImpl;
 
 	@Autowired
-	WorkTypeService workTypeServiceImpl;
+	private WorkTypeService workTypeServiceImpl;
 
 	@Autowired
-	ServiceEditor editor;
+	private ServiceEditor serviceEditor;
+	
+	@Autowired 
+	private CarEditor carEditor;
 
 	@Autowired
-	SapService sapServiceImpl;
-
-	@Autowired
-	WorkTypeValidator workTypeValidator;
+	private WorkTypeValidator workTypeValidator;
 
 	@InitBinder(WORK_TYPE)
 	public void initBinder(WebDataBinder binder) {
 		binder.addValidators(workTypeValidator);
 	}
 
-	@InitBinder
+	@InitBinder(ORDER)
 	public void initBinderOrder(WebDataBinder binder) {
-		binder.registerCustomEditor(WorkType.class, editor);
-		binder.registerCustomEditor(Car.class, editor);
+		binder.registerCustomEditor(WorkType.class, serviceEditor);
+		binder.registerCustomEditor(Car.class, carEditor);
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -119,8 +117,6 @@ public class AdminController {
 		workTypeServiceImpl.delete(id);
 	}
 
-	//
-
 	@RequestMapping(value = "/order", method = RequestMethod.GET)
 	public String getAllOrders(Model model) {
 		model.addAttribute(ITEMSORDER, orderServiseImpl.findAll());
@@ -142,7 +138,6 @@ public class AdminController {
 			Model model) {
 
 		if (bindingResult.hasErrors()) {
-			System.out.println("*******binding result");
 			model.addAttribute(ITEMSWORKTYPE, workTypeServiceImpl.findAll());
 			model.addAttribute(ITEMSCAR, carServiceImpl.findAll());
 			model.addAttribute(STATUS_ORDER_ENUM, StatusOrderEnum.values());
@@ -153,33 +148,10 @@ public class AdminController {
 		return "redirect:/admin/order";
 	}
 
-	// @RequestMapping(value = "/admin/deleteOrder/{id}", method =
-	// RequestMethod.GET)
-	// public String deleteType(@PathVariable int id) {
-	// orderServiseImpl.delete(id);
-	// return "redirect:/order";
-	// }
-
 	@RequestMapping(value = "/order/delete", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteType(@RequestBody int id) {
 		orderServiseImpl.delete(id);
 	}
-
-	// @RequestMapping(value = "/newOrder", method = RequestMethod.GET)
-	// public String redirectToCreate(Model model) {
-	// model.addAttribute(ORDER, new Orders());
-	// model.addAttribute(ITEMSWORKTYPE, workTypeServiceImpl.findAll());
-	// model.addAttribute(ITEMSCAR, carServiceImpl.findAll());
-	// model.addAttribute(STATUS_ORDER_ENUM, StatusOrderEnum.values());
-	// return "updateCreateOrders";
-	// }
-	//
-	// @RequestMapping(value = "/newOrder", method = RequestMethod.POST)
-	// public String addType(@Validated @ModelAttribute("orders") Orders orders,
-	// BindingResult bindingResult) {
-	// orderServiseImpl.save(orders);
-	// return "redirect:/order";
-	// }
 
 }
