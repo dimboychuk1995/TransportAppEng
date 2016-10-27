@@ -1,4 +1,4 @@
-package com.oblenergo.controlller;
+package com.oblenergo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

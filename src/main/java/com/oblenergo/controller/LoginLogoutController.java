@@ -1,4 +1,4 @@
-package com.oblenergo.controlller;
+package com.oblenergo.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

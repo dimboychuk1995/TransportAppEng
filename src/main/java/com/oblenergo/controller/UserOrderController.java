@@ -1,4 +1,4 @@
-package com.oblenergo.controlller;
+package com.oblenergo.controller;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;

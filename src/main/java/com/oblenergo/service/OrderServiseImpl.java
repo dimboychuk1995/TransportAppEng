@@ -79,21 +79,24 @@ public class OrderServiseImpl implements OrderServise {
   @Transactional
   @Override
   public void update(Orders order) {
+
+    Orders entity = null;
     try {
 
-      Orders entity = dao.findById(order.getId());
-      entity.setCar(order.getCar());
-      entity.setCar_model(order.getCar_model());
-      entity.setPerformer_id(order.getPerformer_id());
-      entity.setDate(order.getDate());
-      entity.setTime(order.getTime());
-      entity.setCar_number(order.getCar_number());
-      entity.setStatus_order(order.getStatus_order());
+      entity = dao.findById(order.getId());
 
     } catch (DataAccessException dae) {
       LOGGER.error("Unable to get order with id : " + order.getId(), dae);
       throw dae;
     }
+
+    entity.setCar(order.getCar());
+    entity.setCar_model(order.getCar_model());
+    entity.setPerformer_id(order.getPerformer_id());
+    entity.setDate(order.getDate());
+    entity.setTime(order.getTime());
+    entity.setCar_number(order.getCar_number());
+    entity.setStatus_order(order.getStatus_order());
   }
 
   @Transactional

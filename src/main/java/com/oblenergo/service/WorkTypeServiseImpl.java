@@ -21,6 +21,7 @@ public class WorkTypeServiseImpl implements WorkTypeService {
   @Transactional
   @Override
   public List<WorkType> findAll() {
+
     try {
       return dao.findAllWorkType();
     } catch (DataAccessException dae) {
@@ -32,6 +33,7 @@ public class WorkTypeServiseImpl implements WorkTypeService {
   @Transactional
   @Override
   public void save(WorkType workType) {
+
     try {
       dao.save(workType);
     } catch (DataAccessException dae) {
@@ -43,6 +45,7 @@ public class WorkTypeServiseImpl implements WorkTypeService {
   @Transactional
   @Override
   public WorkType findWorkTypeById(int id) {
+
     try {
       return dao.findById(id);
     } catch (DataAccessException dae) {
@@ -55,6 +58,7 @@ public class WorkTypeServiseImpl implements WorkTypeService {
   @Transactional
   @Override
   public WorkType findWorkTypeByName(String name) {
+
     try {
       return dao.findByName(name);
     } catch (DataAccessException dae) {
@@ -66,29 +70,34 @@ public class WorkTypeServiseImpl implements WorkTypeService {
   @Transactional
   @Override
   public void update(WorkType workType) {
+    WorkType entity = null;
+
     try {
-      WorkType entity = dao.findById(workType.getId());
-      entity.setName(workType.getName());
-      entity.setCount_hours(workType.getCount_hours());
-      entity.setSalary(workType.getSalary());
-      entity.setSocial_insurance(workType.getSocial_insurance());
-      entity.setProduction_costs(workType.getProduction_costs());
-      entity.setAll_costs(workType.getAll_costs());
-      entity.setProfit(workType.getProfit());
-      entity.setSum(workType.getSum());
-      entity.setCost_of_materials(workType.getCost_of_materials());
-      entity.setSelling_price(workType.getSelling_price());
-      entity.setVat(workType.getVat());
-      entity.setPrice_including_vat(workType.getPrice_including_vat());
+      entity = dao.findById(workType.getId());
     } catch (DataAccessException dae) {
       LOGGER.error("Unable to get workType with id : " + workType.getId(), dae);
       throw dae;
     }
+
+    entity.setName(workType.getName());
+    entity.setCount_hours(workType.getCount_hours());
+    entity.setSalary(workType.getSalary());
+    entity.setSocial_insurance(workType.getSocial_insurance());
+    entity.setProduction_costs(workType.getProduction_costs());
+    entity.setAll_costs(workType.getAll_costs());
+    entity.setProfit(workType.getProfit());
+    entity.setSum(workType.getSum());
+    entity.setCost_of_materials(workType.getCost_of_materials());
+    entity.setSelling_price(workType.getSelling_price());
+    entity.setVat(workType.getVat());
+    entity.setPrice_including_vat(workType.getPrice_including_vat());
+
   }
 
   @Transactional
   @Override
   public void delete(int id) {
+
     try {
       dao.delete(id);
     } catch (DataAccessException dae) {
@@ -100,6 +109,7 @@ public class WorkTypeServiseImpl implements WorkTypeService {
   @Transactional
   @Override
   public boolean isWorkTypeUnique(String name, int id) {
+
     try {
 
       WorkType wt = findWorkTypeByName(name);

@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -30,16 +31,18 @@ public class Orders implements Serializable {
 
   private int id;
   private WorkType workType;
+  private String user_tab;
   private String customer;
   private Car car;
   private String car_model;
+  private String car_number;
   private Integer performer_id;
   private String date;
   private String time;
-  private String user_tab;
-  private String car_number;
+
   private StatusOrderEnum status_order = StatusOrderEnum.valueOf("NEW");
 
+  // getters
   @Id
   @Column(name = "id")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,8 +50,11 @@ public class Orders implements Serializable {
     return id;
   }
 
-  public void setId(int id) {
-    this.id = id;
+  @NotNull
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "name_servise_id", referencedColumnName = "id")
+  public WorkType getWorkType() {
+    return workType;
   }
 
   @NotBlank
@@ -58,37 +64,16 @@ public class Orders implements Serializable {
     return user_tab;
   }
 
-  public void setUser_tab(String user_tab) {
-    this.user_tab = user_tab;
-  }
-
-  @NotBlank
-  @Column(name = "car_number")
-  public String getCar_number() {
-    return car_number;
-  }
-
-  public void setCar_number(String car_number) {
-    this.car_number = car_number;
-  }
-
-  @Enumerated(EnumType.STRING)
-  @Column(name = "status_order")
-  public StatusOrderEnum getStatus_order() {
-    return status_order;
-  }
-
-  public void setStatus_order(StatusOrderEnum status_order) {
-    this.status_order = status_order;
-  }
-
   @Column(name = "customer")
   public String getCustomer() {
     return customer;
   }
 
-  public void setCustomer(String customer) {
-    this.customer = customer;
+  @NotNull
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "car_name_id", referencedColumnName = "id")
+  public Car getCar() {
+    return car;
   }
 
   @NotBlank
@@ -97,17 +82,15 @@ public class Orders implements Serializable {
     return car_model;
   }
 
-  public void setCar_model(String car_model) {
-    this.car_model = car_model;
+  @NotBlank
+  @Column(name = "car_number")
+  public String getCar_number() {
+    return car_number;
   }
 
   @Column(name = "performer_id")
   public Integer getPerformer_id() {
     return performer_id;
-  }
-
-  public void setPerformer_id(Integer performer_id) {
-    this.performer_id = performer_id;
   }
 
   @NotBlank
@@ -117,37 +100,61 @@ public class Orders implements Serializable {
     return date;
   }
 
-  public void setDate(String date) {
-    this.date = date;
-  }
-
   @Column(name = "time")
   public String getTime() {
     return time;
   }
 
-  public void setTime(String time) {
-    this.time = time;
+  @Enumerated(EnumType.STRING)
+  @Column(name = "status_order")
+  public StatusOrderEnum getStatus_order() {
+    return status_order;
   }
 
-  @ManyToOne(optional = false)
-  @JoinColumn(name = "name_servise_id", referencedColumnName = "id")
-  public WorkType getWorkType() {
-    return workType;
+  // setters
+
+  public void setId(int id) {
+    this.id = id;
   }
 
   public void setWorkType(WorkType workType) {
     this.workType = workType;
   }
 
-  @ManyToOne(optional = false)
-  @JoinColumn(name = "car_name_id", referencedColumnName = "id")
-  public Car getCar() {
-    return car;
+  public void setUser_tab(String user_tab) {
+    this.user_tab = user_tab;
+  }
+
+  public void setCustomer(String customer) {
+    this.customer = customer;
   }
 
   public void setCar(Car car) {
     this.car = car;
+  }
+
+  public void setCar_model(String car_model) {
+    this.car_model = car_model;
+  }
+
+  public void setCar_number(String car_number) {
+    this.car_number = car_number;
+  }
+
+  public void setPerformer_id(Integer performer_id) {
+    this.performer_id = performer_id;
+  }
+
+  public void setDate(String date) {
+    this.date = date;
+  }
+
+  public void setTime(String time) {
+    this.time = time;
+  }
+
+  public void setStatus_order(StatusOrderEnum status_order) {
+    this.status_order = status_order;
   }
 
   @Override

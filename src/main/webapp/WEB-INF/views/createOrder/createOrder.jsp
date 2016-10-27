@@ -17,14 +17,15 @@
         <form:form action="" method="POST" modelAttribute="orders" class="form-group" id="orderForm">
 
           <label>Вид робіт</label>
-          <form:select id="typeOfWork" path="workType" items="${typeWorks}" class="form-control orderInput" data-placeholder="work" itemLabel="name" itemValue="id" />
-
+          <form:select id="typeOfWork" path="workType" items="${typeWorks}" class="form-control orderInput" data-placeholder="work" itemLabel="name" itemValue="id" cssErrorClass="error form-control" />
+		  <form:errors path="workType" class="help-block with-errors" cssErrorClass="" />
           <label>Табельний номер</label>
           <form:input required="required" id="tableNumber" class="form-control orderInput" path="user_tab" placeholder="Введіть Ваш табельний номер"  cssErrorClass="error form-control" />
           <form:errors path="user_tab" class="help-block with-errors" cssErrorClass="" />
 
           <label>Марка автор</label>
-          <form:select id="carBrand" path="car" items="${cars}" class="form-control orderInput" data-placeholder="cars" itemLabel="name" itemValue="id" />
+          <form:select id="carBrand" path="car" items="${cars}" class="form-control orderInput" data-placeholder="cars" itemLabel="name" itemValue="id" cssErrorClass="error form-control" />
+		  <form:errors path="car" class="help-block with-errors" cssErrorClass="" />
 
           <label>Модель</label>
           <form:input id="modelCar" required="required" path="car_model" placeholder="Введіть модель авто" class="form-control orderInput" cssErrorClass="error form-control" />
