@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -40,6 +41,7 @@ import com.oblenergo.validator.ClientValidator;
 @Controller
 @RequestMapping(value = "/")
 public class UserOrderController {
+  Logger LOGGER = Logger.getLogger(UserOrderController.class);
 
   private static final String ITEMSWORKTYPE = "typeWorks";
   private static final String ITEMSCAR = "cars";
@@ -109,9 +111,12 @@ public class UserOrderController {
     response.setHeader("Content-Disposition", String.format("inline; filename=\"" + fileName + "\""));
     response.setContentType("application/x-download");
     try (ServletOutputStream outputStream = response.getOutputStream()) {
+
       response.setContentLength(data.length);
       FileCopyUtils.copy(data, outputStream);
+
     } catch (NullPointerException | IOException e) {
+      LOGGER.error("Con't write date to document", e);
       throw new RuntimeException();
     }
   }

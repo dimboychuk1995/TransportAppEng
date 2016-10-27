@@ -6,14 +6,14 @@ import com.oblenergo.model.WorkType;
 
 public interface WorkTypeDao {
 
-	WorkType findById(int id);
+  WorkType findById(int id);
 
-	WorkType findByName(String name);
+  WorkType findByName(String name);
 
-	List<WorkType> findAllItems();
+  List<WorkType> findAllWorkType();
 
-	void save(WorkType wt);
+  void save(WorkType wt);
 
-	void delete(int id);
+  void delete(int id);
 
 }

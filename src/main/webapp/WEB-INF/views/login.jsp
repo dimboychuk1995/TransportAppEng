@@ -36,7 +36,6 @@
                 <input type="submit" class="btn col-md-12 transparent" value="Увійти" />
               </fieldset>
             </form>
-
           </div>
         </c:if>
       </div>

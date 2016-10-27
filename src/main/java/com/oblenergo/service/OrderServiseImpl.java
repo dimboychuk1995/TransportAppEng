@@ -14,7 +14,9 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +25,8 @@ import com.oblenergo.model.Orders;
 
 @Service
 public class OrderServiseImpl implements OrderServise {
+
+  Logger LOGGER = Logger.getLogger(OrderServiseImpl.class);
 
   @Autowired
   OrderDao dao;
@@ -42,45 +46,77 @@ public class OrderServiseImpl implements OrderServise {
   @Transactional
   @Override
   public List<Orders> findAll() {
-    return dao.findAllItems();
+    try {
+      return dao.findAllItems();
+    } catch (DataAccessException dae) {
+      LOGGER.error("Unable to get all workTypes", dae);
+      throw dae;
+    }
   }
 
   @Transactional
   @Override
   public void save(Orders order) {
-    dao.save(order);
+    try {
+      dao.save(order);
+    } catch (DataAccessException dae) {
+      LOGGER.error("Unable to write data to DB for save order", dae);
+      throw dae;
+    }
   }
 
   @Transactional
   @Override
   public Orders findOrderById(int id) {
-    return dao.findById(id);
+    try {
+      return dao.findById(id);
+    } catch (DataAccessException dae) {
+      LOGGER.error("Unable to find order with id : " + id, dae);
+      throw dae;
+    }
   }
 
   @Transactional
   @Override
   public void update(Orders order) {
-    Orders entity = dao.findById(order.getId());
-    entity.setCar(order.getCar());
-    entity.setCar_model(order.getCar_model());
-    entity.setPerformer_id(order.getPerformer_id());
-    entity.setDate(order.getDate());
-    entity.setTime(order.getTime());
-    entity.setCar_number(order.getCar_number());
-    entity.setStatus_order(order.getStatus_order());
+    try {
+
+      Orders entity = dao.findById(order.getId());
+      entity.setCar(order.getCar());
+      entity.setCar_model(order.getCar_model());
+      entity.setPerformer_id(order.getPerformer_id());
+      entity.setDate(order.getDate());
+      entity.setTime(order.getTime());
+      entity.setCar_number(order.getCar_number());
+      entity.setStatus_order(order.getStatus_order());
+
+    } catch (DataAccessException dae) {
+      LOGGER.error("Unable to get order with id : " + order.getId(), dae);
+      throw dae;
+    }
   }
 
   @Transactional
   @Override
   public void delete(int id) {
-    dao.delete(id);
+    try {
+      dao.delete(id);
+    } catch (DataAccessException dae) {
+      LOGGER.error("Unable to delete order with id : " + id, dae);
+      throw dae;
+    }
+
   }
 
   @Transactional
   @Override
   public List<Orders> findDateOfOrders(String date) {
-
-    return dao.dateOfOrders(date);
+    try {
+      return dao.dateOfOrders(date);
+    } catch (DataAccessException dae) {
+      LOGGER.error("Unable to find order with date" + date);
+      throw dae;
+    }
   }
 
   @Override
@@ -185,8 +221,6 @@ public class OrderServiseImpl implements OrderServise {
                   iter++;
                 }
               }
-              // busyTime.add(iter, time[i]);
-              // iter++;
             } else {
 
               busyTime.add(iter, time[i - stepOfTime]);
@@ -259,8 +293,13 @@ public class OrderServiseImpl implements OrderServise {
   @Transactional
   @Override
   public List<Orders> findAllNew() {
+    try {
+      return dao.findAllNewOrders();
+    } catch (DataAccessException dae) {
+      LOGGER.error("Unable to find new orders");
+      throw dae;
+    }
 
-    return dao.findAllNewOrders();
   }
 
 }
