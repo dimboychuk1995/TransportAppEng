@@ -3,7 +3,6 @@ package com.oblenergo.controlller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class LoginLogoutController {
 
-    private static final Logger LOGGER = Logger.getLogger(LoginLogoutController.class);
     private static final String SUCCES = "succes";
     
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -26,7 +24,6 @@ public class LoginLogoutController {
         if (auth instanceof AnonymousAuthenticationToken) {
             return "login";
         }
-        System.out.println(auth.getAuthorities());
         model.addAttribute(SUCCES, auth.isAuthenticated());
         return "login";
     }
