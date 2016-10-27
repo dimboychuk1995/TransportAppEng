@@ -9,6 +9,7 @@ $(function() {
       language: {
         search: "Введіть табельний номер замовника:",
         searchPlaceholder: "пошук...",
+        zeroRecords: "За даними параметрами збігів не знайдено",
         paginate: {
         	next: "Наступна",
         	previous: "Попередня"

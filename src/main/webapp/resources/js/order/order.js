@@ -4,6 +4,31 @@ $(function() {
   
   connect();
 
+  $(document).ready(function() {
+	    $('#orders').DataTable({
+	      language: {
+	        search: "Введіть ПІП замовника:",
+	        searchPlaceholder: "пошук...",
+	        zeroRecords: "За даними параметрами збігів не знайдено",
+	        paginate: {
+	          next: "Наступна",
+	          previous: "Попередня"
+	        }
+ 
+	      },
+	      order: false,
+	      columnDefs: [{
+	        targets: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+	        orderable: false,
+	      }, {
+	        targets: [0, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+	        searchable: false,
+	      }],
+	      bLengthChange: false,
+	      info: false,
+	    });
+	  });
+  
   function connect() {
     var socket = new SockJS(contextPath + '/spring-websocket');
     stompClient = Stomp.over(socket);

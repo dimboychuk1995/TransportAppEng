@@ -8,28 +8,25 @@
   	<div class="row">
     	<div class="col-md-12">
 			<div class="table-responsive">
-			    <table class="table table-hover table-striped">
+			    <table class="table table-hover table-bordered table-striped" id="orders">
 			        <thead>
 			            <tr>
-			                <th>Вид робіт</th>
-			                <th>Замовник</th>
-			                <th>Марка авто</th>
-			                <th>Модель</th>
-			                <th>Сума без ПДВ</th>
-			                <th>ПДВ</th>
-			                <th>Всього</th>
-			                <th>Дата</th>
-			                <th>Час</th>
-			                <th class="tab_num">Табельний номер</th>
-			                <th>Номер авто</th>
-			                <th class="status_order">Статус замовлення</th>
-			                <th class=""></th>
-			                <th class=""></th>
+			                <th class="col-md-2">Вид робіт</th>
+			                <th class="col-md-1">Замовник</th>
+			                <th class="col-md-1">Марка авто</th>
+			                <th class="col-md-1">Модель</th>
+			                <th class="col-md-1">Номер авто</th>
+			                <th class="col-md-1">Дата</th>
+			                <th class="col-md-1">Час</th>
+			                <th class="col-md-1">Табельний номер</th>
+			                <th class="col-md-1">Статус замовлення</th>
+			                <th class="col-md-1">Редагувати</th>
+			                <th class="col-md-1">Видалити</th>
 			            </tr>
 			        </thead>
 			        <tbody>
 			            <c:forEach items="${order}" var="orders">
-			                <tr id="${orders.id}">
+			                <tr id="${orders.id}" class="dataRow">
 			                    <td>
 			                        <c:out value="${orders.workType.name}"></c:out>
 			                    </td>
@@ -41,16 +38,10 @@
 			                    </td>
 			                    <td>
 			                        <c:out value="${orders.car_model}"></c:out>
-			                    </td>
+			                    </td>    
 			                    <td>
-			                        <c:out value="${orders.workType.selling_price}"></c:out>
-			                    </td>
-			                    <td>
-			                        <c:out value="${orders.workType.vat}"></c:out>
-			                    </td>
-			                    <td>
-			                        <c:out value="${orders.workType.price_including_vat}"></c:out>
-			                    </td>
+			                        <c:out value="${orders.car_number}"></c:out>
+			                    </td>  
 			                    <td>
 			                        <c:out value="${orders.date}"></c:out>
 			                    </td>
@@ -59,18 +50,15 @@
 			                    </td>
 			                    <td>
 			                        <c:out value="${orders.user_tab}"></c:out>
-			                    </td>
-			                    <td>
-			                        <c:out value="${orders.car_number}"></c:out>
-			                    </td>
+			                    </td>		
 			                    <td>
 			                        <c:out value="${orders.status_order.statusOrder}"></c:out>
 			                    </td>
-			                    <td>
-			                        <a class="btn btn-primary" href=<c:url value="/admin/order/${orders.id}"/>>Оновити</a>
+			                    <td class="no-padding">
+			                        <a class="btn btn-primary col-md-12" href=<c:url value="/admin/order/${orders.id}"/>>Редагувати</a>
 			                    </td>
-			                    <td>
-			                        <button id="${orders.id}" type="submit" class="btn btn-danger delete">Видалити замовлення</button>
+			                    <td class="no-padding">
+			                        <button id="${orders.id}" type="submit" class="btn btn-danger delete col-md-12">Видалити</button>
 			                    </td>
 			                </tr>
 			            </c:forEach>

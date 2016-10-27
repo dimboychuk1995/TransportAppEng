@@ -5,6 +5,7 @@ $(function() {
       language: {
         search: "Введіть назву послуги:",
         searchPlaceholder: "пошук...",
+        zeroRecords: "За даними параметрами збігів не знайдено",
         paginate: {
           next: "Наступна",
           previous: "Попередня"
