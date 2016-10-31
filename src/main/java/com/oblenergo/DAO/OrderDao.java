@@ -1,8 +1,8 @@
 package com.oblenergo.DAO;
 
-import java.util.List;
-
 import com.oblenergo.model.Orders;
+
+import java.util.List;
 
 public interface OrderDao {
 
@@ -17,5 +17,7 @@ public interface OrderDao {
 	List<Orders> dateOfOrders(String date);
 	
 	List<Orders> findAllNewOrders();
+
+	List<Orders> findAllConfirmOrders();
 
 }

@@ -1,27 +1,25 @@
 package com.oblenergo.service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-
-/**
- *
- * @author us9522
- */
-
-import java.util.List;
-import java.util.stream.Collectors;
-
+import com.oblenergo.DAO.OrderDao;
+import com.oblenergo.model.Orders;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.oblenergo.DAO.OrderDao;
-import com.oblenergo.model.Orders;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.List;
+import java.util.stream.Collectors;
+
+/**
+ *
+ * @author us9522
+ */
 
 @Service
 public class OrderServiseImpl implements OrderServise {
@@ -295,9 +293,9 @@ public class OrderServiseImpl implements OrderServise {
 
   @Transactional
   @Override
-  public List<Orders> findAllNew() {
+  public List<Orders> findAllConfirm() {
     try {
-      return dao.findAllNewOrders();
+      return dao.findAllConfirmOrders();
     } catch (DataAccessException dae) {
       LOGGER.error("Unable to find new orders");
       throw dae;

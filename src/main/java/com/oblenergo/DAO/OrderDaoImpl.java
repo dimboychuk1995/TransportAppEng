@@ -1,14 +1,13 @@
 package com.oblenergo.DAO;
 
-import java.util.List;
-
+import com.oblenergo.enums.StatusOrderEnum;
+import com.oblenergo.model.Orders;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import com.oblenergo.enums.StatusOrderEnum;
-import com.oblenergo.model.Orders;
+import java.util.List;
 
 @Repository
 public class OrderDaoImpl extends AbstractDao<Integer, Orders> implements OrderDao {
@@ -52,6 +51,15 @@ public class OrderDaoImpl extends AbstractDao<Integer, Orders> implements OrderD
 	public List<Orders> findAllNewOrders() {
 		Criteria crit = createEntityCriteria();
 		crit.add(Restrictions.eq("status_order", StatusOrderEnum.NEW));
+		crit.addOrder(Order.desc("id"));
+		return (List<Orders>) crit.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Orders> findAllConfirmOrders(){
+		Criteria crit = createEntityCriteria();
+		crit.add(Restrictions.eq("status_order", StatusOrderEnum.DONE));
 		crit.addOrder(Order.desc("id"));
 		return (List<Orders>) crit.list();
 	}

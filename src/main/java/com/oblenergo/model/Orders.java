@@ -38,7 +38,7 @@ public class Orders implements Serializable {
   public int getId() {
     return id;
   }
-  
+
   @ManyToOne(optional = false)
   @JoinColumn(name = "name_servise_id", referencedColumnName = "id")
   public WorkType getWorkType() {

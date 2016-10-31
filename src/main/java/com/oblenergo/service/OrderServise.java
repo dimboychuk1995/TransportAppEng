@@ -10,9 +10,9 @@ package com.oblenergo.service;
  * @author us9522
  */
 
-import java.util.List;
-
 import com.oblenergo.model.Orders;
+
+import java.util.List;
 
 public interface OrderServise {
 
@@ -32,6 +32,6 @@ public interface OrderServise {
 
 	public List<String> findFreeTimeForAdmin(String[] arrTimeOrders, String date, Orders order);
 
-	public List<Orders> findAllNew();
+	public List<Orders> findAllConfirm();
 
 }
