@@ -136,14 +136,16 @@ public class AdminController {
 	@RequestMapping(value = "/order/{id}", method = RequestMethod.POST)
 	public String updateOrder(@Validated @ModelAttribute("orders") Orders orders, BindingResult bindingResult,
 			Model model) {
+	  
+	  System.out.println(orders);
 
 		if (bindingResult.hasErrors()) {
+		  model.addAttribute(ORDER, orderServiseImpl.findOrderById(orders.getId()));
 			model.addAttribute(ITEMSWORKTYPE, workTypeServiceImpl.findAll());
 			model.addAttribute(ITEMSCAR, carServiceImpl.findAll());
 			model.addAttribute(STATUS_ORDER_ENUM, StatusOrderEnum.values());
 			return "updateCreateOrders";
 		}
-		model.addAttribute(ITEMSORDER, orderServiseImpl.findAll());
 		orderServiseImpl.update(orders);
 		return "redirect:/admin/order";
 	}
