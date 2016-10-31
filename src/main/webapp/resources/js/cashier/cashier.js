@@ -15,9 +15,8 @@ $(function() {
         	previous: "Попередня"
         }
       },
-      order: [
-        [1, 'asc']
-      ],
+      order:[1, 'asc']
+      ,
       columnDefs: [{
         targets: [5, 6, 7],
         orderable: false,

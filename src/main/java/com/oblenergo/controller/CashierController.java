@@ -26,7 +26,7 @@ public class CashierController {
 
 	@Autowired
 	private OrderServise orderServiceImpl;
-
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public String getCashierPage(Model model) {
 		model.addAttribute(ORDER_LIST, orderServiceImpl.findAllConfirm());
@@ -40,6 +40,7 @@ public class CashierController {
 		order.setStatus_order(StatusOrderEnum.valueOf("PAID"));
 		orderServiceImpl.update(order);
 	}
+	
 
 	@MessageMapping("/paymentAproveNotification")
 	@SendTo("/adminNotification")
