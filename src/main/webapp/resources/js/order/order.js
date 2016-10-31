@@ -14,11 +14,10 @@ $(function() {
 	          next: "Наступна",
 	          previous: "Попередня"
 	        }
- 
 	      },
-	      order: false,
+	      order: [1, 'asc'],
 	      columnDefs: [{
-	        targets: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+	        targets: [2, 3, 4, 6, 8, 9, 10],
 	        orderable: false,
 	      }, {
 	        targets: [0, 2, 3, 4, 5, 6, 7, 8, 9, 10],

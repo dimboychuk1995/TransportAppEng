@@ -6,6 +6,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
@@ -51,6 +53,22 @@ public class AppConfiguration extends WebMvcConfigurerAdapter {
                 "/WEB-INF/tiles/orders.xml", "/WEB-INF/tiles/cashier.xml" };
         tilesConfigurer.setDefinitions(str);
         return tilesConfigurer;
+    }
+    
+    
+    @Bean
+    public JavaMailSenderImpl javaMailSenderImpl(){
+      JavaMailSenderImpl mailSenderImpl =  new JavaMailSenderImpl();
+      mailSenderImpl.setHost("10.93.1.63");
+      mailSenderImpl.setPort(25);
+      return mailSenderImpl;  
+    }
+    
+    @Bean
+    public SimpleMailMessage simpleMailMessage(){
+      SimpleMailMessage mailMessage = new SimpleMailMessage();
+      mailMessage.setFrom("yuriy.lyubinets@oe.if.ua");
+      return mailMessage;
     }
 
 }
