@@ -24,9 +24,14 @@
   <!-- Main CSS -->
   <link href="<c:url value = "/resources/dist/css/main.css" />" rel="stylesheet">
 
+    <!-- jQuery CSS -->
+  <link href="<c:url value = "/resources/dist/css/jquery/jquery-ui.css" />" rel="stylesheet">
+  
   <!-- jQuery -->
   <script src="<c:url value = "/resources/dist/js/jquery/jquery.min.js" />"></script>
   <script src="<c:url value = "/resources/dist/js/jquery/jquery.js" />"></script>
+  <script src="<c:url value = "/resources/dist/js/jquery/jquery-ui.js" />"></script>
+  
   
   <!-- Main script -->
   <script src="<c:url value = "/resources/js/main.js" />"></script>

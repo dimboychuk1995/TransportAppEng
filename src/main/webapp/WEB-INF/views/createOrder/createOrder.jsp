@@ -16,9 +16,24 @@
 
         <form:form action="" method="POST" modelAttribute="orders" class="form-group" id="orderForm">
 
-          <label>Вид робіт</label>
-          <form:select id="typeOfWork" path="workType" items="${typeWorks}" class="form-control orderInput" data-placeholder="work" itemLabel="name" itemValue="id" cssErrorClass="error form-control" />
-		  <form:errors path="workType" class="help-block with-errors" cssErrorClass="" />
+          
+          <label class = "col-md-12 no-padding-left">Вид робіт</label>
+          <div class = "col-md-9 no-padding">
+	          <form:select id="typeOfWork" path="workType" items="${typeWorks}" class="form-control orderInput" data-placeholder="work" itemLabel="name" itemValue="id" cssErrorClass="error form-control" />
+			  <form:errors path="workType" class="help-block with-errors" cssErrorClass="" />
+	       </div>
+	       <div class = "col-md-2 bold-padding">Кількість:</div>
+	       <div class = "col-md-1 no-padding-right">
+	       		<select id = "countOrder" class = "no-padding option-center form-control">
+	       			<option>1</option>
+	       			<option>2</option>
+	       			<option>3</option>
+	       			<option>4</option>
+	       		</select>
+	       </div>
+<!-- 	       this input for testing  -->
+          <input id = "timeImplementation" type = "hidden" value = "180">
+<!--           end test -->
           <label>Табельний номер</label>
           <form:input required="required" id="tableNumber" class="form-control orderInput" path="user_tab" placeholder="Введіть Ваш табельний номер"  cssErrorClass="error form-control" />
           <form:errors path="user_tab" class="help-block with-errors" cssErrorClass="" />
@@ -35,21 +50,32 @@
           <form:input id="numberCar" required="required" path="car_number" class="form-control orderInput" placeholder="Введіть номер Вашого авто" cssErrorClass="error form-control" />
           <form:errors path="car_number" class="help-block with-errors" cssErrorClass="" />
 
-          <label class="col-md-6 no-padding-left">Дата</label>
-          <label class="col-md-6">Час</label>
+          <label>Дата</label>
           <div id="datePicker">
-            <div class="col-md-6 no-padding">
-              <form:input id="dpicker" required="required" path="date" class="date start dateChange form-control col-md-6" placeholder="Виберіть дату" cssErrorClass="date start dateChange error form-control" />
-              <form:errors path="date" class="help-block with-errors" cssErrorClass="" />
-            </div>
-
-            <div class="col-md-6 no-padding-right">
-              <form:select id="selectForm" path="time" class="form-control orderTime col-md-6">
-                <option disabled="disabled">Виберіть дату спочатку</option>
-              </form:select>
-            </div>
+              <form:input id="dpicker" required="required" path="date" class="date start dateChange form-control " placeholder="Виберіть дату" cssErrorClass="date start dateChange error form-control" />
+              <form:errors path="date" class="help-block with-errors" cssErrorClass="" />   
           </div>
+            
+         <br> 
+        
+        <label> Виберіть період надання послуги</label>
+		
+		<div class = "containSlider">
+			<div id="range"></div>
+		</div>
 
+		<label  class="col-md-6 no-padding-left">Початок</label>
+		<label  class="col-md-6">Кінець</label>
+		
+        <div class = "col-md-6 no-padding">
+	        <form:input id="startTime" required="required" path="time" class="form-control col-md-6 " placeholder="start" readonly="true" cssErrorClass="error form-control" />
+	        <form:errors path="" class="help-block with-errors" cssErrorClass="" />   
+        </div>
+        
+        <div class = "col-md-6 no-padding-right">
+	        <form:input id="endTime" required="required" path="" class="col-md-6 form-control" placeholder="end" readonly="true" cssErrorClass="error form-control" />
+	        <form:errors path="" class="help-block with-errors" cssErrorClass="" />  
+        </div>
           <div class="">
             <button id="" type="submit" class="btn btn-success paymentApprove form-control pull-down">Замовити
 		      <span class="glyphicon glyphicon-ok"></span>
@@ -113,8 +139,19 @@
 
 <input id="contextPath" type="hidden" value="${pageContext.request.contextPath}" />
 
+<!-- TimePicker diapazon CSS -->
+<%--  <link href="<c:url value = "/resources/dist/css/dateTimePicker/diapazonTime.css" />" rel="stylesheet"> --%>
 <!-- DateTimePicker -->
+ <link href="<c:url value = "/resources/dist/css/dateTimePicker/nouislider.css" />" rel="stylesheet">
+ <link href="<c:url value = "/resources/dist/css/dateTimePicker/nouislider.min.css" />" rel="stylesheet">
+ <link href="<c:url value = "/resources/dist/css/dateTimePicker/nouislider.pips.css" />" rel="stylesheet">
+ <link href="<c:url value = "/resources/dist/css/dateTimePicker/nouislider.tooltips.css" />" rel="stylesheet">
+
+ <script src=<c:url value="/resources/js/dateTimePicker/nouislider.js" />></script>
+ <script src=<c:url value="/resources/js/dateTimePicker/nouislider.min.js" />></script> 
+ <script src=<c:url value="/resources/js/dateTimePicker/timeRange.js" />></script>
 <script src=<c:url value="/resources/js/dateTimePicker/time.js" />></script>
+<!-- <script src=<c:url value="/resources/js/dateTimePicker/diapasonTime.js" />></script> -->
 <script src=<c:url value="/resources/js/dateTimePicker/dateTimePicker.js" />></script>
 <script src=<c:url value="/resources/js/dateTimePicker/dateTimePicker.js" />></script>
 <script src=<c:url value="/resources/js/dateTimePicker/bootstrap-datepicker.js" />></script>
