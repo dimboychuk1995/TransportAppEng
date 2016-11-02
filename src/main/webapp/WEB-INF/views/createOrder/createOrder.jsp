@@ -63,18 +63,19 @@
 		<div class = "containSlider">
 			<div id="range"></div>
 		</div>
+		<br>
 
 		<label  class="col-md-6 no-padding-left">Початок</label>
 		<label  class="col-md-6">Кінець</label>
 		
         <div class = "col-md-6 no-padding">
-	        <form:input id="startTime" required="required" path="time" class="form-control col-md-6 " placeholder="start" readonly="true" cssErrorClass="error form-control" />
-	        <form:errors path="" class="help-block with-errors" cssErrorClass="" />   
+	        <form:input id="startTime" required="required" path="time" class="form-control col-md-6 " placeholder="start" cssErrorClass="error form-control" />
+	        <form:errors path="time" class="help-block with-errors" cssErrorClass="" />   
         </div>
         
         <div class = "col-md-6 no-padding-right">
-	        <form:input id="endTime" required="required" path="" class="col-md-6 form-control" placeholder="end" readonly="true" cssErrorClass="error form-control" />
-	        <form:errors path="" class="help-block with-errors" cssErrorClass="" />  
+	        <form:input id="endTime" required="required" path="time_end" class="col-md-6 form-control" placeholder="end"  cssErrorClass="error form-control" />
+	        <form:errors path="time_end" class="help-block with-errors" cssErrorClass="" />  
         </div>
           <div class="">
             <button id="" type="submit" class="btn btn-success paymentApprove form-control pull-down">Замовити

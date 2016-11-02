@@ -1,16 +1,27 @@
 package com.oblenergo.model;
 
-import com.oblenergo.enums.StatusOrderEnum;
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.io.Serializable;
+import com.oblenergo.enums.StatusOrderEnum;
 
 @Entity
 @Table(name = "orders")
@@ -28,6 +39,7 @@ public class Orders implements Serializable {
   private Integer performer_id;
   private String date;
   private String time;
+  private String time_end;
 
   private StatusOrderEnum status_order = StatusOrderEnum.valueOf("NEW");
 
@@ -88,9 +100,18 @@ public class Orders implements Serializable {
     return date;
   }
 
+  @NotBlank
+  @Size(max = 5)
   @Column(name = "time")
   public String getTime() {
     return time;
+  }
+
+  @NotBlank
+  @Size(max = 5)
+  @Column(name = "time_end")
+  public String getTime_end() {
+    return time_end;
   }
 
   @Enumerated(EnumType.STRING)
@@ -141,6 +162,10 @@ public class Orders implements Serializable {
     this.time = time;
   }
 
+  public void setTime_end(String time_end) {
+    this.time_end = time_end;
+  }
+
   public void setStatus_order(StatusOrderEnum status_order) {
     this.status_order = status_order;
   }
@@ -159,4 +184,5 @@ public class Orders implements Serializable {
   public String toString() {
     return ToStringBuilder.reflectionToString(this);
   }
+
 }
