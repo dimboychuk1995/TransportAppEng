@@ -137,8 +137,6 @@ public class AdminController {
 	public String updateOrder(@Validated @ModelAttribute("orders") Orders orders, BindingResult bindingResult,
 			Model model) {
 	  
-	  System.out.println(orders);
-
 		if (bindingResult.hasErrors()) {
 		  model.addAttribute(ORDER, orderServiseImpl.findOrderById(orders.getId()));
 			model.addAttribute(ITEMSWORKTYPE, workTypeServiceImpl.findAll());

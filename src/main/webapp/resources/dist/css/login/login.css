@@ -15,7 +15,7 @@ h3 {
   color: #FFFFFF;
 }
 
-.form - control {
+.form-control {
   background-color: rgba(255, 255, 255, 0.6);
   color: #000000;
 	    border: none;
@@ -25,7 +25,7 @@ h3 {
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: # 000000!important;  
 }
-::-moz - placeholder { /* Firefox 19+ */
+::-moz-placeholder { /* Firefox 19+ */
   color: #000000 !important;
 }
 
