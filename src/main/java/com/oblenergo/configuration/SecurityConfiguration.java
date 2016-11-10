@@ -15,39 +15,39 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    DataSource dataSource;
+  @Autowired
+  DataSource dataSource;
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-       
-        http.authorizeRequests().antMatchers("/", "/login", "/selectTime", "/pdf/**").permitAll().antMatchers("/admin/**", "/order")
-                .access("hasAuthority('ADMIN')").antMatchers("/cashier/**").access("hasAuthority('CASHIER')")
-                .antMatchers("/**").access("isAuthenticated()").and().formLogin().loginPage("/login")
-                .loginProcessingUrl("/loginCheck").usernameParameter("username").passwordParameter("password")
-                .successHandler(authenticationHandler()).failureUrl("/login?error=true").and().exceptionHandling()
-                .accessDeniedPage("/403").and().csrf().disable();
-    }
+  @Override
+  protected void configure(HttpSecurity http) throws Exception {
 
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        
-        web.ignoring().antMatchers("/resources/**");
-    }
+    http.authorizeRequests().antMatchers("/", "/login", "/selectTime", "/pdf/**").permitAll()
+        .antMatchers("/admin/**", "/order").access("hasAuthority('ADMIN')").antMatchers("/cashier/**")
+        .access("hasAuthority('CASHIER')").antMatchers("/**").access("isAuthenticated()").and().formLogin()
+        .loginPage("/login").loginProcessingUrl("/loginCheck").usernameParameter("username")
+        .passwordParameter("password").successHandler(authenticationHandler()).failureUrl("/login?error=true").and()
+        .exceptionHandling().accessDeniedPage("/403").and().csrf().disable();
+  }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        
-        // auth.inMemoryAuthentication().withUser("user").password("user").authorities("USER");
-        // auth.inMemoryAuthentication().withUser("admin").password("admin").authorities("ADMIN");
-        auth.jdbcAuthentication().dataSource(dataSource)
-                .usersByUsernameQuery("SELECT username, password, 1 FROM users WHERE username = ?")
-                .authoritiesByUsernameQuery("SELECT username, role FROM users WHERE username = ?");
-    }
+  @Override
+  public void configure(WebSecurity web) throws Exception {
 
-    @Bean
-    public AuthenticationHandler authenticationHandler() {
-        
-        return new AuthenticationHandler();
-    }
+    web.ignoring().antMatchers("/resources/**");
+  }
+
+  @Override
+  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+
+    // auth.inMemoryAuthentication().withUser("user").password("user").authorities("USER");
+    // auth.inMemoryAuthentication().withUser("admin").password("admin").authorities("ADMIN");
+    auth.jdbcAuthentication().dataSource(dataSource)
+        .usersByUsernameQuery("SELECT username, password, 1 FROM users WHERE username = ?")
+        .authoritiesByUsernameQuery("SELECT username, role FROM users WHERE username = ?");
+  }
+
+  @Bean
+  public AuthenticationHandler authenticationHandler() {
+
+    return new AuthenticationHandler();
+  }
 }

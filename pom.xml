@@ -78,6 +78,12 @@
       <artifactId>spring-messaging</artifactId>
       <version>${org.springframework-version}</version>
     </dependency>
+    
+    <dependency>
+      <groupId>org.springframework.ws</groupId>
+      <artifactId>spring-ws-core</artifactId>
+      <version>2.4.0.RELEASE</version>
+    </dependency>
 
     <!-- Apache tiles -->
 
@@ -223,7 +229,7 @@
 
   <build>
     <finalName>transportApp</finalName>
-    <pluginManagement>
+
       <plugins>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -254,7 +260,29 @@
             <failOnMissingWebXml>false</failOnMissingWebXml>
           </configuration>
         </plugin>
+        <plugin>
+        <groupId>org.apache.cxf</groupId>
+        <artifactId>cxf-codegen-plugin</artifactId>
+        <version>3.1.8</version>
+        <executions>
+          <execution>
+            <id>generate-sources</id>
+            <phase>generate-sources</phase>
+            <configuration>
+              <sourceRoot>${basedir}/src/main/wsdl</sourceRoot>
+              <wsdlOptions>
+                <wsdlOption>
+                  <wsdl>${basedir}/src/main/resources/sap.wsdl</wsdl>
+                </wsdlOption>
+              </wsdlOptions>
+            </configuration>
+            <goals>
+              <goal>wsdl2java</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
       </plugins>
-    </pluginManagement>
+
   </build>
 </project>

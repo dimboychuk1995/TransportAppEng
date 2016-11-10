@@ -7,33 +7,33 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 
 public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
-    @Override
-    protected Class<?>[] getRootConfigClasses() {
+  @Override
+  protected Class<?>[] getRootConfigClasses() {
 
-        return new Class[] { AppConfiguration.class, SecurityConfiguration.class, DatabaseConfiguration.class,
-                WebSocketConfig.class };
-    }
+    return new Class[] { AppConfiguration.class, SecurityConfiguration.class, DatabaseConfiguration.class,
+        WebSocketConfig.class, SapClientConfiguration.class };
+  }
 
-    @Override
-    protected Class<?>[] getServletConfigClasses() {
+  @Override
+  protected Class<?>[] getServletConfigClasses() {
 
-        return null;
-    }
+    return null;
+  }
 
-    @Override
-    protected String[] getServletMappings() {
+  @Override
+  protected String[] getServletMappings() {
 
-        return new String[] { "/" };
-    }
+    return new String[] { "/" };
+  }
 
-    @Override
-    protected Filter[] getServletFilters() {
+  @Override
+  protected Filter[] getServletFilters() {
 
-        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
-        characterEncodingFilter.setEncoding("UTF-8");
-        characterEncodingFilter.setForceEncoding(true);
+    CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+    characterEncodingFilter.setEncoding("UTF-8");
+    characterEncodingFilter.setForceEncoding(true);
 
-        return new Filter[] { characterEncodingFilter };
-    }
+    return new Filter[] { characterEncodingFilter };
+  }
 
 }
