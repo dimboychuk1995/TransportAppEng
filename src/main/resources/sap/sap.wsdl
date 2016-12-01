@@ -1,14 +1,13 @@
-<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
-  xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
-  xmlns:tns="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:n1="urn:sap-com:document:sap:rfc:functions"
-  targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style">
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+  xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="urn:sap-com:document:sap:soap:functions:mc-style"
+  xmlns:n1="urn:sap-com:document:sap:rfc:functions">
   <wsdl:documentation>
     <sidl:sidl xmlns:sidl="http://www.sap.com/2007/03/sidl" />
   </wsdl:documentation>
   <wsdl:types>
-    <xsd:schema attributeFormDefault="qualified"
-      targetNamespace="urn:sap-com:document:sap:rfc:functions">
+    <xsd:schema attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:rfc:functions">
       <xsd:simpleType name="char1">
         <xsd:restriction base="xsd:string">
           <xsd:maxLength value="1" />
@@ -142,9 +141,8 @@
         </xsd:restriction>
       </xsd:simpleType>
     </xsd:schema>
-    <xsd:schema xmlns:n0="urn:sap-com:document:sap:rfc:functions"
-      attributeFormDefault="qualified"
-      targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style">
+    <xsd:schema attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style"
+      xmlns:n0="urn:sap-com:document:sap:rfc:functions">
       <xsd:import namespace="urn:sap-com:document:sap:rfc:functions" />
       <xsd:simpleType name="RfcException.Message.Number">
         <xsd:restriction base="xsd:string">
@@ -237,47 +235,39 @@
       <xsd:complexType name="RfcException.Message">
         <xsd:sequence>
           <xsd:element name="ID" type="xsd:string" />
-          <xsd:element name="Number"
-            type="tns:RfcException.Message.Number" />
+          <xsd:element name="Number" type="tns:RfcException.Message.Number" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="ZsdBillPrint.RfcException">
         <xsd:sequence>
           <xsd:element name="Name" type="tns:ZsdBillPrint.RfcExceptions" />
-          <xsd:element name="Text" type="xsd:string"
-            minOccurs="0" />
-          <xsd:element name="Message" type="tns:RfcException.Message"
-            minOccurs="0" />
+          <xsd:element name="Text" type="xsd:string" minOccurs="0" />
+          <xsd:element name="Message" type="tns:RfcException.Message" minOccurs="0" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="TableOfZbapiCustomerPayment">
         <xsd:sequence>
-          <xsd:element name="item" type="tns:ZbapiCustomerPayment"
-            minOccurs="0" maxOccurs="unbounded" />
+          <xsd:element name="item" type="tns:ZbapiCustomerPayment" minOccurs="0" maxOccurs="unbounded" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="TableOfZpernDebitor">
         <xsd:sequence>
-          <xsd:element name="item" type="tns:ZpernDebitor"
-            minOccurs="0" maxOccurs="unbounded" />
+          <xsd:element name="item" type="tns:ZpernDebitor" minOccurs="0" maxOccurs="unbounded" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="TableOfBdcmsgcoll">
         <xsd:sequence>
-          <xsd:element name="item" type="tns:Bdcmsgcoll"
-            minOccurs="0" maxOccurs="unbounded" />
+          <xsd:element name="item" type="tns:Bdcmsgcoll" minOccurs="0" maxOccurs="unbounded" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="TableOfZdebitorkrem">
         <xsd:sequence>
-          <xsd:element name="item" type="tns:Zdebitorkrem"
-            minOccurs="0" maxOccurs="unbounded" />
+          <xsd:element name="item" type="tns:Zdebitorkrem" minOccurs="0" maxOccurs="unbounded" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="TableOfZsdsmitmatnr">
         <xsd:sequence>
-          <xsd:element name="item" type="tns:Zsdsmitmatnr"
-            minOccurs="0" maxOccurs="unbounded" />
+          <xsd:element name="item" type="tns:Zsdsmitmatnr" minOccurs="0" maxOccurs="unbounded" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:simpleType name="ZsdBillPrint.RfcExceptions">
@@ -293,54 +283,36 @@
       <xsd:element name="ZcustomerPaid">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element name="Customer" type="n0:char10"
-              minOccurs="0" />
-            <xsd:element name="DateFrom" type="n0:date"
-              minOccurs="0" />
-            <xsd:element name="DateTo" type="n0:date"
-              minOccurs="0" />
-            <xsd:element name="Document" type="n0:char10"
-              minOccurs="0" />
-            <xsd:element name="Office" type="n0:char4"
-              minOccurs="0" />
-            <xsd:element name="Payments"
-              type="tns:TableOfZbapiCustomerPayment" />
-            <xsd:element name="SumaFrom" type="n0:curr13.2"
-              minOccurs="0" />
-            <xsd:element name="SumaTo" type="n0:curr13.2"
-              minOccurs="0" />
+            <xsd:element name="Customer" type="n0:char10" minOccurs="0" />
+            <xsd:element name="DateFrom" type="n0:date" minOccurs="0" />
+            <xsd:element name="DateTo" type="n0:date" minOccurs="0" />
+            <xsd:element name="Document" type="n0:char10" minOccurs="0" />
+            <xsd:element name="Office" type="n0:char4" minOccurs="0" />
+            <xsd:element name="Payments" type="tns:TableOfZbapiCustomerPayment" />
+            <xsd:element name="SumaFrom" type="n0:curr13.2" minOccurs="0" />
+            <xsd:element name="SumaTo" type="n0:curr13.2" minOccurs="0" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
       <xsd:element name="ZcustomerPaidResponse">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element name="Payments"
-              type="tns:TableOfZbapiCustomerPayment" />
+            <xsd:element name="Payments" type="tns:TableOfZbapiCustomerPayment" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
       <xsd:element name="ZsearchPerson">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element name="CheckCommunities" type="n0:char1"
-              minOccurs="0" />
-            <xsd:element name="EmployeeId" type="n0:numeric8"
-              minOccurs="0" />
-            <xsd:element name="FstnameM" type="n0:char25"
-              minOccurs="0" />
-            <xsd:element name="Job" type="n0:numeric8"
-              minOccurs="0" />
-            <xsd:element name="Jobtxt" type="n0:char12"
-              minOccurs="0" />
-            <xsd:element name="LastnameM" type="n0:char25"
-              minOccurs="0" />
-            <xsd:element name="OrgUnit" type="n0:numeric8"
-              minOccurs="0" />
-            <xsd:element name="Orgtxt" type="n0:char12"
-              minOccurs="0" />
-            <xsd:element name="OutTab" type="tns:TableOfZpernDebitor"
-              minOccurs="0" />
+            <xsd:element name="CheckCommunities" type="n0:char1" minOccurs="0" />
+            <xsd:element name="EmployeeId" type="n0:numeric8" minOccurs="0" />
+            <xsd:element name="FstnameM" type="n0:char25" minOccurs="0" />
+            <xsd:element name="Job" type="n0:numeric8" minOccurs="0" />
+            <xsd:element name="Jobtxt" type="n0:char12" minOccurs="0" />
+            <xsd:element name="LastnameM" type="n0:char25" minOccurs="0" />
+            <xsd:element name="OrgUnit" type="n0:numeric8" minOccurs="0" />
+            <xsd:element name="Orgtxt" type="n0:char12" minOccurs="0" />
+            <xsd:element name="OutTab" type="tns:TableOfZpernDebitor" minOccurs="0" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
@@ -372,14 +344,10 @@
       <xsd:element name="ZdebitorSearch">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element name="Customer" type="n0:char10"
-              minOccurs="0" />
-            <xsd:element name="Customers" type="tns:TableOfZdebitorkrem"
-              minOccurs="0" />
-            <xsd:element name="Name" type="n0:char35"
-              minOccurs="0" />
-            <xsd:element name="Person" type="n0:numeric8"
-              minOccurs="0" />
+            <xsd:element name="Customer" type="n0:char10" minOccurs="0" />
+            <xsd:element name="Customers" type="tns:TableOfZdebitorkrem" minOccurs="0" />
+            <xsd:element name="Name" type="n0:char35" minOccurs="0" />
+            <xsd:element name="Person" type="n0:numeric8" minOccurs="0" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
@@ -427,8 +395,8 @@
           <xsd:sequence>
             <xsd:element name="Messtab" type="tns:TableOfBdcmsgcoll" />
             <xsd:element name="OrderClient" type="n0:char10" />
-            <xsd:element name="OrderType" type="n0:char4"
-              minOccurs="0" />
+            <xsd:element name="OrderDoc" type="n0:char35" minOccurs="0" />
+            <xsd:element name="OrderType" type="n0:char4" minOccurs="0" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
@@ -446,10 +414,8 @@
           <xsd:sequence>
             <xsd:element name="ItemCnt" type="n0:char10" />
             <xsd:element name="ItemNum" type="n0:char18" />
-            <xsd:element name="ItemText" type="n0:char40"
-              minOccurs="0" />
-            <xsd:element name="Messtab" type="tns:TableOfBdcmsgcoll"
-              minOccurs="0" />
+            <xsd:element name="ItemText" type="n0:char40" minOccurs="0" />
+            <xsd:element name="Messtab" type="tns:TableOfBdcmsgcoll" minOccurs="0" />
             <xsd:element name="OrderNum" type="n0:char10" />
           </xsd:sequence>
         </xsd:complexType>
@@ -483,8 +449,7 @@
       <xsd:element name="ZsdGetMatnrForSmit">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element name="Zmatnrtable" type="tns:TableOfZsdsmitmatnr"
-              minOccurs="0" />
+            <xsd:element name="Zmatnrtable" type="tns:TableOfZsdsmitmatnr" minOccurs="0" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
@@ -557,7 +522,7 @@
   <wsdl:message name="ZsdGetMatnrForSmitResponse">
     <wsdl:part name="parameter" element="tns:ZsdGetMatnrForSmitResponse" />
   </wsdl:message>
-  <wsdl:portType name="zkreminci">
+  <wsdl:portType name="ZKREMENCI">
     <wsdl:operation name="ZcustomerPaid">
       <wsdl:input message="tns:ZcustomerPaid" />
       <wsdl:output message="tns:ZcustomerPaidResponse" />
@@ -599,9 +564,8 @@
       <wsdl:output message="tns:ZsdGetMatnrForSmitResponse" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="ZKREMINCI" type="tns:zkreminci">
-    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"
-      style="document" />
+  <wsdl:binding name="ZKREMENCI" type="tns:ZKREMENCI">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
     <wsdl:operation name="ZcustomerPaid">
       <soap:operation soapAction="" style="document" />
       <wsdl:input>
@@ -693,10 +657,9 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:service name="ZKREMINCI">
-    <wsdl:port name="ZKREMINCI" binding="tns:ZKREMINCI">
-      <soap:address
-        location="http://10.93.107.60:8000/sap/bc/srt/rfc/sap/zkreminci/500/zkreminci/zkreminci" />
+  <wsdl:service name="ZKREMENCI">
+    <wsdl:port name="ZKREMENCI" binding="tns:ZKREMENCI">
+      <soap:address location="http://10.93.107.60:8000/sap/bc/srt/rfc/sap/zkremenci/500/zkremenci/zkremenci" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

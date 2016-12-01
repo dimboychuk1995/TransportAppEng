@@ -1,87 +1,246 @@
 package com.oblenergo.wsClient;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 
+import com.oblenergo.DTO.OrderDTO;
+import com.oblenergo.DTO.WorkTypeDTO;
 import com.sap.document.sap.soap.functions.mc_style.ObjectFactory;
+import com.sap.document.sap.soap.functions.mc_style.ZpernDebitor;
+import com.sap.document.sap.soap.functions.mc_style.ZsdBillCreate;
+import com.sap.document.sap.soap.functions.mc_style.ZsdBillCreateResponse;
+import com.sap.document.sap.soap.functions.mc_style.ZsdBillPrint;
+import com.sap.document.sap.soap.functions.mc_style.ZsdBillPrintResponse;
+import com.sap.document.sap.soap.functions.mc_style.ZsdGetMatnrForSmit;
+import com.sap.document.sap.soap.functions.mc_style.ZsdGetMatnrForSmitResponse;
+import com.sap.document.sap.soap.functions.mc_style.ZsdOrderAddPos;
+import com.sap.document.sap.soap.functions.mc_style.ZsdOrderAddPosResponse;
+import com.sap.document.sap.soap.functions.mc_style.ZsdOrderCreate;
+import com.sap.document.sap.soap.functions.mc_style.ZsdOrderCreateResponse;
+import com.sap.document.sap.soap.functions.mc_style.Zsdsmitmatnr;
 import com.sap.document.sap.soap.functions.mc_style.ZsearchPerson;
 import com.sap.document.sap.soap.functions.mc_style.ZsearchPersonResponse;
 
+/**
+ * @author us9047
+ * 
+ * SapClient is a class which contains all needed methods for
+ * interaction with SAP web-service
+ */
+
 public class SapClient extends WebServiceGatewaySupport {
+
+  private static final Logger LOGGER = Logger.getLogger(SapClient.class);
+
+  private static final String EMPTY_FIELD = "";
+  private static final String ONLY_COMMUNIC_REQUIRED_VALUE = "X";
 
   @Autowired
   private ObjectFactory of;
-  
-  private ZsearchPersonResponse getZsearchPersonResponse() {
 
-    //ok for person searhing
+  /**
+   *
+   * Returns all employee info by time-board number
+   * 
+   * @param time-board number of an employee
+   * @return ZsearchPersonResponse object with an employee info
+   */
+  private ZsearchPersonResponse getZsearchPersonResponse(String tabNamber) {
+
     ZsearchPerson request = of.createZsearchPerson();
-    request.setFstnameM("");
-    request.setLastnameM("");
-    request.setOrgtxt("");
-    request.setJobtxt("");
-    request.setJob("");
-    request.setOrgtxt("");
-    request.setOrgUnit("");
-    request.setCheckCommunities("X");
-    request.setEmployeeId("9047");
+    request.setFstnameM(EMPTY_FIELD);
+    request.setLastnameM(EMPTY_FIELD);
+    request.setOrgtxt(EMPTY_FIELD);
+    request.setJobtxt(EMPTY_FIELD);
+    request.setJob(EMPTY_FIELD);
+    request.setOrgtxt(EMPTY_FIELD);
+    request.setOrgUnit(EMPTY_FIELD);
+    request.setCheckCommunities(ONLY_COMMUNIC_REQUIRED_VALUE);
+    request.setEmployeeId(tabNamber);
     request.setOutTab(of.createTableOfZpernDebitor());
     ZsearchPersonResponse response = (ZsearchPersonResponse) getWebServiceTemplate().marshalSendAndReceive(request);
     return response;
   }
-  
-  //will be changed
-  /*
+
+  /**
+   * 
+   * Returns array with info about all work types which are available in SAP
+   *
+   * @return ZsdGetMatnrForSmitResponse object
+   */
   private ZsdGetMatnrForSmitResponse getZsdGetMatnrForSmitResponse() {
 
     ZsdGetMatnrForSmit request = of.createZsdGetMatnrForSmit();
     request.setZmatnrtable(of.createTableOfZsdsmitmatnr());
-    ZsdGetMatnrForSmitResponse response = (ZsdGetMatnrForSmitResponse) getWebServiceTemplate()
-        .marshalSendAndReceive(request);
-    return response;
+    return (ZsdGetMatnrForSmitResponse) getWebServiceTemplate().marshalSendAndReceive(request);
   }
-  */
-  
-  //will be changed
-  /*
-  private ZsdOrderCreateResponse getZsdOrderCreateResponse() {
+
+  /**
+   * 
+   * Creates order in SAP
+   *
+   * @param registration number of a car
+   * @return ZsdOrderCreateResponse object
+   */
+  private ZsdOrderCreateResponse getZsdOrderCreateResponse(String carNum) {
 
     ZsdOrderCreate request = of.createZsdOrderCreate();
-    TableOfBdcmsgcoll tob = of.createTableOfBdcmsgcoll();
-    Bdcmsgcoll bdcm = of.createBdcmsgcoll();
-    bdcm.setFldname("SMIT");
-    tob.getItem().add(bdcm);
-    request.setOrderClient("100");
-    request.setMesstab(tob);
-    ZsdOrderCreateResponse response = (ZsdOrderCreateResponse) getWebServiceTemplate().marshalSendAndReceive(request);
-    return response;
-  }*/
-
-  //only for testing
-  /*
-  public void checkResponse() {
-    ZsdOrderCreateResponse response = getZsdOrderCreateResponse();
-    System.out.println(response.getSubrc() + "  " + response.getSalesOrder());
+    request.setOrderClient("8000000001");
+    request.setOrderType("SMIT");
+    request.setOrderDoc(carNum);
+    request.setMesstab(of.createTableOfBdcmsgcoll());
+    return (ZsdOrderCreateResponse) getWebServiceTemplate().marshalSendAndReceive(request);
   }
 
-  public void checkService() {
+  /**
+   * 
+   * Adds position to order in SAP
+   *
+   * @param number of order from SAP
+   * @param work type code from SAP
+   * @param amount of work to do 
+   * @return ZsdOrderAddPosResponse object
+   */
+  private ZsdOrderAddPosResponse getOrderAddPosResponse(String orderNum, String itemNum, String itemCount) {
+    ZsdOrderAddPos request = of.createZsdOrderAddPos();
+
+    request.setOrderNum(orderNum);
+    request.setItemNum(itemNum);
+    request.setItemCnt(itemCount);
+    request.setMesstab(of.createTableOfBdcmsgcoll());
+    return (ZsdOrderAddPosResponse) getWebServiceTemplate().marshalSendAndReceive(request);
+  }
+
+  /**
+   * 
+   * Creates bill in SAP
+   *
+   * @param order number from SAP
+   * @return ZsdBillCreateResponse object
+   */
+  private ZsdBillCreateResponse getZsdBillCreateResponse(String orderNum) {
+
+    ZsdBillCreate request = of.createZsdBillCreate();
+    request.setOrderNum(orderNum);
+    request.setMesstab(of.createTableOfBdcmsgcoll());
+    return (ZsdBillCreateResponse) getWebServiceTemplate().marshalSendAndReceive(request);
+
+  }
+
+  /**
+   * 
+   * Returns pdf file with bill from SAP
+   *
+   * @param bill number from SAP
+   * @return ZsdBillPrintResponse object
+   */
+  private ZsdBillPrintResponse getZsdBillPrintResponse(String billNumber) {
+    ZsdBillPrint request = of.createZsdBillPrint();
+    request.setBillNumber(billNumber);
+    return (ZsdBillPrintResponse) getWebServiceTemplate().marshalSendAndReceive(request);
+  }
+  
+  /**
+   * 
+   * Returns full name of an employee
+   *
+   * @param time-board number of an employee
+   * @return String with employee`s full name 
+   */
+  public String getFullName(String tabNamber) {
+
+    ZsearchPersonResponse response = getZsearchPersonResponse(tabNamber);
+    ZpernDebitor userInfo = response.getOutTab().getItem().get(0);
+    return userInfo.getFamily() + " " + userInfo.getName() + " " + userInfo.getFather();
+  }
+
+  /**
+   * 
+   * Returns an employee`s email
+   *
+   * @param time-board number of an employee
+   * @return String with employee`s email 
+   */
+  public String getUserEmail(String tabNamber) {
+
+    ZsearchPersonResponse response = getZsearchPersonResponse(tabNamber);
+    ZpernDebitor userInfo = response.getOutTab().getItem().get(0);
+    return userInfo.getEmail();
+  }
+
+  /**
+   * 
+   * Returns list of all available workTypes
+   *
+   * @return List<WorkTypeDTO> object
+   */
+  public List<WorkTypeDTO> getAllWorktypes() {
+
     ZsdGetMatnrForSmitResponse response = getZsdGetMatnrForSmitResponse();
     List<Zsdsmitmatnr> list = response.getZmatnrtable().getItem();
-    for (Zsdsmitmatnr item : list) {
-      System.out.println(item.getMatnr());
-      System.out.println(item.getMaktx());
-      System.out.println(item.getKbetr());
-      System.out.println(item.getVrvez());
-      System.out.println();
+    List<WorkTypeDTO> workTypeList = new ArrayList<>(list.size());
+    for (int i = 0; i < list.size(); i++) {
+      Zsdsmitmatnr zsdsmitmatnr = list.get(i);
+      WorkTypeDTO workTypeDTO = new WorkTypeDTO();
+      workTypeDTO.setId(zsdsmitmatnr.getMatnr());
+      workTypeDTO.setName(zsdsmitmatnr.getMaktx());
+      workTypeDTO.setPrice(zsdsmitmatnr.getKbetr().toString());
+      workTypeDTO.setTime(zsdsmitmatnr.getVrvez());
+      workTypeList.add(workTypeDTO);
     }
+    return workTypeList;
   }
 
-  public void returnName() {
-    ZsearchPersonResponse resposne = getZsearchPersonResponse();
-    List<ZpernDebitor> list = resposne.getOutTab().getItem();
-    for (ZpernDebitor zpd : list) {
-      System.out.println(zpd.getFamily() + " " + zpd.getName() + " " + zpd.getFather());
+  /**
+   * 
+   * Returns order info
+   *
+   * @param registration number of a car
+   * @param work type code from SAP
+   * @param amount of work to do 
+   * @return OrderDTO object with order info  
+   */
+  public OrderDTO getOrder(String carNum, String itemNum, String itemCount) {
+
+    ZsdOrderCreateResponse response = getZsdOrderCreateResponse(carNum);
+    OrderDTO order = new OrderDTO();
+    if (response.getSubrc() == 0) {
+      ZsdOrderAddPosResponse posResponse = getOrderAddPosResponse(response.getSalesOrder(), itemNum, itemCount);
+      if (posResponse.getSubrc() == 0) {
+        order.setOrderNum(posResponse.getSalesOrder());
+        order.setOrderPrice(posResponse.getItemSapPrice());
+        order.setOrderTime(posResponse.getItemDate());
+      } else {
+        LOGGER.info("Can`t add order position in SAP, return wrong result code");
+      }
+    } else {
+      LOGGER.info("Can`t create order in SAP, return wrong result code");
     }
+    return order;
   }
-  */
+
+  /**
+   * 
+   * Returns PDF with a bill
+   *
+   * @param order number from SAP
+   * @return byte[] object with bill  
+   */
+  public byte[] getPDFBill(String orderNum) {
+    byte[] pdfBillData = null;
+    ZsdBillCreateResponse response = getZsdBillCreateResponse(orderNum);
+    if (response.getSubrc() == 0) {
+      ZsdBillPrintResponse responseWithBill = getZsdBillPrintResponse(response.getBillNumber());
+      pdfBillData = responseWithBill.getPdfBinaryData();
+    } else {
+      LOGGER.info("Can`t create bill in SAP, return wrong result code");
+    }
+    return pdfBillData;
+
+  }
+
 }

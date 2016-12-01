@@ -22,9 +22,9 @@ import java.util.stream.Collectors;
  */
 
 @Service
-public class OrderServiseImpl implements OrderServise {
+public class OrderServiceImpl implements OrderService {
 
-  Logger LOGGER = Logger.getLogger(OrderServiseImpl.class);
+  Logger LOGGER = Logger.getLogger(OrderServiceImpl.class);
 
   @Autowired
   OrderDao dao;

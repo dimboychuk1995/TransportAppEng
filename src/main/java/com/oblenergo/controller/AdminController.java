@@ -23,7 +23,7 @@ import com.oblenergo.model.Car;
 import com.oblenergo.model.Orders;
 import com.oblenergo.model.WorkType;
 import com.oblenergo.service.CarService;
-import com.oblenergo.service.OrderServise;
+import com.oblenergo.service.OrderService;
 import com.oblenergo.service.WorkTypeService;
 import com.oblenergo.validator.WorkTypeValidator;
 
@@ -39,7 +39,7 @@ public class AdminController {
 	private static final String STATUS_ORDER_ENUM = "items";
 
 	@Autowired
-	private OrderServise orderServiseImpl;
+	private OrderService orderServiseImpl;
 
 	@Autowired
 	private CarService carServiceImpl;

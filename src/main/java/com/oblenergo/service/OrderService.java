@@ -14,7 +14,7 @@ import com.oblenergo.model.Orders;
 
 import java.util.List;
 
-public interface OrderServise {
+public interface OrderService {
 
 	public List<Orders> findAll();
 

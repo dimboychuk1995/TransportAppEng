@@ -37,7 +37,7 @@ public class ClientValidator implements Validator {
       if (!tn.getUser_tab().matches("\\d+")) {
         errors.rejectValue("user_tab", "Must.be.number");
       } else {
-        String fullName = sapServiceImpl.httpConnectorForSap(tn.getUser_tab());
+        String fullName = sapServiceImpl.getFullNameFromSap(tn.getUser_tab());
         if (fullName == null) {
           errors.rejectValue("user_tab", "No.such.tabnamber");
         }

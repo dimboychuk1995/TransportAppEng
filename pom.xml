@@ -11,6 +11,7 @@
     <java-version>1.8</java-version>
     <org.springframework-version>4.3.2.RELEASE</org.springframework-version>
     <org.springframework.security-version>4.0.3.RELEASE</org.springframework.security-version>
+    <spring-ws-version>2.4.0.RELEASE</spring-ws-version>
     <org.apache.tiles-version>3.0.5</org.apache.tiles-version>
     <servlet-api-version>3.1.0</servlet-api-version>
     <validation-api-version>1.1.0.Final</validation-api-version>
@@ -82,7 +83,7 @@
     <dependency>
       <groupId>org.springframework.ws</groupId>
       <artifactId>spring-ws-core</artifactId>
-      <version>2.4.0.RELEASE</version>
+      <version>${spring-ws-version}</version>
     </dependency>
 
     <!-- Apache tiles -->
@@ -269,10 +270,10 @@
             <id>generate-sources</id>
             <phase>generate-sources</phase>
             <configuration>
-              <sourceRoot>${basedir}/src/main/wsdl</sourceRoot>
+              <sourceRoot>${basedir}/target/wsdl</sourceRoot>
               <wsdlOptions>
                 <wsdlOption>
-                  <wsdl>${basedir}/src/main/resources/sap.wsdl</wsdl>
+                  <wsdl>${basedir}/src/main/resources/sap/sap.wsdl</wsdl>
                 </wsdlOption>
               </wsdlOptions>
             </configuration>
@@ -283,6 +284,5 @@
         </executions>
       </plugin>
       </plugins>
-
   </build>
 </project>

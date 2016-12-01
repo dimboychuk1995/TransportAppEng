@@ -33,7 +33,7 @@ import com.oblenergo.model.Orders;
 import com.oblenergo.model.WorkType;
 import com.oblenergo.service.CarService;
 import com.oblenergo.service.ItextService;
-import com.oblenergo.service.OrderServise;
+import com.oblenergo.service.OrderService;
 import com.oblenergo.service.SapService;
 import com.oblenergo.service.WorkTypeService;
 import com.oblenergo.validator.ClientValidator;
@@ -52,7 +52,7 @@ public class UserOrderController {
   private WorkTypeService workTypeServiceImpl;
 
   @Autowired
-  private OrderServise orderServiseImpl;
+  private OrderService orderServiseImpl;
 
   @Autowired
   private ItextService iTextServiceImpl;
@@ -86,6 +86,7 @@ public class UserOrderController {
     model.addAttribute(ITEMSWORKTYPE, workTypeServiceImpl.findAll());
     model.addAttribute(ITEMSCAR, carServiceImpl.findAll());
     model.addAttribute(ORDER, new Orders());
+    
     return "createOrder";
   }
 
@@ -97,7 +98,7 @@ public class UserOrderController {
       model.addAttribute(ITEMSCAR, carServiceImpl.findAll());
       return "createOrder";
     }
-    orders.setCustomer(sapServiceImpl.httpConnectorForSap(orders.getUser_tab()));
+    orders.setCustomer(sapServiceImpl.getFullNameFromSap(orders.getUser_tab()));
     orderServiseImpl.save(orders);
     return "redirect:/?id=" + orders.getId();
   }

@@ -16,7 +16,7 @@ import com.oblenergo.enums.StatusOrderEnum;
 import com.oblenergo.model.Notification;
 import com.oblenergo.model.OrderMessage;
 import com.oblenergo.model.Orders;
-import com.oblenergo.service.OrderServise;
+import com.oblenergo.service.OrderService;
 
 @Controller
 @RequestMapping("/cashier")
@@ -25,7 +25,7 @@ public class CashierController {
 	private static final String ORDER_LIST = "orders";
 
 	@Autowired
-	private OrderServise orderServiceImpl;
+	private OrderService orderServiceImpl;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String getCashierPage(Model model) {

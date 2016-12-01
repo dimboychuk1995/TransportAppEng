@@ -12,9 +12,9 @@ import com.oblenergo.DAO.WorkTypeDao;
 import com.oblenergo.model.WorkType;
 
 @Service
-public class WorkTypeServiseImpl implements WorkTypeService {
+public class WorkTypeServiceImpl implements WorkTypeService {
 
-  private static final Logger LOGGER = Logger.getLogger(WorkTypeServiseImpl.class);
+  private static final Logger LOGGER = Logger.getLogger(WorkTypeServiceImpl.class);
   @Autowired
   WorkTypeDao dao;
 

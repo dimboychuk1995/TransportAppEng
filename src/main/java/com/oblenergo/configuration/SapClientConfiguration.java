@@ -7,10 +7,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
+import org.springframework.ws.soap.saaj.SaajSoapMessageFactory;
 import org.springframework.ws.transport.http.HttpComponentsMessageSender;
 
 import com.oblenergo.wsClient.SapClient;
 import com.sap.document.sap.soap.functions.mc_style.ObjectFactory;
+
 
 @Configuration
 @PropertySource("classpath:sapclient.properties")
@@ -30,12 +32,20 @@ public class SapClientConfiguration {
   @Bean
   public SapClient sapClient(Jaxb2Marshaller marshaller, HttpComponentsMessageSender componentsMessageSender) {
 
-    SapClient client = new SapClient();
+    SapClient client = new SapClient(); 
     client.getWebServiceTemplate().setMessageSender(componentsMessageSender);
     client.setDefaultUri(environment.getRequiredProperty("sap.service.default.uri"));
     client.setMarshaller(marshaller);
     client.setUnmarshaller(marshaller);
+   
     return client;
+  }
+  
+  @Bean 
+  public SaajSoapMessageFactory saajSoapMessageFactory(){
+    SaajSoapMessageFactory mf = new SaajSoapMessageFactory();
+
+    return mf;
   }
 
   @Bean
