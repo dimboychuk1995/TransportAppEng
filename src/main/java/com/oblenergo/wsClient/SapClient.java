@@ -208,17 +208,19 @@ public class SapClient extends WebServiceGatewaySupport {
 
     ZsdOrderCreateResponse response = getZsdOrderCreateResponse(carNum);
     OrderDTO order = new OrderDTO();
-    if (response.getSubrc() == 0) {
+    int respCode = response.getSubrc();
+    if (respCode == 0) {
       ZsdOrderAddPosResponse posResponse = getOrderAddPosResponse(response.getSalesOrder(), itemNum, itemCount);
-      if (posResponse.getSubrc() == 0) {
+      int posRespCode = posResponse.getSubrc();
+      if (posRespCode == 0) {
         order.setOrderNum(posResponse.getSalesOrder());
         order.setOrderPrice(posResponse.getItemSapPrice());
         order.setOrderTime(posResponse.getItemDate());
       } else {
-        LOGGER.info("Can`t add order position in SAP, return wrong result code");
+        LOGGER.error("Can`t add order position in SAP, return wrong result code " + posRespCode);
       }
     } else {
-      LOGGER.info("Can`t create order in SAP, return wrong result code");
+      LOGGER.error("Can`t create order in SAP, return wrong result code " + respCode);
     }
     return order;
   }
@@ -233,14 +235,14 @@ public class SapClient extends WebServiceGatewaySupport {
   public byte[] getPDFBill(String orderNum) {
     byte[] pdfBillData = null;
     ZsdBillCreateResponse response = getZsdBillCreateResponse(orderNum);
-    if (response.getSubrc() == 0) {
+    int respCode = response.getSubrc();
+    if (respCode == 0) {
       ZsdBillPrintResponse responseWithBill = getZsdBillPrintResponse(response.getBillNumber());
       pdfBillData = responseWithBill.getPdfBinaryData();
     } else {
-      LOGGER.info("Can`t create bill in SAP, return wrong result code");
+      LOGGER.error("Can`t create bill in SAP, return wrong result code " + respCode);
     }
     return pdfBillData;
-
   }
 
 }
