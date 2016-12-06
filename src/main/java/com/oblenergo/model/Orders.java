@@ -40,6 +40,7 @@ public class Orders implements Serializable {
   private String date;
   private String time;
   private String time_end;
+  private int count;
 
   private StatusOrderEnum status_order = StatusOrderEnum.valueOf("NEW");
 
@@ -101,17 +102,22 @@ public class Orders implements Serializable {
   }
 
   @NotBlank
-  @Size(max = 5)
+  @Size(max = 10)
   @Column(name = "time")
   public String getTime() {
     return time;
   }
 
   @NotBlank
-  @Size(max = 5)
+  @Size(max = 10)
   @Column(name = "time_end")
   public String getTime_end() {
     return time_end;
+  }
+
+  @Column(name = "count")
+  public int getCount() {
+    return count;
   }
 
   @Enumerated(EnumType.STRING)
@@ -164,6 +170,10 @@ public class Orders implements Serializable {
 
   public void setTime_end(String time_end) {
     this.time_end = time_end;
+  }
+
+  public void setCount(int count) {
+    this.count = count;
   }
 
   public void setStatus_order(StatusOrderEnum status_order) {

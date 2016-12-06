@@ -22,7 +22,7 @@ $(function() {
         if (jqXHR.status == 400) {
           alert('Невірно введена дата, повторіть спробу!!!');
         } else {
-          alert('Smth wrong... code: ' + jqXHR.status);
+          alert('Smth wrong... code: ' + jqXHR.status);   
         }
       },
     });

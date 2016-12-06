@@ -1,20 +1,23 @@
 package com.oblenergo.service;
 
-import com.oblenergo.DAO.OrderDao;
-import com.oblenergo.model.Orders;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.List;
-import java.util.stream.Collectors;
+import com.oblenergo.DAO.OrderDao;
+import com.oblenergo.model.Orders;
 
 /**
  *
@@ -31,15 +34,13 @@ public class OrderServiceImpl implements OrderService {
 
   private final static String[] fullTimeRange = { "08:00:00", "08:30:00", "09:00:00", "09:30:00", "10:00:00",
       "10:30:00", "11:00:00", "11:30:00", "12:00:00", "12:30:00", "13:00:00", "13:30:00", "14:00:00", "14:30:00",
-      "15:00:00", "15:30:00", "16:00:00" };
+      "15:00:00", "15:30:00", "16:00:00", "16:30:00", "17:00:00", "17:15:00" };
 
   private final static String[] shortTimeRange = { "08:00:00", "08:30:00", "09:00:00", "09:30:00", "10:00:00",
       "10:30:00", "11:00:00", "11:30:00", "12:00:00", "12:30:00", "13:00:00", "13:30:00", "14:00:00", "14:30:00",
-      "15:00:00" };
+      "15:00:00", "15:30:00", "16:00:00" };
 
-  private final static int shortDay = 5;
-
-  private final static int stepOfTime = 1;
+  private final static int shortDay = 5;// Friday
 
   @Transactional
   @Override
@@ -88,11 +89,13 @@ public class OrderServiceImpl implements OrderService {
       throw dae;
     }
 
+    entity.setCount(order.getCount());
     entity.setCar(order.getCar());
     entity.setCar_model(order.getCar_model());
     entity.setPerformer_id(order.getPerformer_id());
     entity.setDate(order.getDate());
     entity.setTime(order.getTime());
+    entity.setTime_end(order.getTime_end());
     entity.setCar_number(order.getCar_number());
     entity.setStatus_order(order.getStatus_order());
   }
@@ -121,20 +124,7 @@ public class OrderServiceImpl implements OrderService {
   }
 
   @Override
-  public List<String> findFreeTime(String[] arrTimeOrders, String date) {
-    String[] time;
-
-    if (shortDay == getDayOfWeek(date)) {
-      time = shortTimeRange;
-    } else {
-      time = fullTimeRange;
-    }
-
-    return getFreeTime(time, getBusyTime(time, arrTimeOrders));
-  }
-
-  @Override
-  public List<String> findFreeTimeForAdmin(String[] arrTimeOrders, String date, Orders order) {
+  public List<String> findFreeTimeForAdmin(String[][] arrTimeOrders, String date, Orders order, String timeExecution) {
     String[] timeAdmin;
 
     if (shortDay == getDayOfWeek(date)) {
@@ -143,9 +133,19 @@ public class OrderServiceImpl implements OrderService {
       timeAdmin = fullTimeRange;
     }
 
-    return getFreeTime(timeAdmin, getBusyTimeForAdmin(timeAdmin, arrTimeOrders, date, order));
+    List<String> busyTime = getBusyTimes(timeAdmin, arrTimeOrders, date);
+    List<String> freeTime = getFreeTime(timeAdmin, busyTime);
+    List<String> avaliableTime = getAvailableTime(timeAdmin, freeTime, order, timeExecution);
+
+    return avaliableTime;
   }
 
+  /**
+   * Use for getting week`s day of order
+   * 
+   * @param date
+   * @return int dateOfWeek
+   */
   public int getDayOfWeek(String date) {
     Calendar c = Calendar.getInstance();
 
@@ -159,131 +159,138 @@ public class OrderServiceImpl implements OrderService {
     return dayOfWeek;
   }
 
-  public ArrayList<String> getBusyTime(String[] time, String[] arrTimeOrders) {
+  /**
+   * Use for getting busy time on order`s day
+   * 
+   * @param time
+   * @param arrTimeOrders
+   * @param date
+   * @return List<String> busyTime
+   */
+  public List<String> getBusyTimes(String[] time, String[][] arrTimeOrders, String date) {
+    /** value beginning order`s execution */
+    int start = 0;
+    /** value finish order`s execution */
+    int end = 1;
 
-    ArrayList<String> busyTime = new ArrayList<String>();
-    int iter = 0;
-    for (int i = 0; i < time.length; i++) {
-      for (int j = 0; j < arrTimeOrders.length; j++) {
+    /**
+     * value for definition start time of order, it must not write to list with
+     * busy time
+     */
+    int startTimeOrder;
 
-        if (time[i].equals(arrTimeOrders[j])) {
+    ArrayList<String> busyTimes = new ArrayList<String>();
+    for (int timeI = 0; timeI < time.length; timeI++) {
 
-          if (i > 0 && i < (time.length - 2)) {
-            busyTime.add(iter, time[i - stepOfTime]);
-            iter++;
-            busyTime.add(iter, time[i]);
-            iter++;
-            busyTime.add(iter, time[i + stepOfTime]);
-            iter++;
+      outTimeOrder: for (int timeOrderI = 0; timeOrderI < arrTimeOrders.length; timeOrderI++) {
+        for (int j = 0; j < arrTimeOrders[timeOrderI].length; j++) {
+
+          if (time[timeI].equals(arrTimeOrders[timeOrderI][start])) {
+            startTimeOrder = 0;
+            for (int i = timeI; i < time.length; i++) {
+              startTimeOrder++;
+              if (time[i].equals(arrTimeOrders[timeOrderI][end])) {
+                timeI = i;
+                break outTimeOrder;
+
+              } else {
+                if (startTimeOrder != 1) {
+                  busyTimes.add(time[i]);
+                }
+              }
+            }
+          } else {
+            break;
           }
-
-          if (i == 0) {
-            busyTime.add(iter, time[i]);
-            iter++;
-            busyTime.add(iter, time[i + stepOfTime]);
-            iter++;
-          }
-
-          if (i == (time.length - 1)) {
-            busyTime.add(iter, time[i]);
-            iter++;
-            busyTime.add(iter, time[i - stepOfTime]);
-            iter++;
-          }
-
         }
       }
     }
 
-    return busyTime;
+    /** removes duplicate from list busyTimes */
+    Set<String> setBusyTime = new LinkedHashSet<String>(busyTimes);
+
+    // write to ArrayList for working with indexes
+    ArrayList<String> busy = new ArrayList<String>(setBusyTime);
+
+    // test code for show collection
+    System.out.println("Show busy Time: ");
+    for (int i = 0; i < busy.size(); i++) {
+      System.out.print(busy.get(i) + ", ");
+    }
+    System.out.println();
+    // end test code
+    return busy;
   }
 
-  public ArrayList<String> getBusyTimeForAdmin(String[] time, String[] arrTimeOrders, String date, Orders order) {
+  /**
+   * Use for getting available time for set time order
+   * 
+   * @param time
+   * @param freeTime
+   * @param order
+   * @param timeExecution
+   * @return List<String> availableTime
+   */
+  public List<String> getAvailableTime(String time[], List<String> freeTime, Orders order, String timeExecution) {
+    // test code
+    System.out.println("getAvaliableTime()");
+    System.out.println(order.getTime());
+    // end test code
 
-    ArrayList<String> busyTime = new ArrayList<String>();
-    int iter = 0;
+    /** List for save available time */
+    List<String> availableTime = new ArrayList<String>();
+
+    /** value which have count of order */
+    int countOrder = order.getCount();
+    /**
+     * value which have number steps for equal hours in list
+     */
+    int stepTime = convertToStep(timeExecution) * countOrder;
+
+    // test code
+    System.out.println("Step of time : " + stepTime);
+    // end test code
+
+    int countEquals = 0;
+    int temp = 0;
+
     for (int i = 0; i < time.length; i++) {
-      for (int j = 0; j < arrTimeOrders.length; j++) {
-
-        if (time[i].equals(arrTimeOrders[j])) {
-
-          if (i > 0 && i < (time.length - 2)) {
-
-            if (date.equals(order.getDate()) && arrTimeOrders[j].equals(order.getTime())) {
-
-              if ((time.length - 3) < i && (arrTimeOrders.length - 2) < j) {
-
-                if (time[i + 2].equals(arrTimeOrders[j + 1])) {
-                  busyTime.add(iter, time[i + stepOfTime]);
-                  iter++;
-                }
-                if (time[i - 2].equals(arrTimeOrders[j - 1])) {
-                  busyTime.add(iter, time[i - stepOfTime]);
-                  iter++;
-                }
-              }
-            } else {
-
-              busyTime.add(iter, time[i - stepOfTime]);
-              iter++;
-              busyTime.add(iter, time[i]);
-              iter++;
-              busyTime.add(iter, time[i + stepOfTime]);
-              iter++;
-
-            }
+      temp = i;
+      for (int j = 0; j < freeTime.size(); j++) {
+        if (time[i].equals(freeTime.get(j))) {
+          countEquals++;
+          i++;
+          if (countEquals == stepTime) {
+            availableTime.add(time[temp]);
+            countEquals = 0;
+            i = temp;
+            break;
           }
-
-          if (i == 0) {
-
-            if (date.equals(order.getDate()) && arrTimeOrders[j].equals(order.getTime())) {
-
-              if ((time.length - 3) < i && (arrTimeOrders.length - 2) < j) {
-
-                if (time[i + 2].equals(arrTimeOrders[i + 1])) {
-                  busyTime.add(iter, time[i + stepOfTime]);
-                  iter++;
-                }
-              }
-
-            } else {
-
-              busyTime.add(iter, time[i + stepOfTime]);
-              iter++;
-              busyTime.add(iter, time[i]);
-              iter++;
-            }
-
-          }
-
-          if (i == (time.length - 1)) {
-
-            if (date.equals(order.getDate()) && arrTimeOrders[j].equals(order.getTime())) {
-
-              if ((arrTimeOrders.length - 1) >= 2) {
-                if (time[i - 2].equals(arrTimeOrders[j - 1])) {
-                  busyTime.add(iter, time[i - stepOfTime]);
-                }
-              }
-
-            } else {
-
-              busyTime.add(iter, time[i - stepOfTime]);
-              iter++;
-              busyTime.add(iter, time[i]);
-              iter++;
-            }
-
-          }
-
+        } else {
+          countEquals = 0;
+          i = temp;
         }
       }
     }
 
-    return busyTime;
+    // test code
+    System.out.println("Show avaliable time : ");
+    for (int i = 0; i < availableTime.size(); i++) {
+      System.out.print(availableTime.get(i) + ", ");
+    }
+    System.out.println();
+    // end test code
+    return availableTime;
   }
 
-  public List<String> getFreeTime(String[] time, ArrayList<String> busyTime) {
+  public int convertToStep(String execution) {
+    System.out.println(execution);
+    double timeExecution = Double.parseDouble(execution);
+    double execOrder = (double) (timeExecution / 60);
+    return (int) (execOrder + execOrder + 1);
+  }
+
+  public List<String> getFreeTime(String[] time, List<String> busyTime) {
 
     List<String> list = new ArrayList<>(Arrays.asList(time));
     List<String> freeTime = list.stream().filter(x -> !busyTime.contains(x)).collect(Collectors.toList());

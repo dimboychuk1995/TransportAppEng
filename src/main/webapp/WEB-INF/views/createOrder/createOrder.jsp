@@ -19,21 +19,41 @@
           
           <label class = "col-md-12 no-padding-left">Вид робіт</label>
           <div class = "col-md-9 no-padding">
-	          <form:select id="typeOfWork" path="workType" items="${typeWorks}" class="form-control orderInput" data-placeholder="work" itemLabel="name" itemValue="id" cssErrorClass="error form-control" />
+	          <form:select id="typeOfWork" path="workType" items="${workTypeFromSap}" class='form-control orderInput' data-placeholder="work" itemLabel="name" itemValue="id" cssErrorClass="error form-control" />
 			  <form:errors path="workType" class="help-block with-errors" cssErrorClass="" />
 	       </div>
 	       <div class = "col-md-2 bold-padding">Кількість:</div>
 	       <div class = "col-md-1 no-padding-right">
-	       		<select id = "countOrder" class = "no-padding option-center form-control">
+	       		<form:select id = "countOrder" path="count" class = "no-padding option-center form-control">
 	       			<option>1</option>
 	       			<option>2</option>
 	       			<option>3</option>
 	       			<option>4</option>
-	       		</select>
+	       		</form:select>
 	       </div>
-<!-- 	       this input for testing  -->
-          <input id = "timeImplementation" type = "hidden" value = "180">
-<!--           end test -->
+  
+<!-- 	 this input for testing  -->
+		  <input id = "idFromSelect" type = "hidden">
+          <input id = "nameFromSelect" type = "hidden">
+          <input id = "timeFromSelect" type = "hidden" value = '30'>
+          <input id = "priceFromSelect" type = "hidden">
+		<!--           end test -->
+		<!-- 
+				this test code for each	
+		 -->
+		 
+		 <!-- all data from controller -->
+		 <c:forEach items = '${workTypeFromSap}' var = 'typeOfWork'>
+		 <input class = 'idWork' type = 'hidden' value = '${typeOfWork.id}'>
+		 <input class = 'nameWork' type = "hidden" value = '${typeOfWork.name}'>
+		 <input class = 'priceWork' type = "hidden" value = '${typeOfWork.price}'>
+		 <input class = 'timeWork' type = "hidden" value = '${typeOfWork.time}'>
+		 
+		 </c:forEach>
+		 <!-- 
+				end test code for each	
+		 -->
+
           <label>Табельний номер</label>
           <form:input required="required" id="tableNumber" class="form-control orderInput" path="user_tab" placeholder="Введіть Ваш табельний номер"  cssErrorClass="error form-control" />
           <form:errors path="user_tab" class="help-block with-errors" cssErrorClass="" />
@@ -69,12 +89,12 @@
 		<label  class="col-md-6">Кінець</label>
 		
         <div class = "col-md-6 no-padding">
-	        <form:input id="startTime" required="required" path="time" class="form-control col-md-6 " placeholder="start" cssErrorClass="error form-control" />
+	        <form:input id="startTime" required="required" path="time" class="form-control col-md-6 " placeholder="start" readonly="true" cssErrorClass="error form-control" />
 	        <form:errors path="time" class="help-block with-errors" cssErrorClass="" />   
         </div>
         
         <div class = "col-md-6 no-padding-right">
-	        <form:input id="endTime" required="required" path="time_end" class="col-md-6 form-control" placeholder="end"  cssErrorClass="error form-control" />
+	        <form:input id="endTime" required="required" path="time_end" class="col-md-6 form-control" placeholder="end" readonly="true" cssErrorClass="error form-control" />
 	        <form:errors path="time_end" class="help-block with-errors" cssErrorClass="" />  
         </div>
           <div class="">
@@ -150,8 +170,12 @@
 
  <script src=<c:url value="/resources/js/dateTimePicker/nouislider.js" />></script>
  <script src=<c:url value="/resources/js/dateTimePicker/nouislider.min.js" />></script> 
+ 
  <script src=<c:url value="/resources/js/dateTimePicker/timeRange.js" />></script>
-<script src=<c:url value="/resources/js/dateTimePicker/time.js" />></script>
+ <script src=<c:url value="/resources/js/dateTimePicker/timeRangeDisable.js" />></script>
+<!-- <script src=<c:url value="/resources/js/dateTimePicker/time.js" />></script> -->
+
+
 <!-- <script src=<c:url value="/resources/js/dateTimePicker/diapasonTime.js" />></script> -->
 <script src=<c:url value="/resources/js/dateTimePicker/dateTimePicker.js" />></script>
 <script src=<c:url value="/resources/js/dateTimePicker/dateTimePicker.js" />></script>

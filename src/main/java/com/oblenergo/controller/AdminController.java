@@ -24,6 +24,7 @@ import com.oblenergo.model.Orders;
 import com.oblenergo.model.WorkType;
 import com.oblenergo.service.CarService;
 import com.oblenergo.service.OrderService;
+import com.oblenergo.service.SapService;
 import com.oblenergo.service.WorkTypeService;
 import com.oblenergo.validator.WorkTypeValidator;
 
@@ -32,126 +33,132 @@ import com.oblenergo.validator.WorkTypeValidator;
 public class AdminController {
 
   private static final String ITEMSWORKTYPE = "typeWorks";
-	private static final String ITEMSORDER = "order";
-	private static final String ITEMSCAR = "cars";
-	private static final String WORK_TYPE = "workType";
-	private static final String ORDER = "orders";
-	private static final String STATUS_ORDER_ENUM = "items";
+  private static final String ITEMSORDER = "order";
+  private static final String ITEMSCAR = "cars";
+  private static final String WORK_TYPE = "workType";
+  private static final String ORDER = "orders";
+  private static final String STATUS_ORDER_ENUM = "items";
+  private static final String WORKTYPE_FROM_SAP = "workTypeFromSap";
 
-	@Autowired
-	private OrderService orderServiseImpl;
+  @Autowired
+  private OrderService orderServiceImpl;
 
-	@Autowired
-	private CarService carServiceImpl;
+  @Autowired
+  private CarService carServiceImpl;
 
-	@Autowired
-	private WorkTypeService workTypeServiceImpl;
+  @Autowired
+  private WorkTypeService workTypeServiceImpl;
 
-	@Autowired
-	private ServiceEditor serviceEditor;
-	
-	@Autowired 
-	private CarEditor carEditor;
+  @Autowired
+  private ServiceEditor serviceEditor;
 
-	@Autowired
-	private WorkTypeValidator workTypeValidator;
+  @Autowired
+  private CarEditor carEditor;
 
-	@InitBinder(WORK_TYPE)
-	public void initBinder(WebDataBinder binder) {
-		binder.addValidators(workTypeValidator);
-	}
+  @Autowired
+  private SapService sapServiceImpl;
 
-	@InitBinder(ORDER)
-	public void initBinderOrder(WebDataBinder binder) {
-		binder.registerCustomEditor(WorkType.class, serviceEditor);
-		binder.registerCustomEditor(Car.class, carEditor);
-	}
+  @Autowired
+  private WorkTypeValidator workTypeValidator;
 
-	@RequestMapping(method = RequestMethod.GET)
-	public String getAllType(Model model) {
+  @InitBinder(WORK_TYPE)
+  public void initBinder(WebDataBinder binder) {
+    binder.addValidators(workTypeValidator);
+  }
 
-		model.addAttribute(ITEMSWORKTYPE, workTypeServiceImpl.findAll());
-		model.addAttribute(WORK_TYPE, new WorkType());
-		return "workType";
-	}
+  @InitBinder(ORDER)
+  public void initBinderOrder(WebDataBinder binder) {
+    binder.registerCustomEditor(WorkType.class, serviceEditor);
+    binder.registerCustomEditor(Car.class, carEditor);
+  }
 
-	@RequestMapping(value = "/workType/{id}", method = RequestMethod.POST)
-	public String updateType(@Validated @ModelAttribute("workType") WorkType workType, BindingResult bindingResult) {
+  @RequestMapping(method = RequestMethod.GET)
+  public String getAllType(Model model) {
 
-		if (bindingResult.hasErrors()) {
-			return "updateCreateWorkType";
-		}
+    model.addAttribute(ITEMSWORKTYPE, workTypeServiceImpl.findAll());
+    model.addAttribute(WORK_TYPE, new WorkType());
+    return "workType";
+  }
 
-		workTypeServiceImpl.update(workType);
-		return "redirect:/admin";
-	}
+  @RequestMapping(value = "/workType/{id}", method = RequestMethod.POST)
+  public String updateType(@Validated @ModelAttribute("workType") WorkType workType, BindingResult bindingResult) {
 
-	@RequestMapping(value = "/workType/{id}", method = RequestMethod.GET)
-	public String showTypeById(@PathVariable int id, Model model) {
+    if (bindingResult.hasErrors()) {
+      return "updateCreateWorkType";
+    }
 
-		model.addAttribute(WORK_TYPE, workTypeServiceImpl.findWorkTypeById(id));
-		return "updateCreateWorkType";
-	}
+    workTypeServiceImpl.update(workType);
+    return "redirect:/admin";
+  }
 
-	@RequestMapping(value = "/workType/newWorkType", method = RequestMethod.GET)
-	public String redirectToCreate(Model model) {
+  @RequestMapping(value = "/workType/{id}", method = RequestMethod.GET)
+  public String showTypeById(@PathVariable int id, Model model) {
 
-		model.addAttribute(WORK_TYPE, new WorkType());
-		return "updateCreateWorkType";
-	}
+    model.addAttribute(WORK_TYPE, workTypeServiceImpl.findWorkTypeById(id));
+    return "updateCreateWorkType";
+  }
 
-	@RequestMapping(value = "/workType/newWorkType", method = RequestMethod.POST)
-	public String addType(@Validated @ModelAttribute("workType") WorkType workType, BindingResult bindingResult) {
+  @RequestMapping(value = "/workType/newWorkType", method = RequestMethod.GET)
+  public String redirectToCreate(Model model) {
 
-		if (bindingResult.hasErrors()) {
-			return "updateCreateWorkType";
-		}
-		workTypeServiceImpl.save(workType);
-		return "redirect:/admin";
-	}
+    model.addAttribute(WORK_TYPE, new WorkType());
+    return "updateCreateWorkType";
+  }
 
-	@RequestMapping(value = "/delete", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteWorkType(@RequestBody int id) {
+  @RequestMapping(value = "/workType/newWorkType", method = RequestMethod.POST)
+  public String addType(@Validated @ModelAttribute("workType") WorkType workType, BindingResult bindingResult) {
 
-		workTypeServiceImpl.delete(id);
-	}
+    if (bindingResult.hasErrors()) {
+      return "updateCreateWorkType";
+    }
+    workTypeServiceImpl.save(workType);
+    return "redirect:/admin";
+  }
 
-	@RequestMapping(value = "/order", method = RequestMethod.GET)
-	public String getAllOrders(Model model) {
-		model.addAttribute(ITEMSORDER, orderServiseImpl.findAll());
-		model.addAttribute(ORDER, new Orders());
-		return "order";
-	}
+  @RequestMapping(value = "/delete", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void deleteWorkType(@RequestBody int id) {
 
-	@RequestMapping(value = "/order/{id}", method = RequestMethod.GET)
-	public String showTypeOrderById(@PathVariable int id, Model model) {
-		model.addAttribute(ORDER, orderServiseImpl.findOrderById(id));
-		model.addAttribute(ITEMSWORKTYPE, workTypeServiceImpl.findAll());
-		model.addAttribute(ITEMSCAR, carServiceImpl.findAll());
-		model.addAttribute(STATUS_ORDER_ENUM, StatusOrderEnum.values());
-		return "updateCreateOrders";
-	}
+    workTypeServiceImpl.delete(id);
+  }
 
-	@RequestMapping(value = "/order/{id}", method = RequestMethod.POST)
-	public String updateOrder(@Validated @ModelAttribute("orders") Orders orders, BindingResult bindingResult,
-			Model model) {
-	  
-		if (bindingResult.hasErrors()) {
-		  model.addAttribute(ORDER, orderServiseImpl.findOrderById(orders.getId()));
-			model.addAttribute(ITEMSWORKTYPE, workTypeServiceImpl.findAll());
-			model.addAttribute(ITEMSCAR, carServiceImpl.findAll());
-			model.addAttribute(STATUS_ORDER_ENUM, StatusOrderEnum.values());
-			return "updateCreateOrders";
-		}
-		orderServiseImpl.update(orders);
-		return "redirect:/admin/order";
-	}
+  @RequestMapping(value = "/order", method = RequestMethod.GET)
+  public String getAllOrders(Model model) {
+    model.addAttribute(ITEMSORDER, orderServiceImpl.findAll());
+    model.addAttribute(ORDER, new Orders());
+    return "order";
+  }
 
-	@RequestMapping(value = "/order/delete", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteType(@RequestBody int id) {
-		orderServiseImpl.delete(id);
-	}
+  @RequestMapping(value = "/order/{id}", method = RequestMethod.GET)
+  public String showTypeOrderById(@PathVariable int id, Model model) {
+    model.addAttribute(ORDER, orderServiceImpl.findOrderById(id));
+    model.addAttribute(ITEMSWORKTYPE, workTypeServiceImpl.findAll());
+    model.addAttribute(ITEMSCAR, carServiceImpl.findAll());
+    model.addAttribute(STATUS_ORDER_ENUM, StatusOrderEnum.values());
+    model.addAttribute(WORKTYPE_FROM_SAP, sapServiceImpl.getAllWorkTypes());
+
+    return "updateCreateOrders";
+  }
+
+  @RequestMapping(value = "/order/{id}", method = RequestMethod.POST)
+  public String updateOrder(@Validated @ModelAttribute("orders") Orders orders, BindingResult bindingResult,
+      Model model) {
+
+    if (bindingResult.hasErrors()) {
+      model.addAttribute(ORDER, orderServiceImpl.findOrderById(orders.getId()));
+      model.addAttribute(ITEMSWORKTYPE, workTypeServiceImpl.findAll());
+      model.addAttribute(ITEMSCAR, carServiceImpl.findAll());
+      model.addAttribute(STATUS_ORDER_ENUM, StatusOrderEnum.values());
+      return "updateCreateOrders";
+    }
+    orderServiceImpl.update(orders);
+    return "redirect:/admin/order";
+  }
+
+  @RequestMapping(value = "/order/delete", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void deleteType(@RequestBody int id) {
+    orderServiceImpl.delete(id);
+  }
 
 }

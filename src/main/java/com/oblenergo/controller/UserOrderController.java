@@ -35,7 +35,6 @@ import com.oblenergo.service.CarService;
 import com.oblenergo.service.ItextService;
 import com.oblenergo.service.OrderService;
 import com.oblenergo.service.SapService;
-import com.oblenergo.service.WorkTypeService;
 import com.oblenergo.validator.ClientValidator;
 
 @Controller
@@ -43,16 +42,17 @@ import com.oblenergo.validator.ClientValidator;
 public class UserOrderController {
   Logger LOGGER = Logger.getLogger(UserOrderController.class);
 
-  private static final String ITEMSWORKTYPE = "typeWorks";
+  private static final String WORKTYPE_FROM_SAP = "workTypeFromSap";
+  // private static final String ITEMSWORKTYPE = "typeWorks";
   private static final String ITEMSCAR = "cars";
   private static final String ORDER = "orders";
   private static final String DATAFORMAT = "YYYY-MM-DD HH:mm:ss";
 
-  @Autowired
-  private WorkTypeService workTypeServiceImpl;
+  // @Autowired
+  // private WorkTypeService workTypeServiceImpl;
 
   @Autowired
-  private OrderService orderServiseImpl;
+  private OrderService orderServiceImpl;
 
   @Autowired
   private ItextService iTextServiceImpl;
@@ -82,11 +82,9 @@ public class UserOrderController {
 
   @RequestMapping(method = RequestMethod.GET)
   public String getAllType(Model model) {
-
-    model.addAttribute(ITEMSWORKTYPE, workTypeServiceImpl.findAll());
+    model.addAttribute(WORKTYPE_FROM_SAP, sapServiceImpl.getAllWorkTypes());
     model.addAttribute(ITEMSCAR, carServiceImpl.findAll());
     model.addAttribute(ORDER, new Orders());
-    
     return "createOrder";
   }
 
@@ -94,19 +92,19 @@ public class UserOrderController {
   public String addType(@Validated @ModelAttribute("orders") Orders orders, BindingResult bindingResult, Model model) {
 
     if (bindingResult.hasErrors()) {
-      model.addAttribute(ITEMSWORKTYPE, workTypeServiceImpl.findAll());
+      model.addAttribute(WORKTYPE_FROM_SAP, sapServiceImpl.getAllWorkTypes());
       model.addAttribute(ITEMSCAR, carServiceImpl.findAll());
       return "createOrder";
     }
     orders.setCustomer(sapServiceImpl.getFullNameFromSap(orders.getUser_tab()));
-    orderServiseImpl.save(orders);
+    orderServiceImpl.save(orders);
     return "redirect:/?id=" + orders.getId();
   }
 
   @RequestMapping(value = "/pdf/{id}", method = RequestMethod.GET)
   public void getPDF(HttpServletResponse response, @PathVariable int id) {
 
-    Orders order = orderServiseImpl.findOrderById(id);
+    Orders order = orderServiceImpl.findOrderById(id);
     byte[] data = iTextServiceImpl.writeCheck(order);
     String fileName = new SimpleDateFormat(DATAFORMAT).format(new Date()) + ".pdf";
     response.setHeader("Content-Disposition", String.format("inline; filename=\"" + fileName + "\""));
@@ -122,31 +120,34 @@ public class UserOrderController {
     }
   }
 
-  @RequestMapping(value = "/selectTime", headers = "Accept=*/*", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = "application/json")
-  public @ResponseBody String[] selectTimeForDate(@RequestBody String date) {
-
-    List<Orders> orders = orderServiseImpl.findDateOfOrders(date);
-    String[] arrTimeOrders = new String[orders.size()];
-    for (int i = 0; i < arrTimeOrders.length; i++) {
-      arrTimeOrders[i] = orders.get(i).getTime();
-    }
-    List<String> freeTime = orderServiseImpl.findFreeTime(arrTimeOrders, date);
-    String[] arr = freeTime.toArray(new String[freeTime.size()]);
-    return arr;
-  }
-
   @RequestMapping(value = "/selectTimeAdmin", headers = "Accept=*/*", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = "application/json")
   public @ResponseBody String[] selectTimeForDateAdmin(@RequestBody TimeDTO timeDTO) {
 
-    Orders order = orderServiseImpl.findOrderById(Integer.parseInt(timeDTO.getId()));
-    List<Orders> orders = orderServiseImpl.findDateOfOrders(timeDTO.getDate());
-    String[] arrTimeOrders = new String[orders.size()];
-    for (int i = 0; i < arrTimeOrders.length; i++) {
-      arrTimeOrders[i] = orders.get(i).getTime();
+    Orders order = orderServiceImpl.findOrderById(Integer.parseInt(timeDTO.getId()));
+    List<Orders> orders = orderServiceImpl.findDateOfOrders(timeDTO.getDate());
+
+    // test code for show information
+    for (int i = 0; i < orders.size(); i++) {
+      System.out.println("Size : " + orders.size());
+      System.out.println("time : " + orders.get(i).getTime());
+      System.out.println("end time : " + orders.get(i).getTime_end());
     }
-    List<String> freeTime = orderServiseImpl.findFreeTimeForAdmin(arrTimeOrders, timeDTO.getDate(), order);
+    // end test code
+
+    // time all orders on date
+    String[][] arrTimeOrders = new String[orders.size()][2];
+    for (int i = 0; i < arrTimeOrders.length; i++) {
+
+      for (int j = 0; j < arrTimeOrders[i].length; j++) {
+        arrTimeOrders[i][0] = orders.get(i).getTime();
+        arrTimeOrders[i][1] = orders.get(i).getTime_end();
+      }
+    }
+
+    List<String> freeTime = orderServiceImpl.findFreeTimeForAdmin(arrTimeOrders, timeDTO.getDate(), order,
+        timeDTO.getExecution());
+
     String[] arr = freeTime.toArray(new String[freeTime.size()]);
     return arr;
   }
-
 }

@@ -22,6 +22,16 @@
           <label>Вид робіт</label>
           <form:select path="workType" items="${typeWorks}" class="form-control" data-placeholder="work" itemLabel="name" itemValue="id" disabled="true" />
 
+		  <label>Кількість</label>
+          <form:select path="count" id = "countOrders" class="form-control">
+          	<form:option value="${orders.count}">${orders.count}</form:option>
+          	<form:option value="1">1</form:option>
+          	<form:option value="2">2</form:option>
+          	<form:option value="3">3</form:option>
+          	<form:option value="4">4</form:option>
+          </form:select>
+			
+
           <div id="car_name">
             <label>Марка авто</label>
             <form:select path="car" items="${cars}" class="form-control" data-placeholder="cars" itemLabel="name" itemValue="id" />
@@ -34,17 +44,41 @@
           <form:input required="required" id="" path="car_number" class="form-control" cssErrorClass="error form-control" />
           <form:errors path="car_number" class="help-block with-errors" cssErrorClass="" />
 
-          <label class="col-md-6 no-padding-left">Дата</label>
-          <label class="col-md-6">Час</label>
+		 
+		 <!-- 	 this input for testing  -->
+		  <input id = "idFromSelect" type = "hidden">
+          <input id = "nameFromSelect" type = "hidden">
+          <input id = "timeFromSelect" type = "hidden">
+        <!--<input id = "priceFromSelect" type = "hidden"> -->
+		<!--           end test -->
+		 
+		  <!-- all data from controller -->  
+		 <c:forEach items = '${workTypeFromSap}' var = 'typeOfWork'>
+		 <input class = 'idWork' type = 'hidden' value = '${typeOfWork.id}'>
+		 <input class = 'nameWork' type = "hidden" value = '${typeOfWork.name}'>
+		  <!--<input class = 'priceWork' type = "hidden" value = '${typeOfWork.price}'>-->
+		 <input class = 'timeWork' type = "hidden" value = '${typeOfWork.time}'>
+		 </c:forEach>
+		 <!-- 
+				end test code for each	
+		 -->	 
+
+          <label class="col-md-6 no-padding-left">Дата</label> 
+          <label class="col-md-3">Початок</label>
+          <label class="col-md-3">Кінець</label>
           <div id="datePicker">
             <div class="col-md-6 no-padding">
               <form:input id="dpicker" required="required" path="date" class="date start form-control" cssErrorClass="date start error form-control" />
               <form:errors path="date" class="help-block with-errors" cssErrorClass="" />
             </div>
-            <div class="col-md-6 no-padding-right">
+            <div class="col-md-3 no-padding-right">
               <form:select id="selectForm" path="time" class="tpicker form-control">
                 <form:option value="${orders.time}">${orders.time}</form:option>
               </form:select>
+            </div>
+            <div class="col-md-3 no-padding-right">
+              <form:input id="" path="time_end" class="form-control" readonly="true" cssErrorClass="error form-control" />
+              <form:errors path="time_end" class="help-block with-errors" cssErrorClass="" />
             </div>
           </div>
           <label class="col-md-12 no-padding-left">Статус замовлення</label>

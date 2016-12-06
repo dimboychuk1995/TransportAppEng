@@ -5,6 +5,8 @@
  */
 package com.oblenergo.service;
 
+import java.util.List;
+
 /**
  *
  * @author us9522
@@ -12,26 +14,24 @@ package com.oblenergo.service;
 
 import com.oblenergo.model.Orders;
 
-import java.util.List;
-
 public interface OrderService {
 
-	public List<Orders> findAll();
+  public List<Orders> findAll();
 
-	void save(Orders order);
+  void save(Orders order);
 
-	void update(Orders order);
+  void update(Orders order);
 
-	Orders findOrderById(int id);
+  Orders findOrderById(int id);
 
-	void delete(int id);
+  void delete(int id);
 
-	public List<Orders> findDateOfOrders(String date);
+  public List<Orders> findDateOfOrders(String date);
 
-	public List<String> findFreeTime(String[] arrTimeOrders, String date);
+  // public List<String> findFreeTime(String[] arrTimeOrders, String date);
 
-	public List<String> findFreeTimeForAdmin(String[] arrTimeOrders, String date, Orders order);
+  public List<String> findFreeTimeForAdmin(String[][] arrTimeOrders, String date, Orders order, String execution);
 
-	public List<Orders> findAllConfirm();
+  public List<Orders> findAllConfirm();
 
 }

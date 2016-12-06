@@ -5,9 +5,10 @@ import java.io.Serializable;
 public class TimeDTO implements Serializable {
 
   private static final long serialVersionUID = 8464422734342794021L;
-  
+
   private String date;
   private String id;
+  private String timeExecution;
 
   public String getDate() {
     return date;
@@ -23,5 +24,13 @@ public class TimeDTO implements Serializable {
 
   public void setId(String id) {
     this.id = id;
+  }
+
+  public String getExecution() {
+    return timeExecution;
+  }
+
+  public void setExecution(String execution) {
+    this.timeExecution = execution;
   }
 }
