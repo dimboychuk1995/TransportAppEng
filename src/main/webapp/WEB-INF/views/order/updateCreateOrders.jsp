@@ -20,15 +20,11 @@
 
 
           <label>Вид робіт</label>
-          <form:select path="workType" items="${typeWorks}" class="form-control" data-placeholder="work" itemLabel="name" itemValue="id" disabled="true" />
+          <form:select id = 'typeOfWork' path="workType" items="${typeWorks}" class="form-control" data-placeholder="work" itemLabel="name" itemValue="id" disabled="true" />
 
 		  <label>Кількість</label>
-          <form:select path="count" id = "countOrders" class="form-control">
+          <form:select path="count" id = "countOrders" class="form-control" disabled="true">
           	<form:option value="${orders.count}">${orders.count}</form:option>
-          	<form:option value="1">1</form:option>
-          	<form:option value="2">2</form:option>
-          	<form:option value="3">3</form:option>
-          	<form:option value="4">4</form:option>
           </form:select>
 			
 
@@ -49,14 +45,14 @@
 		  <input id = "idFromSelect" type = "hidden">
           <input id = "nameFromSelect" type = "hidden">
           <input id = "timeFromSelect" type = "hidden">
-        <!--<input id = "priceFromSelect" type = "hidden"> -->
+          <input id = "priceFromSelect" type = "hidden">
 		<!--           end test -->
 		 
 		  <!-- all data from controller -->  
 		 <c:forEach items = '${workTypeFromSap}' var = 'typeOfWork'>
 		 <input class = 'idWork' type = 'hidden' value = '${typeOfWork.id}'>
 		 <input class = 'nameWork' type = "hidden" value = '${typeOfWork.name}'>
-		  <!--<input class = 'priceWork' type = "hidden" value = '${typeOfWork.price}'>-->
+		 <input class = 'priceWork' type = "hidden" value = '${typeOfWork.price}'>
 		 <input class = 'timeWork' type = "hidden" value = '${typeOfWork.time}'>
 		 </c:forEach>
 		 <!-- 
@@ -77,7 +73,7 @@
               </form:select>
             </div>
             <div class="col-md-3 no-padding-right">
-              <form:input id="" path="time_end" class="form-control" readonly="true" cssErrorClass="error form-control" />
+              <form:input id="time_end" path="time_end" class="form-control" readonly="true" cssErrorClass="error form-control" />
               <form:errors path="time_end" class="help-block with-errors" cssErrorClass="" />
             </div>
           </div>

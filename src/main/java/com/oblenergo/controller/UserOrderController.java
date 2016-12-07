@@ -125,6 +125,7 @@ public class UserOrderController {
   public @ResponseBody String[] selectTimeForDateAdmin(@RequestBody TimeDTO timeDTO) {
 
     Orders order = orderServiceImpl.findOrderById(Integer.parseInt(timeDTO.getId()));
+
     List<Orders> orders = orderServiceImpl.findDateOfOrders(timeDTO.getDate());
 
     // test code for show information
@@ -144,9 +145,10 @@ public class UserOrderController {
         arrTimeOrders[i][1] = orders.get(i).getTime_end();
       }
     }
-
+    System.out.print("Execution : ");
+    System.out.println(timeDTO.getTimeExecution());
     List<String> freeTime = orderServiceImpl.findFreeTimeForAdmin(arrTimeOrders, timeDTO.getDate(), order,
-        timeDTO.getExecution());
+        timeDTO.getTimeExecution());
 
     String[] arr = freeTime.toArray(new String[freeTime.size()]);
     return arr;
