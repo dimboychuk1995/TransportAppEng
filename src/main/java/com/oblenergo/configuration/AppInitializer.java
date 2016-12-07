@@ -10,7 +10,7 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
   @Override
   protected Class<?>[] getRootConfigClasses() {
 
-    return new Class[] { AppConfiguration.class, SecurityConfiguration.class, DatabaseConfiguration.class,
+    return new Class[] { AppConfiguration.class, DatabaseConfiguration.class,
         WebSocketConfig.class, SapClientConfiguration.class };
   }
 

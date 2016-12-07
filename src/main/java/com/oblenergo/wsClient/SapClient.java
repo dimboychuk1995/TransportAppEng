@@ -49,7 +49,7 @@ public class SapClient extends WebServiceGatewaySupport {
    * @param time-board number of an employee
    * @return ZsearchPersonResponse object with an employee info
    */
-  private ZsearchPersonResponse getZsearchPersonResponse(String tabNamber) {
+  private ZsearchPersonResponse getZsearchPersonResponse(String tabNumber) {
 
     ZsearchPerson request = of.createZsearchPerson();
     request.setFstnameM(EMPTY_FIELD);
@@ -60,7 +60,7 @@ public class SapClient extends WebServiceGatewaySupport {
     request.setOrgtxt(EMPTY_FIELD);
     request.setOrgUnit(EMPTY_FIELD);
     request.setCheckCommunities(ONLY_COMMUNIC_REQUIRED_VALUE);
-    request.setEmployeeId(tabNamber);
+    request.setEmployeeId(tabNumber);
     request.setOutTab(of.createTableOfZpernDebitor());
     ZsearchPersonResponse response = (ZsearchPersonResponse) getWebServiceTemplate().marshalSendAndReceive(request);
     return response;
@@ -151,9 +151,9 @@ public class SapClient extends WebServiceGatewaySupport {
    * @param time-board number of an employee
    * @return String with employee`s full name 
    */
-  public String getFullName(String tabNamber) {
+  public String getFullName(String tabNumber) {
 
-    ZsearchPersonResponse response = getZsearchPersonResponse(tabNamber);
+    ZsearchPersonResponse response = getZsearchPersonResponse(tabNumber);
     ZpernDebitor userInfo = response.getOutTab().getItem().get(0);
     return userInfo.getFamily() + " " + userInfo.getName() + " " + userInfo.getFather();
   }
@@ -165,9 +165,9 @@ public class SapClient extends WebServiceGatewaySupport {
    * @param time-board number of an employee
    * @return String with employee`s email 
    */
-  public String getUserEmail(String tabNamber) {
+  public String getUserEmail(String tabNumber) {
 
-    ZsearchPersonResponse response = getZsearchPersonResponse(tabNamber);
+    ZsearchPersonResponse response = getZsearchPersonResponse(tabNumber);
     ZpernDebitor userInfo = response.getOutTab().getItem().get(0);
     return userInfo.getEmail();
   }
