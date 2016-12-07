@@ -97,6 +97,7 @@ public class UserOrderController {
       return "createOrder";
     }
     orders.setCustomer(sapServiceImpl.getFullNameFromSap(orders.getUser_tab()));
+    System.out.println(orders.getWorkType().getId());
     orderServiceImpl.save(orders);
     return "redirect:/?id=" + orders.getId();
   }

@@ -6,7 +6,7 @@ import com.oblenergo.model.WorkType;
 
 public interface WorkTypeDao {
 
-  WorkType findById(int id);
+  WorkType findById(String id);
 
   WorkType findByName(String name);
 

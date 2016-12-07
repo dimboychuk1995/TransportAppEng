@@ -42,18 +42,18 @@ public class WorkTypeServiceImpl implements WorkTypeService {
     }
   }
 
-//  @Transactional
-//  @Override
-//  public WorkType findWorkTypeById(String id) {
-//
-//    try {
-//      return dao.findByName(id);
-//    } catch (DataAccessException dae) {
-//      LOGGER.error("Unable to find workType with surch id : " + id, dae);
-//      throw dae;
-//    }
-//
-//  }
+  @Transactional
+  @Override
+  public WorkType findWorkTypeById(String id) {
+
+    try {
+      return dao.findById(id);
+    } catch (DataAccessException dae) {
+      LOGGER.error("Unable to find workType with surch id : " + id, dae);
+      throw dae;
+    }
+
+  }
 
   @Transactional
   @Override
@@ -67,22 +67,22 @@ public class WorkTypeServiceImpl implements WorkTypeService {
     }
   }
 
-//  @Transactional
-//  @Override
-//  public void update(WorkType workType) {
-//    WorkType entity = null;
-//
-//    try {
-//      entity = dao.findById(workType.getId());
-//    } catch (DataAccessException dae) {
-//      LOGGER.error("Unable to get workType with id : " + workType.getId(), dae);
-//      throw dae;
-//    }
-//
-//    entity.setName(workType.getName());
-//    
-//
-//  }
+  @Transactional
+  @Override
+  public void update(WorkType workType) {
+    WorkType entity = null;
+
+    try {
+      entity = dao.findById(workType.getId());
+    } catch (DataAccessException dae) {
+      LOGGER.error("Unable to get workType with id : " + workType.getId(), dae);
+      throw dae;
+    }
+
+    entity.setName(workType.getName());
+    
+
+  }
 
   @Transactional
   @Override
@@ -110,23 +110,4 @@ public class WorkTypeServiceImpl implements WorkTypeService {
     }
 
   }
-
-@Override
-public void update(WorkType workType) {
-	// TODO Auto-generated method stub
-	
-}
-
-@Override
-public WorkType findWorkTypeById(int id) {
-	// TODO Auto-generated method stub
-	return null;
-}
-
-@Override
-public WorkType findWorkTypeById(String id) {
-	// TODO Auto-generated method stub
-	return null;
-}
-
 }

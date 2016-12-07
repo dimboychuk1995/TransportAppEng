@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.oblenergo.model.WorkType;
 
 @Repository
-public class WorkTypeDaoImpl extends AbstractDao<Integer, WorkType> implements WorkTypeDao {
+public class WorkTypeDaoImpl extends AbstractDao<String, WorkType> implements WorkTypeDao {
 
   @SuppressWarnings("unchecked")
   @Override
@@ -26,7 +26,7 @@ public class WorkTypeDaoImpl extends AbstractDao<Integer, WorkType> implements W
   }
 
   @Override
-  public WorkType findById(int id) {
+  public WorkType findById(String id) {
     return getById(id);
   }
 

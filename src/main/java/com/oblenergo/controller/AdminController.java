@@ -91,12 +91,12 @@ public class AdminController {
     return "redirect:/admin";
   }
 
-  @RequestMapping(value = "/workType/{id}", method = RequestMethod.GET)
-  public String showTypeById(@PathVariable int id, Model model) {
-
-    model.addAttribute(WORK_TYPE, workTypeServiceImpl.findWorkTypeById(id));
-    return "updateCreateWorkType";
-  }
+//  @RequestMapping(value = "/workType/{id}", method = RequestMethod.GET)
+//  public String showTypeById(@PathVariable int id, Model model) {
+//
+//    model.addAttribute(WORK_TYPE, workTypeServiceImpl.findWorkTypeById(id));
+//    return "updateCreateWorkType";
+//  }
 
   @RequestMapping(value = "/workType/newWorkType", method = RequestMethod.GET)
   public String redirectToCreate(Model model) {

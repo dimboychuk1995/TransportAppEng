@@ -28,7 +28,6 @@ public class ServiceEditor extends PropertyEditorSupport{
     public void setAsText(String text) throws IllegalArgumentException {
         WorkType instance = workTypeServiceImpl.findWorkTypeById(text);
         this.setValue(instance);
-        
     }
 }
     
