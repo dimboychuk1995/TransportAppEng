@@ -3,6 +3,10 @@ package com.oblenergo.DTO;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import javax.persistence.Entity;
+
+
+@Entity
 public class WorkTypeDTO implements Serializable {
 
   private static final long serialVersionUID = 7277613558645074422L;

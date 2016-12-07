@@ -152,9 +152,9 @@ public class ItextServiceImpl implements ItextService {
     table.addCell(cell);
     table.addCell(new Phrase("רע.", getFont()));
     table.addCell(new Phrase("1", getFont()));
-    table.addCell(new Phrase("" + order.getWorkType().getPrice_including_vat(), getFont()));
+    table.addCell(new Phrase("" + order.getWorkType(), getFont()));
     table.addCell(new Phrase("דנם.", getFont()));
-    table.addCell(new Phrase("" + order.getWorkType().getPrice_including_vat(), getFont()));
+    table.addCell(new Phrase("" + order.getWorkType(), getFont()));
     return table;
   }
 

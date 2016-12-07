@@ -67,7 +67,7 @@ public class SapClient extends WebServiceGatewaySupport {
   }
 
   /**
-   * 
+   *
    * Returns array with info about all work types which are available in SAP
    *
    * @return ZsdGetMatnrForSmitResponse object
@@ -192,6 +192,7 @@ public class SapClient extends WebServiceGatewaySupport {
       workTypeDTO.setTime(zsdsmitmatnr.getVrvez());
       workTypeList.add(workTypeDTO);
     }
+    System.out.println(workTypeList.toString());
     return workTypeList;
   }
 

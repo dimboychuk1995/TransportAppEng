@@ -42,18 +42,18 @@ public class WorkTypeServiceImpl implements WorkTypeService {
     }
   }
 
-  @Transactional
-  @Override
-  public WorkType findWorkTypeById(int id) {
-
-    try {
-      return dao.findById(id);
-    } catch (DataAccessException dae) {
-      LOGGER.error("Unable to find workType with surch id : " + id, dae);
-      throw dae;
-    }
-
-  }
+//  @Transactional
+//  @Override
+//  public WorkType findWorkTypeById(String id) {
+//
+//    try {
+//      return dao.findByName(id);
+//    } catch (DataAccessException dae) {
+//      LOGGER.error("Unable to find workType with surch id : " + id, dae);
+//      throw dae;
+//    }
+//
+//  }
 
   @Transactional
   @Override
@@ -67,32 +67,22 @@ public class WorkTypeServiceImpl implements WorkTypeService {
     }
   }
 
-  @Transactional
-  @Override
-  public void update(WorkType workType) {
-    WorkType entity = null;
-
-    try {
-      entity = dao.findById(workType.getId());
-    } catch (DataAccessException dae) {
-      LOGGER.error("Unable to get workType with id : " + workType.getId(), dae);
-      throw dae;
-    }
-
-    entity.setName(workType.getName());
-    entity.setCount_hours(workType.getCount_hours());
-    entity.setSalary(workType.getSalary());
-    entity.setSocial_insurance(workType.getSocial_insurance());
-    entity.setProduction_costs(workType.getProduction_costs());
-    entity.setAll_costs(workType.getAll_costs());
-    entity.setProfit(workType.getProfit());
-    entity.setSum(workType.getSum());
-    entity.setCost_of_materials(workType.getCost_of_materials());
-    entity.setSelling_price(workType.getSelling_price());
-    entity.setVat(workType.getVat());
-    entity.setPrice_including_vat(workType.getPrice_including_vat());
-
-  }
+//  @Transactional
+//  @Override
+//  public void update(WorkType workType) {
+//    WorkType entity = null;
+//
+//    try {
+//      entity = dao.findById(workType.getId());
+//    } catch (DataAccessException dae) {
+//      LOGGER.error("Unable to get workType with id : " + workType.getId(), dae);
+//      throw dae;
+//    }
+//
+//    entity.setName(workType.getName());
+//    
+//
+//  }
 
   @Transactional
   @Override
@@ -108,7 +98,7 @@ public class WorkTypeServiceImpl implements WorkTypeService {
 
   @Transactional
   @Override
-  public boolean isWorkTypeUnique(String name, int id) {
+  public boolean isWorkTypeUnique(String name, String id) {
 
     try {
 
@@ -120,5 +110,23 @@ public class WorkTypeServiceImpl implements WorkTypeService {
     }
 
   }
+
+@Override
+public void update(WorkType workType) {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public WorkType findWorkTypeById(int id) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public WorkType findWorkTypeById(String id) {
+	// TODO Auto-generated method stub
+	return null;
+}
 
 }
