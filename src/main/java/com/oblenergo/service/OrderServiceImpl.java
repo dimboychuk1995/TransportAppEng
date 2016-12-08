@@ -32,15 +32,14 @@ public class OrderServiceImpl implements OrderService {
   @Autowired
   OrderDao dao;
 
-  private final static String[] fullTimeRange = { "08:00:00", "08:30:00", "09:00:00", "09:30:00", "10:00:00",
-      "10:30:00", "11:00:00", "11:30:00", "12:00:00", "12:30:00", "13:00:00", "13:30:00", "14:00:00", "14:30:00",
-      "15:00:00", "15:30:00", "16:00:00", "16:30:00", "17:00:00", "17:15:00" };
+  private final static String[] fullTimeRange = { "10:00:00", "10:30:00", "11:00:00", "11:30:00", "12:00:00",
+      "12:30:00", "13:00:00", "13:30:00", "14:00:00", "14:30:00", "15:00:00", "15:30:00", "16:00:00", "16:30:00",
+      "17:00:00", "17:30:00" };
 
-  private final static String[] shortTimeRange = { "08:00:00", "08:30:00", "09:00:00", "09:30:00", "10:00:00",
-      "10:30:00", "11:00:00", "11:30:00", "12:00:00", "12:30:00", "13:00:00", "13:30:00", "14:00:00", "14:30:00",
-      "15:00:00", "15:30:00", "16:00:00" };
+  private final static String[] shortTimeRange = { "10:00:00", "10:30:00", "11:00:00", "11:30:00", "12:00:00",
+      "12:30:00", "13:00:00", "13:30:00", "14:00:00", "14:30:00", "15:00:00", "15:30:00", "16:00:00" };
 
-  private final static int shortDay = 5;// Friday
+  private final static int shortDay = 7;// Friday
 
   @Transactional
   @Override
@@ -89,7 +88,7 @@ public class OrderServiceImpl implements OrderService {
       throw dae;
     }
 
-    entity.setCount(order.getCount());
+    // entity.setCount(order.getCount());
     entity.setCar(order.getCar());
     entity.setCar_model(order.getCar_model());
     entity.setPerformer_id(order.getPerformer_id());
@@ -131,6 +130,8 @@ public class OrderServiceImpl implements OrderService {
       timeAdmin = shortTimeRange;
     } else {
       timeAdmin = fullTimeRange;
+      System.out.print("Lest element array Full : ");
+      System.out.println(timeAdmin[timeAdmin.length - 1]);
     }
 
     List<String> busyTime = getBusyTimes(timeAdmin, arrTimeOrders, date);
@@ -148,13 +149,16 @@ public class OrderServiceImpl implements OrderService {
    */
   public int getDayOfWeek(String date) {
     Calendar c = Calendar.getInstance();
-
+    System.out.print("Date : ");
+    System.out.println(date);
     try {
       c.setTime(new SimpleDateFormat("yyyy-mm-dd").parse(date));
     } catch (ParseException e) {
       e.printStackTrace();
     }
     int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+
+    System.out.println("Day of week : " + dayOfWeek);
 
     return dayOfWeek;
   }

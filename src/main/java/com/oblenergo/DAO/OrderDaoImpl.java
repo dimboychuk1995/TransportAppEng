@@ -43,6 +43,7 @@ public class OrderDaoImpl extends AbstractDao<Integer, Orders> implements OrderD
   @Override
   public List<Orders> dateOfOrders(String date) {
     Criteria crit = createEntityCriteria();
+    crit.add(Restrictions.eq("status_order", StatusOrderEnum.DONE));
     crit.add(Restrictions.eq("date", date));
     return (List<Orders>) crit.list();
   }

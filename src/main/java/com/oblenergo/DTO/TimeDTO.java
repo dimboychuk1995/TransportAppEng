@@ -26,11 +26,11 @@ public class TimeDTO implements Serializable {
     this.id = id;
   }
 
-  public String getExecution() {
+  public String getTimeExecution() {
     return timeExecution;
   }
 
-  public void setExecution(String execution) {
-    this.timeExecution = execution;
+  public void setTimeExecution(String timeExecution) {
+    this.timeExecution = timeExecution;
   }
 }
