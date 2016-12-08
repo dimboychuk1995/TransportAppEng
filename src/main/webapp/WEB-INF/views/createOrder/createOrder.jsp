@@ -115,18 +115,22 @@
             <table class="table table-bordered table-hover">
               <thead>
                 <tr>
-                  <th class="col-md-6">Назва робіт</th>
-                  <th class="col-md-6">Вартість послуги</th>
+                  <th class="col-md-4">Назва робіт</th>
+                  <th class="col-md-4">Вартість послуги</th>
+                  <th class="col-md-4">Час виконання послуги</th>
                 </tr>
               </thead>
               <tbody>
-                <c:forEach items="${typeWorks}" var="workType">
+                <c:forEach items="${workTypeFromSap}" var="workType">
                   <tr id="${workType.id}">
                     <td>
                       <c:out value="${workType.name}"></c:out>
                     </td>
                     <td>
-                      <c:out value="${workType.price_including_vat},грн"> </c:out>
+                      <c:out value="${workType.price},грн"> </c:out>
+                    </td>
+                    <td>
+                      <c:out value="${workType.time/60}год."> </c:out>
                     </td>
                   </tr>
                 </c:forEach>

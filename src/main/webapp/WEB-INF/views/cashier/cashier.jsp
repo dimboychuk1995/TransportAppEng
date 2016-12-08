@@ -15,7 +15,6 @@
               <th class="col-md-4">Вид робіт</th>
               <th class="col-md-1">Дата</th>
               <th class="col-md-1">Час</th>
-              <th class="col-md-1">ПДВ</th>
               <th class="col-md-1">Всього до оплати</th>
               <th class="col-md-1">Підтвердити оплату</th>
             </tr>
@@ -39,10 +38,7 @@
                   <c:out value="${order.time}"></c:out>
                 </td>
                 <td>
-                  <c:out value="${order.workType.vat}"></c:out>
-                </td>
-                <td>
-                  <c:out value="${order.workType.price_including_vat}"></c:out>
+                  <c:out value="${order.workType}"></c:out>
                 </td>
                 <td class="no-padding">
                   <button id="${order.customer}" class="btn btn-success paymentApprove">
