@@ -1,5 +1,21 @@
 package com.oblenergo.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
 import com.oblenergo.editor.CarEditor;
 import com.oblenergo.editor.ServiceEditor;
 import com.oblenergo.enums.StatusOrderEnum;
@@ -11,15 +27,6 @@ import com.oblenergo.service.OrderService;
 import com.oblenergo.service.SapService;
 import com.oblenergo.service.WorkTypeService;
 import com.oblenergo.validator.WorkTypeValidator;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -84,12 +91,12 @@ public class AdminController {
     return "redirect:/admin";
   }
 
-//  @RequestMapping(value = "/workType/{id}", method = RequestMethod.GET)
-//  public String showTypeById(@PathVariable int id, Model model) {
-//
-//    model.addAttribute(WORK_TYPE, workTypeServiceImpl.findWorkTypeById(id));
-//    return "updateCreateWorkType";
-//  }
+  // @RequestMapping(value = "/workType/{id}", method = RequestMethod.GET)
+  // public String showTypeById(@PathVariable int id, Model model) {
+  //
+  // model.addAttribute(WORK_TYPE, workTypeServiceImpl.findWorkTypeById(id));
+  // return "updateCreateWorkType";
+  // }
 
   @RequestMapping(value = "/workType/newWorkType", method = RequestMethod.GET)
   public String redirectToCreate(Model model) {
@@ -141,6 +148,7 @@ public class AdminController {
       model.addAttribute(ITEMSWORKTYPE, workTypeServiceImpl.findAll());
       model.addAttribute(ITEMSCAR, carServiceImpl.findAll());
       model.addAttribute(STATUS_ORDER_ENUM, StatusOrderEnum.values());
+      model.addAttribute(WORKTYPE_FROM_SAP, sapServiceImpl.getAllWorkTypes());
       return "updateCreateOrders";
     }
     orderServiceImpl.update(orders);

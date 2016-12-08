@@ -184,17 +184,27 @@ public class OrderServiceImpl implements OrderService {
     int startTimeOrder;
 
     ArrayList<String> busyTimes = new ArrayList<String>();
-    for (int timeI = 0; timeI < time.length; timeI++) {
+    for (int timeI = 0; timeI < time.length; timeI++) { // array of all times of
+                                                        // week
 
       outTimeOrder: for (int timeOrderI = 0; timeOrderI < arrTimeOrders.length; timeOrderI++) {
         for (int j = 0; j < arrTimeOrders[timeOrderI].length; j++) {
 
+          // System.out.print("Start order : ");
+          // System.out.println(arrTimeOrders[timeOrderI][start]);
           if (time[timeI].equals(arrTimeOrders[timeOrderI][start])) {
+
             startTimeOrder = 0;
+
             for (int i = timeI; i < time.length; i++) {
+
               startTimeOrder++;
+              // busyTimes.add(time[i]);
+              // System.out.print("Time end : ");
+              // System.out.println(arrTimeOrders[timeOrderI][end]);
               if (time[i].equals(arrTimeOrders[timeOrderI][end])) {
-                timeI = i;
+                // need refactoring
+                timeI = i - 1; //
                 break outTimeOrder;
 
               } else {
@@ -214,6 +224,7 @@ public class OrderServiceImpl implements OrderService {
     Set<String> setBusyTime = new LinkedHashSet<String>(busyTimes);
 
     // write to ArrayList for working with indexes
+    // needn't
     ArrayList<String> busy = new ArrayList<String>(setBusyTime);
 
     // test code for show collection
@@ -289,7 +300,8 @@ public class OrderServiceImpl implements OrderService {
 
   public int convertToStep(String execution) {
     System.out.println(execution);
-    double timeExecution = Double.parseDouble(execution);
+    double timeExecution = 0;
+    timeExecution = Double.parseDouble(execution);
     double execOrder = (double) (timeExecution / 60);
     return (int) (execOrder + execOrder + 1);
   }
@@ -299,7 +311,28 @@ public class OrderServiceImpl implements OrderService {
     List<String> list = new ArrayList<>(Arrays.asList(time));
     List<String> freeTime = list.stream().filter(x -> !busyTime.contains(x)).collect(Collectors.toList());
 
+    System.out.println("Free Time : ");
+    for (int i = 0; i < freeTime.size(); i++) {
+
+      System.out.print(freeTime.get(i) + ", ");
+    }
+    System.out.println();
+
     return freeTime;
+  }
+
+  @Override
+  public String[][] getAllTimeOfOrders(List<Orders> orders) {
+
+    String[][] arrTimeOrders = new String[orders.size()][2];
+    for (int i = 0; i < arrTimeOrders.length; i++) {
+
+      for (int j = 0; j < arrTimeOrders[i].length; j++) {
+        arrTimeOrders[i][0] = orders.get(i).getTime();
+        arrTimeOrders[i][1] = orders.get(i).getTime_end();
+      }
+    }
+    return arrTimeOrders;
   }
 
   @Transactional

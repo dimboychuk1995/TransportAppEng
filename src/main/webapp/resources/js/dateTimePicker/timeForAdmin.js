@@ -1,25 +1,39 @@
 $(function() {
-
   var contextPath = $('#contextPath').val();
+  
+  // when downloading page updateCreateOrders this function download available hours for orders
+//  $('.tpicker').ready(function() {
+//
+//	  selectTime($("#dpicker").val());
+//
+//  });
+
+  // this function appeals to AJAX  
   $(document).on('click', '.day', function() {
     var classVal = $(this).prop('class');
     if (classVal === 'day') {
       selectTime($("#dpicker").val());
     } else {
       if ($("#dpicker").val() == "") {
-        $('#selectForm').children('option').remove();
+        $('#selectForm').children('option').remove();  
       }
     }
   });
-
-   // $(document).on('change', '.tpicker', function() {
-    //	if($("#dpicker").val() != ""){
-    	//	selectTime($("#dpicker").val());
-    //	}
-   // });
+  
+  $(document).on('click', '.tpicker', function() {
+	  if ($("#dpicker").val() != "") {
+		  var sizeSelect = $('select.tpicker option').length;
+		  console.log(sizeSelect);
+		  if ( sizeSelect <= 1 ){
+			  selectTime($("#dpicker").val());
+			  setEndTimeForOrder();
+		  }
+	    setEndTimeForOrder();
+	  }
+	});
 
   function selectTime(timeInput) {
-    getDataTypeFromSelect();
+	  getDataOrder();
     $.ajax({
       type: 'POST',
       url: contextPath + '/selectTimeAdmin',
@@ -27,13 +41,14 @@ $(function() {
       data: JSON.stringify({
         "date": timeInput,
         "id": $("#idOrder").val(),
-        "timeExecution": $("#timeFromSelect").val(),
+        "timeExecution": $("#timeOrder").val(),
 
       }),
       success: function(response) {
         $('#selectForm').children('option').remove();
         for (var i = 0; i < response.length; i++) {
-          $('#selectForm').append($('<option></option>').val(response[i]).html(response[i]))
+          $('#selectForm').append($('<option></option>').val(
+            response[i]).html(response[i]))
         }
         setEndTimeForOrder();
       },
@@ -50,59 +65,59 @@ $(function() {
   };
 });
 
+// this function for getting the time execution of order
+function getDataOrder() {
+  var idWorkFromSelect = $("#typeOfWork").val();
+  var idWork = document.getElementsByClassName('idWork');
+  var nameWork = document.getElementsByClassName('nameWork');
+  var timeWork = document.getElementsByClassName('timeWork');
 
-function getDataTypeFromSelect(){
-    var idWorkFromSelect = $("#typeOfWork").val();
-    console.log(idWorkFromSelect);
-    var idWork = document.getElementsByClassName('idWork');
-    var nameWork = document.getElementsByClassName('nameWork');
-    var timeWork = document.getElementsByClassName('timeWork');
-    var priceWork = document.getElementsByClassName('priceWork');
-    
+  for (var i = 0; i < idWork.length; i++) {
 
-    for(var i = 0; i < idWork.length; i++){
-      
-      if(idWork[i].value === idWorkFromSelect){
-        console.log(idWork[i].value);
-        console.log(timeWork[i].value);
-        console.log(priceWork[i].value);
-    	  $('#idFromSelect').val(idWork[i].value);
-    	  $('#nameFromSelect').val(nameWork[i].value);
-        $('#timeFromSelect').val(timeWork[i].value);
-        $('#pricFromSelect').val(priceWork[i].value);
+    if (idWork[i].value === idWorkFromSelect) {
 
-        var testExecution = $("#timeFromSelect").val();
-        console.log('Execution : ');
-        console.log(testExecution);
-      }
+      $('#timeOrder').val(timeWork[i].value);
     }
+  }
 }
 
-function setEndTimeForOrder(){
+function setEndTimeForOrder() {
   var startTime = $('#selectForm').val();
-  var endTime = getEndTime(startTime);
-  $('#time_end').val(endTime);
+  if(startTime !== null){
+	  var endTime = getEndTime(startTime);
+	  $('#time_end').val(endTime);
+  }else{
+	  $('#time_end').val(null);
+	  $('#selectForm').val(null);
+  }
+
 
 }
+
+// this  function return time of end function
 function getEndTime(timeString) {
-    var time = timeString.split(":");
-    var hours =  time[0];
-    var minutes =  time[1];
-    var seconds =  time[2];
+  var time = timeString.split(":");
+  var hours = time[0];
+  var minutes = time[1];
+  var seconds = time[2];
 
-    var timeWorkExecution = $("#timeFromSelect").val();
+  var timeWorkExecution = $("#timeOrder").val();
+  var countOrder = $("#countOrders").val();
+  console.log(countOrder);
+  
+  var minuteExecution = ((hours * 60) + (timeWorkExecution * countOrder));
+ console.log(minuteExecution);
+  var hourEndExec = minuteExecution / 60;
 
-    var minuteExecution = (hours*60) + (timeWorkExecution*1);
+  var hourString = hourEndExec.toString();
 
-    var hourEndExec = minuteExecution/60;
-
-    var hourString = hourEndExec.toString();
-
-    var timeEnd = hourString.concat(':').concat(minutes).concat(':').concat(seconds);
-    return timeEnd;
+  var timeEnd = hourString.concat(':').concat(minutes).concat(':').concat(
+    seconds);
+  return timeEnd;
 }
-    $(document).on('change', '.tpicker', function() {
-      if($("#dpicker").val() != ""){
-        setEndTimeForOrder();
-      }
-    });
+
+//$(document).on('change', '.tpicker', function() {
+//  if ($("#dpicker").val() != "") {
+//    setEndTimeForOrder();
+//  }
+//});

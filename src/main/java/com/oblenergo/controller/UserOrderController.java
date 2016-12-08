@@ -125,28 +125,8 @@ public class UserOrderController {
   public @ResponseBody String[] selectTimeForDateAdmin(@RequestBody TimeDTO timeDTO) {
 
     Orders order = orderServiceImpl.findOrderById(Integer.parseInt(timeDTO.getId()));
-
     List<Orders> orders = orderServiceImpl.findDateOfOrders(timeDTO.getDate());
-
-    // test code for show information
-    for (int i = 0; i < orders.size(); i++) {
-      System.out.println("Size : " + orders.size());
-      System.out.println("time : " + orders.get(i).getTime());
-      System.out.println("end time : " + orders.get(i).getTime_end());
-    }
-    // end test code
-
-    // time all orders on date
-    String[][] arrTimeOrders = new String[orders.size()][2];
-    for (int i = 0; i < arrTimeOrders.length; i++) {
-
-      for (int j = 0; j < arrTimeOrders[i].length; j++) {
-        arrTimeOrders[i][0] = orders.get(i).getTime();
-        arrTimeOrders[i][1] = orders.get(i).getTime_end();
-      }
-    }
-    System.out.print("Execution : ");
-    System.out.println(timeDTO.getTimeExecution());
+    String[][] arrTimeOrders = orderServiceImpl.getAllTimeOfOrders(orders);
     List<String> freeTime = orderServiceImpl.findFreeTimeForAdmin(arrTimeOrders, timeDTO.getDate(), order,
         timeDTO.getTimeExecution());
 
