@@ -1,15 +1,13 @@
 package com.oblenergo.controller;
 
+import com.oblenergo.DTO.OrderDTO;
 import com.oblenergo.editor.CarEditor;
 import com.oblenergo.editor.ServiceEditor;
 import com.oblenergo.enums.StatusOrderEnum;
 import com.oblenergo.model.Car;
 import com.oblenergo.model.Orders;
 import com.oblenergo.model.WorkType;
-import com.oblenergo.service.CarService;
-import com.oblenergo.service.OrderService;
-import com.oblenergo.service.SapService;
-import com.oblenergo.service.WorkTypeService;
+import com.oblenergo.service.*;
 import com.oblenergo.validator.WorkTypeValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,6 +30,10 @@ public class AdminController {
   private static final String ORDER = "orders";
   private static final String STATUS_ORDER_ENUM = "items";
   private static final String WORKTYPE_FROM_SAP = "workTypeFromSap";
+
+
+  @Autowired
+  private MailService mailServiceImpl;
 
   @Autowired
   private OrderService orderServiceImpl;
@@ -133,7 +135,7 @@ public class AdminController {
   }
 
   @RequestMapping(value = "/order/{id}", method = RequestMethod.POST)
-  public String updateOrder(@Validated @ModelAttribute("orders") Orders orders, BindingResult bindingResult,
+  public String updateOrder(@Validated @ModelAttribute("orders") Orders orders, @ModelAttribute("orderDTO") OrderDTO orderDTO, BindingResult bindingResult,
       Model model) {
 
     if (bindingResult.hasErrors()) {

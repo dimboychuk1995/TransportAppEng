@@ -1,30 +1,5 @@
 package com.oblenergo.controller;
 
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.oblenergo.DTO.TimeDTO;
 import com.oblenergo.editor.CarEditor;
 import com.oblenergo.editor.ServiceEditor;
@@ -36,6 +11,23 @@ import com.oblenergo.service.ItextService;
 import com.oblenergo.service.OrderService;
 import com.oblenergo.service.SapService;
 import com.oblenergo.validator.ClientValidator;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/")
@@ -43,6 +35,7 @@ public class UserOrderController {
   Logger LOGGER = Logger.getLogger(UserOrderController.class);
 
   private static final String WORKTYPE_FROM_SAP = "workTypeFromSap";
+  private static final String PDF_FROM_SAP = "PDFfromSap";
   // private static final String ITEMSWORKTYPE = "typeWorks";
   private static final String ITEMSCAR = "cars";
   private static final String ORDER = "orders";
@@ -94,10 +87,12 @@ public class UserOrderController {
     if (bindingResult.hasErrors()) {
       model.addAttribute(WORKTYPE_FROM_SAP, sapServiceImpl.getAllWorkTypes());
       model.addAttribute(ITEMSCAR, carServiceImpl.findAll());
+
       return "createOrder";
     }
     orders.setCustomer(sapServiceImpl.getFullNameFromSap(orders.getUser_tab()));
     System.out.println(orders.getWorkType().getId());
+
     orderServiceImpl.save(orders);
     return "redirect:/?id=" + orders.getId();
   }
