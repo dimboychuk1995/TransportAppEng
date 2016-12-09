@@ -34,4 +34,6 @@ public interface OrderService {
 
   public List<Orders> findAllConfirm();
 
+  public String[][] getAllTimeOfOrders(List<Orders> orders);
+
 }

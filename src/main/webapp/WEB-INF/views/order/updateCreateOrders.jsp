@@ -41,23 +41,18 @@
           <form:errors path="car_number" class="help-block with-errors" cssErrorClass="" />
 
 		 
-		 <!-- 	 this input for testing  -->
-		  <input id = "idFromSelect" type = "hidden">
-          <input id = "nameFromSelect" type = "hidden">
-          <input id = "timeFromSelect" type = "hidden">
-          <input id = "priceFromSelect" type = "hidden">
-		<!--           end test -->
+		 <!-- 	 data of orders  -->
+          <!--  <input id = "nameOrder" type = "hidden"> -->
+          <input id = "timeOrder" type = "hidden">
+
 		 
 		  <!-- all data from controller -->  
 		 <c:forEach items = '${workTypeFromSap}' var = 'typeOfWork'>
-		 <input class = 'idWork' type = 'hidden' value = '${typeOfWork.id}'>
+		 <input class = 'idWork' type = "hidden" value = '${typeOfWork.id}'>
 		 <input class = 'nameWork' type = "hidden" value = '${typeOfWork.name}'>
-		 <input class = 'priceWork' type = "hidden" value = '${typeOfWork.price}'>
 		 <input class = 'timeWork' type = "hidden" value = '${typeOfWork.time}'>
 		 </c:forEach>
-		 <!-- 
-				end test code for each	
-		 -->	 
+	 
 
           <label class="col-md-6 no-padding-left">Дата</label> 
           <label class="col-md-3">Початок</label>
