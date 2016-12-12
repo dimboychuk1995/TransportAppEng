@@ -3,6 +3,7 @@ package com.oblenergo.DAO;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -43,8 +44,12 @@ public class OrderDaoImpl extends AbstractDao<Integer, Orders> implements OrderD
   @Override
   public List<Orders> dateOfOrders(String date) {
     Criteria crit = createEntityCriteria();
-    crit.add(Restrictions.eq("status_order", StatusOrderEnum.DONE));
-    crit.add(Restrictions.eq("date", date));
+    Criterion paidORDone = Restrictions.or(Restrictions.eq("status_order", StatusOrderEnum.PAID),
+        Restrictions.eq("status_order", StatusOrderEnum.DONE));
+    Criterion dateOrder = Restrictions.eq("date", date);
+
+    crit.add(paidORDone);
+    crit.add(dateOrder);
     return (List<Orders>) crit.list();
   }
 
