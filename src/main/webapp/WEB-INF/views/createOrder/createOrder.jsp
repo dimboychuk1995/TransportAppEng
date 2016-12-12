@@ -145,16 +145,14 @@
 
       <div class="row">
         <div class="alert alert-success col-md-4 col-md-offset-4">
-          Ваше замовлення оформлено, для здійснення оплати та в'їзду на територію підприємтсва роздрукуйте будь ласка чек!
+          Ваше замовлення оформлено, очікуйте квитанцію для оплати на Вашу електронну пошту!
         </div>
       </div>
 
       <div class="row">
         <div class="col-md-4 col-md-offset-4">
-          <form:form action="${pageContext.request.contextPath}/pdf/${param.id}" method="GET">
-            <button type="submit" class="btn btn-success">Роздрукувати чек</button>
-            <a href=<c:url value="/" /> class="btn btn-default">Повернутися</a>
-          </form:form>
+            <a href=<c:url value="/" /> class="btn btn-success">Повернутися</a>
+
         </div>
       </div>
 
