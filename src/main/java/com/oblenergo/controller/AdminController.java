@@ -1,26 +1,6 @@
 package com.oblenergo.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-
-
 import com.oblenergo.DTO.OrderDTO;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
 import com.oblenergo.editor.CarEditor;
 import com.oblenergo.editor.ServiceEditor;
 import com.oblenergo.enums.StatusOrderEnum;
@@ -29,6 +9,15 @@ import com.oblenergo.model.Orders;
 import com.oblenergo.model.WorkType;
 import com.oblenergo.service.*;
 import com.oblenergo.validator.WorkTypeValidator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -146,8 +135,8 @@ public class AdminController {
   }
 
   @RequestMapping(value = "/order/{id}", method = RequestMethod.POST)
-  public String updateOrder(@Validated @ModelAttribute("orders") Orders orders, @ModelAttribute("orderDTO") OrderDTO orderDTO, BindingResult bindingResult,
-      Model model) {
+   public String updateOrder(@Validated @ModelAttribute("orders") Orders orders, BindingResult bindingResult,
+                             Model model) {
 
     if (bindingResult.hasErrors()) {
       model.addAttribute(ORDER, orderServiceImpl.findOrderById(orders.getId()));
@@ -157,6 +146,16 @@ public class AdminController {
       model.addAttribute(WORKTYPE_FROM_SAP, sapServiceImpl.getAllWorkTypes());
       return "updateCreateOrders";
     }
+
+      System.out.println(orders.getCar_number());
+      System.out.println("000000000023200977");
+      System.out.println(Integer.toString(orders.getCount()));
+      System.out.println("here1");
+      OrderDTO orderDTO = sapServiceImpl.createNewOrder(orders.getCar_number(), "000000000023200977", Integer.toString(orders.getCount()));
+      sapServiceImpl.getBillPDF(orderDTO.getOrderNum());
+      System.out.println("here2");
+      mailServiceImpl.sendMail(orders, "dmytro.boychuk@oe.if.ua", "some text");
+
     orderServiceImpl.update(orders);
     return "redirect:/admin/order";
   }

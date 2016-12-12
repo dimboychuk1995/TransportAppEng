@@ -23,7 +23,7 @@
           <form:select id = 'typeOfWork' path="workType" items="${typeWorks}" class="form-control" data-placeholder="work" itemLabel="name" itemValue="id" disabled="true" />
 
 		  <label>Кількість</label>
-          <form:select path="count" id = "countOrders" class="form-control" disabled="true">
+          <form:select path="count" id = "countOrders" class="form-control" readonly="true">
           	<form:option value="${orders.count}">${orders.count}</form:option>
           </form:select>
 			
