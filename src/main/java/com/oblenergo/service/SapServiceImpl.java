@@ -18,6 +18,13 @@ public class SapServiceImpl implements SapService {
   SapClient sapClient;
 
   @Override
+  public String getUserEmailFromSap(String tabNamber){
+
+    return sapClient.getUserEmail(tabNamber);
+  }
+
+
+  @Override
   public String getFullNameFromSap(String tabNamber) {
 
     return sapClient.getFullName(tabNamber);

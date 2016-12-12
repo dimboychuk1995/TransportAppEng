@@ -1,11 +1,13 @@
 package com.oblenergo.service;
 
-import java.util.List;
-
 import com.oblenergo.DTO.OrderDTO;
 import com.oblenergo.DTO.WorkTypeDTO;
 
+import java.util.List;
+
 public interface SapService {
+
+  String getUserEmailFromSap(String tabNamber);
 
   String getFullNameFromSap(String tabNamber);
 

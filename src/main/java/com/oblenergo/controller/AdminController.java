@@ -138,6 +138,12 @@ public class AdminController {
    public String updateOrder(@Validated @ModelAttribute("orders") Orders orders, BindingResult bindingResult,
                              Model model) {
 
+
+    System.out.println(sapServiceImpl.getUserEmailFromSap("9522"));
+    System.out.println();
+    System.out.println();
+    System.out.println();
+    System.out.println();
     if (bindingResult.hasErrors()) {
       model.addAttribute(ORDER, orderServiceImpl.findOrderById(orders.getId()));
       model.addAttribute(ITEMSWORKTYPE, workTypeServiceImpl.findAll());
@@ -147,14 +153,11 @@ public class AdminController {
       return "updateCreateOrders";
     }
 
-      System.out.println(orders.getCar_number());
-      System.out.println("000000000023200977");
-      System.out.println(Integer.toString(orders.getCount()));
-      System.out.println("here1");
-      OrderDTO orderDTO = sapServiceImpl.createNewOrder(orders.getCar_number(), "000000000023200977", Integer.toString(orders.getCount()));
+
+
+      OrderDTO orderDTO = sapServiceImpl.createNewOrder(orders.getCar_number(), orders.getWorkType().getId(), Integer.toString(orders.getCount()));
       sapServiceImpl.getBillPDF(orderDTO.getOrderNum());
-      System.out.println("here2");
-      mailServiceImpl.sendMail(orders, "dmytro.boychuk@oe.if.ua", "some text");
+      mailServiceImpl.sendMail(orders, sapServiceImpl.getUserEmailFromSap(orders.getUser_tab()), "Submit");
 
     orderServiceImpl.update(orders);
     return "redirect:/admin/order";

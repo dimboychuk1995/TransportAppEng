@@ -20,7 +20,7 @@
 
 
           <label>Вид робіт</label>
-          <form:select id = 'typeOfWork' path="workType" items="${typeWorks}" class="form-control" data-placeholder="work" itemLabel="name" itemValue="id" disabled="true" />
+          <form:select id = 'typeOfWork' path="workType" items="${typeWorks}" class="form-control" data-placeholder="work" itemLabel="name" itemValue="id" readonly="true" />
 
 		  <label>Кількість</label>
           <form:select path="count" id = "countOrders" class="form-control" readonly="true">
