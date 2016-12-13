@@ -148,12 +148,6 @@ public class AdminController {
   public String updateOrder(@Validated @ModelAttribute("orders") Orders orders,  BindingResult bindingResult,
       Model model) {
 
-
-    System.out.println(sapServiceImpl.getUserEmailFromSap("9522"));
-    System.out.println();
-    System.out.println();
-    System.out.println();
-    System.out.println();
     if (bindingResult.hasErrors()) {
       model.addAttribute(ORDER, orderServiceImpl.findOrderById(orders.getId()));
       model.addAttribute(ITEMSWORKTYPE, workTypeServiceImpl.findAll());
