@@ -1,5 +1,22 @@
 package com.oblenergo.controller;
 
+import java.util.List;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.oblenergo.DTO.TimeDTO;
 import com.oblenergo.editor.CarEditor;
 import com.oblenergo.editor.ServiceEditor;
@@ -11,23 +28,6 @@ import com.oblenergo.service.ItextService;
 import com.oblenergo.service.OrderService;
 import com.oblenergo.service.SapService;
 import com.oblenergo.validator.ClientValidator;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 
 @Controller
 @RequestMapping(value = "/")
@@ -97,24 +97,26 @@ public class UserOrderController {
     return "redirect:/?id=" + orders.getId();
   }
 
-  @RequestMapping(value = "/pdf/{id}", method = RequestMethod.GET)
-  public void getPDF(HttpServletResponse response, @PathVariable int id) {
-
-    Orders order = orderServiceImpl.findOrderById(id);
-    byte[] data = iTextServiceImpl.writeCheck(order);
-    String fileName = new SimpleDateFormat(DATAFORMAT).format(new Date()) + ".pdf";
-    response.setHeader("Content-Disposition", String.format("inline; filename=\"" + fileName + "\""));
-    response.setContentType("application/x-download");
-    try (ServletOutputStream outputStream = response.getOutputStream()) {
-
-      response.setContentLength(data.length);
-      FileCopyUtils.copy(data, outputStream);
-
-    } catch (NullPointerException | IOException e) {
-      LOGGER.error("Con't write date to document", e);
-      throw new RuntimeException();
-    }
-  }
+  // @RequestMapping(value = "/pdf/{id}", method = RequestMethod.GET)
+  // public void getPDF(HttpServletResponse response, @PathVariable int id) {
+  //
+  //// Orders order = orderServiceImpl.findOrderById(id);
+  //// byte[] data = iTextServiceImpl.writeCheck(order);
+  //// String fileName = new SimpleDateFormat(DATAFORMAT).format(new Date()) +
+  // ".pdf";
+  //// response.setHeader("Content-Disposition", String.format("inline;
+  // filename=\"" + fileName + "\""));
+  //// response.setContentType("application/x-download");
+  //// try (ServletOutputStream outputStream = response.getOutputStream()) {
+  ////
+  //// response.setContentLength(data.length);
+  //// FileCopyUtils.copy(data, outputStream);
+  ////
+  //// } catch (NullPointerException | IOException e) {
+  //// LOGGER.error("Con't write date to document", e);
+  //// throw new RuntimeException();
+  //// }
+  // }
 
   @RequestMapping(value = "/selectTimeAdmin", headers = "Accept=*/*", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = "application/json")
   public @ResponseBody String[] selectTimeForDateAdmin(@RequestBody TimeDTO timeDTO) {

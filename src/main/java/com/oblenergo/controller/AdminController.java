@@ -145,11 +145,10 @@ public class AdminController {
   }
 
   @RequestMapping(value = "/order/{id}", method = RequestMethod.POST)
-  public String updateOrder(@Validated @ModelAttribute("orders") Orders orders,  BindingResult bindingResult,
+  public String updateOrder(@Validated @ModelAttribute("orders") Orders orders, BindingResult bindingResult,
       Model model) {
 
-
-    System.out.println(sapServiceImpl.getUserEmailFromSap("9522"));
+    System.out.println(sapServiceImpl.getUserEmailFromSap("9546"));
     System.out.println();
     System.out.println();
     System.out.println();
@@ -163,13 +162,16 @@ public class AdminController {
       return "updateCreateOrders";
     }
 
-    if(orders.getStatus_order().equals(StatusOrderEnum.DONE)) {
-      OrderDTO orderDTO = sapServiceImpl.createNewOrder(orders.getCar_number(), orders.getWorkType().getId(), Integer.toString(orders.getCount()));
-      mailServiceImpl.sendMail(orderDTO, sapServiceImpl.getUserEmailFromSap(orders.getUser_tab()), "Your order is confirmed");
+    if (orders.getStatus_order().equals(StatusOrderEnum.DONE)) {
+      OrderDTO orderDTO = sapServiceImpl.createNewOrder(orders.getCar_number(), orders.getWorkType().getId(),
+          Integer.toString(orders.getCount()));
+      mailServiceImpl.sendMail(orderDTO, orders, sapServiceImpl.getUserEmailFromSap(orders.getUser_tab()),
+          "Your order is confirmed");
     }
 
-    if(orders.getStatus_order().equals(StatusOrderEnum.CANCELED)) {
-      mailServiceImpl.sendMailWithoutPDF(sapServiceImpl.getUserEmailFromSap(orders.getUser_tab()), "Your order is CANCELED");
+    if (orders.getStatus_order().equals(StatusOrderEnum.CANCELED)) {
+      mailServiceImpl.sendMailWithoutPDF(sapServiceImpl.getUserEmailFromSap(orders.getUser_tab()),
+          "Your order is CANCELED");
     }
 
     orderServiceImpl.update(orders);

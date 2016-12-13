@@ -49,7 +49,7 @@ public class ItextServiceImpl implements ItextService {
   }
 
   @Override
-  public byte[] writeCheck(Orders order) {
+  public byte[] writePermit(Orders order) {
 
     byte[] pdf = null;
     Document document = new Document();

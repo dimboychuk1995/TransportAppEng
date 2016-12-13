@@ -1,6 +1,8 @@
 package com.oblenergo.service;
 
-import com.oblenergo.DTO.OrderDTO;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -11,8 +13,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
+import com.oblenergo.DTO.OrderDTO;
 
 @Service
 public class MailServiceImpl implements MailService {
@@ -55,7 +56,7 @@ public class MailServiceImpl implements MailService {
   }
 
   @Override
-  public void sendMailWithoutPDF(String email, String text){
+  public void sendMailWithoutPDF(String email, String text) {
 
     try {
       MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true);
@@ -69,6 +70,5 @@ public class MailServiceImpl implements MailService {
       LOGGER.error("There was a problem setting the sender address", e1);
     }
   }
-
 
 }
