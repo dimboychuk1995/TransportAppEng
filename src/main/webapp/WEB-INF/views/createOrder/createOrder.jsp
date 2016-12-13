@@ -43,11 +43,11 @@
 		 -->
 		 
 		 <!-- all data from controller -->
-		 <c:forEach items = '${workTypeFromSap}' var = 'typeOfWork'>
-		 <input class = 'idWork' type = 'hidden' value = '${typeOfWork.id}'>
-		 <input class = 'nameWork' type = "hidden" value = '${typeOfWork.name}'>
-		 <input class = 'priceWork' type = "hidden" value = '${typeOfWork.price}'>
-		 <input class = 'timeWork' type = "hidden" value = '${typeOfWork.time}'>
+         <c:forEach items = '${workTypeFromSap}' var = 'typeOfWork'>
+         <input class = 'idWork' type = 'hidden' value = '${typeOfWork.id}'>
+         <input class = 'nameWork' type = "hidden" value = '${typeOfWork.name}'>
+         <input class = 'priceWork' type = "hidden" value = '${typeOfWork.price}'>
+         <input class = 'timeWork' type = "hidden" value = '${typeOfWork.time}'>
 		 
 		 </c:forEach>
 		 <!-- 
@@ -75,8 +75,12 @@
               <form:input id="dpicker" required="required" path="date" class="date start dateChange form-control " placeholder="Виберіть дату" cssErrorClass="date start dateChange error form-control" />
               <form:errors path="date" class="help-block with-errors" cssErrorClass="" />   
           </div>
-            
-         <br> 
+
+          <label>Мобільний номер</label>
+          <form:input id="mobile_phone_number" required="required" path="mobile_phone_number" class="form-control orderInput" placeholder="Введіть ваш мобільний номер" cssErrorClass="error form-control" />
+          <form:errors path="mobile_phone_number" class="help-block with-errors" cssErrorClass="" />
+
+        <br>
         
         <label> Виберіть період надання послуги</label>
 		
