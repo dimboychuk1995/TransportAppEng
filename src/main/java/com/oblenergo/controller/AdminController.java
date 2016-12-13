@@ -148,11 +148,6 @@ public class AdminController {
   public String updateOrder(@Validated @ModelAttribute("orders") Orders orders, BindingResult bindingResult,
       Model model) {
 
-    System.out.println(sapServiceImpl.getUserEmailFromSap("9546"));
-    System.out.println();
-    System.out.println();
-    System.out.println();
-    System.out.println();
     if (bindingResult.hasErrors()) {
       model.addAttribute(ORDER, orderServiceImpl.findOrderById(orders.getId()));
       model.addAttribute(ITEMSWORKTYPE, workTypeServiceImpl.findAll());
@@ -162,7 +157,8 @@ public class AdminController {
       return "updateCreateOrders";
     }
 
-    if (orders.getStatus_order().equals(StatusOrderEnum.DONE)) {
+    if (orders.getStatus_order().equals(StatusOrderEnum.DONE)
+        && (!orderServiceImpl.findOrderById(orders.getId()).getStatus_order().equals(orders.getStatus_order()))) {
       OrderDTO orderDTO = sapServiceImpl.createNewOrder(orders.getCar_number(), orders.getWorkType().getId(),
           Integer.toString(orders.getCount()));
       mailServiceImpl.sendMail(orderDTO, orders, sapServiceImpl.getUserEmailFromSap(orders.getUser_tab()),
