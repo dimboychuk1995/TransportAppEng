@@ -42,10 +42,7 @@
 
 		 
 		 <!-- 	 data of orders  -->
-          <!--  <input id = "nameOrder" type = "hidden"> -->
           <input id = "timeOrder" type = "hidden">
-
-		 
 		  <!-- all data from controller -->  
 		 <c:forEach items = '${workTypeFromSap}' var = 'typeOfWork'>
 		 <input class = 'idWork' type = "hidden" value = '${typeOfWork.id}'>

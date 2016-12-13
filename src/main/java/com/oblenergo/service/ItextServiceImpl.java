@@ -16,6 +16,7 @@ import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.BaseFont;
@@ -57,14 +58,16 @@ public class ItextServiceImpl implements ItextService {
     try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
 
       PdfWriter writer = PdfWriter.getInstance(document, baos);
+      String pathImageLogo = context.getRealPath("/resources/oblenergoLogoColor.png");
       document.open();
+      Image imgLogo = Image.getInstance(pathImageLogo);
+      document.add(imgLogo);
       document.add(createTable(order));
 
       Paragraph paragraph = new Paragraph();
       paragraph.setSpacingBefore(25);
 
       document.add(paragraph);
-      document.add(createTableOrder(order));
       document.close();
       pdf = baos.toByteArray();
       writer.close();
@@ -80,7 +83,7 @@ public class ItextServiceImpl implements ItextService {
     PdfPTable table = new PdfPTable(2);
     table.setWidthPercentage(100); // Width 100%
     // Set Column widths
-    float[] columnWidths = { 2f, 5f };
+    float[] columnWidths = { 5f, 5f };
     try {
       table.setWidths(columnWidths);
     } catch (DocumentException e) {
@@ -90,71 +93,38 @@ public class ItextServiceImpl implements ItextService {
 
     PdfPCell cell;
 
-    cell = new PdfPCell(new Phrase("РАХУНОК-ФАКТУРА №  від " + getLocalDay(), getFont()));
+    cell = new PdfPCell(new Phrase("Перепустка для в'їзду на територію № " + order.getId(), getFont()));
     cell.setColspan(2);
     cell.setBorderColor(BaseColor.WHITE);
     table.addCell(cell);
 
-    cell = new PdfPCell(new Phrase("Постачальник : ", getFont()));
+    cell = new PdfPCell(new Phrase("Замоввник : ", getFont()));
 
-    table.addCell(cell);
-
-    table.addCell("00131564");
-
-    cell = new PdfPCell(new Phrase("Адреса : ", getFont()));
-    table.addCell(cell);
-    table.addCell(new Phrase("76014, м.Івано-Франківськ, вул.Індустріальна ,34.", getFont()));
-
-    cell = new PdfPCell(new Phrase("ІПН : ", getFont()));
-    table.addCell(cell);
-    table.addCell("001315609158");
-
-    cell = new PdfPCell(new Phrase("Р/рахунок : ", getFont()));
-    table.addCell(cell);
-    table.addCell(new Phrase("Філія - Івано.-Франк.ОУ АТ Ощадбанк 336503   26003301757", getFont()));
-
-    cell = new PdfPCell(new Phrase("Платник : ", getFont()));
     table.addCell(cell);
 
     table.addCell(new Phrase(order.getCustomer(), getFont()));
-    cell = new PdfPCell(new Phrase("Підстава : ", getFont()));
+
+    cell = new PdfPCell(new Phrase("Вид послуги : ", getFont()));
+    table.addCell(cell);
+    table.addCell(new Phrase(order.getWorkType().getName(), getFont()));
+
+    cell = new PdfPCell(new Phrase("Державний реєстраційний номер : ", getFont()));
+    table.addCell(cell);
+    table.addCell(new Phrase(order.getCar_number().toString(), getFont()));
+
+    cell = new PdfPCell(new Phrase("Дата виконання послуги : ", getFont()));
+    table.addCell(cell);
+    table.addCell(new Phrase(order.getDate(), getFont()));
+
+    cell = new PdfPCell(new Phrase("Початок виконання послуги : ", getFont()));
+    table.addCell(cell);
+    table.addCell(new Phrase(order.getTime(), getFont()));
+
+    cell = new PdfPCell(new Phrase("Кінець надання послуги : ", getFont()));
     table.addCell(cell);
 
-    table.addCell(new Phrase("на підставі заказу №" + order.getId() + " від " + getLocalDay(), getFont()));
+    table.addCell(new Phrase(order.getTime_end(), getFont()));
 
-    return table;
-  }
-
-  public PdfPTable createTableOrder(Orders order) throws DocumentException {
-
-    // a table with three columns
-    PdfPTable table = new PdfPTable(6);
-    table.setWidthPercentage(100); // Width 100%
-    // Set Column widths
-    float[] columnWidths = { 5f, 2f, 2f, 2f, 2f, 2f };
-    try {
-      table.setWidths(columnWidths);
-    } catch (DocumentException e) {
-      LOGGER.error("Unable to create the table " + e);
-      throw e;
-    }
-
-    PdfPCell cell;
-    cell = new PdfPCell(new Phrase("Найменування товару", getFont()));
-    table.addCell(cell);
-    table.addCell(new Phrase("Од.виміру", getFont()));
-    table.addCell(new Phrase("Кількість", getFont()));
-    table.addCell(new Phrase("Ціна", getFont()));
-    table.addCell(new Phrase("Один. ціни", getFont()));
-    table.addCell(new Phrase("Сума", getFont()));
-
-    cell = new PdfPCell(new Phrase(order.getWorkType().getName(), getFont()));
-    table.addCell(cell);
-    table.addCell(new Phrase("шт.", getFont()));
-    table.addCell(new Phrase("1", getFont()));
-    table.addCell(new Phrase("" + order.getWorkType(), getFont()));
-    table.addCell(new Phrase("грн.", getFont()));
-    table.addCell(new Phrase("" + order.getWorkType(), getFont()));
     return table;
   }
 
