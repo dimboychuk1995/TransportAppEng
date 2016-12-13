@@ -1,29 +1,21 @@
 package com.oblenergo.service;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import javax.servlet.ServletContext;
-
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.itextpdf.text.BaseColor;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Font;
-import com.itextpdf.text.Image;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Phrase;
+import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.oblenergo.model.Orders;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.servlet.ServletContext;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Service
 public class ItextServiceImpl implements ItextService {
@@ -93,34 +85,34 @@ public class ItextServiceImpl implements ItextService {
 
     PdfPCell cell;
 
-    cell = new PdfPCell(new Phrase("Перепустка для в'їзду на територію № " + order.getId(), getFont()));
+    cell = new PdfPCell(new Phrase("РџРµСЂРµРїСѓСЃС‚РєР° РґР»СЏ РІ*С—Р·РґСѓ РЅР° С‚РµСЂРёС‚РѕСЂС–СЋ" + order.getId(), getFont()));
     cell.setColspan(2);
     cell.setBorderColor(BaseColor.WHITE);
     table.addCell(cell);
 
-    cell = new PdfPCell(new Phrase("Замоввник : ", getFont()));
+    cell = new PdfPCell(new Phrase("Р—Р°РјРѕРІРЅРёРє : ", getFont()));
 
     table.addCell(cell);
 
     table.addCell(new Phrase(order.getCustomer(), getFont()));
 
-    cell = new PdfPCell(new Phrase("Вид послуги : ", getFont()));
+    cell = new PdfPCell(new Phrase("Р’РёРґ РїРѕСЃР»СѓРіРё : ", getFont()));
     table.addCell(cell);
     table.addCell(new Phrase(order.getWorkType().getName(), getFont()));
 
-    cell = new PdfPCell(new Phrase("Державний реєстраційний номер : ", getFont()));
+    cell = new PdfPCell(new Phrase("Р”РµСЂР¶Р°РІРЅРёР№ СЂРµС”СЃС‚СЂР°С†С–Р№РЅРёР№ РЅРѕРјРµСЂ : ", getFont()));
     table.addCell(cell);
     table.addCell(new Phrase(order.getCar_number().toString(), getFont()));
 
-    cell = new PdfPCell(new Phrase("Дата виконання послуги : ", getFont()));
+    cell = new PdfPCell(new Phrase("Р”Р°С‚Р° РІРёРєРѕРЅР°РЅРЅСЏ РїРѕСЃР»СѓРіРё : ", getFont()));
     table.addCell(cell);
     table.addCell(new Phrase(order.getDate(), getFont()));
 
-    cell = new PdfPCell(new Phrase("Початок виконання послуги : ", getFont()));
+    cell = new PdfPCell(new Phrase("РџРѕС‡Р°С‚РѕРє РІРёРєРѕРЅР°РЅРЅСЏ РїРѕСЃР»СѓРіРё : ", getFont()));
     table.addCell(cell);
     table.addCell(new Phrase(order.getTime(), getFont()));
 
-    cell = new PdfPCell(new Phrase("Кінець надання послуги : ", getFont()));
+    cell = new PdfPCell(new Phrase("РљС–РЅРµС†СЊ РЅР°РґР°РЅРЅСЏ РїРѕСЃР»СѓРіРё : ", getFont()));
     table.addCell(cell);
 
     table.addCell(new Phrase(order.getTime_end(), getFont()));
