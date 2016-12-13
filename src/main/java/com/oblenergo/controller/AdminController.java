@@ -145,7 +145,7 @@ public class AdminController {
   }
 
   @RequestMapping(value = "/order/{id}", method = RequestMethod.POST)
-  public String updateOrder(@Validated @ModelAttribute("orders") Orders orders, @ModelAttribute("order") OrderDTO order, BindingResult bindingResult,
+  public String updateOrder(@Validated @ModelAttribute("orders") Orders orders,  BindingResult bindingResult,
       Model model) {
 
 
@@ -165,8 +165,7 @@ public class AdminController {
 
     if(orders.getStatus_order().equals(StatusOrderEnum.DONE)) {
       OrderDTO orderDTO = sapServiceImpl.createNewOrder(orders.getCar_number(), orders.getWorkType().getId(), Integer.toString(orders.getCount()));
-      sapServiceImpl.getBillPDF(orderDTO.getOrderNum());
-      mailServiceImpl.sendMail(order, sapServiceImpl.getUserEmailFromSap(orders.getUser_tab()), "Your order is confirmed");
+      mailServiceImpl.sendMail(orderDTO, sapServiceImpl.getUserEmailFromSap(orders.getUser_tab()), "Your order is confirmed");
     }
 
     if(orders.getStatus_order().equals(StatusOrderEnum.CANCELED)) {
