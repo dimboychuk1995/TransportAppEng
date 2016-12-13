@@ -1,14 +1,5 @@
 package com.oblenergo.controller;
 
-import com.oblenergo.DTO.OrderDTO;
-import com.oblenergo.editor.CarEditor;
-import com.oblenergo.editor.ServiceEditor;
-import com.oblenergo.enums.StatusOrderEnum;
-import com.oblenergo.model.Car;
-import com.oblenergo.model.Orders;
-import com.oblenergo.model.WorkType;
-import com.oblenergo.service.*;
-import com.oblenergo.validator.WorkTypeValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,7 +8,27 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+import com.oblenergo.DTO.OrderDTO;
+import com.oblenergo.editor.CarEditor;
+import com.oblenergo.editor.ServiceEditor;
+import com.oblenergo.enums.StatusOrderEnum;
+import com.oblenergo.model.Car;
+import com.oblenergo.model.Orders;
+import com.oblenergo.model.WorkType;
+import com.oblenergo.service.CarService;
+import com.oblenergo.service.MailService;
+import com.oblenergo.service.OrderService;
+import com.oblenergo.service.SapService;
+import com.oblenergo.service.WorkTypeService;
+import com.oblenergo.validator.WorkTypeValidator;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -30,7 +41,6 @@ public class AdminController {
   private static final String ORDER = "orders";
   private static final String STATUS_ORDER_ENUM = "items";
   private static final String WORKTYPE_FROM_SAP = "workTypeFromSap";
-
 
   @Autowired
   private MailService mailServiceImpl;
@@ -135,8 +145,8 @@ public class AdminController {
   }
 
   @RequestMapping(value = "/order/{id}", method = RequestMethod.POST)
-   public String updateOrder(@Validated @ModelAttribute("orders") Orders orders, @ModelAttribute("order") OrderDTO order, BindingResult bindingResult,
-                             Model model) {
+  public String updateOrder(@Validated @ModelAttribute("orders") Orders orders, @ModelAttribute("order") OrderDTO order, BindingResult bindingResult,
+      Model model) {
 
 
     System.out.println(sapServiceImpl.getUserEmailFromSap("9522"));
@@ -162,8 +172,6 @@ public class AdminController {
     if(orders.getStatus_order().equals(StatusOrderEnum.CANCELED)) {
       mailServiceImpl.sendMailWithoutPDF(sapServiceImpl.getUserEmailFromSap(orders.getUser_tab()), "Your order is CANCELED");
     }
-
-
 
     orderServiceImpl.update(orders);
     return "redirect:/admin/order";
