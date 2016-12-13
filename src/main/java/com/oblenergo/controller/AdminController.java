@@ -163,7 +163,8 @@ public class AdminController {
       return "updateCreateOrders";
     }
 
-    if(orders.getStatus_order().equals(StatusOrderEnum.DONE)) {
+    if(orders.getStatus_order().equals(StatusOrderEnum.DONE) &&
+            (!orderServiceImpl.findOrderById(orders.getId()).getStatus_order().equals(orders.getStatus_order()))) {
       OrderDTO orderDTO = sapServiceImpl.createNewOrder(orders.getCar_number(), orders.getWorkType().getId(), Integer.toString(orders.getCount()));
       mailServiceImpl.sendMail(orderDTO, sapServiceImpl.getUserEmailFromSap(orders.getUser_tab()), "Your order is confirmed");
     }
