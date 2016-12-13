@@ -12,6 +12,8 @@ public interface WorkTypeDao {
 
   List<WorkType> findAllWorkType();
 
+  List<WorkType> findAllAvailableWorkType();
+
   void save(WorkType wt);
 
   void delete(int id);

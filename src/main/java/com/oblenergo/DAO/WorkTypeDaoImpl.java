@@ -20,6 +20,14 @@ public class WorkTypeDaoImpl extends AbstractDao<String, WorkType> implements Wo
     return (List<WorkType>) crit.list();
   }
 
+  @SuppressWarnings("unchecked")
+  @Override
+  public List<WorkType> findAllAvailableWorkType() {
+    Criteria crit = createEntityCriteria();
+    crit.add(Restrictions.eq("enabled", true));
+    return (List<WorkType>) crit.list();
+  }
+
   @Override
   public void save(WorkType wt) {
     persist(wt);
