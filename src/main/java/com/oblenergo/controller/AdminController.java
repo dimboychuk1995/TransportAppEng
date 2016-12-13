@@ -135,7 +135,7 @@ public class AdminController {
   }
 
   @RequestMapping(value = "/order/{id}", method = RequestMethod.POST)
-   public String updateOrder(@Validated @ModelAttribute("orders") Orders orders, BindingResult bindingResult,
+   public String updateOrder(@Validated @ModelAttribute("orders") Orders orders, @ModelAttribute("order") OrderDTO order, BindingResult bindingResult,
                              Model model) {
 
 
@@ -153,11 +153,17 @@ public class AdminController {
       return "updateCreateOrders";
     }
 
-
-
+    if(orders.getStatus_order().equals(StatusOrderEnum.DONE)) {
       OrderDTO orderDTO = sapServiceImpl.createNewOrder(orders.getCar_number(), orders.getWorkType().getId(), Integer.toString(orders.getCount()));
       sapServiceImpl.getBillPDF(orderDTO.getOrderNum());
-      mailServiceImpl.sendMail(orders, sapServiceImpl.getUserEmailFromSap(orders.getUser_tab()), "Submit");
+      mailServiceImpl.sendMail(order, sapServiceImpl.getUserEmailFromSap(orders.getUser_tab()), "Your order is confirmed");
+    }
+
+    if(orders.getStatus_order().equals(StatusOrderEnum.CANCELED)) {
+      mailServiceImpl.sendMailWithoutPDF(sapServiceImpl.getUserEmailFromSap(orders.getUser_tab()), "Your order is CANCELED");
+    }
+
+
 
     orderServiceImpl.update(orders);
     return "redirect:/admin/order";

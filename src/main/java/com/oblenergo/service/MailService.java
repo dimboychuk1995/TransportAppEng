@@ -1,9 +1,11 @@
 package com.oblenergo.service;
 
-import com.oblenergo.model.Orders;
+import com.oblenergo.DTO.OrderDTO;
 
 public interface MailService {
 
-  void sendMail(Orders order, String email, String text);
+  void sendMail(OrderDTO order, String email, String text);
+
+  void sendMailWithoutPDF(String email, String text);
 
 }
