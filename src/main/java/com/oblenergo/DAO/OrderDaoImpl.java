@@ -47,7 +47,6 @@ public class OrderDaoImpl extends AbstractDao<Integer, Orders> implements OrderD
     Criterion paidORDone = Restrictions.or(Restrictions.eq("status_order", StatusOrderEnum.PAID),
         Restrictions.eq("status_order", StatusOrderEnum.DONE));
     Criterion dateOrder = Restrictions.eq("date", date);
-
     crit.add(paidORDone);
     crit.add(dateOrder);
     return (List<Orders>) crit.list();
