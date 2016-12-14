@@ -15,20 +15,17 @@
     <div class="header">
       <div class="logo">
         <h1>
-          <a href="#">Page not found</a>
+          <a href="#">Щось пішло не так</a>
 		</h1>
       </div>
     </div>
     <div class="content">
-      <c:if test="${not empty message}">
-        <p>${message}</p>
-      </c:if>
       <img src=<c:url value="/resources/travolta.gif" /> title="error" />
       <p>
-        <span>Ohh.....</span>You Requested the page that is no longer There.
+        <span>Оува.....</span>Зверніться до адміністратора або повторіть спробу.
       </p>
-      <a href="#" onclick="window.history.back();">Back</a>
-      <a href=<c:url value="/" />>Home</a>
+      <a href="#" onclick="window.history.back();">Назад</a>
+      <a href=<c:url value="/" />>Початкова сторінка</a>
     </div>
   </div>
 </body>

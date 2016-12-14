@@ -43,9 +43,16 @@ public class SapServiceImpl implements SapService {
   }
 
   @Override
-  public byte[] getBillPDF(String orderNum) {
+  public byte[] getBillPDF(String billNumber) {
 
-    return sapClient.getPDFBill(orderNum);
+    return sapClient.getPDFBill(billNumber);
+  }
+
+
+  @Override
+  public String getBillNumber(String orderNum) {
+
+    return sapClient.getBillNumber(orderNum);
   }
 
 }

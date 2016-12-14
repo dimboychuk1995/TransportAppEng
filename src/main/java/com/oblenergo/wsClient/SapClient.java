@@ -38,7 +38,7 @@ public class SapClient extends WebServiceGatewaySupport {
 
   private static final String EMPTY_FIELD = "";
   private static final String ONLY_COMMUNIC_REQUIRED_VALUE = "X";
-
+  
   @Autowired
   private ObjectFactory of;
 
@@ -225,24 +225,39 @@ public class SapClient extends WebServiceGatewaySupport {
     }
     return order;
   }
+  
+  
+  /**
+   * 
+   * Returns number of the bill
+   *
+   * @param order number from SAP
+   * @return String with number of the bill from SAP  
+   */
+  public String getBillNumber(String orderNum) {
+   
+    ZsdBillCreateResponse response = getZsdBillCreateResponse(orderNum);
+    int respCode = response.getSubrc();
+    if (respCode == 0) {
+      return response.getBillNumber();
+    } else {
+      LOGGER.error("Can`t create bill in SAP, return wrong result code " + respCode);
+      throw new RuntimeException();
+    }
+  }
 
   /**
    * 
    * Returns PDF with a bill
    *
-   * @param order number from SAP
+   * @param bill number from SAP
    * @return byte[] object with bill  
    */
-  public byte[] getPDFBill(String orderNum) {
+  public byte[] getPDFBill(String billNum) {
+    
     byte[] pdfBillData = null;
-    ZsdBillCreateResponse response = getZsdBillCreateResponse(orderNum);
-    int respCode = response.getSubrc();
-    if (respCode == 0) {
-      ZsdBillPrintResponse responseWithBill = getZsdBillPrintResponse(response.getBillNumber());
-      pdfBillData = responseWithBill.getPdfBinaryData();
-    } else {
-      LOGGER.error("Can`t create bill in SAP, return wrong result code " + respCode);
-    }
+    ZsdBillPrintResponse responseWithBill = getZsdBillPrintResponse(billNum);
+    pdfBillData = responseWithBill.getPdfBinaryData();
     return pdfBillData;
   }
 

@@ -15,6 +15,8 @@ public interface SapService {
 
   OrderDTO createNewOrder(String carNum, String itemNum, String itemCount);
 
-  byte[] getBillPDF(String orderNum);
+  byte[] getBillPDF(String billNum);
+  
+  String getBillNumber(String orderNum);
 
 }
