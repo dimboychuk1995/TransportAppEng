@@ -27,6 +27,9 @@
     <!-- jQuery CSS -->
   <link href="<c:url value = "/resources/dist/css/jquery/jquery-ui.css" />" rel="stylesheet">
   
+  <!-- Bootstrap toggle CSS -->
+  <link href="<c:url value = "/resources/dist/css/toggleBootstrap/bootstrap-toggle.min.css" />" rel="stylesheet">
+  
   <!-- jQuery -->
   <script src="<c:url value = "/resources/dist/js/jquery/jquery.min.js" />"></script>
   <script src="<c:url value = "/resources/dist/js/jquery/jquery.js" />"></script>
@@ -47,6 +50,9 @@
   <!-- WebSocket JS -->
   <script src="<c:url value = "/resources/dist/js/web_socket/sockjs.min.js" />"></script>
   <script src="<c:url value = "/resources/dist/js/web_socket/stomp.min.js" />"></script>
+  
+  <!-- Bootstrap toggle JS -->
+  <script src="<c:url value = "/resources/js/toggleBootstrap/bootstrap-toggle.min.js"/>"></script>
   
   <title>
     <tiles:insertAttribute name="title" ignore="true" />

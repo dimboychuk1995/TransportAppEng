@@ -10,19 +10,9 @@
         <table id="workTypes" class="table table-hover table-striped table-bordered">
           <thead>
             <tr>
-              <th class="col-md-4">Назва робіт</th>
-              <th class="col-md-1">Кількість люд/год.</th>
-              <th class="col-md-1">Заробітна плата</th>
-              <th class="col-md-1">Нарахування</th>
-              <th class="col-md-1">Загальні витрати</th>
-              <th class="col-md-1">Всього витрати</th>
-              <th class="col-md-1">Прибуток</th>
-              <th class="col-md-1">Разом</th>
-              <th class="col-md-1">Вартість матеріалів</th>
-              <th class="col-md-1">Відпускна вартість</th>
-              <th class="col-md-1">ПДВ</th>
-              <th class="col-md-1">Вартість ПДВ</th>
-              <th class="col-md-1">Редагувати</th>
+              <th class="col-md-2">id послуги</th>
+              <th class="col-md-3">назва послуги</th>
+              <th class="col-md-2">Редагувати</th>
               <th class="col-md-1">Видалити</th>
             </tr>
           </thead>
@@ -30,43 +20,13 @@
             <c:forEach items="${typeWorks}" var="workType">
               <tr id="${workType.id}" class="dataRow">
                 <td class="no-vertical-padding">
+                  <c:out value="${workType.id}"></c:out>
+                </td>
+                <td class="no-vertical-padding">
                   <c:out value="${workType.name}"></c:out>
                 </td>
-                <td class="no-vertical-padding">
-                  <c:out value="${workType.count_hours}"></c:out>
-                </td>
-                <td class="no-vertical-padding">
-                  <c:out value="${workType.salary}"></c:out>
-                </td>
-                <td class="no-vertical-padding">
-                  <c:out value="${workType.social_insurance}"></c:out>
-                </td>
-                <td class="no-vertical-padding">
-                  <c:out value="${workType.production_costs}"></c:out>
-                </td>
-                <td class="no-verical-padding">
-                  <c:out value="${workType.all_costs}"></c:out>
-                </td>
-                <td class="no-vertical-padding">
-                  <c:out value="${workType.profit}"></c:out>
-                </td>
-                <td class="no-vertical-padding">
-                  <c:out value="${workType.sum}"></c:out>
-                </td>
-                <td class="no-vertical-padding">
-                  <c:out value="${workType.cost_of_materials}"></c:out>
-                </td>
-                <td class="no-vertical-padding">
-                  <c:out value="${workType.selling_price}"></c:out>
-                </td>
-                <td class="no-vertical-padding">
-                  <c:out value="${workType.vat}"></c:out>
-                </td>
-                <td class="no-vertical-padding">
-                  <c:out value="${workType.price_including_vat}"></c:out>
-                </td>
                 <td class="no-padding">
-                  <a href=<c:url value="/admin/workType/${workType.id}" /> class="btn btn-primary">Редагувати</a>
+                <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger">
                 </td>
                 <td class="no-padding">
                   <button id="${workType.id}" class="btn btn-danger delete">Видалити</button>
@@ -78,7 +38,6 @@
       </div>
       <a href=<c:url value="/admin/workType/newWorkType" /> class="btn btn-primary">Створити нову послугу</a>
       <a href=<c:url value="/admin/order" /> class="btn btn-info">Список замовлень</a>
-
     </div>
   </div>
 </div>
