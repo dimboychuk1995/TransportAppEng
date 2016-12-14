@@ -1,6 +1,7 @@
 package com.oblenergo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -41,6 +42,9 @@ public class AdminController {
   private static final String ORDER = "orders";
   private static final String STATUS_ORDER_ENUM = "items";
   private static final String WORKTYPE_FROM_SAP = "workTypeFromSap";
+
+  @Autowired
+  private Environment environment;
 
   @Autowired
   private MailService mailServiceImpl;
@@ -162,10 +166,12 @@ public class AdminController {
       OrderDTO orderDTO = sapServiceImpl.createNewOrder(orders.getCar_number(), orders.getWorkType().getId(),
           Integer.toString(orders.getCount()));
       mailServiceImpl.sendMail(orderDTO, orders, sapServiceImpl.getUserEmailFromSap(orders.getUser_tab()),
-          "Your order is confirmed");
-    }
-
-    if (orders.getStatus_order().equals(StatusOrderEnum.CANCELED)) {
+              "Your order is DONE");
+    }else if(orders.getStatus_order().equals(StatusOrderEnum.DONE)
+            && (orderServiceImpl.findOrderById(orders.getId()).getStatus_order().equals(orders.getStatus_order()))) {
+      mailServiceImpl.sendMailOnlyPermit(orders, sapServiceImpl.getUserEmailFromSap(orders.getUser_tab()),
+              "Your order is DONE");
+    }else if (orders.getStatus_order().equals(StatusOrderEnum.CANCELED)) {
       mailServiceImpl.sendMailWithoutPDF(sapServiceImpl.getUserEmailFromSap(orders.getUser_tab()),
           "Your order is CANCELED");
     }
