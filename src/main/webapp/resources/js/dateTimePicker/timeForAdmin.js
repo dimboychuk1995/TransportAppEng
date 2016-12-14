@@ -1,12 +1,5 @@
 $(function() {
   var contextPath = $('#contextPath').val();
-  
-  // when downloading page updateCreateOrders this function download available hours for orders
-//  $('.tpicker').ready(function() {
-//
-//	  selectTime($("#dpicker").val());
-//
-//  });
 
   // this function appeals to AJAX  
   $(document).on('click', '.day', function() {
@@ -89,6 +82,7 @@ function setEndTimeForOrder() {
   }else{
 	  $('#time_end').val(null);
 	  $('#selectForm').val(null);
+	  
   }
 
 
@@ -115,9 +109,3 @@ function getEndTime(timeString) {
     seconds);
   return timeEnd;
 }
-
-//$(document).on('change', '.tpicker', function() {
-//  if ($("#dpicker").val() != "") {
-//    setEndTimeForOrder();
-//  }
-//});

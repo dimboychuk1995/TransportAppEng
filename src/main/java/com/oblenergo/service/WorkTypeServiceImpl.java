@@ -1,6 +1,7 @@
 package com.oblenergo.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.oblenergo.DAO.WorkTypeDao;
+import com.oblenergo.DTO.WorkTypeDTO;
 import com.oblenergo.model.WorkType;
 
 @Service
@@ -80,7 +82,6 @@ public class WorkTypeServiceImpl implements WorkTypeService {
     }
 
     entity.setName(workType.getName());
-    
 
   }
 
@@ -109,5 +110,17 @@ public class WorkTypeServiceImpl implements WorkTypeService {
       throw dae;
     }
 
+  }
+
+  @Transactional
+  @Override
+  public List<WorkTypeDTO> findAvailableWorkType(List<WorkTypeDTO> listWorkTypeDTO) {
+    List<WorkType> listWorkType = dao.findAllAvailableWorkType();
+    List<WorkTypeDTO> listAvailableWorkTypeDTO = null;
+
+    listAvailableWorkTypeDTO = listWorkTypeDTO.stream()
+        .filter(wtDTO -> (listWorkType.stream().filter(wt -> wt.getId().equals(wtDTO.getId())).count()) >= 1)
+        .collect(Collectors.toList());
+    return listAvailableWorkTypeDTO;
   }
 }

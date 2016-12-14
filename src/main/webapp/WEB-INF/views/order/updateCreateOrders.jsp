@@ -20,13 +20,10 @@
 
 
           <label>Вид робіт</label>
-          <form:select id = 'typeOfWork' path="workType" items="${typeWorks}" class="form-control" data-placeholder="work" itemLabel="name" itemValue="id" readonly="true" />
+          <form:select id = 'typeOfWork' path="workType" items=  "${typeWorks}" class="form-control" data-placeholder="work" itemLabel="name" itemValue="id" readonly="true" />
 
 		  <label>Кількість</label>
-          <form:select path="count" id = "countOrders" class="form-control" readonly="true">
-          	<form:option value="${orders.count}">${orders.count}</form:option>
-          </form:select>
-			
+		  <form:input path="count" id = "countOrders" class="form-control" readonly="true" value="${orders.count}"/>
 
           <div id="car_name">
             <label>Марка авто</label>
@@ -42,10 +39,7 @@
 
 		 
 		 <!-- 	 data of orders  -->
-          <!--  <input id = "nameOrder" type = "hidden"> -->
           <input id = "timeOrder" type = "hidden">
-
-		 
 		  <!-- all data from controller -->  
 		 <c:forEach items = '${workTypeFromSap}' var = 'typeOfWork'>
 		 <input class = 'idWork' type = "hidden" value = '${typeOfWork.id}'>

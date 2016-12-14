@@ -1,6 +1,7 @@
 package com.oblenergo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -41,6 +42,9 @@ public class AdminController {
   private static final String ORDER = "orders";
   private static final String STATUS_ORDER_ENUM = "items";
   private static final String WORKTYPE_FROM_SAP = "workTypeFromSap";
+
+  @Autowired
+  private Environment environment;
 
   @Autowired
   private MailService mailServiceImpl;
@@ -96,13 +100,6 @@ public class AdminController {
     return "redirect:/admin";
   }
 
-  // @RequestMapping(value = "/workType/{id}", method = RequestMethod.GET)
-  // public String showTypeById(@PathVariable int id, Model model) {
-  //
-  // model.addAttribute(WORK_TYPE, workTypeServiceImpl.findWorkTypeById(id));
-  // return "updateCreateWorkType";
-  // }
-
   @RequestMapping(value = "/workType/newWorkType", method = RequestMethod.GET)
   public String redirectToCreate(Model model) {
 
@@ -145,15 +142,9 @@ public class AdminController {
   }
 
   @RequestMapping(value = "/order/{id}", method = RequestMethod.POST)
-  public String updateOrder(@Validated @ModelAttribute("orders") Orders orders, @ModelAttribute("order") OrderDTO order, BindingResult bindingResult,
+  public String updateOrder(@Validated @ModelAttribute("orders") Orders orders, BindingResult bindingResult,
       Model model) {
 
-
-    System.out.println(sapServiceImpl.getUserEmailFromSap("9522"));
-    System.out.println();
-    System.out.println();
-    System.out.println();
-    System.out.println();
     if (bindingResult.hasErrors()) {
       model.addAttribute(ORDER, orderServiceImpl.findOrderById(orders.getId()));
       model.addAttribute(ITEMSWORKTYPE, workTypeServiceImpl.findAll());
@@ -163,14 +154,19 @@ public class AdminController {
       return "updateCreateOrders";
     }
 
-    if(orders.getStatus_order().equals(StatusOrderEnum.DONE)) {
-      OrderDTO orderDTO = sapServiceImpl.createNewOrder(orders.getCar_number(), orders.getWorkType().getId(), Integer.toString(orders.getCount()));
-      sapServiceImpl.getBillPDF(orderDTO.getOrderNum());
-      mailServiceImpl.sendMail(order, sapServiceImpl.getUserEmailFromSap(orders.getUser_tab()), "Your order is confirmed");
-    }
-
-    if(orders.getStatus_order().equals(StatusOrderEnum.CANCELED)) {
-      mailServiceImpl.sendMailWithoutPDF(sapServiceImpl.getUserEmailFromSap(orders.getUser_tab()), "Your order is CANCELED");
+    if (orders.getStatus_order().equals(StatusOrderEnum.DONE)
+        && (!orderServiceImpl.findOrderById(orders.getId()).getStatus_order().equals(orders.getStatus_order()))) {
+      OrderDTO orderDTO = sapServiceImpl.createNewOrder(orders.getCar_number(), orders.getWorkType().getId(),
+          Integer.toString(orders.getCount()));
+      mailServiceImpl.sendMail(orderDTO, orders, sapServiceImpl.getUserEmailFromSap(orders.getUser_tab()),
+              "Your order is DONE");
+    }else if(orders.getStatus_order().equals(StatusOrderEnum.DONE)
+            && (orderServiceImpl.findOrderById(orders.getId()).getStatus_order().equals(orders.getStatus_order()))) {
+      mailServiceImpl.sendMailOnlyPermit(orders, sapServiceImpl.getUserEmailFromSap(orders.getUser_tab()),
+              "Your order is DONE");
+    }else if (orders.getStatus_order().equals(StatusOrderEnum.CANCELED)) {
+      mailServiceImpl.sendMailWithoutPDF(sapServiceImpl.getUserEmailFromSap(orders.getUser_tab()),
+          "Your order is CANCELED");
     }
 
     orderServiceImpl.update(orders);

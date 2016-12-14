@@ -4,5 +4,5 @@ import com.oblenergo.model.Orders;
 
 public interface ItextService {
 
-	public byte[] writeCheck(Orders orders);
+  public byte[] writePermit(Orders orders);
 }

@@ -11,7 +11,7 @@
 			    <table class="table table-hover table-bordered table-striped" id="orders">
 			        <thead>
 			            <tr>
-			                <th class="col-md-2">Вид робіт</th>
+			                <th class="col-md-1">Вид робіт</th>
 			                <th class="col-md-1">Замовник</th>
 			                <th class="col-md-1">Марка авто</th>
 			                <th class="col-md-1">Модель</th>
@@ -19,6 +19,7 @@
 			                <th class="col-md-1">Дата</th>
 			                <th class="col-md-1">Час</th>
 			                <th class="col-md-1">Табельний номер</th>
+			                <th class="col-md-1">Мобільний номер</th>
 			                <th class="col-md-1">Статус замовлення</th>
 			                <th class="col-md-1">Редагувати</th>
 			                <th class="col-md-1">Видалити</th>
@@ -50,7 +51,10 @@
 			                    </td>
 			                    <td>
 			                        <c:out value="${orders.user_tab}"></c:out>
-			                    </td>		
+			                    </td>
+								<td>
+									<c:out value="${orders.mobile_phone_number}"></c:out>
+								</td>
 			                    <td>
 			                        <c:out value="${orders.status_order.statusOrder}"></c:out>
 			                    </td>

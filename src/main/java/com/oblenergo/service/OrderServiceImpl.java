@@ -1,17 +1,23 @@
 package com.oblenergo.service;
 
-import com.oblenergo.DAO.OrderDao;
-import com.oblenergo.model.Orders;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.stream.Collectors;
+import com.oblenergo.DAO.OrderDao;
+import com.oblenergo.model.Orders;
 
 /**
  *
@@ -125,8 +131,6 @@ public class OrderServiceImpl implements OrderService {
       timeAdmin = shortTimeRange;
     } else {
       timeAdmin = fullTimeRange;
-      System.out.print("Lest element array Full : ");
-      System.out.println(timeAdmin[timeAdmin.length - 1]);
     }
 
     List<String> busyTime = getBusyTimes(timeAdmin, arrTimeOrders, date);
@@ -144,17 +148,12 @@ public class OrderServiceImpl implements OrderService {
    */
   public int getDayOfWeek(String date) {
     Calendar c = Calendar.getInstance();
-    System.out.print("Date : ");
-    System.out.println(date);
     try {
       c.setTime(new SimpleDateFormat("yyyy-mm-dd").parse(date));
     } catch (ParseException e) {
       e.printStackTrace();
     }
     int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
-
-    System.out.println("Day of week : " + dayOfWeek);
-
     return dayOfWeek;
   }
 
@@ -184,9 +183,6 @@ public class OrderServiceImpl implements OrderService {
 
       outTimeOrder: for (int timeOrderI = 0; timeOrderI < arrTimeOrders.length; timeOrderI++) {
         for (int j = 0; j < arrTimeOrders[timeOrderI].length; j++) {
-
-          // System.out.print("Start order : ");
-          // System.out.println(arrTimeOrders[timeOrderI][start]);
           if (time[timeI].equals(arrTimeOrders[timeOrderI][start])) {
 
             startTimeOrder = 0;
@@ -194,12 +190,8 @@ public class OrderServiceImpl implements OrderService {
             for (int i = timeI; i < time.length; i++) {
 
               startTimeOrder++;
-              // busyTimes.add(time[i]);
-              // System.out.print("Time end : ");
-              // System.out.println(arrTimeOrders[timeOrderI][end]);
               if (time[i].equals(arrTimeOrders[timeOrderI][end])) {
-                // need refactoring
-                timeI = i - 1; //
+                timeI = i - 1;
                 break outTimeOrder;
 
               } else {
@@ -221,14 +213,6 @@ public class OrderServiceImpl implements OrderService {
     // write to ArrayList for working with indexes
     // needn't
     ArrayList<String> busy = new ArrayList<String>(setBusyTime);
-
-    // test code for show collection
-    System.out.println("Show busy Time: ");
-    for (int i = 0; i < busy.size(); i++) {
-      System.out.print(busy.get(i) + ", ");
-    }
-    System.out.println();
-    // end test code
     return busy;
   }
 
@@ -242,10 +226,6 @@ public class OrderServiceImpl implements OrderService {
    * @return List<String> availableTime
    */
   public List<String> getAvailableTime(String time[], List<String> freeTime, Orders order, String timeExecution) {
-    // test code
-    System.out.println("getAvaliableTime()");
-    System.out.println(order.getTime());
-    // end test code
 
     /** List for save available time */
     List<String> availableTime = new ArrayList<String>();
@@ -256,10 +236,6 @@ public class OrderServiceImpl implements OrderService {
      * value which have number steps for equal hours in list
      */
     int stepTime = convertToStep(timeExecution) * countOrder;
-
-    // test code
-    System.out.println("Step of time : " + stepTime);
-    // end test code
 
     int countEquals = 0;
     int temp = 0;
@@ -283,18 +259,10 @@ public class OrderServiceImpl implements OrderService {
       }
     }
 
-    // test code
-    System.out.println("Show avaliable time : ");
-    for (int i = 0; i < availableTime.size(); i++) {
-      System.out.print(availableTime.get(i) + ", ");
-    }
-    System.out.println();
-    // end test code
     return availableTime;
   }
 
   public int convertToStep(String execution) {
-    System.out.println(execution);
     double timeExecution = 0;
     timeExecution = Double.parseDouble(execution);
     double execOrder = (double) (timeExecution / 60);
@@ -305,14 +273,6 @@ public class OrderServiceImpl implements OrderService {
 
     List<String> list = new ArrayList<>(Arrays.asList(time));
     List<String> freeTime = list.stream().filter(x -> !busyTime.contains(x)).collect(Collectors.toList());
-
-    System.out.println("Free Time : ");
-    for (int i = 0; i < freeTime.size(); i++) {
-
-      System.out.print(freeTime.get(i) + ", ");
-    }
-    System.out.println();
-
     return freeTime;
   }
 
@@ -341,5 +301,4 @@ public class OrderServiceImpl implements OrderService {
     }
 
   }
-
 }
