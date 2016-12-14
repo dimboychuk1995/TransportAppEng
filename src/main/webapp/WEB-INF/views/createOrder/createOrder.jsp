@@ -77,7 +77,7 @@
           </div>
 
           <label>Мобільний номер</label>
-          <form:input id="mobile_phone_number" required="required" path="mobile_phone_number" class="form-control orderInput" placeholder="Введіть ваш мобільний номер" cssErrorClass="error form-control" />
+          <form:input id="mobile_phone_number" required="required" path="mobile_phone_number" class="form-control orderInput" placeholder="+38011111111" cssErrorClass="error form-control" />
           <form:errors path="mobile_phone_number" class="help-block with-errors" cssErrorClass="" />
 
         <br>

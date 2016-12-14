@@ -1,5 +1,9 @@
 package com.oblenergo.configuration;
 
+import java.util.List;
+
+import javax.mail.internet.MimeMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -18,9 +22,6 @@ import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesView;
-
-import javax.mail.internet.MimeMessage;
-import java.util.List;
 
 @Configuration
 @ComponentScan("com.oblenergo")
@@ -87,7 +88,7 @@ public class AppConfiguration extends WebMvcConfigurerAdapter {
     SimpleMappingExceptionResolver exceptionResolver = new SimpleMappingExceptionResolver();
     exceptionResolver.setDefaultErrorView("error");
     exceptionResolvers.add(exceptionResolver);
-
+    
   }
 
 }

@@ -1,16 +1,27 @@
 package com.oblenergo.model;
 
-import com.oblenergo.enums.StatusOrderEnum;
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.io.Serializable;
+import com.oblenergo.enums.StatusOrderEnum;
 
 @Entity
 @Table(name = "orders")
@@ -93,14 +104,14 @@ public class Orders implements Serializable {
   }
 
   @NotBlank
-  @Size(max = 10)
+  @Size(max = 8)
   @Column(name = "time")
   public String getTime() {
     return time;
   }
 
   @NotBlank
-  @Size(max = 10)
+  @Size(max = 8)
   @Column(name = "time_end")
   public String getTime_end() {
     return time_end;
@@ -117,6 +128,8 @@ public class Orders implements Serializable {
     return status_order;
   }
 
+  @NotBlank
+  @Size(max = 13, min = 13)
   @Column(name = "mobile_phone_number")
   public String getMobile_phone_number() {
     return mobile_phone_number;
