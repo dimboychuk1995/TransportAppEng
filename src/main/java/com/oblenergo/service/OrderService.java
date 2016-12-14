@@ -5,14 +5,14 @@
  */
 package com.oblenergo.service;
 
+import com.oblenergo.model.Orders;
+
 import java.util.List;
 
 /**
  *
  * @author us9522
  */
-
-import com.oblenergo.model.Orders;
 
 public interface OrderService {
 

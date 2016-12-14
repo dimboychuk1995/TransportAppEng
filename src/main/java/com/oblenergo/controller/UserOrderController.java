@@ -1,23 +1,7 @@
 package com.oblenergo.controller;
 
-import java.util.List;
-
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.oblenergo.DTO.TimeDTO;
+import com.oblenergo.DTO.WorkTypeDTO;
 import com.oblenergo.editor.CarEditor;
 import com.oblenergo.editor.ServiceEditor;
 import com.oblenergo.model.Car;
@@ -28,6 +12,17 @@ import com.oblenergo.service.OrderService;
 import com.oblenergo.service.SapService;
 import com.oblenergo.service.WorkTypeService;
 import com.oblenergo.validator.ClientValidator;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/")
@@ -89,9 +84,22 @@ public class UserOrderController {
       return "createOrder";
     }
     orders.setCustomer(sapServiceImpl.getFullNameFromSap(orders.getUser_tab()));
-    System.out.println(orders.getWorkType().getId());
 
+    List<WorkTypeDTO> allWorkTypes = sapServiceImpl.getAllWorkTypes();
+
+    String all_sum = null;
+    for(WorkTypeDTO list : allWorkTypes){
+      if (list.getId().equals(orders.getWorkType().getId())){
+        all_sum = list.getPrice();
+      }
+      break;
+    }
+    double all_sumWithPDV = Double.parseDouble(all_sum);
+    all_sumWithPDV = all_sumWithPDV * 1.2;
+    all_sum = Double.toString(all_sumWithPDV);
+    orders.setAll_sum(all_sum);
     orderServiceImpl.save(orders);
+
     return "redirect:/?id=" + orders.getId();
   }
 
