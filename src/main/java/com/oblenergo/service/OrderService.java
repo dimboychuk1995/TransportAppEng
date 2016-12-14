@@ -26,14 +26,12 @@ public interface OrderService {
 
   void delete(int id);
 
-  public List<Orders> findDateOfOrders(String date);
+  List<Orders> findDateOfOrders(String date);
 
-  // public List<String> findFreeTime(String[] arrTimeOrders, String date);
+  List<String> findFreeTimeForAdmin(String[][] arrTimeOrders, String date, Orders order, String execution);
 
-  public List<String> findFreeTimeForAdmin(String[][] arrTimeOrders, String date, Orders order, String execution);
+  List<Orders> findAllConfirm();
 
-  public List<Orders> findAllConfirm();
-
-  public String[][] getAllTimeOfOrders(List<Orders> orders);
+  String[][] getAllTimeOfOrders(List<Orders> orders);
 
 }
