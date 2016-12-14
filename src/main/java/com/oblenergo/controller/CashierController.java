@@ -1,5 +1,6 @@
 package com.oblenergo.controller;
 
+import com.oblenergo.service.SapService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -24,12 +25,18 @@ public class CashierController {
 
 	private static final String ORDER_LIST = "orders";
 
+	private static final String WORKTYPE_FROM_SAP = "workTypeFromSap";
+
 	@Autowired
 	private OrderService orderServiceImpl;
+
+	@Autowired
+	private SapService sapServiceImpl;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String getCashierPage(Model model) {
 		model.addAttribute(ORDER_LIST, orderServiceImpl.findAllConfirm());
+		model.addAttribute(WORKTYPE_FROM_SAP, sapServiceImpl.getAllWorkTypes());
 		return "cashier";
 	}
 

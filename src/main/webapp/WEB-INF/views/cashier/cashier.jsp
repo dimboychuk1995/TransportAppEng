@@ -38,7 +38,7 @@
                   <c:out value="${order.time}"></c:out>
                 </td>
                 <td>
-                  <c:out value="${order.workType}"></c:out>
+                  <c:out value="${order.all_sum}"></c:out>
                 </td>
                 <td class="no-padding">
                   <button id="${order.customer}" class="btn btn-success paymentApprove">
