@@ -143,6 +143,7 @@ public class AdminController {
         && (!orderServiceImpl.findOrderById(orders.getId()).getStatus_order().equals(orders.getStatus_order()))) {
       OrderDTO orderDTO = sapServiceImpl.createNewOrder(orders.getCar_number(), orders.getWorkType().getId(),
           Integer.toString(orders.getCount()));
+      orders.setBill_number(orderDTO.getOrderNum());
       mailServiceImpl.sendMail(orderDTO, orders, sapServiceImpl.getUserEmailFromSap(orders.getUser_tab()),
               "Your order is DONE");
     }else if(orders.getStatus_order().equals(StatusOrderEnum.DONE)
@@ -156,6 +157,7 @@ public class AdminController {
 
     orderServiceImpl.update(orders);
     return "redirect:/admin/order";
+
   }
 
   @RequestMapping(value = "/order/delete", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)

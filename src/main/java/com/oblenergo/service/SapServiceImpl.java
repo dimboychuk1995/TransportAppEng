@@ -48,7 +48,6 @@ public class SapServiceImpl implements SapService {
     return sapClient.getPDFBill(billNumber);
   }
 
-
   @Override
   public String getBillNumber(String orderNum) {
 

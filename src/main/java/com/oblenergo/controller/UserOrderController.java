@@ -94,6 +94,7 @@ public class UserOrderController {
       }
       break;
     }
+
     double all_sumWithPDV = Double.parseDouble(all_sum);
     all_sumWithPDV = all_sumWithPDV * 1.2;
     all_sum = Double.toString(all_sumWithPDV);

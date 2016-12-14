@@ -32,6 +32,7 @@ public class Orders implements Serializable {
   private int count;
   private String mobile_phone_number;
   private String all_sum;
+  private String bill_number;
   private StatusOrderEnum status_order = StatusOrderEnum.valueOf("NEW");
 
   // getters
@@ -126,6 +127,11 @@ public class Orders implements Serializable {
     return all_sum;
   }
 
+  @Column(name = "bill_number")
+  public String getBill_number() {
+    return bill_number;
+  }
+
   // setters
 
   public void setId(int id) {
@@ -186,6 +192,10 @@ public class Orders implements Serializable {
 
   public void setAll_sum(String all_sum) {
     this.all_sum = all_sum;
+  }
+
+  public void setBill_number(String bill_number) {
+    this.bill_number = bill_number;
   }
 
   @Override

@@ -12,10 +12,11 @@
             <tr>
               <th class="col-md-2">Замовник</th>
               <th class="col-md-1">Табельний номер</th>
-              <th class="col-md-4">Вид робіт</th>
+              <th class="col-md-3">Вид робіт</th>
               <th class="col-md-1">Дата</th>
               <th class="col-md-1">Час</th>
               <th class="col-md-1">Всього до оплати</th>
+              <th class="col-md-1">Номер замовлення</th>
               <th class="col-md-1">Підтвердити оплату</th>
             </tr>
           </thead>
@@ -39,6 +40,9 @@
                 </td>
                 <td>
                   <c:out value="${order.all_sum}"></c:out>
+                </td>
+                <td>
+                  <c:out value="${order.bill_number}"></c:out>
                 </td>
                 <td class="no-padding">
                   <button id="${order.customer}" class="btn btn-success paymentApprove">

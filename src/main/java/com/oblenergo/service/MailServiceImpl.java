@@ -47,7 +47,7 @@ public class MailServiceImpl implements MailService {
       messageHelper.setTo(email);
       messageHelper.setText(text);
       messageHelper.addAttachment("rahunok.pdf",
-          new ByteArrayResource(sapServiceImpl.getBillPDF(orderDTO.getOrderNum())));
+          new ByteArrayResource(sapServiceImpl.getBillPDF(sapServiceImpl.getBillNumber(orderDTO.getOrderNum()))));
       messageHelper.addAttachment("permit.pdf", new ByteArrayResource(itextServiceImpl.writePermit(order)));
       senderImpl.send(mimeMessage);
     } catch (MailException e) {

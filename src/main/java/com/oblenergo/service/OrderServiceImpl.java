@@ -1,23 +1,17 @@
 package com.oblenergo.service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
+import com.oblenergo.DAO.OrderDao;
+import com.oblenergo.model.Orders;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.oblenergo.DAO.OrderDao;
-import com.oblenergo.model.Orders;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -97,6 +91,7 @@ public class OrderServiceImpl implements OrderService {
     entity.setTime_end(order.getTime_end());
     entity.setCar_number(order.getCar_number());
     entity.setStatus_order(order.getStatus_order());
+    entity.setBill_number(order.getBill_number());
 
   }
 

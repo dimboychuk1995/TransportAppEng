@@ -27,7 +27,7 @@ public class GeneralController {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(RuntimeException.class)
     public String error500(RuntimeException e) {
-        
+        e.printStackTrace();
         LOGGER.error("Internal runtime exception", e);
         return "error";
     }
@@ -42,7 +42,7 @@ public class GeneralController {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class )
     public String otherServerError500(Exception e) {
-
+        e.printStackTrace();
         LOGGER.error("Internal server exception", e);
         return "error";
     }
