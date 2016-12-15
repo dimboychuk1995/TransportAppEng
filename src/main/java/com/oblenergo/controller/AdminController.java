@@ -1,5 +1,15 @@
 package com.oblenergo.controller;
 
+import com.oblenergo.DTO.OrderDTO;
+import com.oblenergo.DTO.WorkTypeDTO;
+import com.oblenergo.editor.CarEditor;
+import com.oblenergo.editor.ServiceEditor;
+import com.oblenergo.enums.StatusOrderEnum;
+import com.oblenergo.model.Car;
+import com.oblenergo.model.Orders;
+import com.oblenergo.model.WorkType;
+import com.oblenergo.service.*;
+import com.oblenergo.validator.WorkTypeValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -8,27 +18,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 
-import com.oblenergo.DTO.OrderDTO;
-import com.oblenergo.editor.CarEditor;
-import com.oblenergo.editor.ServiceEditor;
-import com.oblenergo.enums.StatusOrderEnum;
-import com.oblenergo.model.Car;
-import com.oblenergo.model.Orders;
-import com.oblenergo.model.WorkType;
-import com.oblenergo.service.CarService;
-import com.oblenergo.service.MailService;
-import com.oblenergo.service.OrderService;
-import com.oblenergo.service.SapService;
-import com.oblenergo.service.WorkTypeService;
-import com.oblenergo.validator.WorkTypeValidator;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -106,9 +98,15 @@ public class AdminController {
   @RequestMapping(value = "/workType/newWorkType", method = RequestMethod.POST)
   public String addType(@Validated @ModelAttribute("workType") WorkType workType, BindingResult bindingResult) {
 
-    if (bindingResult.hasErrors()) {
-      return "updateCreateWorkType";
+    List<WorkTypeDTO> allWorkTypes = sapServiceImpl.getAllWorkTypes();
+    for (WorkTypeDTO list : allWorkTypes) {
+      if (workType.getId().equals(list.getId())) {
+        workType.setName(list.getName());
+      }
+      break;
     }
+
+    workType.setEnabled(true);
     workTypeServiceImpl.save(workType);
     return "redirect:/admin";
   }
