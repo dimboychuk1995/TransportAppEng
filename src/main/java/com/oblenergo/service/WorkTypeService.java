@@ -11,7 +11,7 @@ public interface WorkTypeService {
 
   void save(WorkType workType);
 
-  void update(WorkType workType);
+  void update(String idWorkType);
 
   WorkType findWorkTypeById(String id);
 

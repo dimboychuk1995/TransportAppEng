@@ -1,15 +1,7 @@
 package com.oblenergo.controller;
 
-import com.oblenergo.DTO.OrderDTO;
-import com.oblenergo.DTO.WorkTypeDTO;
-import com.oblenergo.editor.CarEditor;
-import com.oblenergo.editor.ServiceEditor;
-import com.oblenergo.enums.StatusOrderEnum;
-import com.oblenergo.model.Car;
-import com.oblenergo.model.Orders;
-import com.oblenergo.model.WorkType;
-import com.oblenergo.service.*;
-import com.oblenergo.validator.WorkTypeValidator;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,9 +10,29 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-import java.util.List;
+import com.oblenergo.DTO.OrderDTO;
+import com.oblenergo.DTO.WorkTypeDTO;
+import com.oblenergo.editor.CarEditor;
+import com.oblenergo.editor.ServiceEditor;
+import com.oblenergo.enums.StatusOrderEnum;
+import com.oblenergo.model.Car;
+import com.oblenergo.model.Orders;
+import com.oblenergo.model.WorkType;
+import com.oblenergo.service.CarService;
+import com.oblenergo.service.MailService;
+import com.oblenergo.service.OrderService;
+import com.oblenergo.service.SapService;
+import com.oblenergo.service.WorkTypeService;
+import com.oblenergo.validator.WorkTypeValidator;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -84,7 +96,7 @@ public class AdminController {
       return "updateCreateWorkType";
     }
 
-    workTypeServiceImpl.update(workType);
+    // workTypeServiceImpl.update(workType);
     return "redirect:/admin";
   }
 
@@ -173,6 +185,13 @@ public class AdminController {
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void deleteType(@RequestBody int id) {
     orderServiceImpl.delete(id);
+  }
+
+  @RequestMapping(value = "/changeStatusWorkType", headers = "Accept=*/*", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = "application/json")
+  public @ResponseBody void selectTimeForDateAdmin(@RequestBody WorkTypeDTO workTypeDTO) {
+    String idWorkType = workTypeDTO.getId();
+    workTypeServiceImpl.update(idWorkType);
+
   }
 
 }

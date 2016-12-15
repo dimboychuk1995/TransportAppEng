@@ -71,18 +71,20 @@ public class WorkTypeServiceImpl implements WorkTypeService {
 
   @Transactional
   @Override
-  public void update(WorkType workType) {
+  public void update(String idWorkType) {
     WorkType entity = null;
 
     try {
-      entity = dao.findById(workType.getId());
+      entity = dao.findById(idWorkType);
     } catch (DataAccessException dae) {
-      LOGGER.error("Unable to get workType with id : " + workType.getId(), dae);
+      LOGGER.error("Unable to get workType with id : " + idWorkType, dae);
       throw dae;
     }
-
-    entity.setName(workType.getName());
-
+    if (entity.getEnabled()) {
+      entity.setEnabled(false);
+    } else {
+      entity.setEnabled(true);
+    }
   }
 
   @Transactional
