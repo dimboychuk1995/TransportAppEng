@@ -3,7 +3,6 @@ $(function() {
 
   $(document).on('change', '.dataRow', function() {
     var currID = $(this).attr('id')
-    alert(currID);
     changeStatusWorkType(currID)
   });
 
@@ -15,7 +14,7 @@ $(function() {
       data: JSON.stringify({
         "id": idWorkType,
       }),
-      success: alert("status changed"),
+      
       error: function(jqXHR) {
         if (jqXHR.status == 400) {
           console.log(timeInput);

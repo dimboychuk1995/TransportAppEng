@@ -26,7 +26,15 @@
                   <c:out value="${workType.name}"></c:out>
                 </td>
                 <td class="no-padding">
-                <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger">
+                <c:choose>
+	                <c:when test="${workType.enabled}">
+	                	<input type="checkbox" checked data-toggle="toggle" data-on="вкллючено" data-off="виключено" data-onstyle="success" data-offstyle="danger">
+	                </c:when>
+	                <c:otherwise>
+	                	<input type="checkbox" data-toggle="toggle" data-on="вкллючено" data-off="виключено" data-onstyle="success" data-offstyle="danger">
+	                </c:otherwise>
+                </c:choose>
+                
                 </td>
                 <td class="no-padding">
                   <button id="${workType.id}" class="btn btn-danger delete">Видалити</button>
