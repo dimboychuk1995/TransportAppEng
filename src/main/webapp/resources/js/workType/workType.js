@@ -31,11 +31,12 @@ $(function() {
   });
 
   function deleteWorkType(butObj) {
+	  var idWorkType = butObj.prop('id');
     $.ajax({
       type: 'DELETE',
       url: contextPath + '/admin/delete',
       contentType: 'application/json',
-      data: JSON.stringify(butObj.prop('id')),
+      data: butObj.prop('id'),
       success: function() {
         butObj.closest('tr').remove();
       },

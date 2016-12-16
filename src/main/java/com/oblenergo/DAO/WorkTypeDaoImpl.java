@@ -47,7 +47,7 @@ public class WorkTypeDaoImpl extends AbstractDao<String, WorkType> implements Wo
   }
 
   @Override
-  public void delete(int id) {
+  public void delete(String id) {
     Criteria crit = createEntityCriteria();
     crit.add(Restrictions.eq("id", id));
     WorkType wt = (WorkType) crit.uniqueResult();

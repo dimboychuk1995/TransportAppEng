@@ -17,7 +17,7 @@ public interface WorkTypeService {
 
   WorkType findWorkTypeByName(String name);
 
-  void delete(int id);
+  void delete(String id);
 
   boolean isWorkTypeUnique(String name, String id);
 

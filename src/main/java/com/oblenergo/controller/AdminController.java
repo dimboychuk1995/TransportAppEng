@@ -123,10 +123,9 @@ public class AdminController {
     return "redirect:/admin";
   }
 
-  @RequestMapping(value = "/delete", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
+  @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void deleteWorkType(@RequestBody int id) {
-
+  public void deleteWorkType(@RequestBody String id) {
     workTypeServiceImpl.delete(id);
   }
 

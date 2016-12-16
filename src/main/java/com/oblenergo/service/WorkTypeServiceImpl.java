@@ -89,7 +89,7 @@ public class WorkTypeServiceImpl implements WorkTypeService {
 
   @Transactional
   @Override
-  public void delete(int id) {
+  public void delete(String id) {
 
     try {
       dao.delete(id);
