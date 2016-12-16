@@ -1,7 +1,5 @@
 package com.oblenergo.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -70,9 +68,9 @@ public class AdminController {
   @Autowired
   private WorkTypeValidator workTypeValidator;
 
-  @InitBinder(WORK_TYPE)
+  @InitBinder("workType")
   public void initBinder(WebDataBinder binder) {
-    binder.addValidators(workTypeValidator);
+    binder.setValidator(workTypeValidator);
   }
 
   @InitBinder(ORDER)
@@ -89,14 +87,15 @@ public class AdminController {
     return "workType";
   }
 
-  @RequestMapping(value = "/workType/{id}", method = RequestMethod.POST)
-  public String updateType(@Validated @ModelAttribute("workType") WorkType workType, BindingResult bindingResult) {
-
-    if (bindingResult.hasErrors()) {
-      return "updateCreateWorkType";
-    }
-    return "redirect:/admin";
-  }
+  // @RequestMapping(value = "/workType/{id}", method = RequestMethod.POST)
+  // public String updateType(@Validated @ModelAttribute("workType") WorkType
+  // workType, BindingResult bindingResult) {
+  //
+  // if (bindingResult.hasErrors()) {
+  // return "updateCreateWorkType";
+  // }
+  // return "redirect:/admin";
+  // }
 
   @RequestMapping(value = "/workType/newWorkType", method = RequestMethod.GET)
   public String redirectToCreate(Model model) {
@@ -106,16 +105,15 @@ public class AdminController {
   }
 
   @RequestMapping(value = "/workType/newWorkType", method = RequestMethod.POST)
-  public String addType(@Validated @ModelAttribute("workType") WorkType workType, BindingResult bindingResult) {
-
-    List<WorkTypeDTO> allWorkTypes = sapServiceImpl.getAllWorkTypes();
-    for (WorkTypeDTO list : allWorkTypes) {
-      if (workType.getId().equals(list.getId())) {
-        workType.setName(list.getName());
-        break;
-      }
+  public String addType(@Validated @ModelAttribute("workType") WorkType workType, BindingResult bindingResult,
+      Model model) {
+    if (bindingResult.hasErrors()) {
+      model.addAttribute(WORK_TYPE, workType);
+      return "updateCreateWorkType";
     }
-    workType.setEnabled(true);
+    WorkTypeDTO wkDTO = workTypeServiceImpl.getWorkTypeDTOByIdFromSAP(workType.getId());
+    workType.setName(wkDTO.getName());
+    workType.setEnabled(false);
     workTypeServiceImpl.save(workType);
     return "redirect:/admin";
   }

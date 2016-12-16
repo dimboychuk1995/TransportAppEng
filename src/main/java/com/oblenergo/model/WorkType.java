@@ -9,10 +9,9 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -31,8 +30,10 @@ public class WorkType implements Serializable {
 
   // getters
   @Id
+  @NotBlank
+  @Size(max = 18, min = 18)
   @Column(name = "id")
-  //@GeneratedValue(strategy = GenerationType.IDENTITY)
+  // @GeneratedValue(strategy = GenerationType.IDENTITY)
   public String getId() {
     return id;
   }
@@ -42,16 +43,13 @@ public class WorkType implements Serializable {
   public String getName() {
     return name;
   }
-  
+
   @Column(name = "enabled")
   public boolean getEnabled() {
-	  return enabled;
+    return enabled;
   }
 
-  
-
   // setters
-
   public void setId(String id) {
     this.id = id;
   }
@@ -59,12 +57,10 @@ public class WorkType implements Serializable {
   public void setName(String name) {
     this.name = name;
   }
-  
-  public void setEnabled(boolean enabled) {
-	this.enabled = enabled;
-}
 
- 
+  public void setEnabled(boolean enabled) {
+    this.enabled = enabled;
+  }
 
   @Override
   public int hashCode() {

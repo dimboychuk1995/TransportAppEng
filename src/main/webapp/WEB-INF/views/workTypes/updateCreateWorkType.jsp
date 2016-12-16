@@ -16,7 +16,6 @@
           <form:input required="required" path="id" class="form-control" cssErrorClass="error form-control" />
           <form:errors path="id" class="help-block with-errors" cssErrorClass="" />
         </p>
-
         <button id="" type="submit" class="btn btn-success">Зберегти</button>
         <a href=<c:url value="/admin" /> class="btn btn-default">Повернутись на сторінку послуг</a>
       </form:form>

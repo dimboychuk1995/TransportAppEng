@@ -19,6 +19,8 @@ public class WorkTypeServiceImpl implements WorkTypeService {
   private static final Logger LOGGER = Logger.getLogger(WorkTypeServiceImpl.class);
   @Autowired
   WorkTypeDao dao;
+  @Autowired
+  private SapService sapServiceImpl;
 
   @Transactional
   @Override
@@ -101,14 +103,13 @@ public class WorkTypeServiceImpl implements WorkTypeService {
 
   @Transactional
   @Override
-  public boolean isWorkTypeUnique(String name, String id) {
+  public boolean isWorkTypeUnique(String id) {
 
     try {
-
-      WorkType wt = findWorkTypeByName(name);
-      return !(wt == null || wt.getId() == id);
+      WorkType wt = findWorkTypeById(id);
+      return (wt == null);
     } catch (DataAccessException dae) {
-      LOGGER.error("Unable to find workTyepe with name" + name, dae);
+      LOGGER.error("Unable to find workTyepe with id : " + id, dae);
       throw dae;
     }
 
@@ -124,5 +125,20 @@ public class WorkTypeServiceImpl implements WorkTypeService {
         .filter(wtDTO -> (listWorkType.stream().filter(wt -> wt.getId().equals(wtDTO.getId())).count()) >= 1)
         .collect(Collectors.toList());
     return listAvailableWorkTypeDTO;
+  }
+
+  @Override
+  public WorkTypeDTO getWorkTypeDTOByIdFromSAP(String id) {
+    List<WorkTypeDTO> allWorkTypes = sapServiceImpl.getAllWorkTypes();
+    WorkTypeDTO wkDTO = null;
+    for (WorkTypeDTO wt : allWorkTypes) {
+      if (wt.getId().equals(id)) {
+        wkDTO = wt;
+        break;
+      }
+    }
+    // wkDTO = allWorkTypes.stream().filter(x ->
+    // x.getId().equals(id)).findFirst().get();
+    return wkDTO;
   }
 }

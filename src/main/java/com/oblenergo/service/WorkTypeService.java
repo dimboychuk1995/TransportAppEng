@@ -19,8 +19,10 @@ public interface WorkTypeService {
 
   void delete(String id);
 
-  boolean isWorkTypeUnique(String name, String id);
+  boolean isWorkTypeUnique(String id);
 
   List<WorkTypeDTO> findAvailableWorkType(List<WorkTypeDTO> listWorkTypeDTO);
+
+  WorkTypeDTO getWorkTypeDTOByIdFromSAP(String id);
 
 }

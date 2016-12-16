@@ -84,9 +84,9 @@ public class UserOrderController {
   public String addType(@Validated @ModelAttribute("orders") Orders orders, BindingResult bindingResult, Model model) {
 
     if (bindingResult.hasErrors()) {
-      model.addAttribute(WORKTYPE_FROM_SAP, sapServiceImpl.getAllWorkTypes());
+      model.addAttribute(WORKTYPE_FROM_SAP,
+          wokrTypeServiceImpl.findAvailableWorkType(sapServiceImpl.getAllWorkTypes()));
       model.addAttribute(ITEMSCAR, carServiceImpl.findAll());
-
       return "createOrder";
     }
     orders.setCustomer(sapServiceImpl.getFullNameFromSap(orders.getUser_tab()));
