@@ -95,8 +95,6 @@ public class AdminController {
     if (bindingResult.hasErrors()) {
       return "updateCreateWorkType";
     }
-
-    // workTypeServiceImpl.update(workType);
     return "redirect:/admin";
   }
 
@@ -114,10 +112,9 @@ public class AdminController {
     for (WorkTypeDTO list : allWorkTypes) {
       if (workType.getId().equals(list.getId())) {
         workType.setName(list.getName());
+        break;
       }
-      break;
     }
-
     workType.setEnabled(true);
     workTypeServiceImpl.save(workType);
     return "redirect:/admin";
