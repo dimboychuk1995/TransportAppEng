@@ -1,5 +1,13 @@
+
 $(function() {
   var contextPath = $('#contextPath').val();
+  
+  // this function execution when downloading page and return fee time for date which shoose
+  $(document).ready(function(){
+	  if($("#orderStatus").val() == 'NEW'){
+		selectTime($("#dpicker").val());
+	  }
+  });
 
   // this function appeals to AJAX  
   $(document).on('click', '.day', function() {

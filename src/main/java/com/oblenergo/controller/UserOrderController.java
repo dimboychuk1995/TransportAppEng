@@ -110,7 +110,6 @@ public class UserOrderController {
     String[][] arrTimeOrders = orderServiceImpl.getAllTimeOfOrders(orders);
     List<String> freeTime = orderServiceImpl.findFreeTimeForAdmin(arrTimeOrders, timeDTO.getDate(), order,
         timeDTO.getTimeExecution());
-
     String[] arr = freeTime.toArray(new String[freeTime.size()]);
     return arr;
   }

@@ -146,7 +146,7 @@ public class AdminController {
       Model model) {
 
     if (bindingResult.hasErrors()) {
-      model.addAttribute(ORDER, orderServiceImpl.findOrderById(orders.getId()));
+      model.addAttribute(ORDER, orders);
       model.addAttribute(ITEMSWORKTYPE, workTypeServiceImpl.findAll());
       model.addAttribute(ITEMSCAR, carServiceImpl.findAll());
       model.addAttribute(STATUS_ORDER_ENUM, StatusOrderEnum.values());
