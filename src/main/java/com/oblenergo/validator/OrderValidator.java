@@ -51,6 +51,7 @@ public class OrderValidator implements Validator {
 
     if (!checkInput(regexPattern, time)) {
       errors.rejectValue("time", "Bad.time");
+      return;
     }
 
     if (!checkInput(regexPattern, timeEnd)) {
@@ -66,6 +67,9 @@ public class OrderValidator implements Validator {
   }
 
   public boolean checkInput(String regex, String input) {
+    if (input == null) {
+      return false;
+    }
     Pattern p = Pattern.compile(regex);
     Matcher m = p.matcher(input);
     if (m.find()) {

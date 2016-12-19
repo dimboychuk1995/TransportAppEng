@@ -103,15 +103,11 @@ public class Orders implements Serializable {
     return date;
   }
 
-  @NotBlank
-  @Size(max = 8)
   @Column(name = "time")
   public String getTime() {
     return time;
   }
 
-  @NotBlank
-  @Size(max = 8)
   @Column(name = "time_end")
   public String getTime_end() {
     return time_end;

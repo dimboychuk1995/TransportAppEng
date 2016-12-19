@@ -20,6 +20,7 @@
           
           <label>Номер телефону</label>
           <form:input type="text" path="mobile_phone_number" readonly="true" class="form-control" cssErrorClass="" />
+         
 
           <label>Вид робіт</label>
           <form:select id = 'typeOfWork' path="workType" items=  "${typeWorks}" class="form-control" data-placeholder="work" itemLabel="name" itemValue="id" readonly="true" />
@@ -68,13 +69,14 @@
               <form:errors path="date" class="help-block with-errors" cssErrorClass="" />
             </div>
             <div class="col-md-3 no-padding-right">
-              <form:select id="selectForm" path="time" class="tpicker form-control" cssErrorClass="error form-control">
+              <form:select id="selectForm" path="time" class="tpicker form-control"  required="required" cssErrorClass="error form-control">
                 <form:option value="${orders.time}">${orders.time}</form:option>
               </form:select>
-               <form:errors path="time" class="help-block with-errors" cssErrorClass="" />
+              <form:errors path="time" class="help-block with-errors" cssErrorClass="" />
+               
             </div>
             <div class="col-md-3 no-padding-right">
-              <form:input id="time_end" path="time_end" class="form-control" readonly="true" cssErrorClass="error form-control" />
+              <form:input id="time_end"  required="required" path="time_end" class="form-control" readonly="true" cssErrorClass="error form-control" />
               <form:errors path="time_end" class="help-block with-errors" cssErrorClass="" />
             </div>
           </div>
