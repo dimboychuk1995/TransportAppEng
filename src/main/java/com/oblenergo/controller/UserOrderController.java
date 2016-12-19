@@ -89,18 +89,10 @@ public class UserOrderController {
       model.addAttribute(ITEMSCAR, carServiceImpl.findAll());
       return "createOrder";
     }
+
     orders.setCustomer(sapServiceImpl.getFullNameFromSap(orders.getUser_tab()));
-
-    List<WorkTypeDTO> allWorkTypes = sapServiceImpl.getAllWorkTypes();
-
-    String all_sum = null;
-    for (WorkTypeDTO list : allWorkTypes) {
-      if (list.getId().equals(orders.getWorkType().getId())) {
-        all_sum = list.getPrice();
-      }
-      break;
-    }
-
+    WorkTypeDTO wtDTO = wokrTypeServiceImpl.getWorkTypeDTOByIdFromSAP(orders.getWorkType().getId());
+    String all_sum = wtDTO.getPrice();
     double all_sumWithPDV = Double.parseDouble(all_sum);
     all_sumWithPDV = all_sumWithPDV * 1.2;
     all_sum = Double.toString(all_sumWithPDV);

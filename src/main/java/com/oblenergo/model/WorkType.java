@@ -11,7 +11,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -31,7 +30,6 @@ public class WorkType implements Serializable {
   // getters
   @Id
   @NotBlank
-  @Size(max = 18, min = 18)
   @Column(name = "id")
   // @GeneratedValue(strategy = GenerationType.IDENTITY)
   public String getId() {
