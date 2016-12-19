@@ -3,7 +3,7 @@
 var marginSliderDisabled = document.getElementById('range');
 
 noUiSlider.create( marginSliderDisabled, {
-	start: [ 0, 95],
+	start: [ 0, 100],
 	range: {
 		'min': 0,
 		'max': 100
