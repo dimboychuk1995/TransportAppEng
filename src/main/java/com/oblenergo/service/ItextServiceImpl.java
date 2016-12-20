@@ -85,7 +85,7 @@ public class ItextServiceImpl implements ItextService {
 
     PdfPCell cell;
 
-    cell = new PdfPCell(new Phrase("Перепустка для в*їзду на територію" + order.getId(), getFont()));
+    cell = new PdfPCell(new Phrase("Перепустка для в'їзду на територію" + order.getId(), getFont()));
     cell.setColspan(2);
     cell.setBorderColor(BaseColor.WHITE);
     table.addCell(cell);

@@ -1,22 +1,5 @@
 package com.oblenergo.controller;
 
-import java.util.List;
-
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.oblenergo.DTO.TimeDTO;
 import com.oblenergo.DTO.WorkTypeDTO;
 import com.oblenergo.editor.CarEditor;
@@ -29,6 +12,17 @@ import com.oblenergo.service.OrderService;
 import com.oblenergo.service.SapService;
 import com.oblenergo.service.WorkTypeService;
 import com.oblenergo.validator.OrderValidator;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/")
@@ -77,6 +71,10 @@ public class UserOrderController {
     model.addAttribute(WORKTYPE_FROM_SAP, wokrTypeServiceImpl.findAvailableWorkType(sapServiceImpl.getAllWorkTypes()));// sapServiceImpl.getAllWorkTypes());
     model.addAttribute(ITEMSCAR, carServiceImpl.findAll());
     model.addAttribute(ORDER, new Orders());
+
+    List<WorkTypeDTO> workTypeDTOs = sapServiceImpl.getAllWorkTypes();
+    System.out.println(workTypeDTOs.toString());
+
     return "createOrder";
   }
 
@@ -94,7 +92,7 @@ public class UserOrderController {
     WorkTypeDTO wtDTO = wokrTypeServiceImpl.getWorkTypeDTOByIdFromSAP(orders.getWorkType().getId());
     String all_sum = wtDTO.getPrice();
     double all_sumWithPDV = Double.parseDouble(all_sum);
-    all_sumWithPDV = all_sumWithPDV * 1.2;
+    all_sumWithPDV = all_sumWithPDV * 1.2 * orders.getCount();
     all_sum = Double.toString(all_sumWithPDV);
     orders.setAll_sum(all_sum);
     orderServiceImpl.save(orders);

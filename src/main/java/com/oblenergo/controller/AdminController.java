@@ -30,7 +30,6 @@ import com.oblenergo.service.MailService;
 import com.oblenergo.service.OrderService;
 import com.oblenergo.service.SapService;
 import com.oblenergo.service.WorkTypeService;
-import com.oblenergo.validator.OrderValidator;
 import com.oblenergo.validator.WorkTypeValidator;
 
 @Controller
@@ -69,19 +68,15 @@ public class AdminController {
   @Autowired
   private WorkTypeValidator workTypeValidator;
 
-  @Autowired
-  private OrderValidator orderValidator;
-
   @InitBinder("workType")
   public void initBinder(WebDataBinder binder) {
     binder.setValidator(workTypeValidator);
   }
 
-  @InitBinder("orders")
+  @InitBinder(ORDER)
   public void initBinderOrder(WebDataBinder binder) {
     binder.registerCustomEditor(WorkType.class, serviceEditor);
     binder.registerCustomEditor(Car.class, carEditor);
-    binder.addValidators(orderValidator);
   }
 
   @RequestMapping(method = RequestMethod.GET)
@@ -149,8 +144,8 @@ public class AdminController {
   @RequestMapping(value = "/order/{id}", method = RequestMethod.POST)
   public String updateOrder(@Validated @ModelAttribute("orders") Orders orders, BindingResult bindingResult,
       Model model) {
-    if (bindingResult.hasErrors()) {
 
+    if (bindingResult.hasErrors()) {
       model.addAttribute(ORDER, orders);
       model.addAttribute(ITEMSWORKTYPE, workTypeServiceImpl.findAll());
       model.addAttribute(ITEMSCAR, carServiceImpl.findAll());
