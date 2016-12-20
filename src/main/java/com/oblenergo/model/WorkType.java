@@ -27,11 +27,10 @@ public class WorkType implements Serializable {
   private String name;
   private boolean enabled;
 
-  // getters
+
   @Id
   @NotBlank
   @Column(name = "id")
-  // @GeneratedValue(strategy = GenerationType.IDENTITY)
   public String getId() {
     return id;
   }
@@ -47,7 +46,6 @@ public class WorkType implements Serializable {
     return enabled;
   }
 
-  // setters
   public void setId(String id) {
     this.id = id;
   }

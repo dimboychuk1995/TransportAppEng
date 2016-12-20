@@ -10,6 +10,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
 public class ErrorHandlerFilter implements Filter {
+  
+  private final String pathToErrorJSP="/WEB-INF/views/error.jsp";
 
   @Override
   public void destroy() {
@@ -22,7 +24,7 @@ public class ErrorHandlerFilter implements Filter {
     try {
       filterChain.doFilter(request, response);
     } catch (Exception ex) {
-      request.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(request, response);
+      request.getRequestDispatcher(pathToErrorJSP).forward(request, response);
     }
   }
 

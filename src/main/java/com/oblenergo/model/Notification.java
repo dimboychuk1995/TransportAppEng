@@ -5,6 +5,7 @@ public class Notification {
   private String notifictionMessage;
 
   public String getNotifictionMessage() {
+   
     return notifictionMessage;
   }
 
@@ -12,6 +13,7 @@ public class Notification {
   }
 
   public Notification(String notifictionMessage) {
+   
     this.notifictionMessage = notifictionMessage;
   }
 
