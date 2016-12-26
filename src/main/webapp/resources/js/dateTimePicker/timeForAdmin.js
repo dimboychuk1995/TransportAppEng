@@ -37,7 +37,7 @@ $(function() {
 	  getDataOrder();
     $.ajax({
       type: 'POST',
-      url: contextPath + '/selectTimeAdmin',
+      url: contextPath + '/admin/selectTimeAdmin',
       contentType: 'application/json',
       data: JSON.stringify({
         "date": timeInput,

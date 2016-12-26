@@ -1,5 +1,7 @@
 package com.oblenergo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.oblenergo.DTO.OrderDTO;
+import com.oblenergo.DTO.TimeDTO;
 import com.oblenergo.DTO.WorkTypeDTO;
 import com.oblenergo.editor.CarEditor;
 import com.oblenergo.editor.ServiceEditor;
@@ -175,7 +178,18 @@ public class AdminController {
   public @ResponseBody void selectTimeForDateAdmin(@RequestBody WorkTypeDTO workTypeDTO) {
     String idWorkType = workTypeDTO.getId();
     workTypeServiceImpl.update(idWorkType);
+  }
 
+  @RequestMapping(value = "/selectTimeAdmin", headers = "Accept=*/*", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = "application/json")
+  public @ResponseBody String[] selectTimeForDateAdmin(@RequestBody TimeDTO timeDTO) {
+
+    Orders order = orderServiceImpl.findOrderById(Integer.parseInt(timeDTO.getId()));
+    List<Orders> orders = orderServiceImpl.findDateOfOrders(timeDTO.getDate());
+    String[][] arrTimeOrders = orderServiceImpl.getAllTimeOfOrders(orders);
+    List<String> freeTime = orderServiceImpl.findFreeTimeForAdmin(arrTimeOrders, timeDTO.getDate(), order,
+        timeDTO.getTimeExecution());
+    String[] arr = freeTime.toArray(new String[freeTime.size()]);
+    return arr;
   }
 
 }

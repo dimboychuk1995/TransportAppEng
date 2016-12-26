@@ -1,6 +1,17 @@
 package com.oblenergo.controller;
 
-import com.oblenergo.DTO.TimeDTO;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
 import com.oblenergo.DTO.WorkTypeDTO;
 import com.oblenergo.editor.CarEditor;
 import com.oblenergo.editor.ServiceEditor;
@@ -12,17 +23,6 @@ import com.oblenergo.service.OrderService;
 import com.oblenergo.service.SapService;
 import com.oblenergo.service.WorkTypeService;
 import com.oblenergo.validator.OrderValidator;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 @RequestMapping(value = "/")
@@ -30,12 +30,8 @@ public class UserOrderController {
   Logger LOGGER = Logger.getLogger(UserOrderController.class);
 
   private static final String WORKTYPE_FROM_SAP = "workTypeFromSap";
-  // private static final String ITEMSWORKTYPE = "typeWorks";
   private static final String ITEMSCAR = "cars";
   private static final String ORDER = "orders";
-
-  // @Autowired
-  // private WorkTypeService workTypeServiceImpl;
 
   @Autowired
   private OrderService orderServiceImpl;
@@ -71,10 +67,6 @@ public class UserOrderController {
     model.addAttribute(WORKTYPE_FROM_SAP, wokrTypeServiceImpl.findAvailableWorkType(sapServiceImpl.getAllWorkTypes()));// sapServiceImpl.getAllWorkTypes());
     model.addAttribute(ITEMSCAR, carServiceImpl.findAll());
     model.addAttribute(ORDER, new Orders());
-
-    List<WorkTypeDTO> workTypeDTOs = sapServiceImpl.getAllWorkTypes();
-    System.out.println(workTypeDTOs.toString());
-
     return "createOrder";
   }
 
@@ -98,17 +90,5 @@ public class UserOrderController {
     orderServiceImpl.save(orders);
 
     return "redirect:/?id=" + orders.getId();
-  }
-
-  @RequestMapping(value = "/selectTimeAdmin", headers = "Accept=*/*", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = "application/json")
-  public @ResponseBody String[] selectTimeForDateAdmin(@RequestBody TimeDTO timeDTO) {
-
-    Orders order = orderServiceImpl.findOrderById(Integer.parseInt(timeDTO.getId()));
-    List<Orders> orders = orderServiceImpl.findDateOfOrders(timeDTO.getDate());
-    String[][] arrTimeOrders = orderServiceImpl.getAllTimeOfOrders(orders);
-    List<String> freeTime = orderServiceImpl.findFreeTimeForAdmin(arrTimeOrders, timeDTO.getDate(), order,
-        timeDTO.getTimeExecution());
-    String[] arr = freeTime.toArray(new String[freeTime.size()]);
-    return arr;
   }
 }
