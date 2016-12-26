@@ -1,22 +1,31 @@
 package com.oblenergo.service;
 
-import com.itextpdf.text.*;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
+import javax.servlet.ServletContext;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.oblenergo.model.Orders;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import javax.servlet.ServletContext;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
+/**
+ * @author us9546
+ *
+ */
 @Service
 public class ItextServiceImpl implements ItextService {
 
@@ -28,6 +37,11 @@ public class ItextServiceImpl implements ItextService {
   @Autowired
   ServletContext context;
 
+  /**
+   * @return font
+   * 
+   *         this method get font(localization words in document)
+   */
   public Font getFont() {
     BaseFont baseFont = null;
     try {
@@ -40,6 +54,12 @@ public class ItextServiceImpl implements ItextService {
     return new Font(baseFont);
   }
 
+  /**
+   * @param order
+   * @return []byte
+   * 
+   *         this method for create permit for entrance in territory company
+   */
   @Override
   public byte[] writePermit(Orders order) {
 
@@ -85,7 +105,8 @@ public class ItextServiceImpl implements ItextService {
 
     PdfPCell cell;
 
-    cell = new PdfPCell(new Phrase("Перепустка для в'їзду на територію" + order.getId(), getFont()));
+    cell = new PdfPCell(
+        new Phrase("Перепустка для в'їзду на територію" + order.getId(), getFont()));
     cell.setColspan(2);
     cell.setBorderColor(BaseColor.WHITE);
     table.addCell(cell);
@@ -119,12 +140,4 @@ public class ItextServiceImpl implements ItextService {
 
     return table;
   }
-
-  public String getLocalDay() {
-    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-    Date date = new Date();
-    dateFormat.format(date);
-    return dateFormat.format(date);
-  }
-
 }

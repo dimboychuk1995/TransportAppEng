@@ -147,6 +147,7 @@ public class AdminController {
       return "updateCreateOrders";
     }
 
+    // it chunk code should moved to some service
     if (orders.getStatus_order().equals(StatusOrderEnum.DONE)
         && (!orderServiceImpl.findOrderById(orders.getId()).getStatus_order().equals(orders.getStatus_order()))) {
       OrderDTO orderDTO = sapServiceImpl.createNewOrder(orders.getCar_number(), orders.getWorkType().getId(),
@@ -162,7 +163,6 @@ public class AdminController {
       mailServiceImpl.sendMailWithoutPDF(sapServiceImpl.getUserEmailFromSap(orders.getUser_tab()),
           "Your order is CANCELED");
     }
-
     orderServiceImpl.update(orders);
     return "redirect:/admin/order";
 
