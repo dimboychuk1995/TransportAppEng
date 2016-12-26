@@ -1,5 +1,3 @@
-
-
 var marginSliderDisabled = document.getElementById('range');
 
 noUiSlider.create( marginSliderDisabled, {
@@ -8,7 +6,6 @@ noUiSlider.create( marginSliderDisabled, {
 		'min': 0,
 		'max': 100
 	}
-
 });
 
 marginSliderDisabled.setAttribute('disabled', true);

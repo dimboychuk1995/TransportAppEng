@@ -87,16 +87,6 @@ public class AdminController {
     return "workType";
   }
 
-  // @RequestMapping(value = "/workType/{id}", method = RequestMethod.POST)
-  // public String updateType(@Validated @ModelAttribute("workType") WorkType
-  // workType, BindingResult bindingResult) {
-  //
-  // if (bindingResult.hasErrors()) {
-  // return "updateCreateWorkType";
-  // }
-  // return "redirect:/admin";
-  // }
-
   @RequestMapping(value = "/workType/newWorkType", method = RequestMethod.GET)
   public String redirectToCreate(Model model) {
 
