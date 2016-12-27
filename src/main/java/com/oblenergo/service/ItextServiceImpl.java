@@ -38,9 +38,10 @@ public class ItextServiceImpl implements ItextService {
   ServletContext context;
 
   /**
-   * @return font
+   * this method get font(localization words in document)
    * 
-   *         this method get font(localization words in document)
+   * @return Font
+   * 
    */
   public Font getFont() {
     BaseFont baseFont = null;
@@ -55,10 +56,12 @@ public class ItextServiceImpl implements ItextService {
   }
 
   /**
-   * @param order
+   * 
+   * this method for create permit for entrance in territory company
+   * 
+   * @param Order
    * @return []byte
    * 
-   *         this method for create permit for entrance in territory company
    */
   @Override
   public byte[] writePermit(Orders order) {
