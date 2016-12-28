@@ -39,10 +39,10 @@ public class OrderValidator implements Validator {
 
     if (tabNumber != null && tabNumber != "" && tabNumber.length() <= 5) {
 
-      if (!tn.getUser_tab().matches("\\d+")) {
+      if (!tabNumber.matches("\\d+")) {
         errors.rejectValue("user_tab", "Must.be.number");
       } else {
-        String fullName = sapServiceImpl.getFullNameFromSap(tn.getUser_tab());
+        String fullName = sapServiceImpl.getFullNameFromSap(tabNumber);
         if (fullName == null) {
           errors.rejectValue("user_tab", "No.such.tabnamber");
         }

@@ -1,13 +1,14 @@
 package com.oblenergo.service;
 
-import com.oblenergo.DTO.OrderDTO;
-import com.oblenergo.DTO.WorkTypeDTO;
-import com.oblenergo.wsClient.SapClient;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.oblenergo.DTO.OrderDTO;
+import com.oblenergo.DTO.WorkTypeDTO;
+import com.oblenergo.wsClient.SapClient;
 
 @Service
 public class SapServiceImpl implements SapService {
@@ -18,16 +19,20 @@ public class SapServiceImpl implements SapService {
   SapClient sapClient;
 
   @Override
-  public String getUserEmailFromSap(String tabNamber){
+  public String getUserEmailFromSap(String tabNamber) {
 
     return sapClient.getUserEmail(tabNamber);
   }
 
-
   @Override
   public String getFullNameFromSap(String tabNamber) {
-
-    return sapClient.getFullName(tabNamber);
+    String nameFromSAP = null;
+    try {
+      nameFromSAP = sapClient.getFullName(tabNamber);
+    } catch (Exception ex) {
+      LOGGER.error("Tab number of user wasn`t found in SAP");
+    }
+    return nameFromSAP;
   }
 
   @Override

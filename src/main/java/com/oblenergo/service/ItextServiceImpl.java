@@ -22,10 +22,6 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.oblenergo.model.Orders;
 
-/**
- * @author us9546
- *
- */
 @Service
 public class ItextServiceImpl implements ItextService {
 
@@ -37,12 +33,9 @@ public class ItextServiceImpl implements ItextService {
   @Autowired
   ServletContext context;
 
-  /**
-   * this method get font(localization words in document)
+  /** This method get font(localization words in document)
    * 
-   * @return Font
-   * 
-   */
+   * @return Font */
   public Font getFont() {
     BaseFont baseFont = null;
     try {
@@ -55,14 +48,10 @@ public class ItextServiceImpl implements ItextService {
     return new Font(baseFont);
   }
 
-  /**
-   * 
-   * this method for create permit for entrance in territory company
+  /** This method for create permit for entrance in territory company
    * 
    * @param Order
-   * @return []byte
-   * 
-   */
+   * @return []byte */
   @Override
   public byte[] writePermit(Orders order) {
 

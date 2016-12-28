@@ -61,7 +61,7 @@ public class Orders implements Serializable {
   }
 
   @NotBlank
-  @Size(max = 5)
+  @Size(min = 4, max = 5)
   @Column(name = "user_tab")
   public String getUser_tab() {
     return user_tab;

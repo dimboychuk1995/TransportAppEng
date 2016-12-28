@@ -169,16 +169,11 @@ public class WorkTypeServiceImpl implements WorkTypeService {
   public WorkTypeDTO getWorkTypeDTOByIdFromSAP(String id) {
     List<WorkTypeDTO> allWorkTypes = sapServiceImpl.getAllWorkTypes();
     WorkTypeDTO wkDTO = null;
-    for (WorkTypeDTO wt : allWorkTypes) {
-      if (wt.getId().equals(id)) {
-        wkDTO = wt;
-        break;
-      }
+    try {
+      wkDTO = allWorkTypes.stream().filter(x -> x.getId().equals(id)).findFirst().get();
+    } catch (Exception ex) {
+      LOGGER.error("id : " + id + " was not found in SAP");
     }
-
-    // this code is written in Java8, but it do not work!
-    // wkDTO = allWorkTypes.stream().filter(x ->
-    // x.getId().equals(id)).findFirst().get();
     return wkDTO;
   }
 }

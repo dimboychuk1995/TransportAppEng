@@ -74,6 +74,7 @@ public class UserOrderController {
   public String addType(@Validated @ModelAttribute("orders") Orders orders, BindingResult bindingResult, Model model) {
 
     if (bindingResult.hasErrors()) {
+      System.out.println("ERROR in CONTROLLER");
       model.addAttribute(WORKTYPE_FROM_SAP,
           wokrTypeServiceImpl.findAvailableWorkType(sapServiceImpl.getAllWorkTypes()));
       model.addAttribute(ITEMSCAR, carServiceImpl.findAll());
