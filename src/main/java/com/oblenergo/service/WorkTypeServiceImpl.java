@@ -22,13 +22,10 @@ public class WorkTypeServiceImpl implements WorkTypeService {
   @Autowired
   private SapService sapServiceImpl;
 
-  /*
-   * This method return list of all workType which are in DB
+  /** This method return list of all workType which are in DB
    * 
    * @throws DataAccessException
-   * 
-   * @return List<WorkType>
-   */
+   * @return List<WorkType> */
   @Transactional
   @Override
   public List<WorkType> findAll() {
@@ -41,13 +38,10 @@ public class WorkTypeServiceImpl implements WorkTypeService {
     }
   }
 
-  /*
-   * Save to DB
+  /** Save to DB
    * 
    * @param WorkType which have to be save
-   * 
-   * @throws DataAccessException
-   */
+   * @throws DataAccessException */
   @Transactional
   @Override
   public void save(WorkType workType) {
@@ -60,13 +54,10 @@ public class WorkTypeServiceImpl implements WorkTypeService {
     }
   }
 
-  /*
-   * Find by id from DB
+  /** Find by id from DB
    * 
    * @param String id for search WorkType in DB
-   * 
-   * @throws DataAccessException
-   */
+   * @throws DataAccessException */
   @Transactional
   @Override
   public WorkType findWorkTypeById(String id) {
@@ -80,13 +71,10 @@ public class WorkTypeServiceImpl implements WorkTypeService {
 
   }
 
-  /*
-   * Find by name from DB
+  /** Find by name from DB
    * 
    * @param String name for search WorkType in DB
-   * 
-   * @throws DataAccessException
-   */
+   * @throws DataAccessException */
   @Transactional
   @Override
   public WorkType findWorkTypeByName(String name) {
@@ -99,14 +87,10 @@ public class WorkTypeServiceImpl implements WorkTypeService {
     }
   }
 
-  /*
-   * Update in DB
+  /** Update in DB
    * 
    * @param String id of WorkType which have to be update
-   * 
-   * @throws DataAccessException
-   */
-
+   * @throws DataAccessException */
   @Transactional
   @Override
   public void update(String idWorkType) {
@@ -125,13 +109,10 @@ public class WorkTypeServiceImpl implements WorkTypeService {
     }
   }
 
-  /*
-   * Delete from DB
+  /** Delete from DB
    * 
    * @param String id of WorkType which have to be remove
-   * 
-   * @throws DataAccessException
-   */
+   * @throws DataAccessException */
 
   @Transactional
   @Override
@@ -145,13 +126,10 @@ public class WorkTypeServiceImpl implements WorkTypeService {
     }
   }
 
-  /*
-   * Checking that this workType is unique in DB
+  /** Checking that this workType is unique in DB
    * 
    * @param String id of WorkType which is in DB
-   * 
-   * @throws DataAccessException
-   */
+   * @throws DataAccessException */
   @Transactional
   @Override
   public boolean isWorkTypeUnique(String id) {
@@ -166,14 +144,11 @@ public class WorkTypeServiceImpl implements WorkTypeService {
 
   }
 
-  /*
-   * Search for available workTye, its get workType from SAP and also gets
-   * workType from DB then create list with available workType
+  /** Search for available workTye, its get workType from SAP and also gets workType from
+   * DB then create list with available workType
    * 
    * @param List<WorkTypeDTO> from SAP
-   * 
-   * @throws DataAccessException
-   */
+   * @throws DataAccessException */
   @Transactional
   @Override
   public List<WorkTypeDTO> findAvailableWorkType(List<WorkTypeDTO> listWorkTypeDTO) {
@@ -186,13 +161,10 @@ public class WorkTypeServiceImpl implements WorkTypeService {
     return listAvailableWorkTypeDTO;
   }
 
-  /*
-   * Get WorkType by id from SAP
+  /** Get WorkType by id from SAP
    * 
    * @param String id
-   * 
-   * @throws DataAccessException
-   */
+   * @throws DataAccessException */
   @Override
   public WorkTypeDTO getWorkTypeDTOByIdFromSAP(String id) {
     List<WorkTypeDTO> allWorkTypes = sapServiceImpl.getAllWorkTypes();

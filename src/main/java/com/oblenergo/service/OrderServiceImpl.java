@@ -1,22 +1,23 @@
 package com.oblenergo.service;
 
-import com.oblenergo.DAO.OrderDao;
-import com.oblenergo.model.Orders;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.stream.Collectors;
-
-/**
- *
- * @author us9522
- */
+import com.oblenergo.DAO.OrderDao;
+import com.oblenergo.model.Orders;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -26,15 +27,21 @@ public class OrderServiceImpl implements OrderService {
   @Autowired
   OrderDao dao;
 
+  /** FullTimeRange it is array with all hours for full work days */
   private final static String[] fullTimeRange = { "10:00:00", "10:30:00", "11:00:00", "11:30:00", "12:00:00",
       "12:30:00", "13:00:00", "13:30:00", "14:00:00", "14:30:00", "15:00:00", "15:30:00", "16:00:00", "16:30:00",
       "17:00:00", "17:30:00" };
 
+  /** shortTimeRange it is array with all hours for short work day it is Friday */
   private final static String[] shortTimeRange = { "10:00:00", "10:30:00", "11:00:00", "11:30:00", "12:00:00",
       "12:30:00", "13:00:00", "13:30:00", "14:00:00", "14:30:00", "15:00:00", "15:30:00", "16:00:00" };
 
   private final static int shortDay = 7;// Friday
 
+  /** This method return list of all orders which are in DB
+   * 
+   * @throws DataAccessException
+   * @return List<Orders> */
   @Transactional
   @Override
   public List<Orders> findAll() {
@@ -45,6 +52,11 @@ public class OrderServiceImpl implements OrderService {
       throw dae;
     }
   }
+
+  /** Save to DB
+   * 
+   * @param Orders which have to be save
+   * @throws DataAccessException */
 
   @Transactional
   @Override
@@ -57,6 +69,10 @@ public class OrderServiceImpl implements OrderService {
     }
   }
 
+  /** Find by id from DB
+   * 
+   * @param int id for search Orders in DB
+   * @throws DataAccessException */
   @Transactional
   @Override
   public Orders findOrderById(int id) {
@@ -68,6 +84,10 @@ public class OrderServiceImpl implements OrderService {
     }
   }
 
+  /** Update order in DB
+   * 
+   * @param Orders order which have to be update
+   * @throws DataAccessException */
   @Transactional
   @Override
   public void update(Orders order) {
@@ -95,6 +115,10 @@ public class OrderServiceImpl implements OrderService {
 
   }
 
+  /** Delete from DB
+   * 
+   * @param int id of Orders which have to be remove
+   * @throws DataAccessException */
   @Transactional
   @Override
   public void delete(int id) {
@@ -107,6 +131,10 @@ public class OrderServiceImpl implements OrderService {
 
   }
 
+  /** Looking for all orders with date from DB
+   * 
+   * @param String date of Orders
+   * @throws DataAccessException */
   @Transactional
   @Override
   public List<Orders> findDateOfOrders(String date) {
@@ -118,6 +146,12 @@ public class OrderServiceImpl implements OrderService {
     }
   }
 
+  /** Search all free hours for order
+   * 
+   * @param String[][] arrTimeOrders - all time orders which have status DONE OR PAID
+   * @param String date - it date from input which chosen administrator
+   * @param Orders order - it order from form which edited administrator
+   * @param String timeExecution - it time execution of order from SAP */
   @Override
   public List<String> findFreeTimeForAdmin(String[][] arrTimeOrders, String date, Orders order, String timeExecution) {
     String[] timeAdmin;
@@ -135,12 +169,10 @@ public class OrderServiceImpl implements OrderService {
     return avaliableTime;
   }
 
-  /**
-   * Use for getting week`s day of order
+  /** Use for getting week`s day of order
    * 
    * @param date
-   * @return int dateOfWeek
-   */
+   * @return int dateOfWeek */
   public int getDayOfWeek(String date) {
     Calendar c = Calendar.getInstance();
     try {
@@ -152,29 +184,25 @@ public class OrderServiceImpl implements OrderService {
     return dayOfWeek;
   }
 
-  /**
-   * Use for getting busy time on order`s day
+  /** Use for getting busy time on order`s day
    * 
    * @param time
    * @param arrTimeOrders
    * @param date
-   * @return List<String> busyTime
-   */
+   * @return List<String> busyTime */
   public List<String> getBusyTimes(String[] time, String[][] arrTimeOrders, String date) {
     /** value beginning order`s execution */
     int start = 0;
     /** value finish order`s execution */
     int end = 1;
 
-    /**
-     * value for definition start time of order, it must not write to list with
-     * busy time
-     */
+    /** value for definition start time of order, it must not write to list with
+     * busy time */
     int startTimeOrder;
 
     ArrayList<String> busyTimes = new ArrayList<String>();
-    for (int timeI = 0; timeI < time.length; timeI++) { // array of all times of
-                                                        // week
+    // array of all times of week
+    for (int timeI = 0; timeI < time.length; timeI++) {
 
       outTimeOrder: for (int timeOrderI = 0; timeOrderI < arrTimeOrders.length; timeOrderI++) {
         for (int j = 0; j < arrTimeOrders[timeOrderI].length; j++) {
@@ -206,20 +234,17 @@ public class OrderServiceImpl implements OrderService {
     Set<String> setBusyTime = new LinkedHashSet<String>(busyTimes);
 
     // write to ArrayList for working with indexes
-    // needn't
     ArrayList<String> busy = new ArrayList<String>(setBusyTime);
     return busy;
   }
 
-  /**
-   * Use for getting available time for set time order
+  /** Use for getting available time for set time order
    * 
    * @param time
    * @param freeTime
    * @param order
    * @param timeExecution
-   * @return List<String> availableTime
-   */
+   * @return List<String> availableTime */
   public List<String> getAvailableTime(String time[], List<String> freeTime, Orders order, String timeExecution) {
 
     /** List for save available time */
@@ -227,9 +252,8 @@ public class OrderServiceImpl implements OrderService {
 
     /** value which have count of order */
     int countOrder = order.getCount();
-    /**
-     * value which have number steps for equal hours in list
-     */
+
+    /** value which have number steps for equal hours in list */
     int stepTime = convertToStep(timeExecution) * countOrder;
 
     int countEquals = 0;
@@ -257,6 +281,10 @@ public class OrderServiceImpl implements OrderService {
     return availableTime;
   }
 
+  /** Convert execution of order to step for comparing hours which are in this range of
+   * 
+   * @param String execution
+   * @return int double step */
   public int convertToStep(String execution) {
     double timeExecution = 0;
     timeExecution = Double.parseDouble(execution);
@@ -264,6 +292,11 @@ public class OrderServiceImpl implements OrderService {
     return (int) (execOrder + execOrder + 1);
   }
 
+  /** Return list with hours which are free in day
+   * 
+   * @param String[] time - it array with all hours of day
+   * @param List<String> busyTime - it list with hours, which are busy in day
+   * @return List<String> - list with hours which are free */
   public List<String> getFreeTime(String[] time, List<String> busyTime) {
 
     List<String> list = new ArrayList<>(Arrays.asList(time));
@@ -271,6 +304,10 @@ public class OrderServiceImpl implements OrderService {
     return freeTime;
   }
 
+  /** Return multidimensional array which have hours start and finish of orders
+   * 
+   * @param List<Orders> orders - it list all orders which have in day
+   * @return String[][] - multidimensional array with hours start and finish of orders */
   @Override
   public String[][] getAllTimeOfOrders(List<Orders> orders) {
 
@@ -285,6 +322,10 @@ public class OrderServiceImpl implements OrderService {
     return arrTimeOrders;
   }
 
+  /** Finds all orders which have status DONE
+   * 
+   * @throws DataAccessException
+   * @return List<Orders> - list with orders which have status DONE */
   @Transactional
   @Override
   public List<Orders> findAllConfirm() {
