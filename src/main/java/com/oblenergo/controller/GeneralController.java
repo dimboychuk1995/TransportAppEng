@@ -29,6 +29,7 @@ public class GeneralController {
     public String error500(RuntimeException e) {
         
         LOGGER.error("Internal runtime exception", e);
+        e.printStackTrace();
         return "error";
     }
     

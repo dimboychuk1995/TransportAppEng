@@ -15,7 +15,7 @@
     <div class="header">
       <div class="logo">
         <h1>
-          <a href="#">Щось пішло не так</a>
+          Щось пішло не так
 		</h1>
       </div>
     </div>

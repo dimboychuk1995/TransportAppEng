@@ -26,13 +26,8 @@ public class SapServiceImpl implements SapService {
 
   @Override
   public String getFullNameFromSap(String tabNamber) {
-    String nameFromSAP = null;
-    try {
-      nameFromSAP = sapClient.getFullName(tabNamber);
-    } catch (Exception ex) {
-      LOGGER.error("Tab number of user wasn`t found in SAP");
-    }
-    return nameFromSAP;
+ 
+    return sapClient.getFullName(tabNamber);
   }
 
   @Override

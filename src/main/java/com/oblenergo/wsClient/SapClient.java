@@ -154,8 +154,13 @@ public class SapClient extends WebServiceGatewaySupport {
   public String getFullName(String tabNumber) {
 
     ZsearchPersonResponse response = getZsearchPersonResponse(tabNumber);
-    ZpernDebitor userInfo = response.getOutTab().getItem().get(0);
-    return userInfo.getFamily() + " " + userInfo.getName() + " " + userInfo.getFather();
+    List<ZpernDebitor> itemList = response.getOutTab().getItem();
+    if (itemList.size() != 0) {
+      ZpernDebitor userInfo = itemList.get(0);
+      return userInfo.getFamily() + " " + userInfo.getName() + " " + userInfo.getFather();
+    } else {
+      return null;
+    }
   }
 
   /**
@@ -168,8 +173,13 @@ public class SapClient extends WebServiceGatewaySupport {
   public String getUserEmail(String tabNumber) {
 
     ZsearchPersonResponse response = getZsearchPersonResponse(tabNumber);
-    ZpernDebitor userInfo = response.getOutTab().getItem().get(0);
-    return userInfo.getEmail();
+    try {
+      return response.getOutTab().getItem().get(0).getEmail();
+    } catch (IndexOutOfBoundsException e) {
+      LOGGER.error("Something wrong with SAP person search service", e);
+      throw e;
+    }
+ 
   }
 
   /**

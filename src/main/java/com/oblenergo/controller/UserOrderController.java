@@ -74,13 +74,12 @@ public class UserOrderController {
   public String addType(@Validated @ModelAttribute("orders") Orders orders, BindingResult bindingResult, Model model) {
 
     if (bindingResult.hasErrors()) {
-      System.out.println("ERROR in CONTROLLER");
       model.addAttribute(WORKTYPE_FROM_SAP,
           wokrTypeServiceImpl.findAvailableWorkType(sapServiceImpl.getAllWorkTypes()));
       model.addAttribute(ITEMSCAR, carServiceImpl.findAll());
       return "createOrder";
     }
-
+    
     orders.setCustomer(sapServiceImpl.getFullNameFromSap(orders.getUser_tab()));
     WorkTypeDTO wtDTO = wokrTypeServiceImpl.getWorkTypeDTOByIdFromSAP(orders.getWorkType().getId());
     String all_sum = wtDTO.getPrice();
@@ -89,7 +88,7 @@ public class UserOrderController {
     all_sum = Double.toString(all_sumWithPDV);
     orders.setAll_sum(all_sum);
     orderServiceImpl.save(orders);
-
+    
     return "redirect:/?id=" + orders.getId();
   }
 }

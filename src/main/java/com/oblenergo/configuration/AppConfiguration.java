@@ -80,15 +80,5 @@ public class AppConfiguration extends WebMvcConfigurerAdapter {
     MimeMessage mimeMessage = javaMailSenderImpl.createMimeMessage();
     return mimeMessage;
   }
-  
-  @Override
-  public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> exceptionResolvers) {
-
-    super.configureHandlerExceptionResolvers(exceptionResolvers);
-    SimpleMappingExceptionResolver exceptionResolver = new SimpleMappingExceptionResolver();
-    exceptionResolver.setDefaultErrorView("error");
-    exceptionResolvers.add(exceptionResolver);
-    
-  }
 
 }

@@ -9,8 +9,13 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+import org.apache.log4j.Logger;
+
+import com.oblenergo.controller.GeneralController;
+
 public class ErrorHandlerFilter implements Filter {
   
+  private static final Logger LOGGER = Logger.getLogger(ErrorHandlerFilter.class);
   private final String pathToErrorJSP="/WEB-INF/views/error.jsp";
 
   @Override
@@ -25,6 +30,8 @@ public class ErrorHandlerFilter implements Filter {
       filterChain.doFilter(request, response);
     } catch (Exception ex) {
       request.getRequestDispatcher(pathToErrorJSP).forward(request, response);
+      System.out.println("filter");
+      LOGGER.error("Error was cought with filter",ex);
     }
   }
 
