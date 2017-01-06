@@ -15,7 +15,7 @@ $(function() {
 });
 
 function updateSlider() {
-  
+
   getDataTypeFromSelect();
 
   $("#range").remove();
@@ -26,13 +26,13 @@ function updateSlider() {
   var slider = document.getElementById('range'),
     leftValue = document.getElementById('startTime'),
     rightValue = document.getElementById('endTime');
-  
+
   var date = $('#dpicker').val();
 
   // need using AJAX
   var timeImplementation = $('#timeFromSelect').val();
   // end AJAX
-  
+
   var countOrders = $('#countOrder :selected').val();
   var initialStartMinute = 600,
     initialEndMinute = getWorkOfDay(date);
@@ -103,22 +103,21 @@ function getWorkOfDay(dateInput) {
   }
 }
 
-function getDataTypeFromSelect(){
-    var idWorkFromSelect = $("#typeOfWork").val();
-    var idWork = document.getElementsByClassName('idWork');
-    var nameWork = document.getElementsByClassName('nameWork');
-    var timeWork = document.getElementsByClassName('timeWork');
-    var priceWork = document.getElementsByClassName('priceWork');
-    
+function getDataTypeFromSelect() {
+  var idWorkFromSelect = $("#typeOfWork").val();
+  var idWork = document.getElementsByClassName('idWork');
+  var nameWork = document.getElementsByClassName('nameWork');
+  var timeWork = document.getElementsByClassName('timeWork');
+  var priceWork = document.getElementsByClassName('priceWork');
 
-    for(var i = 0; i < nameWork.length; i++){
-      
-      if(idWork[i].value == idWorkFromSelect){
-    	
-    	$('#idFromSelect').val(idWork[i].value);
-    	$('#nameFromSelect').val(nameWork[i].value);
-        $('#timeFromSelect').val(timeWork[i].value);
-        $('#pricFromSelect').val(priceWork[i].value);
-      }
+  for (var i = 0; i < nameWork.length; i++) {
+
+    if (idWork[i].value == idWorkFromSelect) {
+
+      $('#idFromSelect').val(idWork[i].value);
+      $('#nameFromSelect').val(nameWork[i].value);
+      $('#timeFromSelect').val(timeWork[i].value);
+      $('#pricFromSelect').val(priceWork[i].value);
     }
+  }
 }

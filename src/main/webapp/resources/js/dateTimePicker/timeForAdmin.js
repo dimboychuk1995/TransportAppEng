@@ -24,7 +24,6 @@ $(function() {
   $(document).on('click', '.tpicker', function() {
 	  if ($("#dpicker").val() != "") {
 		  var sizeSelect = $('select.tpicker option').length;
-		  console.log(sizeSelect);
 		  if ( sizeSelect <= 1 ){
 			  selectTime($("#dpicker").val());
 			  setEndTimeForOrder();
@@ -92,8 +91,6 @@ function setEndTimeForOrder() {
 	  $('#selectForm').val(null);
 	  
   }
-
-
 }
 
 // this  function return time of end function
@@ -105,10 +102,8 @@ function getEndTime(timeString) {
 
   var timeWorkExecution = $("#timeOrder").val();
   var countOrder = $("#countOrders").val();
-  console.log(countOrder);
   
   var minuteExecution = ((hours * 60) + (timeWorkExecution * countOrder));
- console.log(minuteExecution);
   var hourEndExec = minuteExecution / 60;
 
   var hourString = hourEndExec.toString();

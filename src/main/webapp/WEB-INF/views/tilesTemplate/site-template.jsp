@@ -17,9 +17,8 @@
   <!-- Bootstrap Data table css-->
   <link href="<c:url value = "/resources/dist/bootstrap-dataTables/css/dataTables.bootstrap.min.css" />" rel="stylesheet">
 
-  <!-- TimePicker CSS -->
+  <!-- Datepicker CSS -->
   <link href="<c:url value = "/resources/dist/css/dateTimePicker/bootstrap-datepicker.css" />" rel="stylesheet">
-  <link href="<c:url value = "/resources/dist/css/dateTimePicker/jquery.timepicker.css" />" rel="stylesheet">
   
   <!-- Main CSS -->
   <link href="<c:url value = "/resources/dist/css/main.css" />" rel="stylesheet">
@@ -54,6 +53,11 @@
   <!-- Bootstrap toggle JS -->
   <script src="<c:url value = "/resources/js/toggleBootstrap/bootstrap-toggle.min.js"/>"></script>
   <script src="<c:url value = "/resources/js/toggleBootstrap/workTypeToggle.js"/>"></script>
+  
+  <!-- Datepicker JS -->
+<script src=<c:url value="/resources/js/dateTimePicker/bootstrap-datepicker.js" />></script>
+<script src=<c:url value="/resources/js/dateTimePicker/dateTimePicker.js" />></script> 
+  
   
   <title>
     <tiles:insertAttribute name="title" ignore="true" />

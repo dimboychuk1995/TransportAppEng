@@ -1,32 +1,40 @@
+/* =========================================================
+ * diapasonTime.js
+ * 
+ * This script converts minutes to hours and insert it in 
+ * the inputs of start and finish execution of order
+
+ * ========================================================= */
+
 $(function() {
-    $('#slider-time').slider({
-        range: true,
-        min: 600,
-        max: 840,
-        step: 30,
-        values: [ 600, 840 ],
-        slide: function( event, ui ) {
-        	
-        	
-            var hours1 = Math.floor(ui.values[0] / 60);
-            var minutes1 = ui.values[0] - (hours1 * 60);
+  $('#slider-time').slider({
+    range: true,
+    min: 600,// start of work day
+    max: 840,// finish of work day
+    step: 30,// step
+    values: [600, 840],
+    slide: function(event, ui) {
 
-            if(hours1.length < 10) hours1= '0' + hours;
-            if(minutes1.length < 10) minutes1 = '0' + minutes;
+      var hours1 = Math.floor(ui.values[0] / 60);
+      var minutes1 = ui.values[0] - (hours1 * 60);
 
-            if(minutes1 == 0) minutes1 = '00';
+      if (hours1.length < 10) hours1 = '0' + hours;
+      if (minutes1.length < 10) minutes1 = '0' + minutes;
 
-            var hours2 = Math.floor(ui.values[1] / 60);
-            var minutes2 = ui.values[1] - (hours2 * 60);
+      if (minutes1 == 0) minutes1 = '00';
 
-            if(hours2.length < 10) hours2= '0' + hours;
-            if(minutes2.length < 10) minutes2 = '0' + minutes;
+      var hours2 = Math.floor(ui.values[1] / 60);
+      var minutes2 = ui.values[1] - (hours2 * 60);
 
-            if(minutes2 == 0) minutes2 = '00';
-            
-            document.getElementById('startTime').value = hours1 + ':' + minutes1;
-            document.getElementById('endTime').value = hours2 + ':' + minutes2;
+      if (hours2.length < 10) hours2 = '0' + hours;
+      if (minutes2.length < 10) minutes2 = '0' + minutes;
 
-        }
-    });
+      if (minutes2 == 0) minutes2 = '00';
+
+      document.getElementById('startTime').value = hours1 + ':' +
+        minutes1;
+      document.getElementById('endTime').value = hours2 + ':' +
+        minutes2;
+    }
+  });
 });

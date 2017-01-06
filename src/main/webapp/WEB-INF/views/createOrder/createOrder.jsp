@@ -3,6 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
+ 
+ <link href="<c:url value = "/resources/dist/css/user/userOrder.css" />"  rel="stylesheet" >
+ <!-- CSS Nouislider -->
+ <link href="<c:url value = "/resources/dist/css/dateTimePicker/nouislider.min.css" />" rel="stylesheet">
+
+
 <div class="container-fluid">
 
   <div class="col-md-12">
@@ -87,7 +93,7 @@
 	          </div>
           </div>
           <br>
-
+		<br>
           <label class="col-md-6 no-padding-left">Початок</label>
           <label class="col-md-6">Кінець</label>
 
@@ -132,10 +138,10 @@
                       <c:out value="${workType.name}"></c:out>
                     </td>
                     <td>
-                      <c:out value="${workType.price},грн"> </c:out>
+                      <c:out value="${workType.price}.грн"> </c:out>
                     </td>
                     <td>
-                      <c:out value="${workType.time/60}год."> </c:out>
+                      <c:out value="${workType.time/60} год."> </c:out>
                     </td>
                   </tr>
                 </c:forEach>
@@ -166,17 +172,10 @@
 </div>
 
 <input id="contextPath" type="hidden" value="${pageContext.request.contextPath}" />
- <link rel="stylesheet" href=<c:url value="/resources/dist/css/user/userOrder.css" />>
- <link href="<c:url value = "/resources/dist/css/dateTimePicker/nouislider.css" />" rel="stylesheet">
- <link href="<c:url value = "/resources/dist/css/dateTimePicker/nouislider.min.css" />" rel="stylesheet">
- <link href="<c:url value = "/resources/dist/css/dateTimePicker/nouislider.pips.css" />" rel="stylesheet">
- <link href="<c:url value = "/resources/dist/css/dateTimePicker/nouislider.tooltips.css" />" rel="stylesheet">
- <script src=<c:url value="/resources/js/dateTimePicker/nouislider.js" />></script>
- <script src=<c:url value="/resources/js/dateTimePicker/nouislider.min.js" />></script> 
- <script src=<c:url value="/resources/js/dateTimePicker/timeRange.js" />></script>
- <script src=<c:url value="/resources/js/dateTimePicker/timeRangeDisable.js" />></script>
- <script src=<c:url value="/resources/js/dateTimePicker/dateTimePicker.js" />></script>
- <script src=<c:url value="/resources/js/dateTimePicker/dateTimePicker.js" />></script>
- <script src=<c:url value="/resources/js/dateTimePicker/bootstrap-datepicker.js" />></script>
- <script src=<c:url value="/resources/js/dateTimePicker/datepair.js" />></script>
- <script src=<c:url value="/resources/js/dateTimePicker/jquery.timepicker.js" />></script>        
+
+<!-- Nouislider library -->
+<script src=<c:url value="/resources/js/dateTimePicker/nouislider.min.js" />></script> 
+<!-- Default timeRange -->
+<script src=<c:url value="/resources/js/dateTimePicker/timeRangeDisable.js" />></script>
+  
+<script src=<c:url value="/resources/js/dateTimePicker/timeRange.js" />></script>

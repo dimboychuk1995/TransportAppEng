@@ -1,3 +1,9 @@
+
+/* =========================================================
+ * timeRangeDisable.js
+ *
+ * It default timeRange when downloading page.
+ * ========================================================= */
 var marginSliderDisabled = document.getElementById('range');
 
 noUiSlider.create( marginSliderDisabled, {
@@ -7,5 +13,4 @@ noUiSlider.create( marginSliderDisabled, {
 		'max': 100
 	}
 });
-
 marginSliderDisabled.setAttribute('disabled', true);
