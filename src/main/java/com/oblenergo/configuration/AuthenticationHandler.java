@@ -64,6 +64,7 @@ public class AuthenticationHandler implements AuthenticationSuccessHandler {
     } else if (isAdmin) {
       return "/admin/order";
     } else {
+      System.out.println("Error");
       throw new IllegalStateException();
     }
   }

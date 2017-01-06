@@ -15,33 +15,33 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class LoginLogoutController {
 
-    private static final String SUCCES = "succes";
-    
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String getLoginPage(Model model) {
+  private static final String SUCCES = "succes";
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth instanceof AnonymousAuthenticationToken) {
-            return "login";
-        }
-        model.addAttribute(SUCCES, auth.isAuthenticated());
-        return "login";
+  @RequestMapping(value = "/login", method = RequestMethod.GET)
+  public String getLoginPage(Model model) {
+
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    if (auth instanceof AnonymousAuthenticationToken) {
+      return "login";
     }
+    model.addAttribute(SUCCES, auth.isAuthenticated());
+    return "login";
+  }
 
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
+  @RequestMapping(value = "/logout", method = RequestMethod.GET)
+  public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null) {
-            new SecurityContextLogoutHandler().logout(request, response, auth);
-        }
-        return "redirect:/login";
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    if (auth != null) {
+      new SecurityContextLogoutHandler().logout(request, response, auth);
     }
+    return "redirect:/login";
+  }
 
-    @RequestMapping(value = "/403", method = RequestMethod.GET)
-    public String error403(Model model) {
+  @RequestMapping(value = "/403", method = RequestMethod.GET)
+  public String error403(Model model) {
 
-        model.addAttribute("message", "You don't have permission to access this page");
-        return "error";
-    }
+    model.addAttribute("message", "You don't have permission to access this page");
+    return "error";
+  }
 }

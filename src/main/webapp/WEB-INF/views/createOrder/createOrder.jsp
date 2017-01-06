@@ -81,8 +81,10 @@
 
           <label> Виберіть період надання послуги</label>
 
-          <div class="containSlider">
-            <div id="range"></div>
+          <div class = "col-md-12">
+	          <div class="containSlider">
+	            <div id="range"></div>
+	          </div>
           </div>
           <br>
 
