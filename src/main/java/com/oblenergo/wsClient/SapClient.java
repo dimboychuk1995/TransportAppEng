@@ -148,8 +148,10 @@ public class SapClient extends WebServiceGatewaySupport {
    * 
    * Returns full name of an employee
    *
-   * @param time-board number of an employee
-   * @return String with employee`s full name 
+   * @param time-board
+   *          number of an employee
+   * @return String with employee`s full name or null if there is no employee
+   * with such time-board number
    */
   public String getFullName(String tabNumber) {
 
@@ -168,6 +170,7 @@ public class SapClient extends WebServiceGatewaySupport {
    * Returns an employee`s email
    *
    * @param time-board number of an employee
+   * @throws IndexOutOfBoundsException exception
    * @return String with employee`s email 
    */
   public String getUserEmail(String tabNumber) {
