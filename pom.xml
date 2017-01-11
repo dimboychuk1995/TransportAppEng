@@ -273,7 +273,7 @@
               <sourceRoot>${basedir}/target/wsdl</sourceRoot>
               <wsdlOptions>
                 <wsdlOption>
-                  <wsdl>${basedir}/src/main/resources/sap/sap.wsdl</wsdl>
+                  <wsdl>${basedir}/src/main/resources/sap.wsdl</wsdl>
                 </wsdlOption>
               </wsdlOptions>
             </configuration>
