@@ -37,3 +37,4 @@ log.txt
 nb-configuration.xml
 datasource.properties
 sapclient.properties
+sap.wsdl
