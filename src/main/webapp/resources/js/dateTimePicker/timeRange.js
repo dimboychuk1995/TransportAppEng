@@ -99,7 +99,7 @@ function getWorkOfDay(dateInput) {
   if (date.getDay() == 5) {
     return 960;
   } else {
-    return 1035;
+    return 1020;
   }
 }
 
