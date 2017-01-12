@@ -64,7 +64,9 @@ public class UserOrderController {
 
   @RequestMapping(method = RequestMethod.GET)
   public String getAllType(Model model) {
-    model.addAttribute(WORKTYPE_FROM_SAP, wokrTypeServiceImpl.findAvailableWorkType(sapServiceImpl.getAllWorkTypes()));
+    model.addAttribute(WORKTYPE_FROM_SAP, wokrTypeServiceImpl.findAvailableWorkType(sapServiceImpl.getAllWorkTypes()));// sapServiceImpl.getAllWorkTypes());
+    System.out.println(sapServiceImpl.getAllWorkTypes());
+
     model.addAttribute(ITEMSCAR, carServiceImpl.findAll());
     model.addAttribute(ORDER, new Orders());
     return "createOrder";
