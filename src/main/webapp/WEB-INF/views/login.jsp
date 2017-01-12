@@ -12,8 +12,8 @@
         <c:if test="${succes==true}">
           <div class="form-signin">
             <div class="login-title">
-              <p><strong>Ви успішно увійшли до системи!</strong></p>
-              <p><a href=<c:url value="/logout" /> class="btn transparent">Вийти</a></p>
+              <p><strong>Login successful!</strong></p>
+              <p><a href=<c:url value="/logout" /> class="btn transparent">Logout</a></p>
             </div>
           </div>
         </c:if>
@@ -21,19 +21,19 @@
         <c:if test="${succes!=true}">
           <div class="form-signin">
             <div class="login-title">
-              <h3>Будь ласка увійдіть до системи</h3>
+              <h3>Login <please></please></h3>
             </div>
             <c:if test="${not empty param.error}">
               <div class="alert alert-danger">
-                <strong>Неправильний логін або пароль!</strong>
+                <strong>Wrong login or password!</strong>
               </div>
             </c:if>
 
             <form role="" action="${pageContext.request.contextPath}/loginCheck" method="POST">
               <fieldset>
-                <input class="form-control" name="username" placeholder="Введіть логін" autofocus required>
-                <input class="form-control pull-down" type="password" name="password" placeholder="Введіть пароль" value="" required>
-                <input type="submit" class="btn col-md-12 transparent" value="Увійти" />
+                <input class="form-control" name="username" placeholder="Login" autofocus required>
+                <input class="form-control pull-down" type="password" name="password" placeholder="Password" value="" required>
+                <input type="submit" class="btn col-md-12 transparent" value="Login" />
               </fieldset>
             </form>
           </div>

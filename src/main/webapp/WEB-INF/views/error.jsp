@@ -15,17 +15,17 @@
     <div class="header">
       <div class="logo">
         <h1>
-          Щось пішло не так
+          Something went wrong
 		</h1>
       </div>
     </div>
     <div class="content">
       <img src=<c:url value="/resources/travolta.gif" /> title="error" />
       <p>
-        <span>Оува.....</span>Зверніться до адміністратора або повторіть спробу.
+        <span>.....</span>Contact your administrator or try again.
       </p>
-      <a href="#" onclick="window.history.back();">Назад</a>
-      <a href=<c:url value="/" />>Початкова сторінка</a>
+      <a href="#" onclick="window.history.back();">Back</a>
+      <a href=<c:url value="/" />>Start page</a>
     </div>
   </div>
 </body>

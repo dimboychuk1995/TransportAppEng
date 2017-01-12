@@ -13,7 +13,7 @@
         <sec:authorize access="isAuthenticated()">
           <li>  
             <a href=<c:url value="/logout" /> class="login-logout">
-              <span class="glyphicon glyphicon-log-out login-logout" aria-hidden="true"></span> Вийти
+              <span class="glyphicon glyphicon-log-out login-logout" aria-hidden="true"></span> Logout
             </a>   
           </li>
         </sec:authorize>
@@ -21,7 +21,7 @@
         <sec:authorize access="isAnonymous()">
           <li>
             <a href=<c:url value="/login" /> class="login-logout">
-              <span class="glyphicon glyphicon-log-in login-logout" aria-hidden="true"></span> Увійти
+              <span class="glyphicon glyphicon-log-in login-logout" aria-hidden="true"></span> Login
             </a>
           </li>
         </sec:authorize>

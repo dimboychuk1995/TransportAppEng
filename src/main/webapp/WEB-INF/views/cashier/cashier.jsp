@@ -10,14 +10,14 @@
         <table class="table table-hover table-striped table-bordered" id="orders">
           <thead>
             <tr>
-              <th class="col-md-2">Замовник</th>
-              <th class="col-md-1">Табельний номер</th>
-              <th class="col-md-3">Вид робіт</th>
-              <th class="col-md-1">Дата</th>
-              <th class="col-md-1">Час</th>
-              <th class="col-md-1">Всього до оплати</th>
-              <th class="col-md-1">Номер замовлення</th>
-              <th class="col-md-1">Підтвердити оплату</th>
+              <th class="col-md-2">Customer</th>
+              <th class="col-md-1">Tab number</th>
+              <th class="col-md-3">Type of work</th>
+              <th class="col-md-1">Date</th>
+              <th class="col-md-1">Time</th>
+              <th class="col-md-1">Price</th>
+              <th class="col-md-1">Order number</th>
+              <th class="col-md-1">Confirm payment</th>
             </tr>
           </thead>
           <tbody>
@@ -46,7 +46,7 @@
                 </td>
                 <td class="no-padding">
                   <button id="${order.customer}" class="btn btn-success paymentApprove">
-                    <span class="glyphicon glyphicon-ok"></span> Підтвердити
+                    <span class="glyphicon glyphicon-ok"></span> Submit
                   </button>
                 </td>
               </tr>

@@ -15,19 +15,19 @@
 
     <c:if test="${param.id == null}">
       <div class="row">
-        <h2>Для реєстрації замовлення заповніть дану форму</h2>
+        <h2>To register, fill out this form order</h2>
       </div>
       <div class="col-md-4 col-md-offset-4">
 
         <form:form action="" method="POST" modelAttribute="orders" class="form-group" id="orderForm">
 
-          <label class="col-md-12 no-padding-left">Вид робіт</label>
+          <label class="col-md-12 no-padding-left">Type of work</label>
           <div class="col-md-9 no-padding">
             <form:select id="typeOfWork" path="workType" items="${workTypeFromSap}" class='form-control orderInput' data-placeholder="work"
               itemLabel="name" itemValue="id" cssErrorClass="error form-control" />
             <form:errors path="workType" class="help-block with-errors" cssErrorClass="" />
           </div>
-          <div class="col-md-2 bold-padding">Кількість:</div>
+          <div class="col-md-2 bold-padding">Count:</div>
           <div class="col-md-1 no-padding-right">
             <form:select id="countOrder" path="count" class="no-padding option-center form-control">
               <option>1</option>
@@ -51,41 +51,41 @@
 
           </c:forEach>
 
-          <label>Табельний номер</label>
-          <form:input required="required" id="tableNumber" class="form-control orderInput" path="user_tab" placeholder="Введіть Ваш табельний номер"
+          <label>Tab number</label>
+          <form:input required="required" id="tableNumber" class="form-control orderInput" path="user_tab" placeholder="Input your tab number"
             cssErrorClass="error form-control" />
           <form:errors path="user_tab" class="help-block with-errors" cssErrorClass="" />
 
-          <label>Марка автор</label>
+          <label>Car brand</label>
           <form:select id="carBrand" path="car" items="${cars}" class="form-control orderInput" data-placeholder="cars" itemLabel="name"
             itemValue="id" cssErrorClass="error form-control" />
           <form:errors path="car" class="help-block with-errors" cssErrorClass="" />
 
-          <label>Модель</label>
-          <form:input id="modelCar" required="required" path="car_model" placeholder="Введіть модель авто" class="form-control orderInput"
+          <label>Car model</label>
+          <form:input id="modelCar" required="required" path="car_model" placeholder="Input your car model" class="form-control orderInput"
             cssErrorClass="error form-control" />
           <form:errors path="car_model" class="help-block with-errors" cssErrorClass="" />
 
-          <label>Номер авто</label>
-          <form:input id="numberCar" required="required" path="car_number" class="form-control orderInput" placeholder="Введіть номер Вашого авто"
+          <label>Car number</label>
+          <form:input id="numberCar" required="required" path="car_number" class="form-control orderInput" placeholder="Input your car number"
             cssErrorClass="error form-control" />
           <form:errors path="car_number" class="help-block with-errors" cssErrorClass="" />
 
-          <label>Дата</label>
+          <label>Date</label>
           <div id="datePicker">
-            <form:input id="dpicker" required="required" path="date" class="date start dateChange form-control " placeholder="Виберіть дату"
+            <form:input id="dpicker" required="required" path="date" class="date start dateChange form-control " placeholder="Choose date"
               cssErrorClass="date start dateChange error form-control" />
             <form:errors path="date" class="help-block with-errors" cssErrorClass="" />
           </div>
 
-          <label>Мобільний номер</label>
+          <label>Mobile phone number</label>
           <form:input id="mobile_phone_number" required="required" path="mobile_phone_number" class="form-control orderInput"
             placeholder="+38011111111" cssErrorClass="error form-control" />
           <form:errors path="mobile_phone_number" class="help-block with-errors" cssErrorClass="" />
 
           <br>
 
-          <label> Виберіть період надання послуги</label>
+          <label> Select the service period</label>
 
           <div class = "col-md-12">
 	          <div class="containSlider">
@@ -94,8 +94,8 @@
           </div>
           <br>
 		<br>
-          <label class="col-md-6 no-padding-left">Початок</label>
-          <label class="col-md-6">Кінець</label>
+          <label class="col-md-6 no-padding-left">Start</label>
+          <label class="col-md-6">End</label>
 
           <div class="col-md-6 no-padding">
             <form:input id="startTime" required="required" path="time" class="form-control col-md-6 " placeholder="start" readonly="true"
@@ -109,7 +109,7 @@
             <form:errors path="time_end" class="help-block with-errors" cssErrorClass="" />
           </div>
           <div class="">
-            <button id="" type="submit" class="btn btn-success paymentApprove form-control pull-down">Замовити
+            <button id="" type="submit" class="btn btn-success paymentApprove form-control pull-down">Make order
 		      <span class="glyphicon glyphicon-ok"></span>
 		      </button>
           </div>
@@ -121,14 +121,14 @@
       <div class="row">
 
         <div class="col-md-8 col-md-offset-2">
-          <h2>Перелік доступних послуг</h2>
+          <h2>Available services</h2>
           <div class="table-responsive">
             <table class="table table-bordered table-hover">
               <thead>
                 <tr>
-                  <th class="col-md-4">Назва робіт</th>
-                  <th class="col-md-4">Вартість послуги</th>
-                  <th class="col-md-4">Час виконання послуги</th>
+                  <th class="col-md-4">Type of work</th>
+                  <th class="col-md-4">Cost of services</th>
+                  <th class="col-md-4">Runtime Services</th>
                 </tr>
               </thead>
               <tbody>
@@ -156,13 +156,13 @@
 
       <div class="row">
         <div class="alert alert-success col-md-4 col-md-offset-4">
-          Ваше замовлення оформлено, очікуйте квитанцію для оплати на Вашу електронну пошту!
+          Your order is issued, you can expect to pay for a receipt to your email!
         </div>
       </div>
 
       <div class="row">
         <div class="col-md-4 col-md-offset-4">
-          <a href=<c:url value="/" /> class="btn btn-success">Повернутися</a>
+          <a href=<c:url value="/" /> class="btn btn-success">Go back</a>
 
         </div>
       </div>

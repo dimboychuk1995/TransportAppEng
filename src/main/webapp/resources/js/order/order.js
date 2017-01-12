@@ -7,12 +7,12 @@ $(function() {
   $(document).ready(function() {
 	    $('#orders').DataTable({
 	      language: {
-	        search: "Введіть ПІП замовника:",
-	        searchPlaceholder: "пошук...",
-	        zeroRecords: "За даними параметрами збігів не знайдено",
+	        search: "Enter the full name of customer:",
+	        searchPlaceholder: "search...",
+	        zeroRecords: "According to the parameters matches not found",
 	        paginate: {
-	          next: "Наступна",
-	          previous: "Попередня"
+	          next: "Next",
+	          previous: "Previous"
 	        }
 	      },
 	      order: [1, 'asc'],
@@ -39,7 +39,7 @@ $(function() {
   }
   
   $(document).on('click', '.delete', function() {
-    if (confirm('Ви справді хочете видалити дане замовлення')) {
+    if (confirm('Are you really want to remove this order')) {
       deleteOrder($(this));
     }
     return false;

@@ -7,12 +7,12 @@ $(function() {
     $('#orders').DataTable({
 
       language: {
-        search: "Введіть табельний номер замовника:",
-        searchPlaceholder: "пошук...",
-        zeroRecords: "За даними параметрами збігів не знайдено",
+        search: "Enter tab number of the customer:",
+        searchPlaceholder: "search...",
+        zeroRecords: "According to the parameters matches not found",
         paginate: {
-        	next: "Наступна",
-        	previous: "Попередня"
+        	next: "Next",
+        	previous: "Previous"
         }
       },
       order:[1, 'asc']
@@ -51,13 +51,13 @@ $(function() {
   //Sent message to the server about new order confirmation
   function sendName(customer) {
     stompClient.send("/app/paymentAproveNotification", {}, JSON.stringify({
-      'message': 'Нове замовлення від '+customer
+      'message': 'New order from '+customer
     }));
   }
 
   // Invoke AJAX function to send data to server
   $(document).on('click', '.paymentApprove', function() {
-    if (confirm('Підтвердіть будь ласка')) {
+    if (confirm('Confirm please')) {
       approvePayment($(this));
     }
     return false;
@@ -77,7 +77,7 @@ $(function() {
         butObj.closest('tr').remove();
       },
       error: function(jqXHR) {
-        alert('Щось пішло не так... : ' + jqXHR.status);
+        alert('Some error... : ' + jqXHR.status);
       },
     });
   };

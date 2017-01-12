@@ -10,10 +10,10 @@
         <table id="workTypes" class="table table-hover table-striped table-bordered">
           <thead>
             <tr>
-              <th class="col-md-2">id послуги</th>
-              <th class="col-md-3">назва послуги</th>
-              <th class="col-md-2">Редагувати</th>
-              <th class="col-md-1">Видалити</th>
+              <th class="col-md-2">id work type</th>
+              <th class="col-md-3">Work type name</th>
+              <th class="col-md-2">Edit</th>
+              <th class="col-md-1">Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -28,24 +28,24 @@
                 <td class="no-padding">
                 <c:choose>
 	                <c:when test="${workType.enabled}">
-	                	<input type="checkbox" checked data-toggle="toggle" data-on="вкллючено" data-off="виключено" data-onstyle="success" data-offstyle="danger">
+	                	<input type="checkbox" checked data-toggle="toggle" data-on="on" data-off="off" data-onstyle="success" data-offstyle="danger">
 	                </c:when>
 	                <c:otherwise>
-	                	<input type="checkbox" data-toggle="toggle" data-on="вкллючено" data-off="виключено" data-onstyle="success" data-offstyle="danger">
+	                	<input type="checkbox" data-toggle="toggle" data-on="on" data-off="off" data-onstyle="success" data-offstyle="danger">
 	                </c:otherwise>
                 </c:choose>
                 
                 </td>
                 <td class="no-padding">
-                  <button id="${workType.id}" class="btn btn-danger delete">Видалити</button>
+                  <button id="${workType.id}" class="btn btn-danger delete">Delete</button>
                 </td>
               </tr>
             </c:forEach>
           </tbody>
         </table>
       </div>
-      <a href=<c:url value="/admin/workType/newWorkType" /> class="btn btn-primary">Створити нову послугу</a>
-      <a href=<c:url value="/admin/order" /> class="btn btn-info">Список замовлень</a>
+      <a href=<c:url value="/admin/workType/newWorkType" /> class="btn btn-primary">Create new work type</a>
+      <a href=<c:url value="/admin/order" /> class="btn btn-info">Order list</a>
     </div>
   </div>
 </div>

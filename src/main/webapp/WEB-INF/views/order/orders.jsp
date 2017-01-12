@@ -11,18 +11,18 @@
         <table class="table table-hover table-bordered table-striped" id="orders">
           <thead>
             <tr>
-              <th class="col-md-1">Вид робіт</th>
-              <th class="col-md-1">Замовник</th>
-              <th class="col-md-1">Марка авто</th>
-              <th class="col-md-1">Модель</th>
-              <th class="col-md-1">Номер авто</th>
-              <th class="col-md-1">Дата</th>
-              <th class="col-md-1">Час</th>
-              <th class="col-md-1">Табельний номер</th>
-              <th class="col-md-1">Мобільний номер</th>
-              <th class="col-md-1">Статус замовлення</th>
-              <th class="col-md-1">Редагувати</th>
-              <th class="col-md-1">Видалити</th>
+              <th class="col-md-1">Type of works</th>
+              <th class="col-md-1">Customer</th>
+              <th class="col-md-1">Car brand</th>
+              <th class="col-md-1">Car model</th>
+              <th class="col-md-1">Car number</th>
+              <th class="col-md-1">Date</th>
+              <th class="col-md-1">Time</th>
+              <th class="col-md-1">Tab numer</th>
+              <th class="col-md-1">Mobile phone number</th>
+              <th class="col-md-1">Status order</th>
+              <th class="col-md-1">Edit</th>
+              <th class="col-md-1">Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -59,17 +59,17 @@
                   <c:out value="${orders.status_order.statusOrder}"></c:out>
                 </td>
                 <td class="no-padding">
-                  <a class="btn btn-primary col-md-12" href=<c:url value="/admin/order/${orders.id}" />>Редагувати</a>
+                  <a class="btn btn-primary col-md-12" href=<c:url value="/admin/order/${orders.id}" />>Edit</a>
                 </td>
                 <td class="no-padding">
-                  <button id="${orders.id}" type="submit" class="btn btn-danger delete col-md-12">Видалити</button>
+                  <button id="${orders.id}" type="submit" class="btn btn-danger delete col-md-12">Delete</button>
                 </td>
               </tr>
             </c:forEach>
           </tbody>
         </table>
         <div class="btns_bottom">
-          <a class="btn btn-primary" href=<c:url value="/admin" />>Довідник послуг</a>
+          <a class="btn btn-primary" href=<c:url value="/admin" />>Guide services</a>
         </div>
       </div>
     </div>
